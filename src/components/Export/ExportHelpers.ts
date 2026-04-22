@@ -113,6 +113,11 @@ export const exportToCSV = (state: KickoffState): void => {
   prioritizedGoals.forEach((goal) => {
     rows.push(['', `Priorität ${goal.priority}`, goal.label]);
   });
+  const unprioritizedGoals = state.websiteZiele.goals
+    .filter(g => g.priority === null && g.label.trim() !== '');
+  unprioritizedGoals.forEach((goal) => {
+    rows.push(['', 'Ohne Priorität', goal.label]);
+  });
   rows.push(['', 'Notizen', state.websiteZiele.notizen]);
   rows.push([]);
 
@@ -171,7 +176,13 @@ export const exportToCSV = (state: KickoffState): void => {
   rows.push(['PROJEKTABLAUF', '', '']);
   state.projektablauf.forEach((phase) => {
     rows.push(['', phase.title, phase.date || 'Noch nicht geplant']);
+    if (phase.description) {
+      rows.push(['', '- Beschreibung', phase.description]);
+    }
   });
+  if (state.projektablaufNotizen) {
+    rows.push(['', 'Notizen', state.projektablaufNotizen]);
+  }
   rows.push([]);
 
   // Kommunikation

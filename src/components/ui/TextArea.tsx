@@ -39,6 +39,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
     if (onChange && debouncedValue !== externalValue) {
       onChange(debouncedValue);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 
   const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {

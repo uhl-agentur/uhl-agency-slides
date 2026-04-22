@@ -595,6 +595,7 @@ export const useKickoffStore = create<KickoffStore>()(
             content: state.content,
             specs: state.specs,
             projektablauf: state.projektablauf,
+            projektablaufNotizen: state.projektablaufNotizen,
             kommunikation: state.kommunikation,
             zusammenfassung: state.zusammenfassung,
             nextSteps: state.nextSteps,

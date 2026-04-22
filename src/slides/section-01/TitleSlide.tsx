@@ -56,8 +56,8 @@ export const TitleSlide: React.FC = () => {
                   fontSize: '40px',
                   lineHeight: 1,
                   '--mask-bg': '#000000',
-                  textBoxTrim: 'both',
-                  textBoxEdge: 'cap alphabetic',
+                  textBoxTrim: 'both' as unknown as React.CSSProperties['textBoxTrim'],
+                  textBoxEdge: 'cap alphabetic' as unknown as React.CSSProperties['textBoxEdge'],
                 } as React.CSSProperties}
               >
                 {kundenname}

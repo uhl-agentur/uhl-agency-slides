@@ -56,8 +56,8 @@ export const Badge: React.FC<BadgeProps> = ({
   const baseInlineStyles: React.CSSProperties = {
     letterSpacing: '0.72px',
     lineHeight: 1,
-    textBoxTrim: 'both',
-    textBoxEdge: 'cap alphabetic',
+    textBoxTrim: 'both' as unknown as React.CSSProperties['textBoxTrim'],
+    textBoxEdge: 'cap alphabetic' as unknown as React.CSSProperties['textBoxEdge'],
   };
 
   // Variant styles based on Figma

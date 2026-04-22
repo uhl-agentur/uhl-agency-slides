@@ -71,20 +71,23 @@ const htmlToMarkdown = (html: string): string => {
         return childContent + '\n';
       case 'ol':
         return childContent + '\n';
-      case 'li':
+      case 'li': {
         const parent = el.parentElement;
         if (parent?.tagName.toLowerCase() === 'ol') {
           const index = Array.from(parent.children).indexOf(el) + 1;
           return `${index}. ${childContent}\n`;
         }
         return `- ${childContent}\n`;
-      case 'a':
+      }
+      case 'a': {
         const href = el.getAttribute('href');
         return href ? `[${childContent}](${href})` : childContent;
-      case 'img':
+      }
+      case 'img': {
         const src = el.getAttribute('src');
         const alt = el.getAttribute('alt') || '';
         return src ? `![${alt}](${src})` : '';
+      }
       case 'hr':
         return '\n---\n\n';
       case 'div':
@@ -145,7 +148,7 @@ const parseMarkdown = (markdown: string): string => {
   html = html.replace(/^\*\*\*$/gm, '<hr class="md-hr" />');
 
   // Unordered lists
-  html = html.replace(/^[\*\-]\s+(.*)$/gm, '<li class="md-li">$1</li>');
+  html = html.replace(/^[*-]\s+(.*)$/gm, '<li class="md-li">$1</li>');
   html = html.replace(/(<li class="md-li">.*<\/li>\n?)+/g, '<ul class="md-ul">$&</ul>');
 
   // Ordered lists
