@@ -50,10 +50,10 @@ export const AktuellesDesignSlide: React.FC = () => {
         </p>
       </div>
 
-      {/* Content - Two columns */}
-      <div className="flex flex-1" style={{ gap: '80px' }}>
+      {/* Two columns, equal height, no gap */}
+      <div className="flex-1 flex items-stretch" style={{ gap: '32px' }}>
         {/* Left: Leitfragen */}
-        <div className="flex-1 flex flex-col relative h-full" style={{ paddingBottom: '56px' }}>
+        <div className="flex-1 flex flex-col relative" style={{ backgroundColor: '#F7F7F7' }}>
           <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
             <Badge variant="primary" size="md">
               Leitfragen
@@ -61,15 +61,8 @@ export const AktuellesDesignSlide: React.FC = () => {
           </div>
 
           <div
-            className="flex flex-col flex-1"
-            style={{
-              backgroundColor: '#F7F7F7',
-              padding: '56px',
-              paddingTop: '120px',
-              marginBottom: '-56px',
-              zIndex: 1,
-              gap: '32px',
-            }}
+            className="flex flex-col justify-center flex-1"
+            style={{ padding: '56px', paddingTop: '80px', gap: '32px' }}
           >
             {questions.map((q, index) => (
               <React.Fragment key={index}>
@@ -85,7 +78,7 @@ export const AktuellesDesignSlide: React.FC = () => {
         </div>
 
         {/* Right: Aktuelles Logo */}
-        <div className="flex-1 flex flex-col relative h-full" style={{ paddingBottom: '56px' }}>
+        <div className="flex-1 flex flex-col relative" style={{ backgroundColor: '#F7F7F7' }}>
           <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
             <Badge variant="primary" size="md">
               Aktuelles Logo
@@ -93,14 +86,8 @@ export const AktuellesDesignSlide: React.FC = () => {
           </div>
 
           <div
-            className="flex flex-col flex-1 items-center justify-center"
-            style={{
-              backgroundColor: '#F7F7F7',
-              padding: '56px',
-              paddingTop: '120px',
-              marginBottom: '-56px',
-              zIndex: 1,
-            }}
+            className="flex flex-col items-center justify-center flex-1"
+            style={{ padding: '56px', paddingTop: '80px' }}
           >
             {aktuellesDesign.logoUpload ? (
               <div className="relative">

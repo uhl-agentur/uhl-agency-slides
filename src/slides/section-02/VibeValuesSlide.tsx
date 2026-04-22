@@ -31,8 +31,8 @@ export const VibeValuesSlide: React.FC = () => {
 
   return (
     <div
-      className="bg-white flex flex-col justify-between"
-      style={{ width: '1920px', height: '1080px', padding: '80px' }}
+      className="bg-white flex flex-col"
+      style={{ width: '1920px', height: '1080px', padding: '80px', gap: '80px' }}
     >
       {/* Header - 32px gap per Figma */}
       <div className="flex flex-col" style={{ gap: '32px' }}>
@@ -52,10 +52,10 @@ export const VibeValuesSlide: React.FC = () => {
         </p>
       </div>
 
-      {/* Content - 80px gap per Figma */}
-      <div className="flex" style={{ gap: '80px', height: '407px' }}>
+      {/* Content - two columns, equal height */}
+      <div className="flex items-stretch">
         {/* Left: Vibe Tags */}
-        <div className="flex-1 flex flex-col relative h-full" style={{ paddingBottom: '56px' }}>
+        <div className="flex-1 flex flex-col relative" style={{ backgroundColor: '#F7F7F7' }}>
           <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
             <Badge variant="primary" size="md">
               Vibe
@@ -64,14 +64,7 @@ export const VibeValuesSlide: React.FC = () => {
 
           <div
             className="flex flex-wrap content-center items-center flex-1"
-            style={{
-              backgroundColor: '#F7F7F7',
-              padding: '56px',
-              paddingTop: '120px',
-              marginBottom: '-56px',
-              zIndex: 1,
-              gap: '32px',
-            }}
+            style={{ padding: '56px', paddingTop: '80px', gap: '32px' }}
           >
             {vibeTags.map((tag) => {
               const isSelected = vibeValues.selectedTags.includes(tag);
@@ -97,7 +90,7 @@ export const VibeValuesSlide: React.FC = () => {
         </div>
 
         {/* Right: Values Toggles */}
-        <div className="flex flex-col relative h-full" style={{ paddingBottom: '56px' }}>
+        <div className="flex flex-col relative" style={{ backgroundColor: '#F7F7F7' }}>
           <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
             <Badge variant="primary" size="md">
               Values
@@ -105,15 +98,8 @@ export const VibeValuesSlide: React.FC = () => {
           </div>
 
           <div
-            className="flex flex-col justify-center"
-            style={{
-              backgroundColor: '#F7F7F7',
-              padding: '56px',
-              paddingTop: '120px',
-              marginBottom: '-56px',
-              zIndex: 1,
-              gap: '32px',
-            }}
+            className="flex flex-col justify-center flex-1"
+            style={{ padding: '56px', paddingTop: '80px', gap: '32px' }}
           >
             {/* Toggle: Förmlich / Locker */}
             <button

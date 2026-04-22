@@ -30,6 +30,16 @@ export const WebsiteZieleSlide: React.FC = () => {
     }
   };
 
+  // Filter out empty custom goals, then sort: prioritized first
+  const sortedGoals = [...websiteZiele.goals]
+    .filter((g) => !g.isCustom || g.label)
+    .sort((a, b) => {
+    if (a.priority !== null && b.priority !== null) return a.priority - b.priority;
+    if (a.priority !== null) return -1;
+    if (b.priority !== null) return 1;
+    return 0;
+  });
+
   return (
     <div
       className="bg-white flex flex-col justify-between"
@@ -74,7 +84,7 @@ export const WebsiteZieleSlide: React.FC = () => {
             rowGap: '56px',
           }}
         >
-          {websiteZiele.goals.map((goal) => (
+          {sortedGoals.map((goal) => (
             <button
               key={goal.id}
               onClick={() => handlePriorityClick(goal.id)}

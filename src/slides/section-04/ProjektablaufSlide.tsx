@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useKickoffStore } from '../../state/kickoffStore';
 
 /**
@@ -9,6 +9,19 @@ import { useKickoffStore } from '../../state/kickoffStore';
 
 export const ProjektablaufSlide: React.FC = () => {
   const { projektablauf, updatePhaseDate, projektablaufNotizen, updateProjektablaufNotizen } = useKickoffStore();
+
+  // Always set kickoff date to today
+  const todayFormatted = useMemo(() => {
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const yyyy = now.getFullYear();
+    return `${dd}.${mm}.${yyyy}`;
+  }, []);
+
+  useEffect(() => {
+    updatePhaseDate('kickoff', todayFormatted);
+  }, [todayFormatted, updatePhaseDate]);
 
   return (
     <div
@@ -38,19 +51,21 @@ export const ProjektablaufSlide: React.FC = () => {
       <div className="w-full flex flex-col" style={{ gap: '32px' }}>
         {/* Phase Headers with Date Badges */}
         <div className="flex items-end justify-between" style={{ width: '1760px' }}>
-          {projektablauf.map((phase) => (
+          {projektablauf.map((phase) => {
+            const isKickoff = phase.id === 'kickoff';
+            return (
             <div
               key={phase.id}
               className="flex flex-col items-start justify-end flex-1"
               style={{ paddingBottom: '4px' }}
             >
-              {/* Date Badge - Editable */}
+              {/* Date Badge - Kickoff is always today, others are editable */}
               <div style={{ marginBottom: '8px', zIndex: 2 }}>
                 <span
                   className="font-jakarta"
-                  contentEditable
+                  contentEditable={!isKickoff}
                   suppressContentEditableWarning
-                  onBlur={(e) => {
+                  onBlur={isKickoff ? undefined : (e) => {
                     const text = e.currentTarget.textContent || '';
                     // Format as DD.MM.YYYY on blur
                     const digits = text.replace(/\D/g, '').slice(0, 8);
@@ -62,7 +77,7 @@ export const ProjektablaufSlide: React.FC = () => {
                     updatePhaseDate(phase.id, formatted || text);
                     e.currentTarget.textContent = formatted || text;
                   }}
-                  onKeyDown={(e) => {
+                  onKeyDown={isKickoff ? undefined : (e) => {
                     if (e.key === 'Enter') {
                       e.preventDefault();
                       e.currentTarget.blur();
@@ -83,9 +98,10 @@ export const ProjektablaufSlide: React.FC = () => {
                     outline: 'none',
                     whiteSpace: 'nowrap',
                     minWidth: '20px',
+                    cursor: isKickoff ? 'default' : 'text',
                   }}
                 >
-                  {phase.date || 'XX.XX.XXXX'}
+                  {isKickoff ? todayFormatted : (phase.date || 'XX.XX.XXXX')}
                 </span>
               </div>
               {/* Phase Name */}
@@ -102,7 +118,8 @@ export const ProjektablaufSlide: React.FC = () => {
                 {phase.title}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Timeline Progress Bar */}

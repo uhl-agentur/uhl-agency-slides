@@ -1,20 +1,15 @@
 import React from 'react';
 import { useKickoffStore } from '../../state/kickoffStore';
 import { Badge } from '../../components/ui';
+import { Check } from 'lucide-react';
 
 /**
  * Slide 14: Ist-Status
  * Based on Figma design
- * Current website status with leitfragen and screenshot
+ * Single card: screenshot left, pain points right, URL at bottom of screenshot
  */
 export const IstStatusSlide: React.FC = () => {
-  const { istStatus, updateIstStatus } = useKickoffStore();
-
-  const questions = [
-    'Wie sieht Ihre aktuelle Website aus?',
-    'Was sind die größten Probleme?',
-    'Was funktioniert bereits gut?',
-  ];
+  const { istStatus, updateIstStatus, togglePainPoint, projectSettings } = useKickoffStore();
 
   const handleScreenshotUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -27,12 +22,20 @@ export const IstStatusSlide: React.FC = () => {
     }
   };
 
+  const painPoints: { key: keyof typeof istStatus.painPoints; label: string }[] = [
+    { key: 'designVeraltet', label: 'Design veraltet?' },
+    { key: 'schwerZuPflegen', label: 'Schwer zu pflegen?' },
+    { key: 'nichtMobilOptimiert', label: 'Nicht mobil-optimiert?' },
+    { key: 'langsam', label: 'Schlechte Performance?' },
+    { key: 'keineAnalytics', label: 'Keine Anfragen?' },
+  ];
+
   return (
     <div
       className="bg-white flex flex-col"
       style={{ width: '1920px', height: '1080px', padding: '80px', gap: '80px' }}
     >
-      {/* Header - 32px gap per Figma */}
+      {/* Header */}
       <div className="flex flex-col" style={{ gap: '32px' }}>
         <h1
           className="font-humane text-black uppercase"
@@ -45,77 +48,41 @@ export const IstStatusSlide: React.FC = () => {
           Ist-Status
         </h1>
         <p className="font-jakarta text-black" style={{ fontSize: '32px', lineHeight: '40px' }}>
-          Wie sieht Ihre aktuelle Website aus? Was sind die größten Probleme?
+          <span className="block">Falls vorhanden, Was funktioniert gut?</span>
+          <span className="block">Was muss sich ändern?</span>
         </p>
       </div>
 
-      {/* Content - Two columns */}
-      <div className="flex flex-1" style={{ gap: '80px' }}>
-        {/* Left: Leitfragen */}
-        <div className="flex-1 flex flex-col relative h-full" style={{ paddingBottom: '56px' }}>
-          <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
-            <Badge variant="primary" size="md">
-              Leitfragen
-            </Badge>
-          </div>
-
-          <div
-            className="flex flex-col flex-1"
-            style={{
-              backgroundColor: '#F7F7F7',
-              padding: '56px',
-              paddingTop: '120px',
-              marginBottom: '-56px',
-              zIndex: 1,
-              gap: '32px',
-            }}
-          >
-            {questions.map((q, index) => (
-              <React.Fragment key={index}>
-                <p className="font-jakarta text-black" style={{ fontSize: '24px' }}>
-                  {q}
-                </p>
-                {index < questions.length - 1 && <div className="line-separator" />}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-
-        {/* Right: Screenshot */}
-        <div className="flex-1 flex flex-col relative h-full" style={{ paddingBottom: '56px' }}>
-          <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
-            <Badge variant="primary" size="md">
-              Screenshot
-            </Badge>
-          </div>
-
-          <div
-            className="flex flex-col flex-1 items-center justify-center"
-            style={{
-              backgroundColor: '#F7F7F7',
-              padding: '56px',
-              paddingTop: '120px',
-              marginBottom: '-56px',
-              zIndex: 1,
-            }}
-          >
+      {/* Single row: screenshot left + pain points right, fill remaining height */}
+      <div className="flex-1 flex items-stretch">
+        {/* Left: Screenshot area */}
+        <div
+          className="flex flex-col"
+          style={{ flex: '3', backgroundColor: '#F7F7F7' }}
+        >
+          <div className="flex-1 relative overflow-hidden">
             {istStatus.screenshotUrl ? (
-              <div className="relative">
+              <>
                 <img
                   src={istStatus.screenshotUrl}
                   alt="Website Screenshot"
-                  className="max-w-full object-contain"
-                  style={{ mixBlendMode: 'darken' }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                {/* Inside border overlay */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ border: '8px solid #F7F7F7' }}
                 />
                 <button
                   onClick={() => updateIstStatus({ screenshotUrl: null })}
-                  className="absolute -top-2 -right-2 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800"
+                  className="absolute top-3 right-3 w-8 h-8 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800"
+                  style={{ zIndex: 2 }}
                 >
                   ✕
                 </button>
-              </div>
+              </>
             ) : (
-              <label className="cursor-pointer flex flex-col items-center gap-4 p-12 border-2 rounded-lg transition-colors" style={{ borderColor: 'rgba(0, 0, 0, 0.08)' }}>
+              <label className="absolute inset-0 cursor-pointer flex flex-col items-center justify-center gap-4 border-2 rounded-lg transition-colors" style={{ borderColor: 'rgba(0, 0, 0, 0.08)', margin: '32px' }}>
                 <span className="font-jakarta text-gray-500 text-center" style={{ fontSize: '24px' }}>
                   Screenshot hier hochladen
                 </span>
@@ -127,6 +94,68 @@ export const IstStatusSlide: React.FC = () => {
                 />
               </label>
             )}
+          </div>
+
+          {/* URL field at bottom */}
+          <div
+            className="flex items-center font-jakarta"
+            style={{
+              padding: '16px 32px',
+              gap: '16px',
+              fontSize: '20px',
+              borderTop: '2px solid rgba(0,0,0,0.08)',
+            }}
+          >
+            <span className="font-bold text-black" style={{ flexShrink: 0 }}>URL:</span>
+            <span className="text-black" style={{ fontSize: '20px' }}>
+              {projectSettings.domain || 'Keine Domain hinterlegt'}
+            </span>
+          </div>
+        </div>
+
+        {/* Right: Pain Points */}
+        <div
+          className="flex flex-col relative"
+          style={{ flex: '2', backgroundColor: '#F7F7F7' }}
+        >
+          <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
+            <Badge variant="primary" size="md">
+              Aktuelle Pain Points
+            </Badge>
+          </div>
+
+          <div
+            className="flex flex-col justify-center flex-1"
+            style={{ padding: '56px', paddingTop: '80px', gap: '40px' }}
+          >
+            {painPoints.map((point) => {
+              const isChecked = istStatus.painPoints[point.key];
+              return (
+                <button
+                  key={point.key}
+                  onClick={() => togglePainPoint(point.key)}
+                  className="flex items-center cursor-pointer"
+                  style={{ gap: '16px' }}
+                >
+                  <div
+                    className="flex items-center justify-center"
+                    style={{
+                      width: '24px',
+                      height: '24px',
+                      border: '2px solid black',
+                      borderRadius: '4px',
+                      backgroundColor: isChecked ? 'black' : 'transparent',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {isChecked && <Check size={16} strokeWidth={3} color="white" />}
+                  </div>
+                  <span className="font-jakarta text-black" style={{ fontSize: '24px' }}>
+                    {point.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

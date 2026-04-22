@@ -11,17 +11,17 @@ export const UnternehmenSlide: React.FC = () => {
   const { kundenname } = useVariables();
 
   const questions = [
-    'Wie würden Sie Ihr Unternehmen in zwei Sätzen beschreiben? (Elevator Pitch)',
-    'Was machen Sie besser oder anders als alle anderen am Markt?\nWarum kaufen Kunden bei Ihnen und nicht bei der Konkurrenz?',
-    'Agieren Sie nur lokal (wenn ja, welcher Radius?), national oder international?',
-    'Welches Produkt oder welche Dienstleistung ist Ihr „Bestseller"?\nWorauf liegt der Fokus bei der neuen Website?',
-    'Wer ist bei Ihnen der Entscheidungsträger für Freigaben, wer ist unser\noperativer Ansprechpartner und wer soll als Kontaktperson auf der Website auftreten?',
+    'Ihr Unternehmen in zwei Sätzen? (Elevator Pitch)',
+    'Was machen Sie besser als der Wettbewerb und warum kaufen Kunden bei Ihnen?',
+    'Agieren Sie lokal, national oder international?',
+    'Was ist Ihr „Bestseller" und was soll der Fokus der neuen Website sein?',
+    'Wer gibt Freigaben, wer ist Ansprechpartner und wer Kontaktperson auf der Website?',
   ];
 
   return (
     <div
-      className="bg-white flex flex-col"
-      style={{ width: '1920px', height: '1080px', padding: '80px', gap: '80px' }}
+      className="bg-white flex flex-col justify-between"
+      style={{ width: '1920px', height: '1080px', padding: '80px' }}
     >
       {/* Header - 32px gap between title and subtitle per Figma */}
       <div className="flex flex-col" style={{ gap: '32px' }}>
@@ -44,7 +44,7 @@ export const UnternehmenSlide: React.FC = () => {
       </div>
 
       {/* Questions Card with Badge */}
-      <div className="flex flex-col relative" style={{ paddingBottom: '56px' }}>
+      <div className="flex flex-col relative" style={{ paddingBottom: '56px', marginTop: '40px' }}>
         {/* Badge - positioned above card */}
         <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
           <Badge variant="primary" size="md">

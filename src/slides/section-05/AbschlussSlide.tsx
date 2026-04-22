@@ -45,7 +45,7 @@ export const AbschlussSlide: React.FC = () => {
           <img
             src="/Uhl-Logo.svg"
             alt="UHL Werbeagentur"
-            style={{ width: '240px', height: '240px' }}
+            style={{ width: '240px', height: '240px', filter: 'brightness(0) saturate(100%) invert(91%) sepia(30%) saturate(1440%) hue-rotate(27deg) brightness(104%) contrast(98%)' }}
           />
         </div>
       </div>

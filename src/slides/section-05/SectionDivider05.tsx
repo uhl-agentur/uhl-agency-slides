@@ -9,7 +9,7 @@ export const SectionDivider05: React.FC = () => {
   return (
     <SectionDivider
       sectionNumber="05"
-      title={'Abschluss'}
+      title={'Nächste\nSchritte'}
     />
   );
 };

@@ -113,15 +113,13 @@ export const IstSollSlide: React.FC = () => {
           height: '104px',
         }}
       >
-        <div className="w-full h-full overflow-hidden">
-          <TextArea
-            value={istSoll.notizen}
-            onChange={(v) => updateIstSoll({ notizen: v })}
-            placeholder="Notizen"
-            className="font-jakarta text-black w-full h-full placeholder:opacity-20 text-lg"
-            variant="notes"
-          />
-        </div>
+        <TextArea
+          value={istSoll.notizen}
+          onChange={(v) => updateIstSoll({ notizen: v })}
+          placeholder="Notizen"
+          className="font-jakarta text-black w-full h-full placeholder:opacity-20 text-lg"
+          variant="notes"
+        />
       </div>
     </div>
   );

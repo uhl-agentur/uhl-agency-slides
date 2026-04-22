@@ -235,10 +235,10 @@ const initialState: KickoffState = {
   },
 
   nextSteps: [
-    { id: generateId(), wer: '', was: '', naechsteAktion: '' },
-    { id: generateId(), wer: '', was: '', naechsteAktion: '' },
-    { id: generateId(), wer: '', was: '', naechsteAktion: '' },
-    { id: generateId(), wer: '', was: '', naechsteAktion: '' },
+    { id: generateId(), wer: 'Kunde', was: 'Inhalte & Texte bereitstellen', naechsteAktion: '' },
+    { id: generateId(), wer: 'Kunde', was: 'Feedback zu Entwürfen', naechsteAktion: '' },
+    { id: generateId(), wer: 'UHL', was: 'Konzept & Wireframes erstellen', naechsteAktion: '' },
+    { id: generateId(), wer: 'UHL', was: 'Design-Entwürfe erstellen', naechsteAktion: '' },
   ],
 
   offeneFragen: {

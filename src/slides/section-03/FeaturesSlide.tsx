@@ -37,8 +37,8 @@ export const FeaturesSlide: React.FC = () => {
 
   return (
     <div
-      className="bg-white flex flex-col"
-      style={{ width: '1920px', height: '1080px', padding: '80px', gap: '80px' }}
+      className="bg-white flex flex-col justify-between"
+      style={{ width: '1920px', height: '1080px', padding: '80px' }}
     >
       {/* Header - 32px gap per Figma */}
       <div className="flex flex-col" style={{ gap: '32px' }}>
@@ -58,7 +58,7 @@ export const FeaturesSlide: React.FC = () => {
       </div>
 
       {/* Features Grid - 4 columns per Figma */}
-      <div className="flex-1 flex" style={{ gap: '32px' }}>
+      <div className="flex" style={{ gap: '32px' }}>
         {featureCategories.map((category) => (
           <div key={category.name} className="flex-1 flex flex-col relative" style={{ paddingBottom: '56px' }}>
             <div style={{ position: 'absolute', top: '-50px', left: '24px', zIndex: 2 }}>
@@ -68,7 +68,7 @@ export const FeaturesSlide: React.FC = () => {
             </div>
 
             <div
-              className="flex flex-col flex-1"
+              className="flex flex-col"
               style={{
                 backgroundColor: '#F7F7F7',
                 padding: '56px',
@@ -94,6 +94,7 @@ export const FeaturesSlide: React.FC = () => {
                           width: '24px',
                           height: '24px',
                           border: '2px solid black',
+                          borderRadius: '4px',
                           backgroundColor: isChecked ? 'black' : 'transparent',
                           flexShrink: 0,
                         }}
