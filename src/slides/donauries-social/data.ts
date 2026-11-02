@@ -4,13 +4,12 @@
 export const regionFacts: [string, string][] = [
   ['44', 'Städte, Märkte und Gemeinden'],
   ['135.000', 'Einwohner'],
-  ['2,9 %', 'Arbeitslosenquote'],
   ['UNESCO', 'Global Geopark Ries'],
 ];
 
 export const kanaele: { k: string; n: string; d: string }[] = [
   { k: 'Instagram', n: '9.250', d: '530 Beiträge' },
-  { k: 'Facebook', n: '9.287', d: 'gemeinsamer Kanal' },
+  { k: 'Facebook', n: '9.287', d: '' },
   { k: 'TikTok', n: '–', d: 'kein Kanal' },
 ];
 
@@ -22,7 +21,7 @@ export const vergleich: [string, number, string][] = [
 ];
 
 export const auffaellig: { t: string; d: string }[] = [
-  { t: 'Ein Kanal, zwei Absender', d: 'Tourismus und Arbeitgebermarke laufen über denselben Kanal. Bei vergleichbaren Regionen ist das selten.' },
+  { t: 'Ein Kanal, zwei Themen', d: 'Tourismus und Wirtschaft teilen sich einen Kanal. Das braucht eine klare gemeinsame Linie.' },
   { t: 'Partner markiert, nicht Collab', d: 'Betriebe sind markiert, aber nicht als Collab-Partner angegeben. Der Beitrag erscheint nur bei DONAURIES.' },
   { t: 'Kein TikTok', d: 'Gerade für Ausflüge und Urlaub wird TikTok wie eine Suchmaschine genutzt.' },
 ];
@@ -38,7 +37,7 @@ export const prinzipien: { t: string; d: string }[] = [
 ];
 
 export const kanalPlan: { t: string; s: string; d: string }[] = [
-  { t: 'Instagram und Facebook', s: 'Kern', d: 'Hier ist die Community heute. Formate, Collab-Posts, Stories zu Events.' },
+  { t: 'Instagram und Facebook', s: 'Kern', d: 'Hier ist das Publikum heute. Formate, Collab-Posts, Stories zu Events.' },
   { t: 'TikTok', s: 'neu', d: 'Für Ausflug und Urlaub. Gleiche Drehs, eigener Schnitt.' },
   { t: 'Paid Social', s: 'gezielt', d: 'Budget zuerst in Creator- und UGC-Content, Anzeigen für Events und Highlights.' },
 ];
@@ -66,7 +65,7 @@ export const goodToKnow: string[] = [
   'Nördlingen hat die einzige vollständig begehbare Stadtmauer Deutschlands.',
   'Die Harburg ist eine der größten Burganlagen Süddeutschlands.',
   'Hama in Monheim führt über 18.000 Produkte.',
-  'Rund um Donauwörth: zum 35. Mal in Folge die niedrigste Arbeitslosenquote Deutschlands.',
+  'Maria Brünnlein in Wemding zieht bis zu 200.000 Pilger im Jahr an.',
 ];
 
 // Event year 2027; months marked "voraussichtlich" are not yet announced
@@ -101,7 +100,7 @@ export const team: { n: string; r: string; d: string; img: string[] }[] = [
 ];
 
 export const referenzen: { t: string; s: string; d: string }[] = [
-  { t: 'München Standortkarte', s: 'Regionalität', d: 'Zitat folgt' },
+  { t: 'München Standortkarte', s: 'Regionalität', d: '' },
   { t: 'FinLers', s: 'Bezug Donauwörth', d: 'Arbeitsschutz, Gesundheitsmanagement und Betriebsmedizin. Laufendes Content Marketing für Instagram, Facebook, LinkedIn und Blog.' },
   { t: 'Social Media', s: 'Weitere Referenzen', d: 'Reitzner · IntHome · Kinetikum · Therapiezentrum Augsburg · Blobel Consulting · AWI Consulting' },
 ];

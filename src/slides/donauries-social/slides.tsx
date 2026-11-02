@@ -27,7 +27,7 @@ export const TitleSlide: React.FC = () => (
 
 const agenda = [
   ['01', 'Ausgangslage', 'Region, Kanäle, was uns auffällt'],
-  ['02', 'Strategischer Ansatz', 'Leitidee, Prinzipien, Kanäle'],
+  ['02', 'Strategischer Ansatz', 'Prinzipien, Kanäle und Budget'],
   ['03', 'Erste Ideen', 'Formate, die Tourismus und Wirtschaft verbinden'],
   ['04', 'Zusammenarbeit', 'Ablauf, Team, Referenzen'],
   ['05', 'Offene Fragen', 'Was wir mit Ihnen klären wollen'],
@@ -51,7 +51,7 @@ export const RegionSlide: React.FC = () => (
   <Frame title="Die Region" section="01 Ausgangslage">
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 560px', gap: 64, flex: 1, minHeight: 0 }}>
       <img src="/donauries/karte.jpg" alt="Karte Landkreis Donau-Ries" style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left center' }} />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignContent: 'center', gap: '56px 32px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 56 }}>
         {regionFacts.map(([n, l]) => (
           <div key={l} style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <span style={{ fontSize: 72, fontWeight: 700, fontVariantNumeric: 'tabular-nums' }}>{n}</span>
