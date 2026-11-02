@@ -148,7 +148,7 @@ export const KanalPlanSlide: React.FC = () => (
 );
 
 export const WebsiteSlide: React.FC = () => (
-  <Frame title="Die Website als Zentrale" section="02 Strategischer Ansatz">
+  <Frame title="Optional: Die Website als Zentrale" section="02 Strategischer Ansatz">
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }}>
       {website.optionen.map((o, i) => (
         <Box key={o.t} style={{ gap: 14, padding: '26px 30px' }}>
@@ -163,7 +163,13 @@ export const WebsiteSlide: React.FC = () => (
         <span style={{ fontSize: 30, fontWeight: 700 }}>In beiden Fällen</span>
         <Dash items={website.inhalte} size={27} gap={14} />
       </div>
-      <div style={{ background: C.light, padding: '28px 32px', fontSize: 30, lineHeight: 1.35, fontWeight: 700, alignSelf: 'start' }}>{website.warum}</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={{ background: C.light, padding: '24px 28px', fontSize: 27, lineHeight: 1.35, fontWeight: 700 }}>{website.warum}</div>
+        <Box style={{ gap: 8, padding: '20px 26px' }}>
+          <span style={{ fontSize: 28, fontWeight: 700 }}>{website.shop.t}</span>
+          <span style={{ fontSize: 24, lineHeight: 1.35 }}>{website.shop.d}</span>
+        </Box>
+      </div>
     </div>
   </Frame>
 );
@@ -214,34 +220,27 @@ export const GoodToKnowSlide: React.FC = () => (
   </Frame>
 );
 
-// Timeline: two half-year rows, one marker per month, event lists fade out at the bottom when they run long
-const JahrRow: React.FC<{ months: typeof jahr }> = ({ months }) => (
-  <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: `repeat(${months.length}, minmax(0, 1fr))`, gap: 20 }}>
-    <div style={{ position: 'absolute', left: 0, right: 0, top: 57, height: 3, background: C.black }} />
-    {months.map((j) => (
-      <div key={j.m} style={{ display: 'flex', flexDirection: 'column', gap: 14, minWidth: 0 }}>
-        <span style={{ fontSize: 32, fontWeight: 700, height: 40 }}>{j.m}</span>
-        <div style={{ width: 20, height: 20, borderRadius: '50%', background: j.e.length ? C.black : '#FFFFFF', border: `3px solid ${C.black}` }} />
-        <div
-          style={{
-            display: 'flex', flexDirection: 'column', gap: 8, height: 250, overflow: 'hidden',
-            WebkitMaskImage: 'linear-gradient(to bottom, #000 62%, transparent)', maskImage: 'linear-gradient(to bottom, #000 62%, transparent)',
-          }}
-        >
-          {j.e.map((e) => (
-            <div key={e} style={{ background: C.light, padding: '8px 12px', fontSize: 19, lineHeight: 1.25, fontWeight: 700 }}>{e}</div>
-          ))}
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
+// Timeline: all twelve months on one line, event lists fade out at the bottom when they run long
 export const JahrSlide: React.FC = () => (
   <Frame title="Das Jahr 2027" section="03 Erste Ideen">
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginTop: -24 }}>
-      <JahrRow months={jahr.slice(0, 6)} />
-      <JahrRow months={jahr.slice(6)} />
+    <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: `repeat(${jahr.length}, minmax(0, 1fr))`, gap: 10, marginTop: -16 }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 53, height: 3, background: C.black }} />
+      {jahr.map((j) => (
+        <div key={j.m} style={{ display: 'flex', flexDirection: 'column', gap: 12, minWidth: 0 }}>
+          <span style={{ fontSize: 28, fontWeight: 700, height: 36 }}>{j.m}</span>
+          <div style={{ width: 18, height: 18, borderRadius: '50%', background: j.e.length ? C.black : '#FFFFFF', border: `3px solid ${C.black}` }} />
+          <div
+            style={{
+              display: 'flex', flexDirection: 'column', gap: 6, height: 560, overflow: 'hidden',
+              WebkitMaskImage: 'linear-gradient(to bottom, #000 70%, transparent)', maskImage: 'linear-gradient(to bottom, #000 70%, transparent)',
+            }}
+          >
+            {j.e.map((e) => (
+              <div key={e} style={{ background: C.light, padding: '8px 9px', fontSize: 16, lineHeight: 1.25, fontWeight: 700, hyphens: 'auto' }} lang="de">{e}</div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
     <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 32 }}>
       <span style={{ fontSize: 22 }}>

@@ -75,7 +75,7 @@ export default function DonauriesLeitfadenPage() {
       <Slide n={4} title="Die Kanäle heute" kern="Rund 9.300 Follower je Kanal, kein TikTok. Vergleichbare Regionen liegen deutlich höher.">
         <List items={kanaele.map((k) => <>{k.k}: {k.n} ({k.d})</>)} />
         <List items={vergleich.map(([h, , l]) => <>{h}: {l}</>)} />
-        <P muted>Komoot: Profil „Ferienland DONAURIES“ mit Touren (Ries-Panoramaweg, Sagenweg Wemding u. a.), letzte Aktivität 2.7.2023. YouTube betreibt der Wirtschaftsförderverband (97 Abos, 48 Videos, aktiv). Die Eifel erreicht mit fast gleich vielen Posts rund doppelt so viele Follower. Wertschätzend bleiben: nicht die bisherige Agentur kritisieren.</P>
+        <P muted>YouTube: Kanal @LandkreisDonauRies (340 Abos, 50 Videos) mit Tourismus- und Standortfilmen; die meisten Videos sind 1 bis 14 Jahre alt, zuletzt „20 Jahre Nationaler Geopark Ries“ vor 4 Monaten. Dazu der Kanal des Wirtschaftsförderverbands (97 Abos, Arbeitgeber-Themen). Komoot: Profil „Ferienland DONAURIES“ gefunden (letzte Aktivität laut Recherche 2023), nicht verifiziert, deshalb auf der Folie als offene Möglichkeit. Die Eifel erreicht mit fast gleich vielen Posts rund doppelt so viele Follower. Wertschätzend bleiben: nicht die bisherige Agentur kritisieren.</P>
       </Slide>
 
       <Slide n={5} title="Was uns auffällt" kern="Drei Punkte, an denen wir ansetzen.">
@@ -93,9 +93,9 @@ export default function DonauriesLeitfadenPage() {
         <P muted>TikTok: Vergleich @allgaeu 25.700 und @bayern 39.000 Follower. Nördlingen ist dort als „Shiganshina“ aus Attack on Titan bekannt. LinkedIn nicht ansprechen.</P>
       </Slide>
 
-      <Slide n={8} title="Die Website als Zentrale" kern="Eine Website, die synchron zu allen Kanälen läuft: Blog, Eventkalender, Touren.">
+      <Slide n={8} title="Optional: Die Website als Zentrale" kern="Optional, falls wir die Website bekommen: synchron zu allen Kanälen mit Blog, Eventkalender, Touren. Verstärkt die Reichweite.">
         <List items={[...website.optionen.map((o) => <><b>{o.t}:</b> {o.d}</>), ...website.inhalte]} />
-        <P muted>{website.warum} Welche Option, im Workshop klären.</P>
+        <P muted>{website.warum} Welche Option, im Workshop klären. Shop (wirtschaft-donauries.bayern/shop) verkauft Merch, ist aber ausbaufähig: {website.shop.d}</P>
       </Slide>
 
       <Slide n={9} title="Sechs Formate, eine Region" kern="Jedes Format verbindet Tourismus, Lebensqualität, Wirtschaft und Arbeiten. Alles erste Ideen, nicht fix.">

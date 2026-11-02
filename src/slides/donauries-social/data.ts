@@ -11,8 +11,8 @@ export const kanaele: { k: string; n: string; d: string }[] = [
   { k: 'Instagram', n: '9.250', d: '530 Beiträge' },
   { k: 'Facebook', n: '9.287', d: 'gemeinsamer Kanal' },
   { k: 'TikTok', n: '–', d: 'kein Kanal' },
-  { k: 'Komoot', n: '2023', d: 'letzte Tour' },
-  { k: 'YouTube', n: '97', d: 'Abos, Wirtschaft' },
+  { k: 'YouTube', n: '340', d: 'Abos, Landkreis-Kanal' },
+  { k: 'Komoot', n: '–', d: 'Möglichkeit, noch offen' },
 ];
 
 export const vergleich: [string, number, string][] = [
@@ -28,7 +28,7 @@ export const auffaellig: { t: string; d: string }[] = [
   { t: 'Kein TikTok', d: 'Gerade für Ausflüge und Urlaub wird TikTok wie eine Suchmaschine genutzt.' },
   { t: 'Follow-for-Follow', d: 'Viele Follower kommen über gegenseitiges Folgen und interessieren sich kaum für die Inhalte.' },
   { t: 'Wenig Engagement', d: 'Likes, Kommentare und Shares bleiben im Verhältnis zur Followerzahl gering.' },
-  { t: 'Content von der Stange', d: 'Austauschbare Bilder und Texte erzielen wenig Impressionen.' },
+  { t: 'Content von der Stange', d: 'Viele KI-Captions wirken unpersönlich, Videos passen inhaltlich kaum zu Short-Form und verlieren früh Zuschauer.' },
 ];
 
 export const leitidee = 'Eine Region, die man sehen will.';
@@ -45,8 +45,8 @@ export const kanalPlan: { t: string; s: string; d: string }[] = [
   { t: 'Instagram & Facebook', s: 'Kern', d: 'Hier ist das Publikum heute. Formate, Collab-Posts, Stories zu Events.' },
   { t: 'TikTok', s: 'neu', d: 'Für Ausflug und Urlaub. Gleiche Drehs, eigener Schnitt.' },
   { t: 'Komoot', s: 'neu', d: 'Wander- und Radtouren als Collections, verknüpft mit Reels aus der Region.' },
-  { t: 'Website', s: 'neu', d: 'Die Zentrale: Blog und Eventkalender, synchron zu allen Kanälen.' },
-  { t: 'YouTube & Google', s: 'ergänzend', d: 'Mini-Dokus in voller Länge, Ausflugsziele auffindbar in Google Maps.' },
+  { t: 'Website', s: 'optional', d: 'Die Zentrale: Blog und Eventkalender, synchron zu allen Kanälen.' },
+  { t: 'YouTube & Google Maps', s: 'ergänzend', d: 'Mini-Dokus in voller Länge, kuratierte Listen mit Ausflugszielen in Google Maps.' },
   { t: 'Paid Social', s: 'gezielt', d: 'Budget zuerst in Creator- und UGC-Content, Anzeigen für Events und Highlights.' },
 ];
 
@@ -60,7 +60,8 @@ export const website = {
     'Eventkalender, der Social Media und Website gleichzeitig füttert',
     'Touren aus Komoot und Mini-Dokus direkt eingebunden',
   ],
-  warum: 'Viele, gerade ältere Menschen, informieren sich weiterhin vor allem über Websites.',
+  warum: 'Verstärkt die Reichweite: Viele, gerade ältere Menschen, informieren sich weiterhin vor allem über Websites.',
+  shop: { t: 'Shop ausbauen', d: 'Merch mit Augenzwinkern, z. B. „Schön hier. Aber waren Sie schon mal in Baden-Württemberg?“' },
 };
 
 export const formate: { t: string; d: string }[] = [
@@ -94,7 +95,7 @@ export const goodToKnow: string[] = [
 export const jahr: { m: string; e: string[] }[] = [
   { m: 'Jan', e: ['Faschingsbälle im ganzen Landkreis'] },
   { m: 'Feb', e: ['Faschingsumzug Megesheim', 'Genderkinger Gaudiwurm', 'Tillywurm Rain', 'Faschingsumzug Donauwörth', 'Faschingsumzug Mertingen'] },
-  { m: 'Mär', e: [] },
+  { m: 'Mär', e: ['Ostern (28.3.)'] },
   { m: 'Apr', e: ['Wolle-Festival Nördlingen'] },
   { m: 'Mai', e: ['Stabenfest Nördlingen', 'Ipf-Ries-Halbmarathon', 'Historischer Markt Oettingen', 'Eisenbahnfest Nördlingen', 'Fuchsien- und Kräutermarkt Wemding', 'Residenzkonzerte Oettingen'] },
   { m: 'Jun', e: ['Inselfest Donauwörth', 'Nördlinger Mess\' und RVA', 'Mittelaltermarkt Burg Harburg', 'Brückenfest Harburg', 'Freilichtbühne Donauwörth', 'Bockfest Harburg', 'Leitheimer Schlosskonzerte'] },
