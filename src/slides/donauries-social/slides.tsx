@@ -20,7 +20,7 @@ export const TitleSlide: React.FC = () => (
     <div style={{ position: 'absolute', top: 72, right: 80 }}>
       <UhlBox />
     </div>
-    <img src="/donauries/logo.png" alt="DONAURIES" style={{ width: 380, height: 'auto' }} />
+    <img src="/donauries/logo.png" alt="DONAURIES" style={{ width: 400, height: 'auto' }} />
     <div style={{ fontSize: 34, letterSpacing: '0.06em', color: C.muted }}>Social Media ab 2027 · Ansatz und erste Ideen</div>
   </div>
 );
