@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, C, Dash, Frame, Small, font, UhlBox } from '../infrabau-neuauftritt/ui';
 import {
   auffaellig, fragen, formate, gemacht, goodToKnow, jahr, kanaele, kanalPlan, monatlich,
-  prinzipien, referenzen, regionFacts, team, vergleich, workshop,
+  community, controlling, kpis, prinzipien, referenzen, regionFacts, team, vergleich, warumUhl, workshop,
 } from './data';
 
 // Same look as the infrabau/walcher decks (Gesprächsgrundlage style); content in data.ts
@@ -29,7 +29,7 @@ const agenda = [
   ['01', 'Ausgangslage', 'Region, Kanäle, was uns auffällt'],
   ['02', 'Strategischer Ansatz', 'Prinzipien, Kanäle und Budget'],
   ['03', 'Erste Ideen', 'Formate, die Tourismus und Wirtschaft verbinden'],
-  ['04', 'Zusammenarbeit', 'Ablauf, Team, Referenzen'],
+  ['04', 'Zusammenarbeit', 'Ablauf, Erfolgsmessung, Team, Referenzen'],
   ['05', 'Offene Fragen', 'Was wir mit Ihnen klären wollen'],
 ];
 
@@ -274,6 +274,46 @@ export const TeamSlide: React.FC = () => {
   );
 };
 
+export const ErfolgSlide: React.FC = () => (
+  <Frame title="Erfolg messen & Community betreuen" section="04 Zusammenarbeit">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+      <Box style={{ gap: 24 }}>
+        <span style={{ fontSize: 22, color: C.muted }}>KPIs</span>
+        <span style={{ fontSize: 36, fontWeight: 700 }}>Was wir messen</span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+          {kpis.map((k) => (
+            <span key={k} style={{ fontSize: 24, fontWeight: 700, padding: '8px 14px', background: C.light }}>{k}</span>
+          ))}
+        </div>
+      </Box>
+      <Box style={{ gap: 24 }}>
+        <span style={{ fontSize: 22, color: C.muted }}>Controlling</span>
+        <span style={{ fontSize: 36, fontWeight: 700 }}>Jeden Monat auswerten</span>
+        <Dash items={controlling} size={27} gap={14} />
+      </Box>
+      <Box style={{ gap: 24 }}>
+        <span style={{ fontSize: 22, color: C.muted }}>Community-Management</span>
+        <span style={{ fontSize: 36, fontWeight: 700 }}>Im Gespräch bleiben</span>
+        <Dash items={community} size={27} gap={14} />
+      </Box>
+    </div>
+  </Frame>
+);
+
+export const WarumUhlSlide: React.FC = () => (
+  <Frame title="Warum uhl" section="04 Zusammenarbeit">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 32 }}>
+      {warumUhl.map((w, i) => (
+        <Box key={w.t} style={{ gap: 16 }}>
+          <span style={{ fontSize: 22, color: C.muted }}>0{i + 1}</span>
+          <span style={{ fontSize: 38, fontWeight: 700, lineHeight: 1.15 }}>{w.t}</span>
+          <span style={{ fontSize: 28, lineHeight: 1.35 }}>{w.d}</span>
+        </Box>
+      ))}
+    </div>
+  </Frame>
+);
+
 export const ReferenzenSlide: React.FC = () => (
   <Frame title="Referenzen" section="04 Zusammenarbeit">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, alignItems: 'stretch' }}>
@@ -314,7 +354,9 @@ export const allDonauriesSlides: React.FC[] = [
   GoodToKnowSlide,
   JahrSlide,
   AblaufSlide,
+  ErfolgSlide,
   TeamSlide,
+  WarumUhlSlide,
   ReferenzenSlide,
   FragenSlide,
 ];

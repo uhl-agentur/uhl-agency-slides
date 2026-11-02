@@ -90,6 +90,29 @@ export const monatlich: { t: string; d: string }[] = [
   { t: 'Online-Meeting', d: 'Reporting und konkrete Empfehlungen' },
 ];
 
+// Controlling and community management (our plan, no client facts)
+export const kpis: string[] = ['Reichweite', 'Shares und Saves', 'Profilaufrufe', 'Follower-Entwicklung', 'Interaktionsrate'];
+
+export const controlling: string[] = [
+  'Monatliches Reporting im Online-Meeting',
+  'Was gut lief, was nicht, und warum',
+  'Konkrete Empfehlungen für den nächsten Monat',
+];
+
+export const community: string[] = [
+  'Kommentare und Direktnachrichten betreuen',
+  'Fachliche Fragen gemeinsam mit den Vereinen beantworten',
+  'Partner, Gemeinden und Creator markieren und einbinden',
+];
+
+// Why uhl: only what we know about ourselves
+export const warumUhl: { t: string; d: string }[] = [
+  { t: 'Nähe zur Region', d: 'Wir kennen den Landkreis und drehen selbst vor Ort, ohne lange Anfahrt.' },
+  { t: 'Alles im eigenen Team', d: 'Strategie, Text und Interview, Design, Video und Foto aus einer Hand.' },
+  { t: 'Formate statt Einzelposts', d: 'Wiedererkennbare Reihen, die Tourismus und Wirtschaft verbinden.' },
+  { t: 'Feste Abläufe', d: 'Klarer Monatsrhythmus, ein Online-Meeting, ein Reporting mit Empfehlungen.' },
+];
+
 export const team: { n: string; r: string; d: string; img: string[] }[] = [
   { n: 'Daniel', r: 'Geschäftsführung', d: '', img: ['/team/daniel-hurle.jpg'] },
   { n: 'Karlheinz', r: 'Geschäftsführung', d: '', img: ['/team/karlheinz-uhl.jpg'] },
@@ -103,7 +126,7 @@ export const team: { n: string; r: string; d: string; img: string[] }[] = [
 export const referenzen: { t: string; s: string; d: string; todo?: boolean }[] = [
   { t: 'München Standortkarte', s: 'Regionalität', d: 'Zitat folgt', todo: true },
   { t: 'FinLers', s: 'Bezug Donauwörth', d: 'Arbeitsschutz, Gesundheitsmanagement und Betriebsmedizin. Laufendes Content Marketing für Instagram, Facebook, LinkedIn und Blog.' },
-  { t: 'Social Media', s: 'Weitere Referenzen', d: 'Reitzner · IntHome · Kinetikum · Therapiezentrum Augsburg · Blobel Consulting · AWI Consulting' },
+  { t: 'Social Media', s: 'Weitere Referenzen', d: 'Reitzner · IntHome · Kinetikum · Therapiezentrum Augsburg' },
 ];
 
 export const fragen: { t: string; q: string[] }[] = [

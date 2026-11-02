@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carlito } from 'next/font/google';
 import {
-  auffaellig, formate, gemacht, goodToKnow, jahr, kanaele, kanalPlan, monatlich, workshop,
+  auffaellig, community, controlling, formate, gemacht, goodToKnow, jahr, kanaele, kanalPlan, kpis, monatlich, warumUhl, workshop,
   prinzipien, referenzen, regionFacts, team, vergleich,
 } from '../../../src/slides/donauries-social/data';
 
@@ -117,16 +117,26 @@ export default function DonauriesLeitfadenPage() {
         <P muted>Offene Punkte für Telefonat oder Workshop: Gewichtung Tourismus zu Wirtschaft, wie viel Content die Vereine selbst liefern.</P>
       </Slide>
 
-      <Slide n={13} title="Das Team hinter Social Media" kern="Geschäftsführung mit Bezug zu Donauwörth und dem Ries, dazu Content, Design, Copywriting sowie Video und Fotografie.">
+      <Slide n={13} title="Erfolg messen & Community betreuen" kern="Wir messen, was zählt, werten jeden Monat aus und betreuen die Community.">
+        <List items={[<><b>KPIs:</b> {kpis.join(', ')}</>, <><b>Controlling:</b> {controlling.join('; ')}</>, <><b>Community-Management:</b> {community.join('; ')}</>]} />
+        <P muted>Wer welche Kommentare beantwortet, im Workshop festlegen; fachliche Fragen kennen nur die Vereine.</P>
+      </Slide>
+
+      <Slide n={14} title="Das Team hinter Social Media" kern="Geschäftsführung mit Bezug zu Donauwörth und dem Ries, dazu Content, Design, Copywriting sowie Video und Fotografie.">
         <List items={team.map((t) => <><b>{t.n}:</b> {t.r}{t.d ? `, ${t.d}` : ''}</>)} />
       </Slide>
 
-      <Slide n={14} title="Referenzen" kern="Regionalität und Social Media aus eigener Arbeit.">
+      <Slide n={15} title="Warum uhl" kern="Nähe, ein Team für alles, Formate und feste Abläufe.">
+        <List items={warumUhl.map((w) => <><b>{w.t}:</b> {w.d}</>)} />
+        <P muted>Hier mündlich die Herkunft betonen: Daniel aus Donauwörth, Karlheinz aus dem Ries.</P>
+      </Slide>
+
+      <Slide n={16} title="Referenzen" kern="Regionalität und Social Media aus eigener Arbeit.">
         <List items={referenzen.map((r) => <><b>{r.t}</b> ({r.s}){r.d ? `: ${r.d}` : ''}</>)} />
         <P muted>Zitat München Standortkarte fehlt noch. Keine Destinations-Referenz: über Nähe, eigene Drehs und frische Formate ausgleichen.</P>
       </Slide>
 
-      <Slide n={15} title="Was wir mit Ihnen klären wollen" kern="Auswahl aus dem Fragen-Pool, nicht alle stellen.">
+      <Slide n={17} title="Was wir mit Ihnen klären wollen" kern="Auswahl aus dem Fragen-Pool, nicht alle stellen.">
         {fragenPool.map((c) => (
           <div key={c.t}>
             <P><b>{c.t}</b></P>
