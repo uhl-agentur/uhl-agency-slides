@@ -250,20 +250,25 @@ export const AblaufSlide: React.FC = () => (
   </Frame>
 );
 
-// Portraits from the uhl website (black studio background), name and role in a color strip below
+// Round face avatars (cropped from the uhl website portraits), name and role below on the color tile
 export const TeamSlide: React.FC = () => (
   <Frame title="Das Team hinter Social Media" section="04 Zusammenarbeit">
-    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', gap: 20, flex: 1, minHeight: 0 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr', gap: 24 }}>
       {team.map((t, i) => (
-        <div key={t.n} style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-          <div style={{ flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: `repeat(${t.img.length}, 1fr)`, background: C.black }}>
-            {t.img.map((src) => (
-              <img key={src} src={src} alt={t.n} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 18%' }} />
+        <div key={t.n} style={{ background: tileBg[i], padding: '40px 30px 40px', minHeight: 520, display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {t.img.map((src, j) => (
+              <img
+                key={src}
+                src={src}
+                alt=""
+                style={{ width: 220, height: 220, borderRadius: '50%', objectFit: 'cover', border: '6px solid #FFFFFF', marginLeft: j > 0 ? -28 : 0 }}
+              />
             ))}
           </div>
-          <div style={{ background: tileBg[i], padding: '22px 24px', minHeight: 150, display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <span style={{ fontSize: 34, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
-            <span style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.25 }}>{t.r}</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <span style={{ fontSize: 36, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
+            <span style={{ fontSize: 25, fontWeight: 700, lineHeight: 1.25 }}>{t.r}</span>
             {t.d && <span style={{ fontSize: 22 }}>{t.d}</span>}
           </div>
         </div>

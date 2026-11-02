@@ -92,11 +92,11 @@ export const monatlich: { t: string; d: string }[] = [
 ];
 
 export const team: { n: string; r: string; d: string; img: string[] }[] = [
-  { n: 'Daniel & Karlheinz', r: 'Geschäftsführung', d: 'Bezug zu Donauwörth bzw. dem Ries', img: ['/team/daniel-hurle.jpg', '/team/karlheinz-uhl.jpg'] },
-  { n: 'Rupert', r: 'Content-Ideen und Umsetzung', d: '', img: ['/team/rupert-lohse.jpg'] },
-  { n: 'Annalena', r: 'Design der Beiträge und Planung', d: '', img: ['/team/annalena-geier.jpg'] },
-  { n: 'Kai', r: 'Copywriting & Interviewführung', d: '', img: ['/team/kai-mueller.jpg'] },
-  { n: 'Cedric', r: 'Video und Fotografie', d: '', img: ['/team/cedric-weber.jpg'] },
+  { n: 'Daniel & Karlheinz', r: 'Geschäftsführung', d: 'Bezug zu Donauwörth bzw. dem Ries', img: ['/team/avatar-daniel-hurle.jpg', '/team/avatar-karlheinz-uhl.jpg'] },
+  { n: 'Rupert', r: 'Content-Ideen und Umsetzung', d: '', img: ['/team/avatar-rupert-lohse.jpg'] },
+  { n: 'Annalena', r: 'Design der Beiträge und Planung', d: '', img: ['/team/avatar-annalena-geier.jpg'] },
+  { n: 'Kai', r: 'Copywriting & Interviewführung', d: '', img: ['/team/avatar-kai-mueller.jpg'] },
+  { n: 'Cedric', r: 'Video und Fotografie', d: '', img: ['/team/avatar-cedric-weber.jpg'] },
 ];
 
 export const referenzen: { t: string; s: string; d: string }[] = [
