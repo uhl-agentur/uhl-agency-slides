@@ -250,32 +250,28 @@ export const AblaufSlide: React.FC = () => (
   </Frame>
 );
 
-// Round face avatars (cropped from the uhl website portraits), name and role below on the color tile
-export const TeamSlide: React.FC = () => (
-  <Frame title="Das Team hinter Social Media" section="04 Zusammenarbeit">
-    <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr', gap: 24 }}>
-      {team.map((t, i) => (
-        <div key={t.n} style={{ background: tileBg[i], padding: '40px 30px 40px', minHeight: 520, display: 'flex', flexDirection: 'column', gap: 32 }}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            {t.img.map((src, j) => (
-              <img
-                key={src}
-                src={src}
-                alt=""
-                style={{ width: 220, height: 220, borderRadius: '50%', objectFit: 'cover', marginLeft: j > 0 ? -20 : 0 }}
-              />
-            ))}
+// Six portraits in one row (studio photos from the uhl website), captions below; the two managing directors share one caption
+export const TeamSlide: React.FC = () => {
+  const cols = team.reduce((n, t) => n + t.img.length, 0);
+  return (
+    <Frame title="Das Team hinter Social Media" section="04 Zusammenarbeit">
+      <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, columnGap: 20, rowGap: 28 }}>
+        {team.flatMap((t) =>
+          t.img.map((src) => (
+            <img key={src} src={src} alt={t.n} style={{ width: '100%', aspectRatio: '3 / 4', objectFit: 'cover', display: 'block' }} />
+          )),
+        )}
+        {team.map((t) => (
+          <div key={t.n} style={{ gridColumn: `span ${t.img.length}`, borderTop: `3px solid ${C.black}`, paddingTop: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <span style={{ fontSize: 34, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
+            <span style={{ fontSize: 25, lineHeight: 1.3 }}>{t.r}</span>
+            {t.d && <span style={{ fontSize: 22, color: C.muted }}>{t.d}</span>}
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <span style={{ fontSize: 36, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
-            <span style={{ fontSize: 25, fontWeight: 700, lineHeight: 1.25 }}>{t.r}</span>
-            {t.d && <span style={{ fontSize: 22 }}>{t.d}</span>}
-          </div>
-        </div>
-      ))}
-    </div>
-  </Frame>
-);
+        ))}
+      </div>
+    </Frame>
+  );
+};
 
 export const ReferenzenSlide: React.FC = () => (
   <Frame title="Referenzen" section="04 Zusammenarbeit">
