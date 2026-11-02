@@ -52,8 +52,8 @@ export const AgendaSlide: React.FC = () => (
 
 export const RegionSlide: React.FC = () => (
   <Frame title="Die Region" section="01 Ausgangslage">
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 520px', gap: 64, alignItems: 'center', marginTop: -24 }}>
-      <img src="/donauries/karte.jpg" alt="Karte Landkreis Donau-Ries" style={{ width: '100%', height: 780, objectFit: 'contain', objectPosition: 'left top' }} />
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 420px', gap: 48, alignItems: 'center', marginTop: -32 }}>
+      <img src="/donauries/karte-crop.jpg" alt="Karte Landkreis Donau-Ries" style={{ width: '100%', height: 820, objectFit: 'contain', objectPosition: 'left center' }} />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 56 }}>
         {regionFacts.map(([n, l]) => (
           <div key={l} style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -294,8 +294,8 @@ export const TeamSlide: React.FC = () => {
         )}
         {team.map((t) => (
           <div key={t.n} style={{ gridColumn: `span ${t.img.length}`, paddingTop: 4, display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <span style={{ fontSize: 34, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
-            <span style={{ fontSize: 21, lineHeight: 1.3, whiteSpace: 'nowrap' }}>{t.r}</span>
+            <span style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
+            <span style={{ fontSize: 18, lineHeight: 1.3 }}>{t.r}</span>
             {t.d && <span style={{ fontSize: 22, color: C.muted }}>{t.d}</span>}
           </div>
         ))}

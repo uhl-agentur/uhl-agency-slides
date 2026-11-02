@@ -152,6 +152,8 @@ export const team: { n: string; r: string; d: string; img: string[] }[] = [
   { n: 'Annalena', r: 'Social Media Managerin', d: '', img: ['/team/annalena-geier.jpg'] },
   { n: 'Kay', r: 'Redakteur', d: '', img: ['/team/kai-mueller.jpg'] },
   { n: 'Cedric', r: 'Video & Fotografie', d: '', img: ['/team/cedric-weber.jpg'] },
+  { n: 'Valentin', r: 'Mediengestalter & Analytics', d: '', img: ['/team/valentin-puma.jpg'] },
+  { n: 'Marion', r: 'Webdesignerin', d: '', img: ['/team/marion-diepold.jpg'] },
 ];
 
 // Main reference with quote (placeholder rendered red until the quote arrives), others small below
