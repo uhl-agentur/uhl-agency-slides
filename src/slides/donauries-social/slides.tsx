@@ -262,7 +262,7 @@ export const TeamSlide: React.FC = () => (
                 key={src}
                 src={src}
                 alt=""
-                style={{ width: 220, height: 220, borderRadius: '50%', objectFit: 'cover', border: '6px solid #FFFFFF', marginLeft: j > 0 ? -28 : 0 }}
+                style={{ width: 220, height: 220, borderRadius: '50%', objectFit: 'cover', marginLeft: j > 0 ? -20 : 0 }}
               />
             ))}
           </div>
