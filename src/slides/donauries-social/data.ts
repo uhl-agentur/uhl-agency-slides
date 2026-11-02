@@ -94,10 +94,10 @@ export const monatlich: { t: string; d: string }[] = [
 export const team: { n: string; r: string; d: string; img: string[] }[] = [
   { n: 'Daniel', r: 'Geschäftsführung', d: 'aus Donauwörth', img: ['/team/daniel-hurle.jpg'] },
   { n: 'Karlheinz', r: 'Geschäftsführung', d: 'aus dem Ries', img: ['/team/karlheinz-uhl.jpg'] },
-  { n: 'Rupert', r: 'Content-Ideen und Umsetzung', d: '', img: ['/team/rupert-lohse.jpg'] },
-  { n: 'Annalena', r: 'Design der Beiträge und Planung', d: '', img: ['/team/annalena-geier.jpg'] },
+  { n: 'Rupert', r: 'Content-Ideen & Umsetzung', d: '', img: ['/team/rupert-lohse.jpg'] },
+  { n: 'Annalena', r: 'Design der Beiträge & Planung', d: '', img: ['/team/annalena-geier.jpg'] },
   { n: 'Kai', r: 'Copywriting & Interviewführung', d: '', img: ['/team/kai-mueller.jpg'] },
-  { n: 'Cedric', r: 'Video und Fotografie', d: '', img: ['/team/cedric-weber.jpg'] },
+  { n: 'Cedric', r: 'Video & Fotografie', d: '', img: ['/team/cedric-weber.jpg'] },
 ];
 
 export const referenzen: { t: string; s: string; d: string }[] = [
