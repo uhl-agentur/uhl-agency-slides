@@ -255,7 +255,7 @@ export const TeamSlide: React.FC = () => {
   const cols = team.reduce((n, t) => n + t.img.length, 0);
   return (
     <Frame title="Das Team hinter Social Media" section="04 Zusammenarbeit">
-      <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, columnGap: 20, rowGap: 28 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, columnGap: 16, rowGap: 24 }}>
         {team.flatMap((t) =>
           t.img.map((src) => (
             <img key={src} src={src} alt={t.n} style={{ width: '100%', aspectRatio: '3 / 4', objectFit: 'cover', display: 'block' }} />
@@ -264,7 +264,7 @@ export const TeamSlide: React.FC = () => {
         {team.map((t) => (
           <div key={t.n} style={{ gridColumn: `span ${t.img.length}`, paddingTop: 4, display: 'flex', flexDirection: 'column', gap: 8 }}>
             <span style={{ fontSize: 34, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
-            <span style={{ fontSize: 25, lineHeight: 1.3 }}>{t.r}</span>
+            <span style={{ fontSize: 21, lineHeight: 1.3, whiteSpace: 'nowrap' }}>{t.r}</span>
             {t.d && <span style={{ fontSize: 22, color: C.muted }}>{t.d}</span>}
           </div>
         ))}
