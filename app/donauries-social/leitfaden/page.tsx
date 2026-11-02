@@ -100,7 +100,7 @@ export default function DonauriesLeitfadenPage() {
 
       <Slide n={9} title="Gemacht im DONAURIES" kern="Kurzdokus machen Arbeit sehenswert und zeigen nebenbei, wie es sich hier lebt.">
         <List items={gemacht} />
-        <P muted>Airbus Helicopters Donauwörth baut ab 2027 neu, rund 450 Arbeitsplätze. Firmenfreigaben über den Wirtschaftsförderverband und die TOP-Arbeitgeber.</P>
+        <P muted>Airbus Helicopters Donauwörth baut ab 2027 neu, rund 450 Arbeitsplätze. Firmenfreigaben über den Wirtschaftsförderverband und die TOP-Arbeitgeber. Orgelbau: G. F. Steinmeyer (Oettingen, gegründet 1847) baute bis 2001 Orgeln, weitergeführt als Orgelbau Steinmeyer GmbH; welche Werkstatt heute im Landkreis aktiv ist, vor dem Termin klären.</P>
       </Slide>
 
       <Slide n={10} title="Good-to-know" kern="Kurze Fakten über die Region, Hook in den ersten zwei Sekunden.">
@@ -109,7 +109,7 @@ export default function DonauriesLeitfadenPage() {
 
       <Slide n={11} title="Das Jahr 2027" kern="Events geben den Takt vor, die Landesgartenschau 2028 ist der rote Faden.">
         <List items={jahr.map((j) => <><b>{j.m}:</b> {j.e.join(', ')}</>)} />
-        <P muted>Bestätigt: 25. Reichsstraßenfest 21.–24.7.2027, Wolle Festival 24.–25.4.2027. Stabenfest, Mess', Scharlachrennen, Historischer Markt nach Muster der Vorjahre. Landesgartenschau Donauwörth 2028: 27 ha, 165 Tage, rund 3.000 Veranstaltungen, Spatenstich 17.7.2026.</P>
+        <P muted>Bestätigt: 25. Reichsstraßenfest 21.–24.7.2027, Wolle Festival 24.–25.4.2027. Stabenfest, Mess', Scharlachrennen, Historischer Markt nach Muster der Vorjahre. Hangover Party Mertingen: Open-Air-Party der Landjugend, 2026 am 10.–11.7. mit rund 8.000 Gästen, Termin 2027 offen. Landesgartenschau Donauwörth 2028: 27 ha, 165 Tage, rund 3.000 Veranstaltungen, Spatenstich 17.7.2026.</P>
       </Slide>
 
       <Slide n={12} title="So arbeiten wir" kern="Sechs Schritte, jeden Monat ein Online-Meeting mit Reporting.">

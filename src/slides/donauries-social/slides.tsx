@@ -9,18 +9,19 @@ import {
 
 const tileBg = [C.blue, C.yellow, C.tan, C.green, C.blue, C.yellow];
 
+// Client logo is blue on white, so the title slide uses the white ground
 export const TitleSlide: React.FC = () => (
   <div
     style={{
-      ...font, width: 1920, height: 1080, background: C.black, color: '#FFFFFF', position: 'relative',
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 48,
+      ...font, width: 1920, height: 1080, background: '#FFFFFF', color: C.text, position: 'relative',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 56,
     }}
   >
     <div style={{ position: 'absolute', top: 72, right: 80 }}>
-      <UhlBox onDark />
+      <UhlBox />
     </div>
-    <div style={{ fontSize: 140, fontWeight: 700, letterSpacing: '0.04em' }}>DONAURIES</div>
-    <div style={{ fontSize: 34, letterSpacing: '0.06em', color: '#BDBDBD' }}>Social Media ab 2027 · Ansatz und erste Ideen</div>
+    <img src="/donauries/logo.png" alt="DONAURIES" style={{ width: 380, height: 'auto' }} />
+    <div style={{ fontSize: 34, letterSpacing: '0.06em', color: C.muted }}>Social Media ab 2027 · Ansatz und erste Ideen</div>
   </div>
 );
 

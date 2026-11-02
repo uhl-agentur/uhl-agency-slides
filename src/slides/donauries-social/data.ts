@@ -56,6 +56,7 @@ export const gemacht: string[] = [
   'Ausbildung zum Fluggerätmechaniker bei Airbus Helicopters',
   'Neubau in Donauwörth für rund 450 Arbeitsplätze',
   'Hama in Monheim, Zott in Mertingen, Brauerei Oettinger',
+  'Orgelbau in Oettingen, Steinmeyer-Tradition seit 1847',
   'Kleine Handwerksbetriebe mit besonderem Können',
 ];
 
@@ -73,7 +74,7 @@ export const jahr: { m: string; e: string[] }[] = [
   { m: 'Apr', e: ['Wolle Festival Nördlingen'] },
   { m: 'Mai', e: ['Stabenfest Nördlingen', 'Ipf-Ries Halbmarathon', 'Historischer Markt Oettingen'] },
   { m: 'Jun', e: ['Nördlinger Mess'] },
-  { m: 'Jul', e: ['25. Reichsstraßenfest Donauwörth', 'Scharlachrennen Nördlingen'] },
+  { m: 'Jul', e: ['25. Reichsstraßenfest Donauwörth', 'Scharlachrennen Nördlingen', 'Hangover Party Mertingen'] },
   { m: 'Dez', e: ['Weihnachtsmärkte'] },
 ];
 
