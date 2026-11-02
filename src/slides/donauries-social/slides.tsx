@@ -229,12 +229,12 @@ export const JahrSlide: React.FC = () => (
           <div style={{ width: 18, height: 18, borderRadius: '50%', background: j.e.length ? C.black : '#FFFFFF', border: `3px solid ${C.black}` }} />
           <div
             style={{
-              display: 'flex', flexDirection: 'column', gap: 6, height: 560, overflow: 'hidden',
-              WebkitMaskImage: 'linear-gradient(to bottom, #000 70%, transparent)', maskImage: 'linear-gradient(to bottom, #000 70%, transparent)',
+              display: 'flex', flexDirection: 'column', gap: 8, height: 470, overflow: 'hidden',
+              WebkitMaskImage: 'linear-gradient(to bottom, #000 45%, transparent)', maskImage: 'linear-gradient(to bottom, #000 45%, transparent)',
             }}
           >
             {j.e.map((e) => (
-              <div key={e} style={{ background: C.light, padding: '8px 9px', fontSize: 16, lineHeight: 1.25, fontWeight: 700, hyphens: 'auto' }} lang="de">{e}</div>
+              <div key={e} style={{ background: C.light, padding: '10px 10px', fontSize: 17, lineHeight: 1.25, fontWeight: 700, hyphens: 'manual' }} lang="de">{e}</div>
             ))}
           </div>
         </div>

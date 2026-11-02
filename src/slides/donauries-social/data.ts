@@ -95,17 +95,17 @@ export const goodToKnow: string[] = [
 // all others follow the 2026 pattern (sources in 07_Briefings/01_Pitch, Recherche)
 export const jahr: { m: string; e: string[] }[] = [
   { m: 'Jan', e: ['Faschingsbälle im ganzen Landkreis'] },
-  { m: 'Feb', e: ['Faschingsumzug Megesheim', 'Genderkinger Gaudiwurm', 'Tillywurm Rain', 'Faschingsumzug Donauwörth', 'Faschingsumzug Mertingen'] },
-  { m: 'Mär', e: ['Ostern (28.3.)'] },
+  { m: 'Feb', e: ['Faschings\u00adumzug Megesheim', 'Genderkinger Gaudiwurm', 'Tillywurm Rain', 'Faschings\u00adumzug Donauwörth', 'Faschings\u00adumzug Mertingen'] },
+  { m: 'Mär', e: [] },
   { m: 'Apr', e: ['Wolle-Festival Nördlingen'] },
-  { m: 'Mai', e: ['Stabenfest Nördlingen', 'Ipf-Ries-Halbmarathon', 'Historischer Markt Oettingen', 'Eisenbahnfest Nördlingen', 'Fuchsien- und Kräutermarkt Wemding', 'Residenzkonzerte Oettingen'] },
-  { m: 'Jun', e: ['Inselfest Donauwörth', 'Nördlinger Mess\' und RVA', 'Mittelaltermarkt Burg Harburg', 'Brückenfest Harburg', 'Freilichtbühne Donauwörth', 'Bockfest Harburg', 'Leitheimer Schlosskonzerte'] },
-  { m: 'Jul', e: ['25. Reichsstraßenfest Donauwörth', 'Schwäbischwerder Kindertag', 'Scharlachrennen Nördlingen', 'Hangover Party Mertingen', 'Rainer Stadtfest', 'Jakobi-Kirchweih Oettingen', 'Nördlinger Stadtlauf', 'Blasmusik Open Air Monheim', 'Jakobimarkt Rain'] },
+  { m: 'Mai', e: ['Stabenfest Nördlingen', 'Ipf-Ries-Halbmarathon', 'Historischer Markt Oettingen', 'Eisenbahnfest Nördlingen', 'Fuchsien- und Kräutermarkt Wemding', 'Residenz\u00adkonzerte Oettingen'] },
+  { m: 'Jun', e: ['Inselfest Donauwörth', 'Nördlinger Mess\' und RVA', 'Mittelalter\u00admarkt Burg Harburg', 'Brückenfest Harburg', 'Freilichtbühne Donauwörth', 'Bockfest Harburg', 'Leitheimer Schloss\u00adkonzerte'] },
+  { m: 'Jul', e: ['25. Reichsstraßen\u00adfest Donauwörth', 'Schwäbisch\u00adwerder Kindertag', 'Scharlachrennen Nördlingen', 'Hangover Party Mertingen', 'Rainer Stadtfest', 'Jakobi-Kirchweih Oettingen', 'Nördlinger Stadtlauf', 'Blasmusik Open Air Monheim', 'Jakobimarkt Rain'] },
   { m: 'Aug', e: ['Rainer Winkel Festival Münster', 'Historisches Fest Huisheim'] },
-  { m: 'Sep', e: ['KulturNachtRain', 'Donau-Rieser Schaftag Maihingen'] },
+  { m: 'Sep', e: ['KulturNacht\u00adRain', 'Donau-Rieser Schaftag Maihingen'] },
   { m: 'Okt', e: ['Donauwörther Kulturtage', 'Kirchweihen im Ries'] },
-  { m: 'Nov', e: ['Kunst- und Lichternacht Donauwörth', 'Weihnachtsduft Donauwörth', 'Christkindlesmarkt Oettingen'] },
-  { m: 'Dez', e: ['Weihnachtsmarkt Nördlingen', 'Weihnachtsmarkt Insel Ried Donauwörth'] },
+  { m: 'Nov', e: ['Kunst- und Lichternacht Donauwörth', 'Weihnachts\u00adduft Donauwörth', 'Christkindles\u00admarkt Oettingen'] },
+  { m: 'Dez', e: ['Weihnachts\u00admarkt Nördlingen', 'Weihnachts\u00admarkt Insel Ried Donauwörth'] },
 ];
 
 export const workshop = {
