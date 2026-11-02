@@ -119,14 +119,14 @@ export default function DonauriesLeitfadenPage() {
 
       <Slide n={13} title="Erfolg messen & Community betreuen" kern="Wir messen, was zählt, werten jeden Monat aus und betreuen die Community.">
         <List items={[<><b>KPIs:</b> {kpis.join(', ')}</>, <><b>Controlling:</b> {controlling.join('; ')}</>, <><b>Community-Management:</b> {community.join('; ')}</>]} />
-        <P muted>Wer welche Kommentare beantwortet, im Workshop festlegen; fachliche Fragen kennen nur die Vereine.</P>
+        <P muted>Wer welche Kommentare beantwortet, im Workshop festlegen; fachliche Fragen kennen nur die Vereine. Interaktive DMs, zum Beispiel „EVENTS“ kommentieren für die Event-Liste (Was geht im DONAURIES), „AUSBILDUNG“ für Stellen der Betriebe (Gemacht im DONAURIES), „HIN“ für Route und Infos (Good-to-know). Tool wie ManyChat nur als Idee nennen: US-Anbieter, Datenschutz beim öffentlichen Auftraggeber vorher prüfen, Kosten im Workshop klären.</P>
       </Slide>
 
       <Slide n={14} title="Das Team hinter Social Media" kern="Geschäftsführung mit Bezug zu Donauwörth und dem Ries, dazu Content, Design, Copywriting sowie Video und Fotografie.">
         <List items={team.map((t) => <><b>{t.n}:</b> {t.r}{t.d ? `, ${t.d}` : ''}</>)} />
       </Slide>
 
-      <Slide n={15} title="Warum uhl" kern="Nähe, ein Team für alles, Formate und feste Abläufe.">
+      <Slide n={15} title="Warum Uhl" kern="Nähe, ein Team für alles, Formate und feste Abläufe.">
         <List items={warumUhl.map((w) => <><b>{w.t}:</b> {w.d}</>)} />
         <P muted>Hier mündlich die Herkunft betonen: Daniel aus Donauwörth, Karlheinz aus dem Ries.</P>
       </Slide>

@@ -103,9 +103,10 @@ export const community: string[] = [
   'Kommentare und Direktnachrichten betreuen',
   'Fachliche Fragen gemeinsam mit den Vereinen beantworten',
   'Partner, Gemeinden und Creator markieren und einbinden',
+  'Interaktive DMs: Stichwort kommentieren, Link per Direktnachricht',
 ];
 
-// Why uhl: only what we know about ourselves
+// Why Uhl: only what we know about ourselves
 export const warumUhl: { t: string; d: string }[] = [
   { t: 'Nähe zur Region', d: 'Wir kennen den Landkreis und drehen selbst vor Ort, ohne lange Anfahrt.' },
   { t: 'Alles im eigenen Team', d: 'Strategie, Text und Interview, Design, Video und Foto aus einer Hand.' },

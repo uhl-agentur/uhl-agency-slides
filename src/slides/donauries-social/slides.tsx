@@ -301,7 +301,7 @@ export const ErfolgSlide: React.FC = () => (
 );
 
 export const WarumUhlSlide: React.FC = () => (
-  <Frame title="Warum uhl" section="04 Zusammenarbeit">
+  <Frame title="Warum Uhl" section="04 Zusammenarbeit">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 32 }}>
       {warumUhl.map((w, i) => (
         <Box key={w.t} style={{ gap: 16 }}>
