@@ -27,3 +27,6 @@ out/
 *.sln
 *.sw?
 .vercel
+output/
+tsconfig.tsbuildinfo
+.next
