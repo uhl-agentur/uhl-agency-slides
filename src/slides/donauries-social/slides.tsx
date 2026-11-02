@@ -22,8 +22,8 @@ export const TitleSlide: React.FC = () => (
     </div>
     <img src="/donauries/logo.png" alt="DONAURIES" style={{ width: 360, height: 'auto' }} />
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
-      <div style={{ fontSize: 64, fontWeight: 700 }}>Eine Region. Überall sichtbar.</div>
-      <div style={{ fontSize: 30, letterSpacing: '0.04em', color: C.muted }}>Instagram, Facebook, TikTok, YouTube und Komoot</div>
+      <div style={{ fontSize: 64, fontWeight: 700 }}>Do ziagt’s mi na.</div>
+      <div style={{ fontSize: 30, letterSpacing: '0.04em', color: C.muted }}>Und bald auf Instagram, TikTok und Co. alle anderen auch.</div>
     </div>
   </div>
 );
