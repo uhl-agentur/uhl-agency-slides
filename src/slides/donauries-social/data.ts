@@ -56,13 +56,13 @@ export const website = {
     { t: 'Eine gemeinsame DONAURIES-Seite', d: 'Eine Seite für Tourismus und Wirtschaft, passend zum gemeinsamen Kanal.' },
   ],
   inhalte: [
-    'Verstärkt die Reichweite: Gerade ältere Menschen informieren sich weiterhin über Websites',
+    'Verstärkt die Reichweite: Gerade ältere Zielgruppen informieren sich weiterhin über Websites',
     'Blogbeiträge zu jedem Format, synchron zu Reels und Posts',
     'Eventkalender, der Social Media und Website gleichzeitig füttert',
     'Touren aus Komoot und Mini-Dokus direkt eingebunden',
   ],
-  warum: 'Verstärkt die Reichweite: Viele, gerade ältere Menschen, informieren sich weiterhin vor allem über Websites.',
-  shop: { t: 'Shop ausbauen', d: 'Merch mit Augenzwinkern, z. B. „Schön hier. Aber waren Sie schon mal in Baden-Württemberg?“' },
+  warum: 'Verstärkt die Reichweite: Gerade ältere Zielgruppen informieren sich weiterhin über Websites.',
+  shop: { t: 'Shop ausbauen', d: 'Merch mit eigenem Slogan mit Augenzwinkern, nach dem Vorbild der Baden-Württemberg-Kampagne „Schön hier. Aber waren Sie schon mal in Baden-Württemberg?“' },
 };
 
 export const formate: { t: string; d: string }[] = [
