@@ -223,7 +223,7 @@ export const JahrSlide: React.FC = () => (
 
 export const AblaufSlide: React.FC = () => (
   <Frame title="So arbeiten wir" section="04 Zusammenarbeit">
-    <div style={{ display: 'grid', gridTemplateColumns: '440px 1fr', gap: 48, alignItems: 'start' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '400px 1fr', gap: 40, alignItems: 'start' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         <span style={{ fontSize: 26, color: C.muted }}>Zum Start</span>
         <Box style={{ gap: 18 }}>
@@ -234,13 +234,13 @@ export const AblaufSlide: React.FC = () => (
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         <span style={{ fontSize: 26, color: C.muted }}>Jeden Monat</span>
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${monatlich.length}, 1fr)`, gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${monatlich.length}, minmax(0, 1fr))`, gap: 16 }}>
           {monatlich.map((m, i) => (
             <div key={m.t} style={{ background: tileBg[i], padding: '28px 26px', minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <span style={{ fontSize: 24 }}>0{i + 1}</span>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <span style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.15 }}>{m.t}</span>
-                <span style={{ fontSize: 24, lineHeight: 1.35 }}>{m.d}</span>
+                <span style={{ fontSize: 27, fontWeight: 700, lineHeight: 1.15, hyphens: 'auto' }} lang="de">{m.t}</span>
+                <span style={{ fontSize: 22, lineHeight: 1.35 }}>{m.d}</span>
               </div>
             </div>
           ))}

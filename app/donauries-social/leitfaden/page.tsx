@@ -112,7 +112,7 @@ export default function DonauriesLeitfadenPage() {
         <P muted>Bestätigt: 25. Reichsstraßenfest 21.–24.7.2027, Wolle Festival 24.–25.4.2027. Stabenfest, Mess', Scharlachrennen, Historischer Markt nach Muster der Vorjahre. Hangover Party Mertingen: Open-Air-Party der Landjugend, 2026 am 10.–11.7. mit rund 8.000 Gästen, Termin 2027 offen. Landesgartenschau Donauwörth 2028: 27 ha, 165 Tage, rund 3.000 Veranstaltungen, Spatenstich 17.7.2026.</P>
       </Slide>
 
-      <Slide n={12} title="So arbeiten wir" kern="Zum Start ein Workshop, danach ein fester Monatsablauf mit Online-Meeting.">
+      <Slide n={12} title="So arbeiten wir" kern="Zum Start ein Workshop, danach ein fester Monatsablauf mit Community-Management und Online-Meeting.">
         <List items={[<><b>{workshop.t} ({workshop.s}):</b> {workshop.items.join(', ')}</>, ...monatlich.map((m) => <><b>{m.t}:</b> {m.d}</>)]} />
         <P muted>Offene Punkte für Telefonat oder Workshop: Gewichtung Tourismus zu Wirtschaft, wie viel Content die Vereine selbst liefern.</P>
       </Slide>

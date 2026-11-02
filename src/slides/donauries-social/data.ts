@@ -87,6 +87,7 @@ export const monatlich: { t: string; d: string }[] = [
   { t: 'Redaktionsplan', d: 'Themen und Termine in Notion, Abstimmung mit Ihnen' },
   { t: 'Dreh vor Ort', d: 'Gebündelt nach Region und Anlass' },
   { t: 'Veröffentlichung', d: 'Beitragsplanung über Metricool, mit Collab-Posts' },
+  { t: 'Community-Management', d: 'Kommentare und Nachrichten laufend betreuen' },
   { t: 'Online-Meeting', d: 'Reporting und konkrete Empfehlungen' },
 ];
 
