@@ -81,7 +81,7 @@ export const jahr: { m: string; e: string[] }[] = [
 export const workshop = {
   t: 'Workshop',
   s: 'Auftakt und Strategie',
-  items: ['Ziele und Gewichtung Tourismus zu Wirtschaft', 'Formate und Event-Kalender', 'Freigabewege beider Vereine'],
+  items: ['Ziele und Schwerpunkte gemeinsam festlegen', 'Social-Media-Strategie entwickeln', 'Formate und Event-Kalender planen'],
 };
 
 export const monatlich: { t: string; d: string }[] = [
@@ -95,6 +95,8 @@ export const team: { n: string; r: string; d: string }[] = [
   { n: 'Daniel und Karlheinz', r: 'Geschäftsführung', d: 'Bezug zu Donauwörth bzw. dem Ries' },
   { n: 'Ruppert', r: 'Content-Ideen und Umsetzung', d: '' },
   { n: 'Annalena', r: 'Design der Beiträge und Planung', d: '' },
+  { n: 'Kay', r: 'Copywriting', d: 'Texte und Interviews' },
+  { n: 'Cedric', r: 'Video und Fotografie', d: '' },
 ];
 
 export const referenzen: { t: string; s: string; d: string }[] = [

@@ -252,12 +252,12 @@ export const AblaufSlide: React.FC = () => (
 
 export const TeamSlide: React.FC = () => (
   <Frame title="Das Team hinter Social Media" section="04 Zusammenarbeit">
-    <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', gap: 28 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1fr', gap: 24 }}>
       {team.map((t, i) => (
-        <div key={t.n} style={{ background: tileBg[i], height: 360, padding: 36, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: 44, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
+        <div key={t.n} style={{ background: tileBg[i], height: 360, padding: 30, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: 40, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <span style={{ fontSize: 28, fontWeight: 700 }}>{t.r}</span>
+            <span style={{ fontSize: 26, fontWeight: 700, lineHeight: 1.25 }}>{t.r}</span>
             {t.d && <span style={{ fontSize: 24 }}>{t.d}</span>}
           </div>
         </div>

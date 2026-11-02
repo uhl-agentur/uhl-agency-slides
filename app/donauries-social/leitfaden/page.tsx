@@ -114,10 +114,10 @@ export default function DonauriesLeitfadenPage() {
 
       <Slide n={12} title="So arbeiten wir" kern="Zum Start ein Workshop, danach ein fester Monatsablauf mit Online-Meeting.">
         <List items={[<><b>{workshop.t} ({workshop.s}):</b> {workshop.items.join(', ')}</>, ...monatlich.map((m) => <><b>{m.t}:</b> {m.d}</>)]} />
-        <P muted>Im Workshop klären: Gewichtung Tourismus zu Wirtschaft, Freigabewege beider Vereine, wie viel Content die Vereine selbst liefern.</P>
+        <P muted>Offene Punkte für Telefonat oder Workshop: Gewichtung Tourismus zu Wirtschaft, wie viel Content die Vereine selbst liefern.</P>
       </Slide>
 
-      <Slide n={13} title="Das Team hinter Social Media" kern="Geschäftsführung mit Bezug zu Donauwörth und dem Ries, dazu Content und Design.">
+      <Slide n={13} title="Das Team hinter Social Media" kern="Geschäftsführung mit Bezug zu Donauwörth und dem Ries, dazu Content, Design, Copywriting sowie Video und Fotografie.">
         <List items={team.map((t) => <><b>{t.n}:</b> {t.r}{t.d ? `, ${t.d}` : ''}</>)} />
       </Slide>
 
