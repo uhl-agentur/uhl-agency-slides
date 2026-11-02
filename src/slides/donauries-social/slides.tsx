@@ -250,7 +250,7 @@ export const AblaufSlide: React.FC = () => (
   </Frame>
 );
 
-// Six portraits in one row (studio photos from the uhl website), captions below; the two managing directors share one caption
+// Six portraits in one row (studio photos from the uhl website), captions below
 export const TeamSlide: React.FC = () => {
   const cols = team.reduce((n, t) => n + t.img.length, 0);
   return (
@@ -262,7 +262,7 @@ export const TeamSlide: React.FC = () => {
           )),
         )}
         {team.map((t) => (
-          <div key={t.n} style={{ gridColumn: `span ${t.img.length}`, borderTop: `3px solid ${C.black}`, paddingTop: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div key={t.n} style={{ gridColumn: `span ${t.img.length}`, paddingTop: 4, display: 'flex', flexDirection: 'column', gap: 8 }}>
             <span style={{ fontSize: 34, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
             <span style={{ fontSize: 25, lineHeight: 1.3 }}>{t.r}</span>
             {t.d && <span style={{ fontSize: 22, color: C.muted }}>{t.d}</span>}

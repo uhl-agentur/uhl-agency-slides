@@ -92,7 +92,8 @@ export const monatlich: { t: string; d: string }[] = [
 ];
 
 export const team: { n: string; r: string; d: string; img: string[] }[] = [
-  { n: 'Daniel & Karlheinz', r: 'Geschäftsführung', d: 'Bezug zu Donauwörth bzw. dem Ries', img: ['/team/daniel-hurle.jpg', '/team/karlheinz-uhl.jpg'] },
+  { n: 'Daniel', r: 'Geschäftsführung', d: 'aus Donauwörth', img: ['/team/daniel-hurle.jpg'] },
+  { n: 'Karlheinz', r: 'Geschäftsführung', d: 'aus dem Ries', img: ['/team/karlheinz-uhl.jpg'] },
   { n: 'Rupert', r: 'Content-Ideen und Umsetzung', d: '', img: ['/team/rupert-lohse.jpg'] },
   { n: 'Annalena', r: 'Design der Beiträge und Planung', d: '', img: ['/team/annalena-geier.jpg'] },
   { n: 'Kai', r: 'Copywriting & Interviewführung', d: '', img: ['/team/kai-mueller.jpg'] },
