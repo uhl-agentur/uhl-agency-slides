@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, C, Dash, Frame, Small, font, UhlBox } from '../infrabau-neuauftritt/ui';
 import {
-  ablauf, auffaellig, fragen, formate, gemacht, goodToKnow, jahr, kanaele, kanalPlan, leitidee, leitideeSub,
-  prinzipien, referenzen, regionFacts, team, vergleich,
+  auffaellig, fragen, formate, gemacht, goodToKnow, jahr, kanaele, kanalPlan, monatlich,
+  prinzipien, referenzen, regionFacts, team, vergleich, workshop,
 } from './data';
 
 // Same look as the infrabau/walcher decks (Gesprächsgrundlage style); content in data.ts
@@ -99,8 +99,8 @@ export const AuffaelligSlide: React.FC = () => (
   <Frame title="Was uns auffällt" section="01 Ausgangslage">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, alignItems: 'stretch' }}>
       {auffaellig.map((a, i) => (
-        <Box key={a.t} dark={i === 1} style={{ justifyContent: 'flex-start', gap: 28 }}>
-          <span style={{ fontSize: 22, color: i === 1 ? '#BDBDBD' : C.muted }}>0{i + 1}</span>
+        <Box key={a.t} style={{ justifyContent: 'flex-start', gap: 28 }}>
+          <span style={{ fontSize: 22, color: C.muted }}>0{i + 1}</span>
           <span style={{ fontSize: 36, fontWeight: 700, lineHeight: 1.15 }}>{a.t}</span>
           <span style={{ fontSize: 27, lineHeight: 1.35 }}>{a.d}</span>
         </Box>
@@ -111,17 +111,13 @@ export const AuffaelligSlide: React.FC = () => (
 
 export const AnsatzSlide: React.FC = () => (
   <Frame title="Unser Ansatz" section="02 Strategischer Ansatz">
-    <Box dark style={{ padding: '40px 48px', gap: 14 }}>
-      <span style={{ fontSize: 52, fontWeight: 700 }}>{leitidee}</span>
-      <span style={{ fontSize: 30, color: '#D0D0D0' }}>{leitideeSub}</span>
-    </Box>
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32, marginTop: 56 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 32 }}>
       {prinzipien.map((p, i) => (
-        <div key={p.t} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <Box key={p.t} style={{ gap: 16 }}>
           <span style={{ fontSize: 22, color: C.muted }}>0{i + 1}</span>
-          <span style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.15 }}>{p.t}</span>
-          <span style={{ fontSize: 26, lineHeight: 1.35 }}>{p.d}</span>
-        </div>
+          <span style={{ fontSize: 38, fontWeight: 700, lineHeight: 1.15 }}>{p.t}</span>
+          <span style={{ fontSize: 28, lineHeight: 1.35 }}>{p.d}</span>
+        </Box>
       ))}
     </div>
   </Frame>
@@ -131,11 +127,11 @@ export const KanalPlanSlide: React.FC = () => (
   <Frame title="Kanäle und Budget" section="02 Strategischer Ansatz">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, alignItems: 'stretch' }}>
       {kanalPlan.map((k) => (
-        <Box key={k.t} dark={k.dark} style={{ gap: 28 }}>
+        <Box key={k.t} style={{ gap: 28 }}>
           <span
             style={{
               alignSelf: 'flex-start', fontSize: 20, fontWeight: 700, padding: '6px 14px',
-              border: `2px solid ${k.dark ? '#FFFFFF' : C.black}`,
+              border: `2px solid ${C.black}`,
             }}
           >
             {k.s}
@@ -185,8 +181,8 @@ export const GoodToKnowSlide: React.FC = () => (
   <Frame title="Good-to-know" section="03 Erste Ideen">
     <span style={{ fontSize: 30, marginBottom: 40 }}>Kurze Fakten über die Region, vor Ort gedreht, Hook in den ersten zwei Sekunden.</span>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridTemplateRows: '1fr 1fr', gap: 28, flex: 1 }}>
-      {goodToKnow.map((g, i) => (
-        <Box key={g} dark={i === 0} style={{ justifyContent: 'center' }}>
+      {goodToKnow.map((g) => (
+        <Box key={g} style={{ justifyContent: 'center' }}>
           <span style={{ fontSize: 30, fontWeight: 700, lineHeight: 1.3 }}>{g}</span>
         </Box>
       ))}
@@ -194,70 +190,88 @@ export const GoodToKnowSlide: React.FC = () => (
   </Frame>
 );
 
+// Timeline: one marker per month with events, events as light cards below the line
 export const JahrSlide: React.FC = () => (
   <Frame title="Das Jahr 2027" section="03 Erste Ideen">
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${jahr.length}, 1fr)`, gap: 24, borderTop: `3px solid ${C.black}`, paddingTop: 28 }}>
+    <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: `repeat(${jahr.length}, 1fr)`, gap: 28 }}>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 95, height: 4, background: C.black }} />
       {jahr.map((j) => (
-        <div key={j.m} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <span style={{ fontSize: 40, fontWeight: 700 }}>{j.m}</span>
-          <Dash items={j.e} size={25} gap={10} />
+        <div key={j.m} style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <span style={{ fontSize: 44, fontWeight: 700, height: 56 }}>{j.m}</span>
+          <div style={{ width: 26, height: 26, borderRadius: '50%', background: C.black, border: '6px solid #FFFFFF', boxShadow: `0 0 0 3px ${C.black}`, position: 'relative' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {j.e.map((e) => (
+              <div key={e} style={{ background: C.light, padding: '14px 18px', fontSize: 24, lineHeight: 1.3, fontWeight: 700 }}>{e}</div>
+            ))}
+          </div>
         </div>
       ))}
     </div>
-    <div style={{ marginTop: 'auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
-      <Box dark style={{ gap: 12 }}>
-        <span style={{ fontSize: 32, fontWeight: 700 }}>Countdown Landesgartenschau Donauwörth 2028</span>
-        <span style={{ fontSize: 26 }}>Das ganze Jahr: Baustelle, Menschen dahinter, Vorfreude.</span>
-      </Box>
-      <Box style={{ gap: 12 }}>
-        <span style={{ fontSize: 32, fontWeight: 700 }}>Was geht im DONAURIES</span>
-        <span style={{ fontSize: 26 }}>Regelmäßiger Ausblick auf die nächsten Events.</span>
-      </Box>
+    <div style={{ marginTop: 'auto' }}>
+      <Dash
+        size={26}
+        gap={10}
+        items={[
+          <><b>Dazu das ganze Jahr:</b> Countdown zur Landesgartenschau Donauwörth 2028</>,
+          <><b>Was geht im DONAURIES:</b> regelmäßiger Ausblick auf die nächsten Events</>,
+        ]}
+      />
+      <Small style={{ marginTop: 18 }}>Termine teils voraussichtlich, Stand 02.11.2026.</Small>
     </div>
-    <Small style={{ marginTop: 20 }}>Termine teils voraussichtlich, Stand 02.11.2026.</Small>
   </Frame>
 );
 
 export const AblaufSlide: React.FC = () => (
   <Frame title="So arbeiten wir" section="04 Zusammenarbeit">
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${ablauf.length}, 1fr)`, gap: 28, paddingTop: 80 }}>
-      {ablauf.map((a, i) => (
-        <div key={a.n} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-          <div style={{ height: 12, background: i === 0 ? C.black : C.line }} />
-          <span style={{ fontSize: 26, color: C.muted }}>{a.n}</span>
-          <span style={{ fontSize: 36, fontWeight: 700, lineHeight: 1.15 }}>{a.t}</span>
-          <span style={{ fontSize: 28, lineHeight: 1.35 }}>{a.d}</span>
+    <div style={{ display: 'grid', gridTemplateColumns: '440px 1fr', gap: 48, alignItems: 'start' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <span style={{ fontSize: 26, color: C.muted }}>Zum Start</span>
+        <Box style={{ gap: 18 }}>
+          <span style={{ fontSize: 40, fontWeight: 700 }}>{workshop.t}</span>
+          <span style={{ fontSize: 26, color: C.muted }}>{workshop.s}</span>
+          <Dash items={workshop.items} size={26} gap={12} />
+        </Box>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <span style={{ fontSize: 26, color: C.muted }}>Jeden Monat</span>
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${monatlich.length}, 1fr)`, gap: 20 }}>
+          {monatlich.map((m, i) => (
+            <div key={m.t} style={{ background: tileBg[i], padding: '28px 26px', minHeight: 300, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <span style={{ fontSize: 24 }}>0{i + 1}</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <span style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.15 }}>{m.t}</span>
+                <span style={{ fontSize: 24, lineHeight: 1.35 }}>{m.d}</span>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   </Frame>
 );
 
 export const TeamSlide: React.FC = () => (
-  <Frame title="Ihr Team" section="04 Zusammenarbeit">
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 28 }}>
+  <Frame title="Das Team hinter Social Media" section="04 Zusammenarbeit">
+    <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', gap: 28 }}>
       {team.map((t, i) => (
-        <div key={t.n} style={{ background: tileBg[i], height: 320, padding: 32, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: 44, fontWeight: 700 }}>{t.n}</span>
+        <div key={t.n} style={{ background: tileBg[i], height: 360, padding: 36, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: 44, fontWeight: 700, lineHeight: 1.1 }}>{t.n}</span>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <span style={{ fontSize: 26, fontWeight: 700 }}>{t.r}</span>
+            <span style={{ fontSize: 28, fontWeight: 700 }}>{t.r}</span>
             {t.d && <span style={{ fontSize: 24 }}>{t.d}</span>}
           </div>
         </div>
       ))}
     </div>
-    <Box dark style={{ marginTop: 56, padding: '32px 40px' }}>
-      <span style={{ fontSize: 34, fontWeight: 700 }}>Aus der Region, für die Region: Wir drehen selbst vor Ort, regelmäßig und ohne Anfahrtstag.</span>
-    </Box>
   </Frame>
 );
 
 export const ReferenzenSlide: React.FC = () => (
   <Frame title="Referenzen" section="04 Zusammenarbeit">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, alignItems: 'stretch' }}>
-      {referenzen.map((r, i) => (
-        <Box key={r.t} dark={i === 0} style={{ gap: 24 }}>
-          <span style={{ fontSize: 22, color: i === 0 ? '#BDBDBD' : C.muted }}>{r.s}</span>
+      {referenzen.map((r) => (
+        <Box key={r.t} style={{ gap: 24 }}>
+          <span style={{ fontSize: 22, color: C.muted }}>{r.s}</span>
           <span style={{ fontSize: 40, fontWeight: 700, lineHeight: 1.15 }}>{r.t}</span>
           {r.d && <span style={{ fontSize: 28, lineHeight: 1.4 }}>{r.d}</span>}
         </Box>

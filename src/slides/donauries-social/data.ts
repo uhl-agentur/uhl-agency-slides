@@ -37,9 +37,9 @@ export const prinzipien: { t: string; d: string }[] = [
   { t: 'Ein Thema, zwei Blickwinkel', d: 'Ort, Menschen, Arbeit und Freizeit in einem Beitrag.' },
 ];
 
-export const kanalPlan: { t: string; s: string; d: string; dark?: boolean }[] = [
+export const kanalPlan: { t: string; s: string; d: string }[] = [
   { t: 'Instagram und Facebook', s: 'Kern', d: 'Hier ist die Community heute. Formate, Collab-Posts, Stories zu Events.' },
-  { t: 'TikTok', s: 'neu', d: 'Für Ausflug und Urlaub. Gleiche Drehs, eigener Schnitt.', dark: true },
+  { t: 'TikTok', s: 'neu', d: 'Für Ausflug und Urlaub. Gleiche Drehs, eigener Schnitt.' },
   { t: 'Paid Social', s: 'gezielt', d: 'Budget zuerst in Creator- und UGC-Content, Anzeigen für Events und Highlights.' },
 ];
 
@@ -56,7 +56,7 @@ export const gemacht: string[] = [
   'Ausbildung zum Fluggerätmechaniker bei Airbus Helicopters',
   'Neubau in Donauwörth für rund 450 Arbeitsplätze',
   'Hama in Monheim, Zott in Mertingen, Brauerei Oettinger',
-  'Orgelbau in Oettingen, Steinmeyer-Tradition seit 1847',
+  'Die Orgelmanufaktur in Oettingen, Orgelbau seit 1847',
   'Kleine Handwerksbetriebe mit besonderem Können',
 ];
 
@@ -78,25 +78,28 @@ export const jahr: { m: string; e: string[] }[] = [
   { m: 'Dez', e: ['Weihnachtsmärkte'] },
 ];
 
-export const ablauf: { n: string; t: string; d: string }[] = [
-  { n: '01', t: 'Auftakt-Workshop', d: 'Ziele, Gewichtung, Formate, Freigaben' },
-  { n: '02', t: 'Strategie', d: 'Formatplan und Event-Kalender' },
-  { n: '03', t: 'Redaktionsplan', d: 'Monatlich, Abstimmung in Metricool' },
-  { n: '04', t: 'Dreh vor Ort', d: 'Gebündelt nach Region und Anlass' },
-  { n: '05', t: 'Veröffentlichung', d: 'Mit Collab-Posts der Partner' },
-  { n: '06', t: 'Online-Meeting', d: 'Jeden Monat, mit Reporting und Empfehlungen' },
+export const workshop = {
+  t: 'Workshop',
+  s: 'Auftakt und Strategie',
+  items: ['Ziele und Gewichtung Tourismus zu Wirtschaft', 'Formate und Event-Kalender', 'Freigabewege beider Vereine'],
+};
+
+export const monatlich: { t: string; d: string }[] = [
+  { t: 'Redaktionsplan', d: 'Themen und Termine in Notion, Abstimmung mit Ihnen' },
+  { t: 'Dreh vor Ort', d: 'Gebündelt nach Region und Anlass' },
+  { t: 'Veröffentlichung', d: 'Beitragsplanung über Metricool, mit Collab-Posts' },
+  { t: 'Online-Meeting', d: 'Reporting und konkrete Empfehlungen' },
 ];
 
 export const team: { n: string; r: string; d: string }[] = [
-  { n: 'Daniel', r: 'Strategie und Betreuung', d: 'aus Donauwörth' },
-  { n: 'Karlheinz', r: 'Strategie und Betreuung', d: 'aus dem Ries' },
+  { n: 'Daniel und Karlheinz', r: 'Geschäftsführung', d: 'Bezug zu Donauwörth bzw. dem Ries' },
   { n: 'Ruppert', r: 'Content-Ideen und Umsetzung', d: '' },
   { n: 'Annalena', r: 'Design der Beiträge und Planung', d: '' },
 ];
 
 export const referenzen: { t: string; s: string; d: string }[] = [
   { t: 'München Standortkarte', s: 'Regionalität', d: 'Zitat folgt' },
-  { t: 'FinLers', s: 'Bezug Donauwörth', d: '' },
+  { t: 'FinLers', s: 'Bezug Donauwörth', d: 'Arbeitsschutz, Gesundheitsmanagement und Betriebsmedizin. Laufendes Content Marketing für Instagram, Facebook, LinkedIn und Blog.' },
   { t: 'Social Media', s: 'Weitere Referenzen', d: 'Reitzner · IntHome · Kinetikum · Therapiezentrum Augsburg · Blobel Consulting · AWI Consulting' },
 ];
 

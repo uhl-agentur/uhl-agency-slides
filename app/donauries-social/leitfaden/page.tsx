@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carlito } from 'next/font/google';
 import {
-  ablauf, auffaellig, formate, gemacht, goodToKnow, jahr, kanaele, kanalPlan, leitidee, leitideeSub,
+  auffaellig, formate, gemacht, goodToKnow, jahr, kanaele, kanalPlan, monatlich, workshop,
   prinzipien, referenzen, regionFacts, team, vergleich,
 } from '../../../src/slides/donauries-social/data';
 
@@ -83,7 +83,7 @@ export default function DonauriesLeitfadenPage() {
         <P muted>Collab-Posts: Ein Collab-Beitrag erscheint im Profil und Feed beider Accounts. Das ist die schnellste Reichweite ohne Mediabudget. Vergleich: @allgaeu hat dieselbe Doppelrolle („Urlauben, leben und arbeiten“).</P>
       </Slide>
 
-      <Slide n={6} title="Unser Ansatz" kern={`${leitidee} ${leitideeSub}`}>
+      <Slide n={6} title="Unser Ansatz" kern="Vier Prinzipien für einen gemeinsamen Kanal von Tourismus und Wirtschaft.">
         <List items={prinzipien.map((p) => <><b>{p.t}:</b> {p.d}</>)} />
         <P muted>Content vor Community: Für eine Region ist Community kein eigenes Ziel. Wir messen Reichweite, Shares, Saves und Profilaufrufe. Einzelbilder bringen rund ein Drittel weniger Interaktion als Reels und Carousels. Über 400 Markenpartner und 43 TOP-Arbeitgeber (Wirtschaftsförderverband) sind mögliche Collab-Partner.</P>
       </Slide>
@@ -112,12 +112,12 @@ export default function DonauriesLeitfadenPage() {
         <P muted>Bestätigt: 25. Reichsstraßenfest 21.–24.7.2027, Wolle Festival 24.–25.4.2027. Stabenfest, Mess', Scharlachrennen, Historischer Markt nach Muster der Vorjahre. Hangover Party Mertingen: Open-Air-Party der Landjugend, 2026 am 10.–11.7. mit rund 8.000 Gästen, Termin 2027 offen. Landesgartenschau Donauwörth 2028: 27 ha, 165 Tage, rund 3.000 Veranstaltungen, Spatenstich 17.7.2026.</P>
       </Slide>
 
-      <Slide n={12} title="So arbeiten wir" kern="Sechs Schritte, jeden Monat ein Online-Meeting mit Reporting.">
-        <List items={ablauf.map((a) => <><b>{a.t}:</b> {a.d}</>)} />
+      <Slide n={12} title="So arbeiten wir" kern="Zum Start ein Workshop, danach ein fester Monatsablauf mit Online-Meeting.">
+        <List items={[<><b>{workshop.t} ({workshop.s}):</b> {workshop.items.join(', ')}</>, ...monatlich.map((m) => <><b>{m.t}:</b> {m.d}</>)]} />
         <P muted>Im Workshop klären: Gewichtung Tourismus zu Wirtschaft, Freigabewege beider Vereine, wie viel Content die Vereine selbst liefern.</P>
       </Slide>
 
-      <Slide n={13} title="Ihr Team" kern="Aus der Region, für die Region: Wir drehen selbst vor Ort.">
+      <Slide n={13} title="Das Team hinter Social Media" kern="Geschäftsführung mit Bezug zu Donauwörth und dem Ries, dazu Content und Design.">
         <List items={team.map((t) => <><b>{t.n}:</b> {t.r}{t.d ? `, ${t.d}` : ''}</>)} />
       </Slide>
 
