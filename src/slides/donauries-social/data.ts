@@ -110,7 +110,7 @@ export const community: string[] = [
 export const warumUhl: { t: string; d: string }[] = [
   { t: 'Nähe zur Region', d: 'Wir kennen den Landkreis und drehen selbst vor Ort, ohne lange Anfahrt.' },
   { t: 'Alles im eigenen Team', d: 'Strategie, Text und Interview, Design, Video und Foto aus einer Hand.' },
-  { t: 'Formate statt Einzelposts', d: 'Wiedererkennbare Reihen, die Tourismus und Wirtschaft verbinden.' },
+  { t: 'Drei Generationen im Team', d: 'Für jede Plattform passt jemand zur Zielgruppe und weiß, was dort funktioniert.' },
   { t: 'Feste Abläufe', d: 'Klarer Monatsrhythmus, ein Online-Meeting, ein Reporting mit Empfehlungen.' },
 ];
 
@@ -119,7 +119,7 @@ export const team: { n: string; r: string; d: string; img: string[] }[] = [
   { n: 'Karlheinz', r: 'Geschäftsführung', d: '', img: ['/team/karlheinz-uhl.jpg'] },
   { n: 'Rupert', r: 'Content-Ideen & Umsetzung', d: '', img: ['/team/rupert-lohse.jpg'] },
   { n: 'Annalena', r: 'Design der Beiträge & Planung', d: '', img: ['/team/annalena-geier.jpg'] },
-  { n: 'Kai', r: 'Copywriting & Interviewführung', d: '', img: ['/team/kai-mueller.jpg'] },
+  { n: 'Kay', r: 'Copywriting & Interviewführung', d: '', img: ['/team/kai-mueller.jpg'] },
   { n: 'Cedric', r: 'Video & Fotografie', d: '', img: ['/team/cedric-weber.jpg'] },
 ];
 

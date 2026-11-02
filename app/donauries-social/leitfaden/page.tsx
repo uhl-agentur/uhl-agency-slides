@@ -126,7 +126,7 @@ export default function DonauriesLeitfadenPage() {
         <List items={team.map((t) => <><b>{t.n}:</b> {t.r}{t.d ? `, ${t.d}` : ''}</>)} />
       </Slide>
 
-      <Slide n={15} title="Warum Uhl" kern="Nähe, ein Team für alles, Formate und feste Abläufe.">
+      <Slide n={15} title="Warum Uhl" kern="Nähe, ein Team für alles, drei Generationen und feste Abläufe.">
         <List items={warumUhl.map((w) => <><b>{w.t}:</b> {w.d}</>)} />
         <P muted>Hier mündlich die Herkunft betonen: Daniel aus Donauwörth, Karlheinz aus dem Ries.</P>
       </Slide>
