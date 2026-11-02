@@ -163,13 +163,11 @@ export const WebsiteSlide: React.FC = () => (
         <span style={{ fontSize: 30, fontWeight: 700 }}>In beiden Fällen</span>
         <Dash items={website.inhalte} size={27} gap={14} />
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-        <div style={{ background: C.light, padding: '24px 28px', fontSize: 27, lineHeight: 1.35, fontWeight: 700 }}>{website.warum}</div>
-        <Box style={{ gap: 8, padding: '20px 26px' }}>
-          <span style={{ fontSize: 28, fontWeight: 700 }}>{website.shop.t}</span>
-          <span style={{ fontSize: 24, lineHeight: 1.35 }}>{website.shop.d}</span>
-        </Box>
-      </div>
+      <Box dark style={{ gap: 12, padding: '28px 32px', alignSelf: 'start' }}>
+        <span style={{ fontSize: 22, color: '#BDBDBD' }}>Dazu</span>
+        <span style={{ fontSize: 34, fontWeight: 700 }}>{website.shop.t}</span>
+        <span style={{ fontSize: 26, lineHeight: 1.35 }}>{website.shop.d}</span>
+      </Box>
     </div>
   </Frame>
 );

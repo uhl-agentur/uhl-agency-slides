@@ -56,6 +56,7 @@ export const website = {
     { t: 'Eine gemeinsame DONAURIES-Seite', d: 'Eine Seite für Tourismus und Wirtschaft, passend zum gemeinsamen Kanal.' },
   ],
   inhalte: [
+    'Verstärkt die Reichweite: Gerade ältere Menschen informieren sich weiterhin über Websites',
     'Blogbeiträge zu jedem Format, synchron zu Reels und Posts',
     'Eventkalender, der Social Media und Website gleichzeitig füttert',
     'Touren aus Komoot und Mini-Dokus direkt eingebunden',
