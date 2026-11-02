@@ -11,6 +11,8 @@ export const kanaele: { k: string; n: string; d: string }[] = [
   { k: 'Instagram', n: '9.250', d: '530 Beiträge' },
   { k: 'Facebook', n: '9.287', d: 'gemeinsamer Kanal' },
   { k: 'TikTok', n: '–', d: 'kein Kanal' },
+  { k: 'Komoot', n: '2023', d: 'letzte Tour' },
+  { k: 'YouTube', n: '97', d: 'Abos, Wirtschaft' },
 ];
 
 export const vergleich: [string, number, string][] = [
@@ -24,6 +26,9 @@ export const auffaellig: { t: string; d: string }[] = [
   { t: 'Ein Kanal, zwei Themen', d: 'Tourismus und Wirtschaft teilen sich einen Kanal. Das braucht eine klare gemeinsame Linie.' },
   { t: 'Partner markiert, nicht Collab', d: 'Betriebe sind markiert, aber nicht als Collab-Partner angegeben. Der Beitrag erscheint nur bei DONAURIES.' },
   { t: 'Kein TikTok', d: 'Gerade für Ausflüge und Urlaub wird TikTok wie eine Suchmaschine genutzt.' },
+  { t: 'Follow-for-Follow', d: 'Viele Follower kommen über gegenseitiges Folgen und interessieren sich kaum für die Inhalte.' },
+  { t: 'Wenig Engagement', d: 'Likes, Kommentare und Shares bleiben im Verhältnis zur Followerzahl gering.' },
+  { t: 'Content von der Stange', d: 'Austauschbare Bilder und Texte erzielen wenig Impressionen.' },
 ];
 
 export const leitidee = 'Eine Region, die man sehen will.';
@@ -37,10 +42,26 @@ export const prinzipien: { t: string; d: string }[] = [
 ];
 
 export const kanalPlan: { t: string; s: string; d: string }[] = [
-  { t: 'Instagram und Facebook', s: 'Kern', d: 'Hier ist das Publikum heute. Formate, Collab-Posts, Stories zu Events.' },
+  { t: 'Instagram & Facebook', s: 'Kern', d: 'Hier ist das Publikum heute. Formate, Collab-Posts, Stories zu Events.' },
   { t: 'TikTok', s: 'neu', d: 'Für Ausflug und Urlaub. Gleiche Drehs, eigener Schnitt.' },
+  { t: 'Komoot', s: 'neu', d: 'Wander- und Radtouren als Collections, verknüpft mit Reels aus der Region.' },
+  { t: 'Website', s: 'neu', d: 'Die Zentrale: Blog und Eventkalender, synchron zu allen Kanälen.' },
+  { t: 'YouTube & Google', s: 'ergänzend', d: 'Mini-Dokus in voller Länge, Ausflugsziele auffindbar in Google Maps.' },
   { t: 'Paid Social', s: 'gezielt', d: 'Budget zuerst in Creator- und UGC-Content, Anzeigen für Events und Highlights.' },
 ];
+
+export const website = {
+  optionen: [
+    { t: 'Bestehende Seiten neu aufsetzen', d: 'Ferienland und Wirtschaftsförderverband bekommen einen frischen Auftritt.' },
+    { t: 'Eine gemeinsame DONAURIES-Seite', d: 'Eine Seite für Tourismus und Wirtschaft, passend zum gemeinsamen Kanal.' },
+  ],
+  inhalte: [
+    'Blogbeiträge zu jedem Format, synchron zu Reels und Posts',
+    'Eventkalender, der Social Media und Website gleichzeitig füttert',
+    'Touren aus Komoot und Mini-Dokus direkt eingebunden',
+  ],
+  warum: 'Viele, gerade ältere Menschen, informieren sich weiterhin vor allem über Websites.',
+};
 
 export const formate: { t: string; d: string }[] = [
   { t: 'Gemacht im DONAURIES', d: 'Kurzdokus über Betriebe und Tätigkeiten' },
@@ -68,13 +89,21 @@ export const goodToKnow: string[] = [
   'Rund um Donauwörth: zum 35. Mal in Folge die niedrigste Arbeitslosenquote Deutschlands.',
 ];
 
-// Event year 2027; months marked "voraussichtlich" are not yet announced
+// Event year 2027 (research 02.11.2026): confirmed only Reichsstraßenfest, Wolle-Festival, Ipf-Ries-Halbmarathon;
+// all others follow the 2026 pattern (sources in 07_Briefings/01_Pitch, Recherche)
 export const jahr: { m: string; e: string[] }[] = [
-  { m: 'Apr', e: ['Wolle Festival Nördlingen'] },
-  { m: 'Mai', e: ['Stabenfest Nördlingen', 'Ipf-Ries Halbmarathon', 'Historischer Markt Oettingen'] },
-  { m: 'Jun', e: ['Nördlinger Mess'] },
-  { m: 'Jul', e: ['25. Reichsstraßenfest Donauwörth', 'Scharlachrennen Nördlingen', 'Hangover Party Mertingen'] },
-  { m: 'Dez', e: ['Weihnachtsmärkte'] },
+  { m: 'Jan', e: ['Faschingsbälle im ganzen Landkreis'] },
+  { m: 'Feb', e: ['Faschingsumzug Megesheim', 'Genderkinger Gaudiwurm', 'Tillywurm Rain', 'Faschingsumzug Donauwörth', 'Faschingsumzug Mertingen'] },
+  { m: 'Mär', e: [] },
+  { m: 'Apr', e: ['Wolle-Festival Nördlingen'] },
+  { m: 'Mai', e: ['Stabenfest Nördlingen', 'Ipf-Ries-Halbmarathon', 'Historischer Markt Oettingen', 'Eisenbahnfest Nördlingen', 'Fuchsien- und Kräutermarkt Wemding', 'Residenzkonzerte Oettingen'] },
+  { m: 'Jun', e: ['Inselfest Donauwörth', 'Nördlinger Mess\' und RVA', 'Mittelaltermarkt Burg Harburg', 'Brückenfest Harburg', 'Freilichtbühne Donauwörth', 'Bockfest Harburg', 'Leitheimer Schlosskonzerte'] },
+  { m: 'Jul', e: ['25. Reichsstraßenfest Donauwörth', 'Schwäbischwerder Kindertag', 'Scharlachrennen Nördlingen', 'Hangover Party Mertingen', 'Rainer Stadtfest', 'Jakobi-Kirchweih Oettingen', 'Nördlinger Stadtlauf', 'Blasmusik Open Air Monheim', 'Jakobimarkt Rain'] },
+  { m: 'Aug', e: ['Rainer Winkel Festival Münster', 'Historisches Fest Huisheim'] },
+  { m: 'Sep', e: ['KulturNachtRain', 'Donau-Rieser Schaftag Maihingen'] },
+  { m: 'Okt', e: ['Donauwörther Kulturtage', 'Kirchweihen im Ries'] },
+  { m: 'Nov', e: ['Kunst- und Lichternacht Donauwörth', 'Weihnachtsduft Donauwörth', 'Christkindlesmarkt Oettingen'] },
+  { m: 'Dez', e: ['Weihnachtsmarkt Nördlingen', 'Weihnachtsmarkt Insel Ried Donauwörth'] },
 ];
 
 export const workshop = {
@@ -108,7 +137,7 @@ export const community: string[] = [
 
 // Why Uhl: only what we know about ourselves
 export const warumUhl: { t: string; d: string }[] = [
-  { t: 'Nähe zur Region', d: 'Wir kennen den Landkreis und drehen selbst vor Ort, ohne lange Anfahrt.' },
+  { t: 'Nähe zur Region', d: 'Daniel kommt aus Donauwörth, Karlheinz aus dem Ries. Wir drehen selbst vor Ort, ohne lange Anfahrt.' },
   { t: 'Alles im eigenen Team', d: 'Strategie, Text und Interview, Design, Video und Foto aus einer Hand.' },
   { t: 'Drei Generationen im Team', d: 'Für jede Plattform passt jemand zur Zielgruppe und weiß, was dort funktioniert.' },
   { t: 'Feste Abläufe', d: 'Klarer Monatsrhythmus, ein Online-Meeting, ein Reporting mit Empfehlungen.' },
@@ -117,21 +146,18 @@ export const warumUhl: { t: string; d: string }[] = [
 export const team: { n: string; r: string; d: string; img: string[] }[] = [
   { n: 'Daniel', r: 'Geschäftsführung', d: '', img: ['/team/daniel-hurle.jpg'] },
   { n: 'Karlheinz', r: 'Geschäftsführung', d: '', img: ['/team/karlheinz-uhl.jpg'] },
-  { n: 'Rupert', r: 'Content-Ideen & Umsetzung', d: '', img: ['/team/rupert-lohse.jpg'] },
-  { n: 'Annalena', r: 'Design der Beiträge & Planung', d: '', img: ['/team/annalena-geier.jpg'] },
-  { n: 'Kay', r: 'Copywriting & Interviewführung', d: '', img: ['/team/kai-mueller.jpg'] },
+  { n: 'Rupert', r: 'Content Creator', d: '', img: ['/team/rupert-lohse.jpg'] },
+  { n: 'Annalena', r: 'Social Media Managerin', d: '', img: ['/team/annalena-geier.jpg'] },
+  { n: 'Kay', r: 'Redakteur', d: '', img: ['/team/kai-mueller.jpg'] },
   { n: 'Cedric', r: 'Video & Fotografie', d: '', img: ['/team/cedric-weber.jpg'] },
 ];
 
-// todo: placeholder still to be filled, rendered red so it is not presented by accident
-export const referenzen: { t: string; s: string; d: string; todo?: boolean }[] = [
-  { t: 'München Standortkarte', s: 'Regionalität', d: 'Zitat folgt', todo: true },
-  { t: 'FinLers', s: 'Bezug Donauwörth', d: 'Arbeitsschutz, Gesundheitsmanagement und Betriebsmedizin. Laufendes Content Marketing für Instagram, Facebook, LinkedIn und Blog.' },
-  { t: 'Social Media', s: 'Weitere Referenzen', d: 'Reitzner · IntHome · Kinetikum · Therapiezentrum Augsburg' },
-];
+// Main reference with quote (placeholder rendered red until the quote arrives), others small below
+export const hauptReferenz = { t: 'Landeshauptstadt München', s: 'Referat für Arbeit und Wirtschaft', quote: 'Zitat folgt', todo: true };
+export const weitereReferenzen = 'Weitere Referenzen: FinLers, Donauwörth (Content Marketing) · Social Media: Reitzner, IntHome, Kinetikum, Therapiezentrum Augsburg';
 
 export const fragen: { t: string; q: string[] }[] = [
   { t: 'Ziele', q: ['Woran merken Sie in einem Jahr, dass der Wechsel richtig war?', 'Wer kommt heute zu kurz, Tourismus oder Wirtschaft?'] },
   { t: 'Content', q: ['Was hat die bisherige Agentur geliefert?', 'Wie viel Material können die Vereine selbst liefern?'] },
-  { t: 'Rahmen', q: ['Gibt es ein eigenes Mediabudget?', 'Wäre ein Auftakt-Workshop schon im Dezember denkbar?'] },
+  { t: 'Rahmen', q: ['Gibt es ein eigenes Mediabudget?', 'Wäre ein Auftakt-Workshop schon im November denkbar?'] },
 ];

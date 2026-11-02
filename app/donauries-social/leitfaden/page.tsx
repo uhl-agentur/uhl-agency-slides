@@ -2,7 +2,7 @@ import React from 'react';
 import { Carlito } from 'next/font/google';
 import {
   auffaellig, community, controlling, formate, gemacht, goodToKnow, jahr, kanaele, kanalPlan, kpis, monatlich, warumUhl, workshop,
-  prinzipien, referenzen, regionFacts, team, vergleich,
+  hauptReferenz, prinzipien, regionFacts, team, vergleich, website, weitereReferenzen,
 } from '../../../src/slides/donauries-social/data';
 
 // Speaker guide (A4) for the DONAURIES social media pitch; same data as the slides.
@@ -43,7 +43,7 @@ const fragenPool: { t: string; q: string[] }[] = [
     'Was hat die bisherige Agentur geliefert: Beiträge, Reels, Drehtage, Werbung?',
     'Sind die Mittel für 2027 eingeplant, teilen sich die Vereine die Kosten, und gibt es ein eigenes Mediabudget?',
     'Für diesen Umfang liegen Agenturen meist bei 4.000 bis 7.000 € im Monat. Wo ordnen Sie sich ein? (Danach schweigen. Sonst: Ab welcher Grenze geht das Angebot intern nicht mehr durch?)',
-    'Wäre der Auftakt-Workshop schon im Dezember denkbar?',
+    'Wäre der Auftakt-Workshop schon im November denkbar?',
   ] },
   { t: 'Entscheidung', q: ['Wer entscheidet, und wie stark zählt der Preis?', 'Mit wie vielen Agenturen sprechen Sie, und wann fällt die Entscheidung?'] },
 ];
@@ -75,7 +75,7 @@ export default function DonauriesLeitfadenPage() {
       <Slide n={4} title="Die Kanäle heute" kern="Rund 9.300 Follower je Kanal, kein TikTok. Vergleichbare Regionen liegen deutlich höher.">
         <List items={kanaele.map((k) => <>{k.k}: {k.n} ({k.d})</>)} />
         <List items={vergleich.map(([h, , l]) => <>{h}: {l}</>)} />
-        <P muted>Die Eifel erreicht mit fast gleich vielen Posts rund doppelt so viele Follower. Wertschätzend bleiben: nicht die bisherige Agentur kritisieren.</P>
+        <P muted>Komoot: Profil „Ferienland DONAURIES“ mit Touren (Ries-Panoramaweg, Sagenweg Wemding u. a.), letzte Aktivität 2.7.2023. YouTube betreibt der Wirtschaftsförderverband (97 Abos, 48 Videos, aktiv). Die Eifel erreicht mit fast gleich vielen Posts rund doppelt so viele Follower. Wertschätzend bleiben: nicht die bisherige Agentur kritisieren.</P>
       </Slide>
 
       <Slide n={5} title="Was uns auffällt" kern="Drei Punkte, an denen wir ansetzen.">
@@ -88,55 +88,60 @@ export default function DonauriesLeitfadenPage() {
         <P muted>Content vor Community: Für eine Region ist Community kein eigenes Ziel. Wir messen Reichweite, Shares, Saves und Profilaufrufe. Einzelbilder bringen rund ein Drittel weniger Interaktion als Reels und Carousels. Über 400 Markenpartner und 43 TOP-Arbeitgeber (Wirtschaftsförderverband) sind mögliche Collab-Partner.</P>
       </Slide>
 
-      <Slide n={7} title="Kanäle und Budget" kern="Instagram und Facebook bleiben Kern, TikTok kommt dazu, Paid zuerst für Creator-Content.">
+      <Slide n={7} title="Kanäle und Budget" kern="Mehr als Social Media: Instagram und Facebook als Kern, dazu TikTok, Komoot, Website, YouTube und Google.">
         <List items={kanalPlan.map((k) => <><b>{k.t} ({k.s}):</b> {k.d}</>)} />
         <P muted>TikTok: Vergleich @allgaeu 25.700 und @bayern 39.000 Follower. Nördlingen ist dort als „Shiganshina“ aus Attack on Titan bekannt. LinkedIn nicht ansprechen.</P>
       </Slide>
 
-      <Slide n={8} title="Sechs Formate, eine Region" kern="Jedes Format verbindet Tourismus, Lebensqualität, Wirtschaft und Arbeiten. Alles erste Ideen, nicht fix.">
+      <Slide n={8} title="Die Website als Zentrale" kern="Eine Website, die synchron zu allen Kanälen läuft: Blog, Eventkalender, Touren.">
+        <List items={[...website.optionen.map((o) => <><b>{o.t}:</b> {o.d}</>), ...website.inhalte]} />
+        <P muted>{website.warum} Welche Option, im Workshop klären.</P>
+      </Slide>
+
+      <Slide n={9} title="Sechs Formate, eine Region" kern="Jedes Format verbindet Tourismus, Lebensqualität, Wirtschaft und Arbeiten. Alles erste Ideen, nicht fix.">
         <List items={formate.map((f) => <><b>{f.t}:</b> {f.d}</>)} />
         <P muted>Gesicht der Region: Moderation mit Regionalbezug und Kameraerfahrung, keine Namen nennen. Creator vor Ort: lokale Creator und Fotograf:innen, eigener Hashtag.</P>
       </Slide>
 
-      <Slide n={9} title="Gemacht im DONAURIES" kern="Kurzdokus machen Arbeit sehenswert und zeigen nebenbei, wie es sich hier lebt.">
+      <Slide n={10} title="Gemacht im DONAURIES" kern="Kurzdokus machen Arbeit sehenswert und zeigen nebenbei, wie es sich hier lebt.">
         <List items={gemacht} />
         <P muted>Airbus Helicopters Donauwörth baut ab 2027 neu, rund 450 Arbeitsplätze. Firmenfreigaben über den Wirtschaftsförderverband und die TOP-Arbeitgeber. Orgelbau: G. F. Steinmeyer (Oettingen, gegründet 1847) baute bis 2001 Orgeln, weitergeführt als Orgelbau Steinmeyer GmbH; welche Werkstatt heute im Landkreis aktiv ist, vor dem Termin klären.</P>
       </Slide>
 
-      <Slide n={10} title="Good-to-know" kern="Kurze Fakten über die Region, Hook in den ersten zwei Sekunden.">
+      <Slide n={11} title="Good-to-know" kern="Kurze Fakten über die Region, Hook in den ersten zwei Sekunden.">
         <List items={goodToKnow} />
       </Slide>
 
-      <Slide n={11} title="Das Jahr 2027" kern="Events geben den Takt vor, die Landesgartenschau 2028 ist der rote Faden.">
+      <Slide n={12} title="Das Jahr 2027" kern="Events geben den Takt vor, die Landesgartenschau 2028 ist der rote Faden.">
         <List items={jahr.map((j) => <><b>{j.m}:</b> {j.e.join(', ')}</>)} />
-        <P muted>Bestätigt: 25. Reichsstraßenfest 21.–24.7.2027, Wolle Festival 24.–25.4.2027. Stabenfest, Mess', Scharlachrennen, Historischer Markt nach Muster der Vorjahre. Hangover Party Mertingen: Open-Air-Party der Landjugend, 2026 am 10.–11.7. mit rund 8.000 Gästen, Termin 2027 offen. Landesgartenschau Donauwörth 2028: 27 ha, 165 Tage, rund 3.000 Veranstaltungen, Spatenstich 17.7.2026.</P>
+        <P muted>Bestätigt für 2027 nur: 25. Reichsstraßenfest 21.–24.7., Wolle-Festival 24.–25.4., Ipf-Ries-Halbmarathon Anfang Mai. Alle anderen nach Vorjahresmuster (Quelle meist festivalsindeutschland.de, beim Veranstalter gegenprüfen). Inselfest ist in Donauwörth (Altstadtinsel Ried, Fischerstechen), nicht in Nördlingen. Ein jährliches Hafenfest gibt es nicht; am Alten Donauhafen Donauwörth war 2025 einmalig das CityRiver-Einweihungsfest. Fasching 2027: Faschingsdienstag 9.2. Landesgartenschau Donauwörth 2028: 27 ha, 165 Tage, rund 3.000 Veranstaltungen.</P>
       </Slide>
 
-      <Slide n={12} title="So arbeiten wir" kern="Zum Start ein Workshop, danach ein fester Monatsablauf mit Community-Management und Online-Meeting.">
+      <Slide n={13} title="So arbeiten wir" kern="Zum Start ein Workshop, danach ein fester Monatsablauf mit Community-Management und Online-Meeting.">
         <List items={[<><b>{workshop.t} ({workshop.s}):</b> {workshop.items.join(', ')}</>, ...monatlich.map((m) => <><b>{m.t}:</b> {m.d}</>), <><b>Laufend dazu:</b> Community-Management: Kommentare und Nachrichten beantworten wir größtenteils selbst. Konkrete Fachfragen stimmen wir mit Ihnen ab.</>]} />
         <P muted>Offene Punkte für Telefonat oder Workshop: Gewichtung Tourismus zu Wirtschaft, wie viel Content die Vereine selbst liefern.</P>
       </Slide>
 
-      <Slide n={13} title="Erfolg messen & Community betreuen" kern="Wir messen, was zählt, werten jeden Monat aus und betreuen die Community.">
+      <Slide n={14} title="Erfolg messen & Community betreuen" kern="Wir messen, was zählt, werten jeden Monat aus und betreuen die Community.">
         <List items={[<><b>KPIs:</b> {kpis.join(', ')}</>, <><b>Controlling:</b> {controlling.join('; ')}</>, <><b>Community-Management:</b> {community.join('; ')}</>]} />
         <P muted>Community-Management machen wir größtenteils selbst; konkrete Fachfragen klären wir mit dem Kunden. Interaktive DMs, zum Beispiel „EVENTS“ kommentieren für die Event-Liste (Was geht im DONAURIES), „AUSBILDUNG“ für Stellen der Betriebe (Gemacht im DONAURIES), „HIN“ für Route und Infos (Good-to-know). Tool wie ManyChat nur als Idee nennen: US-Anbieter, Datenschutz beim öffentlichen Auftraggeber vorher prüfen, Kosten im Workshop klären.</P>
       </Slide>
 
-      <Slide n={14} title="Das Team hinter Social Media" kern="Geschäftsführung mit Bezug zu Donauwörth und dem Ries, dazu Content, Design, Copywriting sowie Video und Fotografie.">
+      <Slide n={15} title="Das Team hinter Social Media" kern="Geschäftsführung, Content Creator, Social Media Managerin, Redakteur sowie Video und Fotografie.">
         <List items={team.map((t) => <><b>{t.n}:</b> {t.r}{t.d ? `, ${t.d}` : ''}</>)} />
       </Slide>
 
-      <Slide n={15} title="Warum Uhl" kern="Nähe, ein Team für alles, drei Generationen und feste Abläufe.">
+      <Slide n={16} title="Warum Uhl" kern="Nähe, ein Team für alles, drei Generationen, feste Abläufe und unser Kunden-Dashboard.">
         <List items={warumUhl.map((w) => <><b>{w.t}:</b> {w.d}</>)} />
-        <P muted>Hier mündlich die Herkunft betonen: Daniel aus Donauwörth, Karlheinz aus dem Ries.</P>
+        <P muted>Dashboard hervorheben: Freigaben, Impressionen und KPIs für den Kunden jederzeit einsehbar.</P>
       </Slide>
 
-      <Slide n={16} title="Referenzen" kern="Regionalität und Social Media aus eigener Arbeit.">
-        <List items={referenzen.map((r) => <><b>{r.t}</b> ({r.s}){r.d ? `: ${r.d}` : ''}</>)} />
-        <P muted>Zitat München Standortkarte fehlt noch. Keine Destinations-Referenz: über Nähe, eigene Drehs und frische Formate ausgleichen.</P>
+      <Slide n={17} title="Referenzen" kern="Regionalität und Social Media aus eigener Arbeit.">
+        <List items={[<><b>{hauptReferenz.t}, {hauptReferenz.s}</b> (mit Zitat)</>, weitereReferenzen]} />
+        <P muted>Zitat fehlt noch. Keine Destinations-Referenz: über Nähe, eigene Drehs und frische Formate ausgleichen.</P>
       </Slide>
 
-      <Slide n={17} title="Was wir mit Ihnen klären wollen" kern="Auswahl aus dem Fragen-Pool, nicht alle stellen.">
+      <Slide n={18} title="Was wir mit Ihnen klären wollen" kern="Auswahl aus dem Fragen-Pool, nicht alle stellen.">
         {fragenPool.map((c) => (
           <div key={c.t}>
             <P><b>{c.t}</b></P>
