@@ -3,7 +3,7 @@ import { Carlito } from 'next/font/google';
 import { allDonauriesSlides } from '../../src/slides/donauries-social/slides';
 
 // Calibri look of the Gesprächsgrundlage decks; Carlito is metric-compatible
-const carlito = Carlito({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-carlito' });
+const carlito = Carlito({ subsets: ['latin'], weight: ['400', '700'], style: ['normal', 'italic'], variable: '--font-carlito' });
 
 // All slides stacked at 1920x1080; screen shows them scaled, print/PDF uses one page per slide
 export default function DonauriesSocialPage() {
