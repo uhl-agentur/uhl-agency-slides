@@ -113,13 +113,13 @@ export default function DonauriesLeitfadenPage() {
       </Slide>
 
       <Slide n={12} title="So arbeiten wir" kern="Zum Start ein Workshop, danach ein fester Monatsablauf mit Community-Management und Online-Meeting.">
-        <List items={[<><b>{workshop.t} ({workshop.s}):</b> {workshop.items.join(', ')}</>, ...monatlich.map((m) => <><b>{m.t}:</b> {m.d}</>)]} />
+        <List items={[<><b>{workshop.t} ({workshop.s}):</b> {workshop.items.join(', ')}</>, ...monatlich.map((m) => <><b>{m.t}:</b> {m.d}</>), <><b>Laufend dazu:</b> Community-Management: Kommentare und Nachrichten beantworten wir größtenteils selbst. Konkrete Fachfragen stimmen wir mit Ihnen ab.</>]} />
         <P muted>Offene Punkte für Telefonat oder Workshop: Gewichtung Tourismus zu Wirtschaft, wie viel Content die Vereine selbst liefern.</P>
       </Slide>
 
       <Slide n={13} title="Erfolg messen & Community betreuen" kern="Wir messen, was zählt, werten jeden Monat aus und betreuen die Community.">
         <List items={[<><b>KPIs:</b> {kpis.join(', ')}</>, <><b>Controlling:</b> {controlling.join('; ')}</>, <><b>Community-Management:</b> {community.join('; ')}</>]} />
-        <P muted>Wer welche Kommentare beantwortet, im Workshop festlegen; fachliche Fragen kennen nur die Vereine. Interaktive DMs, zum Beispiel „EVENTS“ kommentieren für die Event-Liste (Was geht im DONAURIES), „AUSBILDUNG“ für Stellen der Betriebe (Gemacht im DONAURIES), „HIN“ für Route und Infos (Good-to-know). Tool wie ManyChat nur als Idee nennen: US-Anbieter, Datenschutz beim öffentlichen Auftraggeber vorher prüfen, Kosten im Workshop klären.</P>
+        <P muted>Community-Management machen wir größtenteils selbst; konkrete Fachfragen klären wir mit dem Kunden. Interaktive DMs, zum Beispiel „EVENTS“ kommentieren für die Event-Liste (Was geht im DONAURIES), „AUSBILDUNG“ für Stellen der Betriebe (Gemacht im DONAURIES), „HIN“ für Route und Infos (Good-to-know). Tool wie ManyChat nur als Idee nennen: US-Anbieter, Datenschutz beim öffentlichen Auftraggeber vorher prüfen, Kosten im Workshop klären.</P>
       </Slide>
 
       <Slide n={14} title="Das Team hinter Social Media" kern="Geschäftsführung mit Bezug zu Donauwörth und dem Ries, dazu Content, Design, Copywriting sowie Video und Fotografie.">

@@ -87,7 +87,6 @@ export const monatlich: { t: string; d: string }[] = [
   { t: 'Redaktionsplan', d: 'Themen und Termine in Notion, Abstimmung mit Ihnen' },
   { t: 'Dreh vor Ort', d: 'Gebündelt nach Region und Anlass' },
   { t: 'Veröffentlichung', d: 'Beitragsplanung über Metricool, mit Collab-Posts' },
-  { t: 'Community-Management', d: 'Kommentare und Nachrichten laufend betreuen' },
   { t: 'Online-Meeting', d: 'Reporting und konkrete Empfehlungen' },
 ];
 
@@ -101,8 +100,8 @@ export const controlling: string[] = [
 ];
 
 export const community: string[] = [
-  'Kommentare und Direktnachrichten betreuen',
-  'Fachliche Fragen gemeinsam mit den Vereinen beantworten',
+  'Kommentare und Nachrichten größtenteils selbst beantworten',
+  'Konkrete Fachfragen mit Ihnen abstimmen',
   'Partner, Gemeinden und Creator markieren und einbinden',
   'Interaktive DMs: Stichwort kommentieren, Link per Direktnachricht',
 ];

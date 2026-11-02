@@ -245,6 +245,9 @@ export const AblaufSlide: React.FC = () => (
             </div>
           ))}
         </div>
+        <div style={{ background: C.light, padding: '18px 24px', fontSize: 24, lineHeight: 1.35 }}>
+          <b>Laufend dazu:</b> Community-Management: Kommentare und Nachrichten beantworten wir größtenteils selbst. Konkrete Fachfragen stimmen wir mit Ihnen ab.
+        </div>
       </div>
     </div>
   </Frame>
