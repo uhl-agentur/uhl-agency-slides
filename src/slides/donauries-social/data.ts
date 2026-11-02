@@ -9,7 +9,7 @@ export const regionFacts: [string, string][] = [
 
 export const kanaele: { k: string; n: string; d: string }[] = [
   { k: 'Instagram', n: '9.250', d: '530 Beiträge' },
-  { k: 'Facebook', n: '9.287', d: '' },
+  { k: 'Facebook', n: '9.287', d: 'gemeinsamer Kanal' },
   { k: 'TikTok', n: '–', d: 'kein Kanal' },
 ];
 
@@ -65,7 +65,7 @@ export const goodToKnow: string[] = [
   'Nördlingen hat die einzige vollständig begehbare Stadtmauer Deutschlands.',
   'Die Harburg ist eine der größten Burganlagen Süddeutschlands.',
   'Hama in Monheim führt über 18.000 Produkte.',
-  'Maria Brünnlein in Wemding zieht bis zu 200.000 Pilger im Jahr an.',
+  'Rund um Donauwörth: zum 35. Mal in Folge die niedrigste Arbeitslosenquote Deutschlands.',
 ];
 
 // Event year 2027; months marked "voraussichtlich" are not yet announced
@@ -99,8 +99,9 @@ export const team: { n: string; r: string; d: string; img: string[] }[] = [
   { n: 'Cedric', r: 'Video & Fotografie', d: '', img: ['/team/cedric-weber.jpg'] },
 ];
 
-export const referenzen: { t: string; s: string; d: string }[] = [
-  { t: 'München Standortkarte', s: 'Regionalität', d: '' },
+// todo: placeholder still to be filled, rendered red so it is not presented by accident
+export const referenzen: { t: string; s: string; d: string; todo?: boolean }[] = [
+  { t: 'München Standortkarte', s: 'Regionalität', d: 'Zitat folgt', todo: true },
   { t: 'FinLers', s: 'Bezug Donauwörth', d: 'Arbeitsschutz, Gesundheitsmanagement und Betriebsmedizin. Laufendes Content Marketing für Instagram, Facebook, LinkedIn und Blog.' },
   { t: 'Social Media', s: 'Weitere Referenzen', d: 'Reitzner · IntHome · Kinetikum · Therapiezentrum Augsburg · Blobel Consulting · AWI Consulting' },
 ];

@@ -269,6 +269,7 @@ export const TeamSlide: React.FC = () => {
           </div>
         ))}
       </div>
+      <Small style={{ marginTop: 'auto' }}>Daniel kommt aus Donauwörth, Karlheinz aus dem Ries.</Small>
     </Frame>
   );
 };
@@ -280,7 +281,7 @@ export const ReferenzenSlide: React.FC = () => (
         <Box key={r.t} style={{ gap: 24 }}>
           <span style={{ fontSize: 22, color: C.muted }}>{r.s}</span>
           <span style={{ fontSize: 40, fontWeight: 700, lineHeight: 1.15 }}>{r.t}</span>
-          {r.d && <span style={{ fontSize: 28, lineHeight: 1.4 }}>{r.d}</span>}
+          {r.d && <span style={{ fontSize: 28, lineHeight: 1.4, color: r.todo ? '#D62828' : undefined, fontWeight: r.todo ? 700 : 400 }}>{r.d}</span>}
         </Box>
       ))}
     </div>
