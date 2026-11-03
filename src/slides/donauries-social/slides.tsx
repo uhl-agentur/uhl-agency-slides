@@ -354,7 +354,7 @@ export const ReferenzenSlide: React.FC = () => (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 28, textAlign: 'center' }}>
       <span style={{ fontSize: 26, color: C.muted }}>{hauptReferenz.s}</span>
       <span style={{ fontSize: 56, fontWeight: 700 }}>{hauptReferenz.t}</span>
-      <span style={{ fontSize: 34, lineHeight: 1.4, fontStyle: 'italic', maxWidth: 1340, textWrap: 'balance', color: hauptReferenz.todo ? '#D62828' : C.text, fontWeight: hauptReferenz.todo ? 700 : 400 }}>„{hauptReferenz.quote}“</span>
+      <span style={{ fontSize: 38, lineHeight: 1.4, fontStyle: 'italic', maxWidth: 1340, textWrap: 'balance', color: hauptReferenz.todo ? '#D62828' : C.text, fontWeight: hauptReferenz.todo ? 700 : 400 }}>„{hauptReferenz.quote}“</span>
       {hauptReferenz.by && <span style={{ fontSize: 24, color: C.muted }}>{hauptReferenz.by}</span>}
     </div>
     <Small style={{ textAlign: 'center' }}>{weitereReferenzen}</Small>
