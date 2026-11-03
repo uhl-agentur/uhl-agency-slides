@@ -157,7 +157,7 @@ export const team: { n: string; r: string; d: string; img: string[] }[] = [
 ];
 
 // Main reference with quote (placeholder rendered red until the quote arrives), others small below
-export const hauptReferenz = { t: 'Landeshauptstadt München', s: 'Referat für Arbeit und Wirtschaft', quote: 'Zitat folgt', todo: true };
+export const hauptReferenz = { t: 'Landeshauptstadt München', s: 'Referat für Arbeit und Wirtschaft', quote: 'Termingerecht und professionell. Die Zusammenarbeit war jederzeit zuverlässig, flexibel und konstruktiv; durch eigene kreative Ideen leistete die Agentur einen wesentlichen Mehrwert.', by: 'Karin Schillitz', todo: false };
 export const weitereReferenzen = 'Weitere Referenzen: FinLers, Donauwörth (Content Marketing) · Social Media: Reitzner, IntHome, Kinetikum, Therapiezentrum Augsburg';
 
 export const fragen: { t: string; q: string[] }[] = [

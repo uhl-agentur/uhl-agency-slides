@@ -138,7 +138,7 @@ export default function DonauriesLeitfadenPage() {
 
       <Slide n={17} title="Referenzen" kern="Regionalität und Social Media aus eigener Arbeit.">
         <List items={[<><b>{hauptReferenz.t}, {hauptReferenz.s}</b> (mit Zitat)</>, weitereReferenzen]} />
-        <P muted>Zitat fehlt noch. Keine Destinations-Referenz: über Nähe, eigene Drehs und frische Formate ausgleichen.</P>
+        <P muted>Zitat von Karin Schillitz zur Publikation „Büro- und Gewerbestandorte in München“ (Inhalt, Karten, Druck). Keine Destinations-Referenz: über Nähe, eigene Drehs und frische Formate ausgleichen.</P>
       </Slide>
 
       <Slide n={18} title="Was wir mit Ihnen klären wollen" kern="Auswahl aus dem Fragen-Pool, nicht alle stellen.">
