@@ -23,7 +23,17 @@ function AmpelMarke({ stufe, text }: { stufe: Stufe; text: string }) {
     stufe === 'gut' ? 'var(--akzent)' : stufe === 'mittel' ? 'repeating-linear-gradient(135deg, var(--text-2) 0 3px, transparent 3px 7px)' : 'var(--text)';
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
-      <span style={{ width: 32, height: 18, flex: 'none', borderRadius: 'var(--r-sm)', background: fill }} />
+      <span
+        style={{
+          width: 32,
+          height: 18,
+          flex: 'none',
+          borderRadius: 'var(--r-sm)',
+          background: fill,
+          /* the hatched mark keeps its outline so it reads as a box (F2d), the only outline in the system */
+          boxShadow: stufe === 'mittel' ? 'inset 0 0 0 2px var(--text-2)' : undefined,
+        }}
+      />
       <span className="t-meta">{text}</span>
     </span>
   );

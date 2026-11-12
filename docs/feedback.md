@@ -31,3 +31,9 @@ Status: done (S3).
 > Ich schaue allgemein, dass alle Icons, die wir nutzen, richtige Icons sind und keine ASCII-Zeichen.
 
 Status: done (S3).
+
+## F2d — 2026-11-12 (verbatim)
+
+> [Screenshot: Ampel "Baseline" schraffiert] die gestrichelten müssen auch outlines bekommen
+
+Status: done (S3).
