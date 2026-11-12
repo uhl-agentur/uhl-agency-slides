@@ -32,8 +32,8 @@
   --s4: 96px;
   --rand: 96px; /* left / right margin */
   --chrome: 56px; /* distance of label, logo, footer from the edge */
-  --oben: 168px; /* content starts below the chrome */
-  --unten: 152px; /* content ends above the footer */
+  --oben: 168px; /* content starts below the label row */
+  --unten: 168px; /* no footer (F2): bottom margin = top margin, every slide frames its content evenly (F3) */
   --gap: 32px; /* gap in image grids and tiles */
   --r: 8px; /* hard radius ceiling */
   --r-sm: 4px;
@@ -55,8 +55,8 @@
   --akzent: var(--lime);      /* the one signal per slide */
   --akzent-text: var(--wald);
   --akzent-text-2: var(--oliv);
-  --balken: var(--moos);      /* chart bars next to the lime key bar: grey, never black on white (F1) */
-  --balken-text: var(--papier); /* price/value as plain text on a bar, no badge (F2g) */
+  --balken: var(--halm);      /* bar on a chart panel = box level: one step darker than the panel, #C4C4C4 (F3) */
+  --balken-text: var(--wald); /* price/value as plain text on a bar, no badge (F2g) */
   --spur: var(--halm);        /* timeline track and its open markers */
   --spur-fertig: var(--wald); /* done part of a track */
   --logo: var(--wald);
@@ -72,7 +72,7 @@
   --akzent: var(--lime);
   --akzent-text: var(--wald);
   --akzent-text-2: var(--oliv);
-  --balken: var(--farn);
+  --balken: var(--moos);      /* dark goes lighter inward: ground wald, panel tanne, bar moos (F3) */
   --balken-text: var(--papier);
   --spur: var(--farn);
   --spur-fertig: var(--papier);
@@ -146,6 +146,17 @@
 }
 
 /* ----------------------------------------------------------------- type --- */
+/* Line breaking (F3): running text hyphenates automatically, but only words of 10+ letters
+   with 4+ letters on each side, so short words never split ("ei-nem") while long compounds
+   ("Suchmaschinenoptimierung") no longer overflow narrow columns. Headlines never hyphenate
+   (soft hyphens \u00AD in the content only). Units, abbreviations and the last two words are
+   bound by satz() in cx.ts. A word longer than its box still breaks instead of overflowing. */
+.uhl-deck .folie :is(.t-display, .t-aussage, .t-titel, .t-zahl, .t-zahl-s, .t-karte, .t-lead, .t-body, .t-meta, .t-zitat) {
+  overflow-wrap: break-word;
+  hyphens: manual;
+  hyphenate-limit-chars: 10 4 4;
+}
+.uhl-deck .folie :is(.t-body, .t-lead, .t-meta, .t-karte) { hyphens: auto; }
 /* Line lengths: display <= ~18 chars/line, aussage <= 30, titel <= 36,
    lead <= 46, body <= 62, meta <= 48. Headlines balance, running text wraps pretty. */
 .uhl-deck .t-display {
@@ -191,10 +202,6 @@
   font: 400 24px/1.5 var(--f-text);
   text-wrap: pretty;
   max-width: 31em;
-  /* no automatic hyphenation: it broke short words in narrow columns ("ei-nem");
-     long compounds wrap at soft hyphens (\u00AD) set in the content */
-  hyphens: manual;
-  overflow-wrap: break-word;
 }
 .uhl-deck .t-meta {
   font: 500 18px/1.35 var(--f-text);
@@ -363,3 +370,12 @@
 .uhl-deck .bild.voll { position: absolute; inset: 0; }
 /* an empty full-bleed picture shows the slide ground, so every slide keeps the same background (F2) */
 .uhl-deck .bild.voll:has(> .bild-leer) { background: transparent; }
+
+/* Even card insets (F3 "padding in cards sollte auch einheitlich sein"): the first text line of a
+   card is trimmed to its cap height, the last to its baseline, so the half-leading of big numbers
+   no longer adds hidden space and the visible inset equals the padding on all four sides.
+   .trim does the same for a single text element (price on a bar). */
+.uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas, .kachel-akzent) > :first-child { text-box: trim-start cap alphabetic; }
+.uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas, .kachel-akzent) > :last-child { text-box: trim-end cap alphabetic; }
+.uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas, .kachel-akzent) > :only-child,
+.uhl-deck .trim { text-box: trim-both cap alphabetic; }

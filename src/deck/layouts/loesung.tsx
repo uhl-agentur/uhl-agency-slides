@@ -218,8 +218,9 @@ const Karten4L: React.FC<Karten4> = (p) => (
         {p.karten.map((k, i) => {
           const Ikon = ikonen[k.ikon] ?? Sparkles;
           return (
-            <div key={i} className="kachel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
-              <div className="ikon" style={{ marginBottom: 'var(--s3)' }}>
+            /* icon top, text bottom: content touches the padding on every side (F3) */
+            <div key={i} className="kachel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 'var(--s3)' }}>
+              <div className="ikon">
                 <Ikon size={28} strokeWidth={1.75} />
               </div>
               <div className="stapel-s">

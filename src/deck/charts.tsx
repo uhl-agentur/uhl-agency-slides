@@ -45,38 +45,44 @@ export function Balken({
   const groesster = Math.max(...balken.map((b) => b.wert), 1);
   const farbe = 'var(--balken)'; // role from deck.css, follows a forced Folie theme too
   return (
-    <div className={className} style={{ display: 'flex', gap: 'var(--s2)', height: '100%', ...style }}>
+    /* grid: bars in row 1, labels in row 2; the label row takes the height of the tallest label,
+       so every bar keeps the same baseline whatever the label length */
+    <div
+      className={className}
+      style={{ display: 'grid', gridTemplateColumns: `repeat(${balken.length}, minmax(0, 1fr))`, gridTemplateRows: 'minmax(0, 1fr) auto', columnGap: 'var(--s2)', height: '100%', ...style }}
+    >
       {balken.map((b, i) => (
-        <div key={i} style={{ flex: '1 1 0', minWidth: 0, display: 'flex', flexDirection: 'column' }}>
-          <div style={{ flex: 1, minHeight: 0, display: 'flex', alignItems: 'flex-end' }}>
-            <div
-              style={{
-                width: '100%',
-                height: `${Math.max(12, (b.wert / groesster) * 100)}%`,
-                minHeight: 88,
-                borderRadius: 'var(--r)',
-                background: b.hervorheben ? 'var(--akzent)' : farbe,
-                padding: 'var(--s1)',
-              }}
+        <div key={i} style={{ gridRow: 1, gridColumn: i + 1, display: 'flex', alignItems: 'flex-end', minHeight: 0 }}>
+          <div
+            style={{
+              width: '100%',
+              height: `${Math.max(12, (b.wert / groesster) * 100)}%`,
+              minHeight: 88,
+              borderRadius: 'var(--r)',
+              background: b.hervorheben ? 'var(--akzent)' : farbe,
+              padding: 'var(--s2)', // same inset on every side as a small card
+            }}
+          >
+            <T
+              stil="karte"
+              max={max?.tag}
+              className="trim"
+              style={{ display: 'block', color: b.hervorheben ? 'var(--akzent-text)' : 'var(--balken-text)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}
+              /* price as plain text in the top corner of the bar, no badge: fewer tone-on-tone layers (F2g) */
             >
-              <T
-                stil="karte"
-                max={max?.tag}
-                style={{ display: 'block', padding: 'var(--s1) var(--s1) 0', color: b.hervorheben ? 'var(--akzent-text)' : 'var(--balken-text)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}
-                /* price as plain text in the top corner of the bar, no badge: fewer tone-on-tone layers (F2g) */
-              >
-                {b.tag}
-              </T>
-            </div>
-          </div>
-          <div style={{ textAlign: 'center', paddingTop: 'var(--s2)', height: 124 /* name + two meta lines: bars share one baseline */ }}>
-            <T stil="karte" max={max?.label}>
-              {b.label}
-            </T>
-            <T stil="meta" leise max={max?.sub} style={{ marginTop: 6, marginInline: 'auto' }}>
-              {b.sub}
+              {b.tag}
             </T>
           </div>
+        </div>
+      ))}
+      {balken.map((b, i) => (
+        <div key={`l${i}`} className="trim" style={{ gridRow: 2, gridColumn: i + 1, textAlign: 'center', paddingTop: 'var(--s2)' }}>
+          <T stil="karte" max={max?.label}>
+            {b.label}
+          </T>
+          <T stil="meta" leise max={max?.sub} style={{ marginTop: 6, marginInline: 'auto' }}>
+            {b.sub}
+          </T>
         </div>
       ))}
     </div>

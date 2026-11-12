@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext } from 'react';
 import { logoBlock } from './logo';
-import { cx, sichtbareLaenge } from './cx';
+import { cx, satz, sichtbareLaenge } from './cx';
 import { Check } from 'lucide-react';
 
 /* ============================================================================
@@ -112,7 +112,7 @@ export function T({
 
 
 function formatiere(s: string): React.ReactNode {
-  const zeilen = s.split('\n');
+  const zeilen = s.split('\n').map(satz);
   return zeilen.map((z, i) => (
     <React.Fragment key={i}>
       {z.split(/(==[^=]+==)/g).map((teil, j) =>
@@ -236,4 +236,4 @@ export function Kennzahl({
   );
 }
 
-export { cx, sichtbareLaenge };
+export { cx, satz, sichtbareLaenge };

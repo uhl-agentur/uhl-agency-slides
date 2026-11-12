@@ -320,7 +320,7 @@ const ArbeitenProjektFolie: React.FC<ArbeitenProjekt> = (p) => {
 const arbeitenProjekt: ArbeitenProjekt = {
   label: 'Referenz',
   titel: 'Relaunch Schreinerei Huber',
-  bilder: [{ text: 'Startseite · Augsburg · 2026' }, { text: 'Leistungsseite mobil' }, { text: 'Anfrageformular' }],
+  bilder: [{ text: 'Startseite' }, { text: 'Leistungsseite mobil' }, { text: 'Anfrageformular' }],
 };
 const bildTextLimits = { 'bilder[].text': 48 };
 
@@ -543,7 +543,7 @@ const ListeJahreFolie: React.FC<ListeJahre> = (p) => (
       </T>
       <ul style={{ width: 1440, textAlign: 'left' }}>
         {p.zeilen.map((z, i) => (
-          <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '160px 1fr auto', gap: 'var(--gap)', alignItems: 'baseline', padding: 'var(--s2) 0' }}>
+          <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '160px 1fr auto', gap: 'var(--gap)', alignItems: 'center', padding: 'var(--s2) 0' }}>
             <T stil="meta" leise max={9} style={{ fontVariantNumeric: 'tabular-nums' }}>
               {z.jahr}
             </T>
@@ -681,7 +681,6 @@ interface ProjektTitel {
   label?: string;
   projekt: string;
   kunde?: string;
-  ortJahr?: string;
 }
 
 const ProjektTitelFolie: React.FC<ProjektTitel> = (p) => (
@@ -693,9 +692,6 @@ const ProjektTitelFolie: React.FC<ProjektTitel> = (p) => (
       <T stil="lead" max={40}>
         {p.kunde}
       </T>
-      <T stil="meta" leise max={40} style={{ marginTop: 'var(--s1)' }}>
-        {p.ortJahr}
-      </T>
     </div>
   </Folie>
 );
@@ -704,7 +700,6 @@ const projektTitel: ProjektTitel = {
   label: 'Referenz',
   projekt: 'Relaunch und Local SEO',
   kunde: 'Schreinerei Huber',
-  ortJahr: 'Augsburg · 2026',
 };
 
 /* ------------------------------------------------------------------ export --- */
@@ -727,5 +722,5 @@ export const portfolioLayouts: LayoutDef[] = [
   { id: 'kontakt-spalten', name: 'Kontakt in Spalten', gruppe: 'Kontakt', quelle: 'portfolio-034', zweck: 'Abschluss: Titel, drei Kontaktwege und ein Bildband darunter.', komponente: KontaktSpaltenFolie, beispiel: kontakt, limits: { label: 24, titel: 36, 'kanaele[].name': 20, 'kanaele[].wert': 26 }, anzahl: { kanaele: [2, 3] } },
   { id: 'hero-streu', name: 'Aussage mit Streubildern', gruppe: 'Titel', quelle: 'portfolio-037', zweck: 'Positionierung groß in der Mitte, vier Bilder locker in den Ecken.', komponente: HeroStreuFolie, beispiel: heroStreu, limits: { label: 24, tag: 32, aussage: 64, unterzeile: 90 }, anzahl: { bilder: [0, 4] } },
   { id: 'hero-portrait', name: 'Aussage mit Portrait', gruppe: 'Titel', quelle: 'portfolio-036', zweck: 'Vorstellung: große Überschrift, Portrait oder Teamfoto unten mittig.', komponente: HeroPortraitFolie, beispiel: heroPortrait, limits: { label: 24, titel: 48 } },
-  { id: 'projekt-titel', name: 'Projekttitel', gruppe: 'Arbeiten', quelle: 'portfolio-023', zweck: 'Trenner vor einer Fallstudie: Projekt, Kunde, Ort und Jahr.', komponente: ProjektTitelFolie, beispiel: projektTitel, limits: { label: 24, projekt: 40, kunde: 40, ortJahr: 40 } },
+  { id: 'projekt-titel', name: 'Projekttitel', gruppe: 'Arbeiten', quelle: 'portfolio-023', zweck: 'Trenner vor einer Fallstudie: Projekt und Kunde (keine Füllzeilen wie Ort · Jahr, F3b).', komponente: ProjektTitelFolie, beispiel: projektTitel, limits: { label: 24, projekt: 40, kunde: 40 } },
 ];

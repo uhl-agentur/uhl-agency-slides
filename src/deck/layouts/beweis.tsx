@@ -70,7 +70,7 @@ const KennzahlenText6: React.FC<KennzahlenText> = (p) => (
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 'var(--gap)' }}>
         {p.kennzahlen.map((z, i) => (
-          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ height: 200, padding: 'var(--s3)' }} />
+          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ minHeight: 200 }} />
         ))}
       </div>
     </div>
@@ -85,7 +85,7 @@ const Kennzahlen6: React.FC<Kennzahlen> = (p) => (
       </T>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 480px)', gap: 'var(--gap)' }}>
         {p.kennzahlen.map((z, i) => (
-          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ height: 212, padding: 'var(--s2) var(--s3)', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} />
+          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ minHeight: 212, textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} />
         ))}
       </div>
     </div>
@@ -232,7 +232,7 @@ const PreisBalkenFolie: React.FC<PreisBalken> = (p) => (
           {p.hinweis}
         </T>
       </div>
-      <div className="kachel" style={{ height: '100%', padding: 'var(--s4) var(--s3) var(--s3)' }}>
+      <div className="kachel" style={{ height: '100%' }}>
         <Balken balken={p.stufen} max={{ tag: 9, label: 12, sub: 26 }} />
       </div>
     </div>
@@ -467,11 +467,11 @@ export const beweisLayouts: LayoutDef[] = [
     name: 'Preise als Balken',
     gruppe: 'Preis',
     quelle: 'akoya-36 bis 38',
-    zweck: 'Drei bis fünf Pakete als Balken, das empfohlene in Lime.',
+    zweck: 'Zwei bis drei Pakete als Balken, das empfohlene in Lime (ab vier Balken passt der Preis nicht mehr in den Balken).',
     komponente: PreisBalkenFolie,
     beispiel: preis,
     limits: { label: 24, titel: 40, text: 120, hinweis: 80, 'stufen[].tag': 9, 'stufen[].label': 12, 'stufen[].sub': 26 },
-    anzahl: { stufen: [3, 5] },
+    anzahl: { stufen: [2, 3] },
   },
   {
     id: 'ablauf-zeitleiste',

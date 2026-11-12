@@ -128,7 +128,7 @@ const InhaltZeilen: React.FC<Inhalt> = (p) => (
       </T>
       <ol>
         {p.kapitel.map((k, i) => (
-          <li key={i} className="linie-unten t-karte" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: 'var(--s2) 0' }}>
+          <li key={i} className="linie-unten t-karte" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--s2) 0' }}>
             <span>{k}</span>
             <span className="leise t-meta" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {String(i + 1).padStart(2, '0')}

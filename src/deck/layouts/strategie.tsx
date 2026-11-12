@@ -138,7 +138,7 @@ interface Marktbild {
 const MarktbildFolie: React.FC<Marktbild> = (p) => (
   <Folie label={p.label}>
     <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <div className="stapel-l">
           <T stil="titel" as="h2" max={44}>
             {p.titel}
@@ -204,7 +204,7 @@ interface Wettbewerb {
 const WettbewerbFolie: React.FC<Wettbewerb> = (p) => (
   <Folie label={p.label}>
     <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <T stil="titel" as="h2" max={44}>
           {p.titel}
         </T>
@@ -228,7 +228,7 @@ const WettbewerbFolie: React.FC<Wettbewerb> = (p) => (
       </div>
       <div
         className="kachel-akzent"
-        style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+        style={{ display: 'flex', flexDirection: 'column', justifyContent: p.punkte?.length ? 'space-between' : 'center' }}
       >
         <div className="stapel">
           <p className="t-meta leise">Die Lücke</p>
@@ -292,7 +292,7 @@ function PunktMarke({ p, wir }: { p: Punkt; wir?: boolean }) {
 const MatrixFolie: React.FC<Matrix> = (p) => (
   <Folie label={p.label}>
     <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
-      <div className="stapel">
+      <div className="stapel" style={{ alignSelf: 'center' }}>
         <T stil="titel" as="h2" max={44}>
           {p.titel}
         </T>
@@ -528,7 +528,7 @@ const KanalmixFolie: React.FC<Kanalmix> = (p) => {
             <span className="t-meta leise">Baseline</span>
           </div>
           {p.bereiche.map((b, i) => (
-            <div key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', alignItems: 'baseline', padding: '18px 0' }}>
+            <div key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', alignItems: 'center', padding: '18px 0' }}>
               <T stil="karte" max={18}>
                 {b.name}
               </T>
@@ -576,7 +576,7 @@ const KpiFolie: React.FC<Kpi> = (p) => {
               <span className="t-meta leise">Ziel</span>
             </div>
             {p.zeilen.map((z, i) => (
-              <div key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--s2)', alignItems: 'baseline', padding: '20px 0' }}>
+              <div key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--s2)', alignItems: 'center', padding: '20px 0' }}>
                 <T stil="karte" max={18}>
                   {z.bereich}
                 </T>
@@ -678,7 +678,7 @@ const BalkenFolie: React.FC<Balken> = (p) => {
   return (
     <Folie label={p.label}>
       <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
           <div className="stapel">
             <T stil="titel" as="h2" max={44}>
               {p.titel}
@@ -754,7 +754,7 @@ const LinieFolie: React.FC<Linie> = (p) => {
   return (
     <Folie label={p.label}>
       <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
           <div className="stapel">
             <T stil="titel" as="h2" max={44}>
               {p.titel}
@@ -839,7 +839,7 @@ interface PitchCase {
 const PitchCaseFolie: React.FC<PitchCase> = (p) => (
   <Folie label={p.label}>
     <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <div className="stapel-l">
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s2)' }}>
             <Bild bild={p.logo} platzhalter="Logo" unterschrift={false} style={{ width: 120, height: 56 }} />
@@ -865,9 +865,10 @@ const PitchCaseFolie: React.FC<PitchCase> = (p) => (
             </div>
           </div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${p.ergebnisse.length}, 1fr)`, gap: 'var(--gap)' }}>
+        {/* stats sized by their content with one fixed gap: the space between them is equal (F3d) */}
+        <div style={{ display: 'flex', gap: 'var(--s4)' }}>
           {p.ergebnisse.map((k, i) => (
-            <div key={i} className="stapel-s">
+            <div key={i} className="stapel-s" style={{ flex: '0 1 auto', maxWidth: '12em' }}>
               <T stil="titel" max={6} style={{ whiteSpace: 'nowrap' }}>
                 {k.wert}
               </T>
@@ -905,7 +906,6 @@ const PaketeFolie: React.FC<Pakete> = (p) => (
           >
             <div className="stapel">
               <div className="stapel-s">
-                <p className="t-meta leise">{k.empfohlen ? 'Unsere Empfehlung' : ' '}</p>
                 <T stil="karte" max={24}>
                   {k.name}
                 </T>
@@ -940,7 +940,8 @@ interface OffeneFragen {
 
 const OffeneFragenFolie: React.FC<OffeneFragen> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
+    {/* both columns centred vertically (F3c) */}
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
       <div className="stapel">
         <T stil="titel" as="h2" max={44}>
           {p.titel}
@@ -951,7 +952,7 @@ const OffeneFragenFolie: React.FC<OffeneFragen> = (p) => (
       </div>
       <ol style={{ alignSelf: 'center' }}>
         {p.fragen.map((f, i) => (
-          <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '56px 1fr 260px', gap: 'var(--s2)', alignItems: 'baseline', padding: '20px 0' }}>
+          <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '56px 1fr 260px', gap: 'var(--s2)', alignItems: 'center', padding: '20px 0' }}>
             <span className="t-meta leise" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {nr(i)}
             </span>

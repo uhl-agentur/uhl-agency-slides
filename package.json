@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "check:deck": "tsx --tsconfig scripts/tsconfig.check.json scripts/check-deck.ts",
+    "check:satz": "tsx scripts/check-satz.ts",
+    "smoke": "node scripts/smoke.mjs",
     "shots": "node scripts/shot.mjs",
     "pdf": "node scripts/export-pdf.mjs"
   },

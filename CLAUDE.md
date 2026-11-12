@@ -19,13 +19,15 @@ Next.js app for the agency's presentations. Two generations live here:
 | Gallery: every layout light + dark | `/vorlagen`, single: `/vorlagen/<id>?thema=dark` |
 | One deck | `/deck/<slug>` |
 | Screenshots + overflow/limit check | `node scripts/shot.mjs --ids a,b --out output/shots` |
-| Deck check (limits, unknown layouts) | `npx tsx scripts/check-deck.ts <slug>` |
+| Deck check (limits, unknown layouts) | `npm run check:deck -- <slug>` |
+| Smoke test: every layout with stress content (max/min), overflow, overlap, widows, card insets | `npm run smoke` (dev server on 3417); stress data `src/deck/probe.ts`, `/vorlagen/<id>?probe=max` |
+| Typesetting selfcheck (`satz()` in `src/deck/cx.ts`) | `npm run check:satz` |
 | PDF | `node scripts/export-pdf.mjs --route /deck/<slug> --output <file>.pdf` |
 | Template references (gitignored, third-party) | `referenz/akoya/`, `referenz/portfolio/` |
 
 ## Design rules (why: same look as uhl-website, readable on a projector)
 
-- Canvas fixed 1920 x 1080 px. Margin `--rand` 96, chrome 56 from the edge, content between `--oben` 168 and `--unten` 152.
+- Canvas fixed 1920 x 1080 px. Margin `--rand` 96, chrome 56 from the edge, content between `--oben` 168 and `--unten` 168: same margin top and bottom (F3 "padding oben unten … einheitlich").
 - Fonts from uhl-website: **Funnel Display** for voice (display, aussage, titel, zahl, karte, zitat), **Funnel Sans** for running text (lead, body, meta).
 - Type only via `<T stil=…>` / `t-*` classes; strong weight in running text via `t-stark`. Never a raw font size, colour or radius in a layout. Smallest text 18 px (`meta`).
 - Line length is capped by `max-width` in `em` on each style: display ~18 chars/line, aussage ~30, titel ~36, lead ~46, body ~62. Headlines `text-wrap: balance`, running text `pretty`. Line height: headings 0.98–1.15, lead 1.4, body 1.5.
@@ -42,6 +44,11 @@ Next.js app for the agency's presentations. Two generations live here:
 - **Less content**: one headline + one supporting block; no second paragraph without a reason. Why: user F1 "doppelabsätze ohne grund weg", "zu überladen".
 - Spacing tokens: headline to content `--s3` 48, inside a text block `--s2` 24, title to text / picture to caption `--s1` 12, text column to media column `--s4` 96, cards and pictures in a grid `--gap` 32. Content stays in `.inhalt` unless full-bleed.
 - Spacing doubles: 12 / 24 / 48 / 96 (`--s1`…`--s4`), grid gap 32.
+- **Even card insets**: a card has one padding on all four sides (`--s3`, small cards `--s2`); its first text line is trimmed to cap height and its last to the baseline (`text-box` in deck.css), so the visible inset equals the padding. Chart panels too. Why: user F3 "padding in cards sollte auch einheitlich sein".
+- **Bars**: `--balken` is the box level on a chart panel: light halm #C4C4C4 with dark value, dark moos with light value. Why: user F3 "c4c4c4", "dunkler hintergrund wird hell auf heller".
+- **Vertical centring**: split columns and table rows centre their content vertically (`alignItems: center`), no baseline rows, no title-top/source-bottom columns. Stats in a row sit at one fixed gap (content-sized, not equal columns). Why: user F3b/F3c/F3d.
+- **No filler meta** like "Augsburg · 2026": every line on a slide says something. Why: user F3b "sowas weg, nix aussagen".
+- **Typesetting** (F3 "Hurenkind und Schusterjunge und weiteres"): slides have no page or column breaks inside a text, so the print widow/orphan cannot occur; the slide equivalents are handled: `satz()` binds number + unit, abbreviations, dashes and the last two words (no single-word last line); running text hyphenates only words of 10+ letters (`hyphenate-limit-chars`), headlines never; a too-long word breaks instead of overflowing. `npm run smoke` proves it on stress content.
 - Lots of air: one idea per slide, at most one headline + one supporting block.
 
 ## Commit
