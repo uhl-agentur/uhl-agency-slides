@@ -19,8 +19,7 @@
   --salbei: oklch(90.67% 0 0);
   --papier: oklch(97.9% 0 0); /* #F8F8F8 */
   --weiss: oklch(100% 0 0);
-  /* dark-theme steps for two-tone (F2e): ground 17.8 -> card 29 -> box 23 (one step darker than the card) */
-  --kohle: oklch(29% 0 0);
+  /* dark-theme step for badges: ground 17.8 -> card 23 -> box/bar 33 -> badge 40, lighter inward (F2f) */
   --schiefer: oklch(40% 0 0);
   --lime-dunkel: oklch(74% 0.17 128.1); /* box on a lime card: one step darker green (F2e) */
 
@@ -68,16 +67,16 @@
 }
 .uhl-deck .thema-dark {
   --flaeche: var(--wald);
-  --hoch: var(--kohle);       /* card: a lighter grey than the ground */
-  --hoch-2: var(--tanne);     /* box on a card: one step darker than the card, like light and lime (F2e) */
+  --hoch: var(--tanne);       /* card: one step lighter than the ground */
+  --hoch-2: var(--farn);      /* box on a card: one step lighter again (F2f: light goes darker inward, dark goes lighter) */
   --text: var(--papier);
   --text-2: var(--flechte);
   --linie: var(--farn);
   --akzent: var(--lime);
   --akzent-text: var(--wald);
   --akzent-text-2: var(--oliv);
-  --balken: var(--schiefer);
-  --balken-schild: var(--wald);
+  --balken: var(--farn);
+  --balken-schild: var(--schiefer); /* badge one step lighter than the bar */
   --balken-schild-text: var(--papier);
   --spur: var(--farn);
   --spur-fertig: var(--papier);

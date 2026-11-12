@@ -43,3 +43,10 @@ Status: done (S3).
 > Ja, du hast mich nicht ganz richtig verstanden bei dem Tutone. Wir wollen hellgraue Karten mit dunkelgrauer Iconbox - Das stimmt soweit. Wir wollen hellgrüne Karten mit dunkelgrüner Iconbox und wir wollen dunkel- oder dunkelgraue Karten mit noch dunkelgrauerer Iconbox. immer gleiches prinzip prozentual also hintergrund 0%, card 20% oder so, icon box 40%
 
 Status: done (S3).
+
+## F2f — 2026-11-12 (verbatim)
+
+> nvm lass uns jede ebene eine stufe heller machen
+> nein stimmt das macht dann keinen sinn. wir müssen bei hell dunkler werden und bei dunkel heller so wäre das richtige prinzip
+
+Status: done (S3). Light: inward darker; dark: inward lighter (wald → tanne → farn); lime card: darker green box.
