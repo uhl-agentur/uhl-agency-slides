@@ -50,3 +50,9 @@ Status: done (S3).
 > nein stimmt das macht dann keinen sinn. wir müssen bei hell dunkler werden und bei dunkel heller so wäre das richtige prinzip
 
 Status: done (S3). Light: inward darker; dark: inward lighter (wald → tanne → farn); lime card: darker green box.
+
+## F2g — 2026-11-12 (verbatim)
+
+> [Screenshot: preis-balken] die gefallen mir noch nicht, können wir hier die badges einfach entfernen und preise so oben ins eck platzieren sonst sind es zu viele ton in ton ebenen
+
+Status: done (S3).

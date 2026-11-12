@@ -19,8 +19,6 @@
   --salbei: oklch(90.67% 0 0);
   --papier: oklch(97.9% 0 0); /* #F8F8F8 */
   --weiss: oklch(100% 0 0);
-  /* dark-theme step for badges: ground 17.8 -> card 23 -> box/bar 33 -> badge 40, lighter inward (F2f) */
-  --schiefer: oklch(40% 0 0);
   --lime-dunkel: oklch(74% 0.17 128.1); /* box on a lime card: one step darker green (F2e) */
 
   /* --- type: Funnel Display = voice, Funnel Sans = everything that runs --- */
@@ -58,8 +56,7 @@
   --akzent-text: var(--wald);
   --akzent-text-2: var(--oliv);
   --balken: var(--moos);      /* chart bars next to the lime key bar: grey, never black on white (F1) */
-  --balken-schild: var(--wald); /* value badge on a bar: one step darker than the bar (F2) */
-  --balken-schild-text: var(--papier);
+  --balken-text: var(--papier); /* price/value as plain text on a bar, no badge (F2g) */
   --spur: var(--halm);        /* timeline track and its open markers */
   --spur-fertig: var(--wald); /* done part of a track */
   --logo: var(--wald);
@@ -76,8 +73,7 @@
   --akzent-text: var(--wald);
   --akzent-text-2: var(--oliv);
   --balken: var(--farn);
-  --balken-schild: var(--schiefer); /* badge one step lighter than the bar */
-  --balken-schild-text: var(--papier);
+  --balken-text: var(--papier);
   --spur: var(--farn);
   --spur-fertig: var(--papier);
   --logo: var(--papier);

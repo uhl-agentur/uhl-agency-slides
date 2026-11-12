@@ -62,7 +62,8 @@ export function Balken({
               <T
                 stil="karte"
                 max={max?.tag}
-                style={{ display: 'inline-block', padding: '6px 12px', borderRadius: 'var(--r-sm)', background: b.hervorheben ? 'var(--lime-dunkel)' : 'var(--balken-schild)', color: b.hervorheben ? 'var(--wald)' : 'var(--balken-schild-text)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}
+                style={{ display: 'block', padding: 'var(--s1) var(--s1) 0', color: b.hervorheben ? 'var(--akzent-text)' : 'var(--balken-text)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}
+                /* price as plain text in the top corner of the bar, no badge: fewer tone-on-tone layers (F2g) */
               >
                 {b.tag}
               </T>
