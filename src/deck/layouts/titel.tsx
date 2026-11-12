@@ -1,0 +1,154 @@
+import React from 'react';
+import { Bild, BildDaten, Folie, T } from '../system';
+import type { LayoutDef } from '../typen';
+
+/* Reference group: covers and table of contents (akoya 01-06).
+   This file sets the bar for all other layout files: props typed, German
+   sample content that reads like a real deck, limits on every text field. */
+
+/* ------------------------------------------------------------ titel-links --- */
+interface Cover {
+  titel: string;
+  unterzeile?: string;
+  kunde?: string;
+  datum?: string;
+  bild?: BildDaten;
+}
+
+const TitelLinks: React.FC<Cover> = (p) => (
+  <Folie chrome={false}>
+    <div className="voll" style={{ padding: '56px var(--rand)' }}>
+      <div className="stapel" style={{ maxWidth: 1180 }}>
+        <T stil="display" as="h1" max={48}>
+          {p.titel}
+        </T>
+        <T stil="lead" leise max={90}>
+          {p.unterzeile}
+        </T>
+      </div>
+      <div style={{ position: 'absolute', left: 'var(--rand)', bottom: 56 }} className="t-meta leise">
+        {[p.kunde, p.datum].filter(Boolean).join(' · ')}
+      </div>
+    </div>
+  </Folie>
+);
+
+/* ------------------------------------------------------------- titel-split --- */
+const TitelSplit: React.FC<Cover> = (p) => (
+  <Folie chrome={false} logo={false}>
+    <div className="voll" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+      <div style={{ position: 'relative', padding: '0 var(--s4) 0 var(--rand)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div className="stapel">
+          <T stil="aussage" as="h1" max={48}>
+            {p.titel}
+          </T>
+          <T stil="lead" leise max={90}>
+            {p.unterzeile}
+          </T>
+        </div>
+        <div style={{ position: 'absolute', left: 'var(--rand)', bottom: 56 }} className="t-meta leise">
+          {[p.kunde, p.datum].filter(Boolean).join(' · ')}
+        </div>
+      </div>
+      <Bild bild={p.bild} eckig platzhalter="Titelbild" unterschrift={false} style={{ height: '100%' }} />
+    </div>
+  </Folie>
+);
+
+/* -------------------------------------------------------------- titel-bild --- */
+const TitelBild: React.FC<Cover> = (p) => (
+  <Folie chrome={false} aufBild thema="dark">
+    <Bild bild={p.bild} eckig schleier="unten" platzhalter="" unterschrift={false} className="voll" />
+    <div className="voll" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', textAlign: 'center', padding: '0 var(--rand) 120px' }}>
+      <div className="stapel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <T stil="meta" leise max={90}>
+          {p.unterzeile}
+        </T>
+        <T stil="aussage" as="h1" max={48}>
+          {p.titel}
+        </T>
+      </div>
+    </div>
+  </Folie>
+);
+
+const cover: Cover = {
+  titel: 'Marketingstrategie Donauries 2027',
+  unterzeile: 'Wie aus Bekanntheit in der Region planbare Anfragen werden.',
+  kunde: 'Donauries Pflegedienst',
+  datum: 'November 2026',
+};
+const coverLimits = { titel: 48, unterzeile: 90, kunde: 40, datum: 24 };
+
+/* ---------------------------------------------------------------- inhalt --- */
+interface Inhalt {
+  label?: string;
+  titel?: string;
+  kapitel: string[];
+  bild?: BildDaten;
+}
+
+const InhaltSplit: React.FC<Inhalt> = (p) => (
+  <Folie label={p.label} logo={false}>
+    <div className="voll" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+      <div style={{ padding: 'var(--oben) var(--s4) var(--unten) var(--rand)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <ol className="liste-nummer t-lead" style={{ display: 'grid', gap: 18 }}>
+          {p.kapitel.map((k, i) => (
+            <li key={i}>{k}</li>
+          ))}
+        </ol>
+      </div>
+      <Bild bild={p.bild} eckig platzhalter="Bild" unterschrift={false} style={{ height: '100%' }} />
+    </div>
+  </Folie>
+);
+
+const InhaltZentriert: React.FC<Inhalt> = (p) => (
+  <Folie label={p.label}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+      <ol style={{ display: 'grid', gap: 4 }}>
+        {p.kapitel.map((k, i) => (
+          <li key={i} className="t-aussage" style={{ fontSize: 56, maxWidth: 'none' }}>
+            <span className="leise" style={{ fontVariantNumeric: 'tabular-nums' }}>{String(i + 1).padStart(2, '0')}</span>&ensp;{k}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Folie>
+);
+
+const InhaltZeilen: React.FC<Inhalt> = (p) => (
+  <Folie label={p.label}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: 'var(--s4)', alignItems: 'center' }}>
+      <T stil="titel" as="h2" max={40}>
+        {p.titel}
+      </T>
+      <ol>
+        {p.kapitel.map((k, i) => (
+          <li key={i} className="linie-unten t-karte" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '22px 0' }}>
+            <span>{k}</span>
+            <span className="leise t-meta" style={{ fontVariantNumeric: 'tabular-nums' }}>
+              {String(i + 1).padStart(2, '0')}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Folie>
+);
+
+const inhalt: Inhalt = {
+  label: 'Inhalt',
+  titel: 'Was wir heute besprechen',
+  kapitel: ['Ausgangslage', 'Markt und Wettbewerb', 'Zielgruppen', 'Positionierung', 'Kanalmix', 'Roadmap', 'Investition', 'Nächste Schritte'],
+};
+const inhaltLimits = { label: 24, titel: 40, 'kapitel[]': 28 };
+
+export const titelLayouts: LayoutDef[] = [
+  { id: 'titel-links', name: 'Titel, links oben', gruppe: 'Titel', quelle: 'akoya-01', zweck: 'Ruhiges Deckblatt ohne Bild, Titel groß links oben.', komponente: TitelLinks, beispiel: cover, limits: coverLimits },
+  { id: 'titel-split', name: 'Titel mit Bildhälfte', gruppe: 'Titel', quelle: 'akoya-02', zweck: 'Deckblatt mit Kundenbild oder Mockup rechts.', komponente: TitelSplit, beispiel: cover, limits: coverLimits },
+  { id: 'titel-bild', name: 'Titel auf Vollbild', gruppe: 'Titel', quelle: 'akoya-03', zweck: 'Deckblatt auf großem Stimmungsbild, Titel unten zentriert.', komponente: TitelBild, beispiel: cover, limits: coverLimits },
+  { id: 'inhalt-split', name: 'Inhalt mit Bild', gruppe: 'Inhalt', quelle: 'akoya-04', zweck: 'Agenda als nummerierte Liste neben einem Bild.', komponente: InhaltSplit, beispiel: inhalt, limits: inhaltLimits, anzahl: { kapitel: [3, 9] } },
+  { id: 'inhalt-zentriert', name: 'Inhalt groß zentriert', gruppe: 'Inhalt', quelle: 'akoya-05', zweck: 'Agenda als großer, zentrierter Block.', komponente: InhaltZentriert, beispiel: inhalt, limits: { ...inhaltLimits, 'kapitel[]': 24 }, anzahl: { kapitel: [3, 8] } },
+  { id: 'inhalt-zeilen', name: 'Inhalt in Zeilen', gruppe: 'Inhalt', quelle: 'akoya-06 + portfolio-chapters', zweck: 'Agenda mit Titel links, Kapitel als Linienzeilen rechts.', komponente: InhaltZeilen, beispiel: inhalt, limits: inhaltLimits, anzahl: { kapitel: [3, 8] } },
+];

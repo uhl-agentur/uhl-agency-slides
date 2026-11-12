@@ -7,7 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:deck": "tsx --tsconfig scripts/tsconfig.check.json scripts/check-deck.ts",
+    "shots": "node scripts/shot.mjs",
+    "pdf": "node scripts/export-pdf.mjs"
   },
   "dependencies": {
     "@types/file-saver": "^2.0.7",
@@ -31,6 +34,7 @@
     "globals": "^16.5.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.2.1",
+    "tsx": "^4.23.15",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0"
   }
