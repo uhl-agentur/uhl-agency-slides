@@ -3,8 +3,9 @@ import { Bild, BildDaten, Folie, T } from '../system';
 import type { LayoutDef } from '../typen';
 
 /* Portfolio group: the quiet compositions of the photographer template
-   (referenz/portfolio) that Akoya does not cover. Hairlines, small numbers,
-   centred headings, lots of air. Same chrome as every other layout; the
+   (referenz/portfolio) that Akoya does not cover. Small numbers, centred
+   headings, lots of air; structure comes from spacing, not hairlines
+   (feedback F1: "weniger trennlinien"), hairlines only between real list rows. Same chrome as every other layout; the
    template's centred "Logo here" is dropped. */
 
 const nr = (i: number) => String(i + 1).padStart(2, '0');
@@ -63,7 +64,7 @@ const KapitelBildFolie: React.FC<KapitelBild> = (p) => {
   const b = p.bilder ?? [];
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '5fr 6fr', gap: 'var(--s4)' }}>
+      <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
         <div className="stapel" style={{ alignSelf: 'center' }}>
           <T stil="meta" leise max={4}>
             {p.nummer}
@@ -71,8 +72,7 @@ const KapitelBildFolie: React.FC<KapitelBild> = (p) => {
           <T stil="titel" as="h2" max={36}>
             {p.titel}
           </T>
-          <div className="strich" style={{ marginTop: 'var(--s3)' }} />
-          <T stil="body" leise max={180} style={{ marginTop: 'var(--s3)' }}>
+          <T stil="body" leise max={110}>
             {p.text}
           </T>
         </div>
@@ -90,7 +90,7 @@ const kapitelBild: KapitelBild = {
   label: 'Leistungen',
   nummer: '02',
   titel: 'Suchmaschinenoptimierung',
-  text: 'Wir bringen Ihre Seiten dorthin, wo Ihre Kunden suchen. Technisch sauber, mit Inhalten, die Fragen beantworten, und mit Zahlen, die jeden Monat zeigen, was es bringt.',
+  text: 'Wir bringen Ihre Seiten dorthin, wo Ihre Kunden suchen: technisch sauber und messbar.',
 };
 
 /* ---------------------------------------------------------------- ansatz --- */
@@ -107,7 +107,7 @@ const AnsatzFolie: React.FC<Ansatz> = (p) => (
         {p.titel}
       </T>
       <div className="strich" style={{ margin: 'var(--s3) 0' }} />
-      <T stil="lead" max={240}>
+      <T stil="lead" max={150}>
         {p.text}
       </T>
     </div>
@@ -117,7 +117,7 @@ const AnsatzFolie: React.FC<Ansatz> = (p) => (
 const ansatz: Ansatz = {
   label: 'Haltung',
   titel: 'Unser Ansatz',
-  text: 'Wir fangen nicht beim Design an, sondern bei Ihren Kunden: Was suchen sie, was hält sie ab, was überzeugt sie? Daraus entstehen Websites und Kampagnen, die nicht nur gut aussehen, sondern Anfragen bringen.',
+  text: 'Wir fangen nicht beim Design an, sondern bei Ihren Kunden: Was suchen sie, und was überzeugt sie?',
 };
 
 /* ---------------------------------------------------------- rahmen-bild --- */
@@ -131,8 +131,8 @@ const RahmenBildFolie: React.FC<RahmenBild> = (p) => {
   const b = p.bilder ?? [];
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s4)' }}>
-        <div style={{ width: 960, height: 440, padding: 'var(--s1)', border: '2px solid var(--text)', borderRadius: 'var(--r)', display: 'grid', gridTemplateColumns: b.length > 1 ? '1fr 1fr' : '1fr', gap: 'var(--s1)' }}>
+      <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s3)' }}>
+        <div style={{ width: 1120, height: 480, display: 'grid', gridTemplateColumns: b.length > 1 ? '1fr 1fr' : '1fr', gap: 'var(--gap)' }}>
           <Bild bild={b[0]} platzhalter="Vorher" unterschrift={false} style={{ height: '100%' }} />
           {b.length > 1 && <Bild bild={b[1]} platzhalter="Nachher" unterschrift={false} style={{ height: '100%' }} />}
         </div>
@@ -159,20 +159,20 @@ interface Spalten {
 
 const SpaltenFolie: React.FC<Spalten> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 128 }}>
-      <T stil="titel" as="h2" max={36} style={{ textAlign: 'center' }}>
+    <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s3)' }}>
+      <T stil="titel" as="h2" max={36}>
         {p.titel}
       </T>
-      <ol style={{ alignSelf: 'stretch', display: 'grid', gridTemplateColumns: `repeat(${p.spalten.length}, 1fr)`, gap: 'var(--gap)' }}>
+      <ol style={{ alignSelf: 'stretch', display: 'grid', gridTemplateColumns: `repeat(${p.spalten.length}, 1fr)`, gap: 'var(--gap)', textAlign: 'left' }}>
         {p.spalten.map((s, i) => (
-          <li key={i} className="linie-oben stapel-s">
+          <li key={i} className="stapel-s">
             <div className="t-meta leise" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {nr(i)}
             </div>
             <T stil="karte" as="h3" max={24}>
               {s.titel}
             </T>
-            <T stil="body" leise max={90}>
+            <T stil="body" leise max={66}>
               {s.text}
             </T>
           </li>
@@ -202,7 +202,7 @@ const prozess: Spalten = {
     { titel: 'Launch', text: 'Live gehen, messen und gezielt nachschärfen.' },
   ],
 };
-const spaltenLimits = { label: 24, titel: 36, 'spalten[].titel': 24, 'spalten[].text': 90 };
+const spaltenLimits = { label: 24, titel: 36, 'spalten[].titel': 24, 'spalten[].text': 66 };
 
 /* ----------------------------------------------------- leistungen-treppe --- */
 interface Treppe {
@@ -216,13 +216,12 @@ const TreppeFolie: React.FC<Treppe> = (p) => {
   const hoehen = [140, 240, 340, 440];
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '440px 1fr', gap: 'var(--s4)' }}>
+      <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
         <div className="stapel" style={{ alignSelf: 'center' }}>
           <T stil="titel" as="h2" max={24}>
             {p.titel}
           </T>
-          <div className="strich" style={{ marginTop: 'var(--s3)' }} />
-          <T stil="body" leise max={110} style={{ marginTop: 'var(--s3)' }}>
+          <T stil="body" leise max={90}>
             {p.text}
           </T>
         </div>
@@ -232,10 +231,10 @@ const TreppeFolie: React.FC<Treppe> = (p) => {
               <div className="t-titel leise" style={{ fontVariantNumeric: 'tabular-nums' }}>
                 {nr(i)}
               </div>
-              <T stil="karte" as="h3" max={22} style={{ marginTop: 'var(--s2)' }}>
+              <T stil="karte" as="h3" max={11} style={{ marginTop: 'var(--s2)' }}>
                 {s.titel}
               </T>
-              <T stil="meta" leise max={60} style={{ marginTop: 'var(--s1)' }}>
+              <T stil="meta" leise max={40} style={{ marginTop: 'var(--s1)' }}>
                 {s.text}
               </T>
               <Bild bild={s.bild} platzhalter="" unterschrift={false} style={{ height: hoehen[i] ?? 440, marginTop: 'var(--s2)' }} />
@@ -250,12 +249,12 @@ const TreppeFolie: React.FC<Treppe> = (p) => {
 const treppe: Treppe = {
   label: 'Schwerpunkte',
   titel: 'Unsere Schwerpunkte',
-  text: 'Vier Disziplinen, ein Team: Alles greift ineinander, damit aus Sichtbarkeit Anfragen werden.',
+  text: 'Vier Disziplinen, ein Team, damit aus Sichtbarkeit Anfragen werden.',
   stufen: [
-    { titel: 'Marke', text: 'Logo, Farben und Ton, die im Kopf bleiben.' },
-    { titel: 'Website', text: 'Der Ort, an dem aus Besuchern Kunden werden.' },
-    { titel: 'Sichtbarkeit', text: 'SEO und Ads, damit die Richtigen Sie finden.' },
-    { titel: 'Wachstum', text: 'Messen, lernen, nachschärfen, jeden Monat.' },
+    { titel: 'Marke', text: 'Logo, Farben und Ton.' },
+    { titel: 'Website', text: 'Aus Besuchern werden Kunden.' },
+    { titel: 'Reichweite', text: 'SEO und Ads für Ihre Region.' },
+    { titel: 'Wachstum', text: 'Messen und nachschärfen.' },
   ],
 };
 
@@ -276,7 +275,7 @@ const ArbeitenReiheFolie: React.FC<ArbeitenReihe> = (p) => {
   ];
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ ...mitte, gap: 'var(--s4)' }}>
+      <div className="inhalt" style={{ ...mitte, gap: 'var(--s3)' }}>
         <T stil="titel" as="h2" max={36}>
           {p.titel}
         </T>
@@ -310,7 +309,7 @@ const ArbeitenProjektFolie: React.FC<ArbeitenProjekt> = (p) => {
         <T stil="titel" as="h2" max={36}>
           {p.titel}
         </T>
-        <div style={{ flex: 1, width: 1280, display: 'grid', gridTemplateColumns: '1.7fr 1fr', gridTemplateRows: '1fr 1fr', gap: 'var(--s3) var(--s4)', textAlign: 'left', minHeight: 0 }}>
+        <div style={{ flex: 1, width: 1280, display: 'grid', gridTemplateColumns: '1.7fr 1fr', gridTemplateRows: '1fr 1fr', gap: 'var(--gap)', textAlign: 'left', minHeight: 0 }}>
           <Bild bild={b[0]} platzhalter="Hauptbild" style={{ gridRow: '1 / 3' }} />
           <Bild bild={b[1]} platzhalter="Detail" />
           <Bild bild={b[2]} platzhalter="Detail" />
@@ -338,13 +337,15 @@ const ZitatBilderFolie: React.FC<ZitatBilder> = (p) => {
   const b = p.bilder ?? [];
   return (
     <Folie label={p.label}>
-      <div className="inhalt">
-        <Bild bild={b[0]} platzhalter="Kampagne" style={{ position: 'absolute', left: 0, top: 0, width: 560, height: 720 }} />
-        <T stil="lead" max={110} style={{ position: 'absolute', left: 640, top: 140, width: 520, textAlign: 'center' }}>
-          {p.zitat}
-        </T>
-        <Bild bild={b[1]} platzhalter="Detail" style={{ position: 'absolute', left: 700, bottom: 40, width: 260, height: 300 }} />
-        <Bild bild={b[2]} platzhalter="Umsetzung" style={{ position: 'absolute', right: 0, top: 100, width: 440, height: 500 }} />
+      <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
+        <Bild bild={b[0]} platzhalter="Kampagne" style={{ height: '100%' }} />
+        <div style={{ ...mitte, gap: 'var(--s3)' }}>
+          <T stil="lead" max={84}>
+            {p.zitat}
+          </T>
+          <Bild bild={b[1]} platzhalter="Detail" style={{ width: 280, height: 320, textAlign: 'left' }} />
+        </div>
+        <Bild bild={b[2]} platzhalter="Umsetzung" style={{ height: 520 }} />
       </div>
     </Folie>
   );
@@ -370,10 +371,10 @@ const KundenLogosFolie: React.FC<KundenLogos> = (p) => (
       <T stil="titel" as="h2" max={36}>
         {p.titel}
       </T>
-      <T stil="body" leise max={120} style={{ marginTop: 'var(--s2)' }}>
+      <T stil="body" leise max={80} style={{ marginTop: 'var(--s2)' }}>
         {p.text}
       </T>
-      <ul style={{ marginTop: 'var(--s4)', width: 1440, display: 'grid', gridTemplateColumns: `repeat(${Math.min(6, p.logos.length)}, 1fr)`, gap: 'var(--gap)' }}>
+      <ul style={{ marginTop: 'var(--s3)', width: 1440, display: 'grid', gridTemplateColumns: `repeat(${Math.min(6, p.logos.length)}, 1fr)`, gap: 'var(--gap)' }}>
         {p.logos.map((l, i) => (
           <li key={i} className="bild" style={{ height: 136 }}>
             {l.src ? (
@@ -393,7 +394,7 @@ const KundenLogosFolie: React.FC<KundenLogos> = (p) => (
 const kundenLogos: KundenLogos = {
   label: 'Kunden',
   titel: 'Mit wem wir arbeiten',
-  text: 'Handwerk, Mittelstand und Dienstleister aus Augsburg und ganz Bayern vertrauen uns ihre Sichtbarkeit an.',
+  text: 'Handwerk, Mittelstand und Dienstleister aus Augsburg und ganz Bayern.',
   logos: [
     { name: 'Schreinerei Huber' },
     { name: 'Donauries Pflege' },
@@ -450,11 +451,11 @@ const LieferumfangFolie: React.FC<Lieferumfang> = (p) => {
   ];
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ ...mitte, justifyContent: 'space-between' }}>
+      <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s3)' }}>
         <T stil="titel" as="h2" max={36}>
           {p.titel}
         </T>
-        <ul style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: 40, textAlign: 'left' }}>
+        <ul style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: 'var(--gap)', textAlign: 'left' }}>
           {p.posten.map((x, i) => {
             const [w, h] = masse[i % masse.length];
             return (
@@ -467,7 +468,7 @@ const LieferumfangFolie: React.FC<Lieferumfang> = (p) => {
             );
           })}
         </ul>
-        <T stil="body" leise max={110}>
+        <T stil="body" leise max={80}>
           {p.text}
         </T>
       </div>
@@ -479,7 +480,7 @@ const lieferumfang: Lieferumfang = {
   label: 'Lieferumfang',
   titel: 'Was Sie bekommen',
   posten: [{ titel: 'Website im CMS' }, { titel: 'Texte und Bilder' }, { titel: 'SEO-Grundlagen' }, { titel: 'Tracking und Report' }, { titel: 'Schulung fürs Team' }],
-  text: 'Alles liegt am Ende bei Ihnen: Zugänge, Dateien und eine Anleitung zum Selberpflegen.',
+  text: 'Zugänge, Dateien und Anleitung liegen am Ende bei Ihnen.',
 };
 
 /* ------------------------------------------------------------ preise-spalten --- */
@@ -496,21 +497,18 @@ const PreiseFolie: React.FC<Preise> = (p) => (
     <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s4)' }}>
       <ul style={{ width: 1440, display: 'grid', gridTemplateColumns: `repeat(${p.pakete.length}, 1fr)`, gap: 'var(--s4)' }}>
         {p.pakete.map((x, i) => (
-          <li key={i} className="linie-oben" style={{ ...mitte, gap: 'var(--s2)', position: 'relative' }}>
+          <li key={i} style={{ ...mitte, gap: 'var(--s2)' }}>
+            {/* same-height slot above every package keeps names, prices and texts on one line */}
+            <div style={{ height: 40 }}>{p.empfohlen === i && <span className="tag tag-akzent">Empfohlen</span>}</div>
             <T stil="meta" max={28}>
               {x.name}
             </T>
             <T stil="titel" max={14}>
               {x.preis}
             </T>
-            <T stil="meta" leise max={80}>
+            <T stil="meta" leise max={58}>
               {x.text}
             </T>
-            {p.empfohlen === i && (
-              <span className="tag tag-akzent" style={{ position: 'absolute', top: -96 }}>
-                Empfohlen
-              </span>
-            )}
           </li>
         ))}
       </ul>
@@ -541,13 +539,13 @@ interface ListeJahre {
 
 const ListeJahreFolie: React.FC<ListeJahre> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s4)' }}>
+    <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s3)' }}>
       <T stil="titel" as="h2" max={36}>
         {p.titel}
       </T>
       <ul style={{ width: 1440, textAlign: 'left' }}>
         {p.zeilen.map((z, i) => (
-          <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '160px 1fr auto', gap: 'var(--gap)', alignItems: 'baseline', padding: '20px 0' }}>
+          <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '160px 1fr auto', gap: 'var(--gap)', alignItems: 'baseline', padding: 'var(--s2) 0' }}>
             <T stil="meta" leise max={9} style={{ fontVariantNumeric: 'tabular-nums' }}>
               {z.jahr}
             </T>
@@ -592,7 +590,7 @@ const KontaktSpaltenFolie: React.FC<KontaktSpalten> = (p) => (
       </T>
       <ul style={{ width: 1440, display: 'grid', gridTemplateColumns: `repeat(${p.kanaele.length}, 1fr)`, gap: 'var(--s4)' }}>
         {p.kanaele.map((k, i) => (
-          <li key={i} className="linie-oben stapel-s">
+          <li key={i} className="stapel-s">
             <T stil="meta" leise max={20}>
               {k.name}
             </T>
@@ -602,7 +600,7 @@ const KontaktSpaltenFolie: React.FC<KontaktSpalten> = (p) => (
           </li>
         ))}
       </ul>
-      <Bild bild={p.bild} eckig platzhalter="Team oder Büro" unterschrift={false} style={{ alignSelf: 'stretch', flex: 1, marginTop: 'var(--s3)' }} />
+      <Bild bild={p.bild} platzhalter="Team oder Büro" unterschrift={false} style={{ alignSelf: 'stretch', flex: 1, marginTop: 'var(--s3)' }} />
     </div>
   </Folie>
 );
@@ -611,9 +609,9 @@ const kontakt: KontaktSpalten = {
   label: 'Kontakt',
   titel: 'Sprechen wir',
   kanaele: [
-    { name: 'E-Mail', wert: 'hallo@uhl-werbung.de' },
-    { name: 'Website', wert: 'uhl-werbung.de' },
-    { name: 'Telefon', wert: '0821 650 76 0' },
+    { name: 'E-Mail', wert: 'info@uhl-werbeagentur.de' },
+    { name: 'Website', wert: 'uhl-werbeagentur.de' },
+    { name: 'Telefon', wert: '0821 38043' },
   ],
 };
 
@@ -640,16 +638,11 @@ const HeroStreuFolie: React.FC<HeroStreu> = (p) => {
         <Bild key={i} bild={b[i]} platzhalter="" unterschrift={false} style={{ position: 'absolute', ...o }} />
       ))}
       <div className="voll" style={{ ...mitte, justifyContent: 'center', padding: '0 480px' }}>
-        {/* opacity: app/globals.css .tag:not(.selected) leaks into the deck */}
-        {p.tag && (
-          <span className="tag">
-            {p.tag}
-          </span>
-        )}
+        {p.tag && <span className="tag">{p.tag}</span>}
         <T stil="aussage" as="h1" max={64} style={{ marginTop: 'var(--s3)' }}>
           {p.aussage}
         </T>
-        <T stil="body" leise max={90} style={{ marginTop: 'var(--s3)', maxWidth: 560 }}>
+        <T stil="body" leise max={90} style={{ marginTop: 'var(--s2)', maxWidth: 560 }}>
           {p.unterzeile}
         </T>
       </div>
@@ -720,19 +713,19 @@ const projektTitel: ProjektTitel = {
 /* ------------------------------------------------------------------ export --- */
 export const portfolioLayouts: LayoutDef[] = [
   { id: 'kapitel-trenner', name: 'Kapiteltrenner', gruppe: 'Kapitel', quelle: 'portfolio-014', zweck: 'Ruhiger Kapitelanfang mit Nummer, Titel, Strich und einem Satz; links oder zentriert.', komponente: KapitelTrennerFolie, beispiel: kapitelTrenner, limits: kapitelLimits },
-  { id: 'kapitel-bild', name: 'Kapitel mit Bildcollage', gruppe: 'Kapitel', quelle: 'portfolio-017', zweck: 'Kapitelanfang mit kurzer Beschreibung und drei Bildern rechts.', komponente: KapitelBildFolie, beispiel: kapitelBild, limits: { label: 24, nummer: 4, titel: 36, text: 180 }, anzahl: { bilder: [0, 3] } },
-  { id: 'ansatz', name: 'Ansatz zentriert', gruppe: 'Wert', quelle: 'portfolio-002', zweck: 'Haltung oder Arbeitsweise in einem ruhigen, zentrierten Absatz.', komponente: AnsatzFolie, beispiel: ansatz, limits: { label: 24, titel: 32, text: 240 } },
-  { id: 'rahmen-bild', name: 'Gerahmtes Bild mit Aussage', gruppe: 'Wert', quelle: 'portfolio-003', zweck: 'Ein oder zwei Bilder im Rahmen (z. B. vorher/nachher) und eine Aussage darunter.', komponente: RahmenBildFolie, beispiel: rahmenBild, limits: { label: 24, aussage: 70 }, anzahl: { bilder: [0, 2] } },
-  { id: 'leistungen-spalten', name: 'Leistungen in Spalten', gruppe: 'Leistung', quelle: 'portfolio-004', zweck: 'Drei bis vier Leistungen mit Nummer, Linie, Titel und kurzem Text.', komponente: SpaltenFolie, beispiel: leistungen, limits: spaltenLimits, anzahl: { spalten: [3, 4] } },
-  { id: 'leistungen-treppe', name: 'Schwerpunkte als Treppe', gruppe: 'Leistung', quelle: 'portfolio-006', zweck: 'Einleitung links, vier nummerierte Stufen mit steigenden Bildbalken.', komponente: TreppeFolie, beispiel: treppe, limits: { label: 24, titel: 24, text: 110, 'stufen[].titel': 22, 'stufen[].text': 60 }, anzahl: { stufen: [4, 4] } },
+  { id: 'kapitel-bild', name: 'Kapitel mit Bildcollage', gruppe: 'Kapitel', quelle: 'portfolio-017', zweck: 'Kapitelanfang mit kurzer Beschreibung und drei Bildern rechts.', komponente: KapitelBildFolie, beispiel: kapitelBild, limits: { label: 24, nummer: 4, titel: 36, text: 110 }, anzahl: { bilder: [0, 3] } },
+  { id: 'ansatz', name: 'Ansatz zentriert', gruppe: 'Wert', quelle: 'portfolio-002', zweck: 'Haltung oder Arbeitsweise in einem ruhigen, zentrierten Absatz.', komponente: AnsatzFolie, beispiel: ansatz, limits: { label: 24, titel: 32, text: 150 } },
+  { id: 'rahmen-bild', name: 'Bild mit Aussage', gruppe: 'Wert', quelle: 'portfolio-003', zweck: 'Ein oder zwei Bilder (z. B. vorher/nachher) und eine Aussage darunter.', komponente: RahmenBildFolie, beispiel: rahmenBild, limits: { label: 24, aussage: 70 }, anzahl: { bilder: [0, 2] } },
+  { id: 'leistungen-spalten', name: 'Leistungen in Spalten', gruppe: 'Leistung', quelle: 'portfolio-004', zweck: 'Drei bis vier Leistungen mit Nummer, Titel und kurzem Text.', komponente: SpaltenFolie, beispiel: leistungen, limits: spaltenLimits, anzahl: { spalten: [3, 4] } },
+  { id: 'leistungen-treppe', name: 'Schwerpunkte als Treppe', gruppe: 'Leistung', quelle: 'portfolio-006', zweck: 'Einleitung links, vier nummerierte Stufen mit steigenden Bildbalken.', komponente: TreppeFolie, beispiel: treppe, limits: { label: 24, titel: 24, text: 90, 'stufen[].titel': 11, 'stufen[].text': 40 }, anzahl: { stufen: [4, 4] } },
   { id: 'arbeiten-reihe', name: 'Arbeiten in einer Reihe', gruppe: 'Arbeiten', quelle: 'portfolio-007', zweck: 'Fünf Projektbilder unterschiedlicher Größe, zur Mitte hin wachsend.', komponente: ArbeitenReiheFolie, beispiel: arbeitenReihe, limits: { label: 24, titel: 36, ...bildTextLimits }, anzahl: { bilder: [0, 5] } },
   { id: 'arbeiten-projekt', name: 'Projekt mit drei Bildern', gruppe: 'Arbeiten', quelle: 'portfolio-008', zweck: 'Ein Projekt: großes Hauptbild und zwei Details mit Bildunterschrift.', komponente: ArbeitenProjektFolie, beispiel: arbeitenProjekt, limits: { label: 24, titel: 36, ...bildTextLimits }, anzahl: { bilder: [0, 3] } },
-  { id: 'zitat-bilder', name: 'Satz zwischen Bildern', gruppe: 'Arbeiten', quelle: 'portfolio-031', zweck: 'Ein kurzer Satz zwischen drei frei gesetzten Projektbildern.', komponente: ZitatBilderFolie, beispiel: zitatBilder, limits: { label: 24, zitat: 110, 'bilder[].text': 32 }, anzahl: { bilder: [0, 3] } },
-  { id: 'kunden-logos', name: 'Kundenlogos', gruppe: 'Beweis', quelle: 'portfolio-026', zweck: 'Titel, ein Satz und sechs bis zwölf Kundenlogos.', komponente: KundenLogosFolie, beispiel: kundenLogos, limits: { label: 24, titel: 36, text: 120, 'logos[].name': 22 }, anzahl: { logos: [6, 12] } },
+  { id: 'zitat-bilder', name: 'Satz zwischen Bildern', gruppe: 'Arbeiten', quelle: 'portfolio-031', zweck: 'Ein kurzer Satz zwischen drei frei gesetzten Projektbildern.', komponente: ZitatBilderFolie, beispiel: zitatBilder, limits: { label: 24, zitat: 84, 'bilder[].text': 32 }, anzahl: { bilder: [0, 3] } },
+  { id: 'kunden-logos', name: 'Kundenlogos', gruppe: 'Beweis', quelle: 'portfolio-026', zweck: 'Titel, ein Satz und sechs bis zwölf Kundenlogos.', komponente: KundenLogosFolie, beispiel: kundenLogos, limits: { label: 24, titel: 36, text: 80, 'logos[].name': 22 }, anzahl: { logos: [6, 12] } },
   { id: 'testimonial', name: 'Kundenstimme zentriert', gruppe: 'Beweis', quelle: 'portfolio-027', zweck: 'Ein Kundenzitat groß in der Mitte, darunter Name, Rolle, Firma.', komponente: TestimonialFolie, beispiel: testimonial, limits: { label: 24, zitat: 130, name: 32, rolle: 32, firma: 36 } },
-  { id: 'prozess-schritte', name: 'Ablauf in Schritten', gruppe: 'Ablauf', quelle: 'portfolio-028', zweck: 'Drei bis vier Projektschritte mit Nummer, Linie, Titel und Text.', komponente: SpaltenFolie, beispiel: prozess, limits: spaltenLimits, anzahl: { spalten: [3, 4] } },
-  { id: 'lieferumfang', name: 'Lieferumfang mit Bildern', gruppe: 'Leistung', quelle: 'portfolio-029', zweck: 'Was der Kunde am Ende bekommt: drei bis fünf Posten mit Bild und ein Satz.', komponente: LieferumfangFolie, beispiel: lieferumfang, limits: { label: 24, titel: 36, 'posten[].titel': 26, text: 110 }, anzahl: { posten: [3, 5] } },
-  { id: 'preise-spalten', name: 'Preise in Spalten', gruppe: 'Preis', quelle: 'portfolio-030', zweck: 'Zwei bis drei Pakete mit Name, Preis und Hinweis, eines optional empfohlen.', komponente: PreiseFolie, beispiel: preise, limits: { label: 24, 'pakete[].name': 28, 'pakete[].preis': 14, 'pakete[].text': 80, hinweis: 90 }, anzahl: { pakete: [2, 3] } },
+  { id: 'prozess-schritte', name: 'Ablauf in Schritten', gruppe: 'Ablauf', quelle: 'portfolio-028', zweck: 'Drei bis vier Projektschritte mit Nummer, Titel und Text.', komponente: SpaltenFolie, beispiel: prozess, limits: spaltenLimits, anzahl: { spalten: [3, 4] } },
+  { id: 'lieferumfang', name: 'Lieferumfang mit Bildern', gruppe: 'Leistung', quelle: 'portfolio-029', zweck: 'Was der Kunde am Ende bekommt: drei bis fünf Posten mit Bild und ein Satz.', komponente: LieferumfangFolie, beispiel: lieferumfang, limits: { label: 24, titel: 36, 'posten[].titel': 26, text: 80 }, anzahl: { posten: [3, 5] } },
+  { id: 'preise-spalten', name: 'Preise in Spalten', gruppe: 'Preis', quelle: 'portfolio-030', zweck: 'Zwei bis drei Pakete mit Name, Preis und Hinweis, eines optional empfohlen.', komponente: PreiseFolie, beispiel: preise, limits: { label: 24, 'pakete[].name': 28, 'pakete[].preis': 14, 'pakete[].text': 58, hinweis: 90 }, anzahl: { pakete: [2, 3] } },
   { id: 'liste-jahre', name: 'Liste mit Jahreszahlen', gruppe: 'Beweis', quelle: 'portfolio-032', zweck: 'Auszeichnungen, Referenzen oder Meilensteine als Linienzeilen mit Jahr.', komponente: ListeJahreFolie, beispiel: listeJahre, limits: { label: 24, titel: 36, 'zeilen[].jahr': 9, 'zeilen[].titel': 48, 'zeilen[].detail': 36 }, anzahl: { zeilen: [3, 6] } },
   { id: 'kontakt-spalten', name: 'Kontakt in Spalten', gruppe: 'Kontakt', quelle: 'portfolio-034', zweck: 'Abschluss: Titel, drei Kontaktwege und ein Bildband darunter.', komponente: KontaktSpaltenFolie, beispiel: kontakt, limits: { label: 24, titel: 36, 'kanaele[].name': 20, 'kanaele[].wert': 26 }, anzahl: { kanaele: [2, 3] } },
   { id: 'hero-streu', name: 'Aussage mit Streubildern', gruppe: 'Titel', quelle: 'portfolio-037', zweck: 'Positionierung groß in der Mitte, vier Bilder locker in den Ecken.', komponente: HeroStreuFolie, beispiel: heroStreu, limits: { label: 24, tag: 32, aussage: 64, unterzeile: 90 }, anzahl: { bilder: [0, 4] } },

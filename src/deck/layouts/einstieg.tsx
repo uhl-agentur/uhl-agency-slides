@@ -37,9 +37,10 @@ interface AussageBild {
 }
 
 const EinstiegBild: React.FC<AussageBild> = (p) => (
-  <Folie label={p.label} aufBild thema="dark">
-    <Bild bild={p.bild} eckig schleier="oben" platzhalter="" unterschrift={false} className="voll" />
-    <div className="inhalt" style={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>
+  <Folie label={p.label}>
+    {/* full veil of the slide ground: statement in role colours, centred, light and dark */}
+    <Bild bild={p.bild} eckig schleier="voll" platzhalter="" unterschrift={false} className="voll" />
+    <div className="inhalt" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
       <T stil="aussage" as="h2" max={84}>
         {p.aussage}
       </T>
@@ -57,7 +58,7 @@ interface TextBildHoch {
 
 const EinstiegBildHoch: React.FC<TextBildHoch> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 600px', gap: 'var(--s4)' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
       <div style={mitte}>
         <div className="stapel-l">
           <T stil="lead" as="h2" max={130}>
@@ -92,18 +93,20 @@ const Satz: React.FC<SatzBild & { rechts?: boolean }> = (p) => (
 
 const EinstiegBildSatz: React.FC<SatzBild> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
-      <Bild bild={p.bild} platzhalter="Bild" unterschrift={false} style={{ width: 600, height: 600, justifySelf: 'end' }} />
-      <Satz {...p} />
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'stretch' }}>
+      <Bild bild={p.bild} platzhalter="Bild" unterschrift={false} style={{ height: '100%' }} />
+      <div style={mitte}>
+        <Satz {...p} />
+      </div>
     </div>
   </Folie>
 );
 
 const EinstiegSatzBild: React.FC<SatzBild> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 840px', gap: 'var(--s4)', alignItems: 'center' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
       <Satz {...p} rechts />
-      <Bild bild={p.bild} platzhalter="Bild quer" unterschrift={false} style={{ height: 560 }} />
+      <Bild bild={p.bild} platzhalter="Bild quer" unterschrift={false} style={{ height: 544 }} />
     </div>
   </Folie>
 );
@@ -122,7 +125,7 @@ interface TeamReihe {
 
 const TeamReiheFolie: React.FC<TeamReihe> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--s3)' }}>
       <T stil="titel" as="h2" max={72} style={{ textAlign: 'center' }}>
         {p.titel}
       </T>
@@ -134,7 +137,7 @@ const TeamReiheFolie: React.FC<TeamReihe> = (p) => (
               <T stil="meta" max={28}>
                 {m.name}
               </T>
-              <T stil="meta" leise max={32} style={{ marginTop: 2 }}>
+              <T stil="meta" leise max={32}>
                 {m.rolle}
               </T>
             </div>
@@ -175,10 +178,10 @@ const ProblemSpalte: React.FC<ProblemText & { titelOben?: boolean }> = (p) => (
 
 const ProblemTextFolie: React.FC<ProblemText> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '560px 1fr', gap: 'var(--s4)' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
       <ProblemSpalte {...p} />
-      <div style={{ ...mitte, alignItems: 'flex-end' }}>
-        <T stil="titel" as="h2" max={60} style={{ maxWidth: 900 }}>
+      <div style={mitte}>
+        <T stil="titel" as="h2" max={60}>
           {p.titel}
         </T>
       </div>
@@ -188,9 +191,10 @@ const ProblemTextFolie: React.FC<ProblemText> = (p) => (
 
 /* ---------------------------------------------------------- problem-bild --- */
 const ProblemBild: React.FC<AussageBild> = (p) => (
-  <Folie label={p.label} aufBild thema="dark">
-    <Bild bild={p.bild} eckig schleier="unten" platzhalter="" unterschrift={false} className="voll" />
-    <div className="inhalt" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', textAlign: 'center' }}>
+  <Folie label={p.label}>
+    {/* full veil of the slide ground: statement in role colours, centred (feedback F1b "die aussage gerne mittig") */}
+    <Bild bild={p.bild} eckig schleier="voll" platzhalter="" unterschrift={false} className="voll" />
+    <div className="inhalt" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
       <T stil="aussage" as="h2" max={84}>
         {p.aussage}
       </T>
@@ -207,7 +211,7 @@ const ProblemMosaik: React.FC<ProblemBilder> = (p) => {
   const b = (i: number) => <Bild bild={p.bilder?.[i]} platzhalter={`Bild ${i + 1}`} unterschrift={false} style={{ height: '100%' }} />;
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '600px 1fr', gap: 'var(--s4)' }}>
+      <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
         <ProblemSpalte {...p} titelOben />
         <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: 'var(--gap)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'var(--gap)' }}>
@@ -226,7 +230,7 @@ const ProblemMosaik: React.FC<ProblemBilder> = (p) => {
 
 const ProblemRaster: React.FC<ProblemBilder> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '560px 1fr', gap: 'var(--s4)' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
       <ProblemSpalte {...p} titelOben />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridTemplateRows: '1fr 1fr', gap: 'var(--gap)' }}>
         {[0, 1, 2, 3, 4, 5].map((i) => (
@@ -246,7 +250,7 @@ interface ProblemAussage {
 
 const ProblemAussageFolie: React.FC<ProblemAussage> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '800px 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
       <div className="stapel-l">
         {p.saetze.map((s, i) => (
           <T key={i} stil="titel" as={i === 0 ? 'h2' : 'p'} leise={i > 0} max={64}>
@@ -254,7 +258,7 @@ const ProblemAussageFolie: React.FC<ProblemAussage> = (p) => (
           </T>
         ))}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 'var(--gap)', height: 400 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 'var(--gap)', height: 480 }}>
         <Bild bild={p.bilder?.[0]} platzhalter="Bild 1" unterschrift={false} style={{ height: '100%' }} />
         <Bild bild={p.bilder?.[1]} platzhalter="Bild 2" unterschrift={false} style={{ height: '100%' }} />
       </div>
@@ -302,9 +306,8 @@ const teamReihe: TeamReihe = {
 const problemText: ProblemText = {
   label: 'Ausgangslage',
   titel: 'Gute Arbeit allein bringt keine Anfragen mehr.',
-  einleitung: 'Viele Betriebe in der Region sind gut ausgelastet, doch neue Kunden kommen fast nur über Empfehlungen.',
+  einleitung: 'Neue Kunden kommen fast nur über Empfehlungen.',
   punkte: ['Website seit Jahren nicht gepflegt', 'Kaum Bewertungen bei Google', 'Kein klarer Weg zur Anfrage', 'Stellenanzeigen ohne Rücklauf'],
-  folge: 'Die Folge: Aufträge und Bewerbungen landen beim Wettbewerb, der online präsenter ist.',
 };
 
 const problemTextKurz: ProblemText = {
@@ -320,14 +323,11 @@ const problemBild: AussageBild = {
 
 const problemAussage: ProblemAussage = {
   label: 'Ausgangslage',
-  saetze: [
-    'Heute suchen Kunden zuerst bei Google, nicht im Branchenbuch.',
-    'Wer dort fehlt, verliert Anfragen an den Wettbewerb.',
-    'Das kostet Umsatz und gute Bewerber.',
-  ],
+  saetze: ['Kunden suchen heute zuerst bei Google.', 'Wer dort fehlt, verliert Anfragen und Bewerber.'],
 };
 
-const problemLimits = { label: 24, titel: 60, einleitung: 120, 'punkte[]': 40, folge: 110 };
+/* einleitung + list is the one supporting block; folge stays optional for old decks (feedback F1: no double paragraphs) */
+const problemLimits = { label: 24, titel: 60, einleitung: 60, 'punkte[]': 40, folge: 90 };
 
 export const einstiegLayouts: LayoutDef[] = [
   { id: 'einstieg-text', name: 'Einstieg, Text', gruppe: 'Einstieg', quelle: 'akoya-07', zweck: 'Positionierung in einem Satz plus kurzer Absatz, wer wir sind.', komponente: EinstiegTextFolie, beispiel: einstiegText, limits: { label: 24, titel: 64, text: 170 } },
@@ -337,8 +337,8 @@ export const einstiegLayouts: LayoutDef[] = [
   { id: 'einstieg-satz-bild', name: 'Satz links, Bild', gruppe: 'Einstieg', quelle: 'akoya-11', zweck: 'Kurzer Satz rechtsbündig neben einem Querformatbild.', komponente: EinstiegSatzBild, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
   { id: 'team-reihe', name: 'Team in einer Reihe', gruppe: 'Team', quelle: 'akoya-12', zweck: 'Projektteam mit Überschrift und bis zu sechs Porträts mit Rolle.', komponente: TeamReiheFolie, beispiel: teamReihe, limits: { label: 24, titel: 72, 'mitglieder[].name': 28, 'mitglieder[].rolle': 32 }, anzahl: { mitglieder: [2, 6] } },
   { id: 'problem-text', name: 'Problem, Text und Headline', gruppe: 'Problem', quelle: 'akoya-13', zweck: 'Ausgangslage als Textspalte, das Problem als Headline daneben.', komponente: ProblemTextFolie, beispiel: problemText, limits: problemLimits, anzahl: { punkte: [0, 4] } },
-  { id: 'problem-bild', name: 'Problem auf Vollbild', gruppe: 'Problem', quelle: 'akoya-14', zweck: 'Das Problem als ein Satz unten auf einem großen Bild.', komponente: ProblemBild, beispiel: problemBild, limits: { label: 24, aussage: 84 } },
+  { id: 'problem-bild', name: 'Problem auf Vollbild', gruppe: 'Problem', quelle: 'akoya-14', zweck: 'Das Problem als ein Satz mittig auf einem großen Bild.', komponente: ProblemBild, beispiel: problemBild, limits: { label: 24, aussage: 84 } },
   { id: 'problem-mosaik', name: 'Problem mit Bildmosaik', gruppe: 'Problem', quelle: 'akoya-15', zweck: 'Ausgangslage als Text, belegt mit vier Bildern (z. B. Screenshots, Situation vor Ort).', komponente: ProblemMosaik, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 4] } },
   { id: 'problem-raster', name: 'Problem mit Bildraster', gruppe: 'Problem', quelle: 'akoya-16', zweck: 'Ausgangslage als Text neben sechs gleich großen Belegbildern.', komponente: ProblemRaster, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 6] } },
-  { id: 'problem-aussage', name: 'Problem als große Aussage', gruppe: 'Problem', quelle: 'akoya-17', zweck: 'Situation, Folge und Wirkung in zwei bis drei großen Sätzen, dazu zwei Bilder.', komponente: ProblemAussageFolie, beispiel: problemAussage, limits: { label: 24, 'saetze[]': 64 }, anzahl: { saetze: [2, 3], bilder: [0, 2] } },
+  { id: 'problem-aussage', name: 'Problem als große Aussage', gruppe: 'Problem', quelle: 'akoya-17', zweck: 'Situation, Folge und Wirkung in zwei bis drei großen Sätzen, dazu zwei Bilder.', komponente: ProblemAussageFolie, beispiel: problemAussage, limits: { label: 24, 'saetze[]': 56 }, anzahl: { saetze: [2, 3], bilder: [0, 2] } },
 ];

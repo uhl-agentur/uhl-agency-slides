@@ -27,10 +27,10 @@ Start the dev server (`npm run dev -- -p 3417`) and open `/vorlagen`: every layo
 | Slide (slide-checklist.json) | Layout |
 |---|---|
 | 1 kick-off | `strategie-kernsatz` (or `titel-bild` before it) |
-| 2 marktbild | `strategie-marktbild`; numbers: `strategie-balken`, `strategie-linie`; full SWOT: `strategie-swot` |
+| 2 marktbild | `strategie-marktbild` (scale, demand, text, conclusion) + `strategie-swot` as its own slide; numbers: `strategie-balken`, `strategie-linie` |
 | 3 konkurrenz | `strategie-wettbewerb`, `strategie-matrix` |
 | 4 persona | `strategie-personas` + `strategie-journey` |
-| 5 unternehmen | `strategie-unternehmen` |
+| 5 unternehmen | `strategie-unternehmen` (core message, USP, 3 pillars) + trust numbers on `beweis-kennzahlen3`, design direction on `wert-mosaik` |
 | 6 ist-analyse-kanalmix | `strategie-kanalmix` |
 | 7 kanalmix-recap | `strategie-kpi` |
 | 8 roadmap | `strategie-roadmap`, then `offene-fragen`, `kontakt-abschluss` |
@@ -49,7 +49,7 @@ Frame it with `titel-*`, `inhalt-zeilen`, `kapitel-trenner` between chapters.
 | Team | `team-reihe` (real photos from `public/team/`) |
 | Nächste Schritte | `ablauf-titel-zeitleiste`, `kontakt-abschluss` |
 
-Rhythm: one idea per slide, alternate text-heavy and picture/number slides, at most every ~5th slide dark (`thema: 'dark'`) for chapter breaks, the same layout at most twice in a row.
+Rhythm: one idea per slide, one headline + one supporting block (no second paragraph without a reason), alternate text-heavy and picture/number slides, the deck theme set once in `thema` (every layout exists in light and dark), single slides may switch to the other theme for chapter breaks, the same layout at most twice in a row.
 
 ## 3. Write the deck
 

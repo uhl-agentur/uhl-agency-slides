@@ -22,22 +22,23 @@ interface KennzahlenText extends Omit<Kennzahlen, 'aussage' | 'bild'> {
   text?: string;
 }
 
-const Kachelreihe: React.FC<{ k: KennzahlDaten[]; variante: 'glas' | 'dunkel'; schluessel?: number }> = ({ k, variante, schluessel }) => (
+/** grey tiles (role --hoch) in both themes, the one key figure in lime */
+const Kachelreihe: React.FC<{ k: KennzahlDaten[]; schluessel?: number }> = ({ k, schluessel }) => (
   <div style={{ display: 'grid', gridTemplateColumns: `repeat(${k.length}, 440px)`, gap: 'var(--gap)', justifyContent: 'center' }}>
     {k.map((z, i) => (
-      <Kennzahl key={i} k={z} variante={i === schluessel ? 'akzent' : variante} style={{ height: 320, textAlign: 'center', alignItems: 'center' }} />
+      <Kennzahl key={i} k={z} variante={i === schluessel ? 'akzent' : 'hoch'} style={{ height: 320, textAlign: 'center', alignItems: 'center' }} />
     ))}
   </div>
 );
 
 const KennzahlenBild: React.FC<Kennzahlen> = (p) => (
-  <Folie label={p.label} aufBild thema="dark">
+  <Folie label={p.label}>
     <Bild bild={p.bild} eckig schleier="voll" platzhalter="" unterschrift={false} className="voll" />
     <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s4)', textAlign: 'center' }}>
       <T stil="aussage" as="h2" max={80}>
         {p.aussage}
       </T>
-      <Kachelreihe k={p.kennzahlen} variante="glas" schluessel={p.schluessel} />
+      <Kachelreihe k={p.kennzahlen} schluessel={p.schluessel} />
     </div>
   </Folie>
 );
@@ -48,25 +49,33 @@ const Kennzahlen3: React.FC<Kennzahlen> = (p) => (
       <T stil="aussage" as="h2" max={80}>
         {p.aussage}
       </T>
-      <Kachelreihe k={p.kennzahlen} variante="dunkel" schluessel={p.schluessel} />
+      <Kachelreihe k={p.kennzahlen} schluessel={p.schluessel} />
     </div>
   </Folie>
 );
 
+/* Nine tiles need the full width (a 50/50 split leaves no room for the numbers):
+   headline | text as one 50/50 row at the top, the 3 x 3 grid fills the rest. */
 const Kennzahlen9: React.FC<KennzahlenText> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '520px 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
-      <div className="stapel">
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'end' }}>
         <T stil="titel" as="h2" max={48}>
           {p.titel}
         </T>
-        <T stil="body" leise max={200}>
+        <T stil="body" leise max={120}>
           {p.text}
         </T>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridAutoRows: '1fr', gap: 'var(--gap)', height: '100%' }}>
+      <div style={{ flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gridTemplateRows: 'repeat(3, minmax(0, 1fr))', gap: 'var(--gap)' }}>
         {p.kennzahlen.map((z, i) => (
-          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'dunkel'} style={{ padding: 'var(--s2) var(--s3) var(--s3)' }} />
+          <Kennzahl
+            key={i}
+            k={z}
+            gross={false}
+            variante={i === p.schluessel ? 'akzent' : 'hoch'}
+            style={{ padding: 'var(--s2) var(--s3)', gap: 'var(--s1)', flexDirection: 'row', alignItems: 'center' }}
+          />
         ))}
       </div>
     </div>
@@ -81,7 +90,7 @@ const Kennzahlen6: React.FC<Kennzahlen> = (p) => (
       </T>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 480px)', gap: 'var(--gap)' }}>
         {p.kennzahlen.map((z, i) => (
-          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'dunkel'} style={{ height: 212, padding: 'var(--s2) var(--s3)', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} />
+          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ height: 212, padding: 'var(--s2) var(--s3)', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} />
         ))}
       </div>
     </div>
@@ -103,7 +112,7 @@ const kennzahlenLimits = { label: 24, aussage: 80, 'kennzahlen[].wert': 6, 'kenn
 const kennzahlen9: KennzahlenText = {
   label: 'Ergebnisse',
   titel: 'Messbar mehr Wirkung in zwölf Monaten',
-  text: 'Durchschnitt über 24 Mandate aus Handwerk, Pflege und Industrie seit 2023. Gemessen an Anfragen, Kosten und Sichtbarkeit.',
+  text: 'Durchschnitt über 24 Mandate aus Handwerk, Pflege und Industrie seit 2023.',
   kennzahlen: [
     { wert: '+64\u00a0%', text: 'organische Besucher' },
     { wert: '2,4×', text: 'Anfragen pro Monat' },
@@ -117,7 +126,7 @@ const kennzahlen9: KennzahlenText = {
   ],
   schluessel: 1,
 };
-const kennzahlen9Limits = { label: 24, titel: 48, text: 200, 'kennzahlen[].wert': 5, 'kennzahlen[].text': 32 };
+const kennzahlen9Limits = { label: 24, titel: 48, text: 120, 'kennzahlen[].wert': 5, 'kennzahlen[].text': 32 };
 
 const kennzahlen6: Kennzahlen = {
   label: 'Ergebnisse',
@@ -143,12 +152,12 @@ interface WertMosaik {
 
 const WertMosaikFolie: React.FC<WertMosaik> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '520px 1fr', gap: 'var(--s4)' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
       <div className="stapel" style={{ alignSelf: 'center' }}>
         <T stil="titel" as="h2" max={48}>
           {p.titel}
         </T>
-        <T stil="body" leise max={200}>
+        <T stil="body" leise max={140}>
           {p.text}
         </T>
       </div>
@@ -173,17 +182,17 @@ interface WertVenn {
 
 const WertVennFolie: React.FC<WertVenn> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 760px', gap: 'var(--s4)', alignItems: 'center' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center', justifyItems: 'start' }}>
       <div className="stapel-l">
         <T stil="titel" as="h2" max={48}>
           {p.titel}
         </T>
         <Liste punkte={p.punkte} max={40} />
-        <T stil="body" leise max={90}>
+        <T stil="body" leise max={80}>
           {p.fazit}
         </T>
       </div>
-      <Venn3 kreise={p.kreise} mitte={p.mitte} groesse={760} max={{ titel: 22, text: 48, mitte: 20 }} />
+      <Venn3 kreise={p.kreise} mitte={p.mitte} groesse={760} max={{ titel: 22, text: 48, mitte: 20 }} style={{ justifySelf: 'center' }} />
     </div>
   </Folie>
 );
@@ -197,11 +206,11 @@ interface ZweiSpalten {
 
 const ZweiSpaltenFolie: React.FC<ZweiSpalten> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
-      <T stil="lead" max={240} style={{ gridColumn: 2 }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
+      <T stil="lead" max={160}>
         {p.links}
       </T>
-      <T stil="lead" max={240}>
+      <T stil="lead" max={160}>
         {p.rechts}
       </T>
     </div>
@@ -219,12 +228,12 @@ interface PreisBalken {
 
 const PreisBalkenFolie: React.FC<PreisBalken> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '480px 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
       <div className="stapel">
         <T stil="titel" as="h2" max={40}>
           {p.titel}
         </T>
-        <T stil="body" leise max={160}>
+        <T stil="body" leise max={120}>
           {p.text}
         </T>
         <T stil="meta" leise max={80}>
@@ -241,8 +250,8 @@ const PreisBalkenFolie: React.FC<PreisBalken> = (p) => (
 const preis: PreisBalken = {
   label: 'Investition',
   titel: 'Drei Pakete, ein klarer Monatspreis',
-  text: 'Fester Betrag pro Monat, ohne Mindestlaufzeit nach dem ersten Quartal. Mediabudget für Anzeigen zahlen Sie direkt an Google und Meta.',
-  hinweis: 'Alle Preise netto zzgl. MwSt.',
+  text: 'Fester Betrag pro Monat, nach dem ersten Quartal monatlich kündbar.',
+  hinweis: 'Netto zzgl. MwSt., Mediabudget zahlen Sie direkt an Google und Meta.',
   stufen: [
     { wert: 1250, tag: '1.250 €', label: 'Start', sub: 'Website und SEO' },
     { wert: 2400, tag: '2.400 €', label: 'Wachstum', sub: 'plus Google Ads', hervorheben: true },
@@ -270,11 +279,12 @@ const AblaufZeitleiste: React.FC<Ablauf> = (p) => (
 
 const AblaufTitelZeitleiste: React.FC<Ablauf> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s4)' }}>
-      <T stil="titel" as="h2" max={60} style={{ textAlign: 'center', marginInline: 'auto' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+      <T stil="titel" as="h2" max={60}>
         {p.titel}
       </T>
-      <Zeitleiste punkte={p.punkte} erreicht={p.erreicht} max={{ ...zeitleisteMax, text: 90 }} />
+      {/* centred in the space below the headline */}
+      <Zeitleiste punkte={p.punkte} erreicht={p.erreicht} max={{ ...zeitleisteMax, text: 90 }} style={{ marginBlock: 'auto' }} />
     </div>
   </Folie>
 );
@@ -326,7 +336,7 @@ const KontaktAbschluss: React.FC<Kontakt> = (p) => (
       <T stil="aussage" as="h2" max={60}>
         {p.aussage}
       </T>
-      <div className="t-body leise" style={{ display: 'grid', gap: 4 }}>
+      <div className="t-body leise">
         {[p.mail, ...(p.zeilen ?? [])].map((z, i) => (
           <p key={i}>{z}</p>
         ))}
@@ -343,7 +353,7 @@ const KontaktBild: React.FC<Kontakt> = (p) => (
           <T stil="titel" as="h2" max={60}>
             {p.aussage}
           </T>
-          <div className="t-body" style={{ display: 'grid', gap: 4 }}>
+          <div className="t-body">
             <p>{p.mail}</p>
             {(p.zeilen ?? []).map((z, i) => (
               <p key={i} className="leise">
@@ -361,8 +371,8 @@ const KontaktBild: React.FC<Kontakt> = (p) => (
 const kontakt: Kontakt = {
   label: 'Kontakt',
   aussage: 'Lassen Sie uns gemeinsam loslegen.',
-  mail: 'hallo@uhl-werbeagentur.de',
-  zeilen: ['www.uhl-werbeagentur.de', 'Uhl Werbeagentur, Augsburg'],
+  mail: 'info@uhl-werbeagentur.de',
+  zeilen: ['uhl-werbeagentur.de', 'Uhl Werbeagentur, Augsburg'],
 };
 const kontaktLimits = { label: 24, aussage: 60, mail: 34, 'zeilen[]': 40 };
 
@@ -372,7 +382,7 @@ export const beweisLayouts: LayoutDef[] = [
     name: 'Aussage + 3 Kennzahlen auf Bild',
     gruppe: 'Beweis',
     quelle: 'akoya-29',
-    zweck: 'Drei Belegzahlen als Glaskacheln auf einem Stimmungsbild.',
+    zweck: 'Drei Belegzahlen als Kacheln auf einem Stimmungsbild hinter Schleier.',
     komponente: KennzahlenBild,
     beispiel: kennzahlen3,
     limits: kennzahlenLimits,
@@ -421,9 +431,9 @@ export const beweisLayouts: LayoutDef[] = [
     beispiel: {
       label: 'Ihr Nutzen',
       titel: 'Ein Auftritt, der nach Ihnen aussieht',
-      text: 'Echte Fotos aus Ihrem Betrieb statt Stockbildern. So erkennen Kunden und Bewerber sofort, mit wem sie es zu tun haben.',
+      text: 'Echte Fotos aus Ihrem Betrieb statt Stockbildern: Kunden und Bewerber sehen sofort, mit wem sie es zu tun haben.',
     } satisfies WertMosaik,
-    limits: { label: 24, titel: 48, text: 200 },
+    limits: { label: 24, titel: 48, text: 140 },
   },
   {
     id: 'wert-venn',
@@ -435,8 +445,7 @@ export const beweisLayouts: LayoutDef[] = [
     beispiel: {
       label: 'Positionierung',
       titel: 'Was Ihre Kunden davon haben',
-      punkte: ['Schneller einen festen Ansprechpartner', 'Klare Preise schon auf der Website', 'Termine online statt am Telefon', 'Beratung auch nach dem Kauf'],
-      fazit: 'Der Vorsprung wächst mit jedem zufriedenen Kunden, der Sie weiterempfiehlt.',
+      punkte: ['Ein fester Ansprechpartner', 'Klare Preise schon auf der Website', 'Termine online statt am Telefon'],
       kreise: [
         { titel: 'Was Kunden schätzen', text: 'Schnelle Termine, faire Preise, Ruhe.' },
         { titel: 'Was Sie können', text: 'Meisterbetrieb mit 30 Jahren Erfahrung.' },
@@ -444,7 +453,7 @@ export const beweisLayouts: LayoutDef[] = [
       ],
       mitte: '==Ihre Position==',
     } satisfies WertVenn,
-    limits: { label: 24, titel: 48, 'punkte[]': 40, fazit: 90, 'kreise[].titel': 22, 'kreise[].text': 48, mitte: 20 },
+    limits: { label: 24, titel: 48, 'punkte[]': 40, fazit: 80, 'kreise[].titel': 22, 'kreise[].text': 48, mitte: 20 },
     anzahl: { punkte: [2, 5], kreise: [3, 3] },
   },
   {
@@ -456,10 +465,10 @@ export const beweisLayouts: LayoutDef[] = [
     komponente: ZweiSpaltenFolie,
     beispiel: {
       label: 'Ihr Nutzen',
-      links: 'Mit uns kommen Anfragen nicht mehr zufällig, sondern planbar. Statt Flyer, Zeitungsanzeige und Bauchgefühl steuern Sie Ihr Marketing über klare Zahlen und sehen jeden Monat, was wirkt.',
-      rechts: 'Gleichzeitig wird jede Anfrage besser: Interessenten kennen Leistungen und Preise schon, bevor sie anrufen. Ihr Team spart Zeit im Erstgespräch und kann sich auf die Kunden konzentrieren.',
+      links: 'Bisher kommen Anfragen zufällig. Flyer, Zeitungsanzeige und Bauchgefühl entscheiden, niemand sieht, was wirkt.',
+      rechts: 'Künftig kommen sie planbar. Interessenten kennen Leistungen und Preise, bevor sie anrufen, und jeden Monat zeigen Zahlen, was wirkt.',
     } satisfies ZweiSpalten,
-    limits: { label: 24, links: 240, rechts: 240 },
+    limits: { label: 24, links: 160, rechts: 160 },
   },
   {
     id: 'preis-balken',
@@ -469,7 +478,7 @@ export const beweisLayouts: LayoutDef[] = [
     zweck: 'Drei bis fünf Pakete als Balken, das empfohlene in Lime.',
     komponente: PreisBalkenFolie,
     beispiel: preis,
-    limits: { label: 24, titel: 40, text: 160, hinweis: 80, 'stufen[].tag': 9, 'stufen[].label': 12, 'stufen[].sub': 26 },
+    limits: { label: 24, titel: 40, text: 120, hinweis: 80, 'stufen[].tag': 9, 'stufen[].label': 12, 'stufen[].sub': 26 },
     anzahl: { stufen: [3, 5] },
   },
   {
@@ -531,7 +540,7 @@ export const beweisLayouts: LayoutDef[] = [
     quelle: 'akoya-42',
     zweck: 'Letzte Folie mit einer großen Kontaktadresse in der Mitte.',
     komponente: KontaktMail,
-    beispiel: { label: 'Kontakt', aussage: 'Fragen? Schreiben Sie uns.', mail: 'hallo@uhl-werbeagentur.de' } satisfies Kontakt,
+    beispiel: { label: 'Kontakt', aussage: 'Fragen? Schreiben Sie uns.', mail: 'info@uhl-werbeagentur.de' } satisfies Kontakt,
     limits: { label: 24, aussage: 60, mail: 34 },
   },
   {

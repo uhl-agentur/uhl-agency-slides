@@ -62,7 +62,7 @@ export function Balken({
               <T
                 stil="karte"
                 max={max?.tag}
-                style={{ display: 'inline-block', padding: '6px 12px', borderRadius: 'var(--r-sm)', background: 'var(--karte)', color: 'var(--text)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}
+                style={{ display: 'inline-block', padding: '6px 12px', borderRadius: 'var(--r-sm)', background: 'var(--flaeche)', color: 'var(--text)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}
               >
                 {b.tag}
               </T>
@@ -127,7 +127,7 @@ export function Venn3({
     <div className={className} style={{ position: 'relative', width: groesse, height: groesse, ...style }}>
       <svg viewBox="0 0 1 1" width={groesse} height={groesse} style={{ position: 'absolute', inset: 0, overflow: 'visible' }} aria-hidden>
         {mitten.map((m, i) => (
-          <circle key={i} cx={m.cx} cy={m.cy} r={r} fill="var(--text)" fillOpacity={0.07} stroke="var(--linie)" strokeWidth={1 / groesse} />
+          <circle key={i} cx={m.cx} cy={m.cy} r={r} fill="var(--text)" fillOpacity={0.1} />
         ))}
       </svg>
       {kreise.map((k, i) => (
@@ -190,7 +190,7 @@ export function Zeitleiste({
               {p.titel}
             </T>
             <div style={{ position: 'relative', height: 20, margin: 'var(--s2) 0' }}>
-              <div style={{ position: 'absolute', left: 0, right: 0, top: 8, height: 4, background: fertig ? 'var(--text)' : 'var(--linie)' }} />
+              <div style={{ position: 'absolute', left: 0, right: 0, top: 8, height: 4, background: fertig ? 'var(--spur-fertig)' : 'var(--spur)' }} />
               <div
                 style={{
                   position: 'absolute',
@@ -200,8 +200,8 @@ export function Zeitleiste({
                   height: 20,
                   padding: 0,
                   borderRadius: 'var(--r-sm)',
-                  background: aktuell ? 'var(--akzent)' : erledigt ? 'var(--text)' : 'var(--flaeche)',
-                  border: aktuell || erledigt ? 'none' : '2px solid var(--linie)',
+                  /* markers sit in the track colour, no outline (feedback F1) */
+                  background: aktuell ? 'var(--akzent)' : erledigt ? 'var(--spur-fertig)' : 'var(--spur)',
                 }}
               />
             </div>

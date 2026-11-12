@@ -38,28 +38,43 @@
   --r-sm: 4px;
 }
 
-/* Theme roles: a slide sets thema-light / thema-dark, everything inside reads roles. */
+/* Theme roles (feedback F1: "light version vordefinierte farbcodes … und selbe für schwarz").
+   Every component reads ONLY these roles, never a palette colour, so each slide
+   works in light and dark with tested contrast (webdesign-rules wcag-contrast):
+     text/flaeche 17.8:1 · text-2/flaeche 6.1:1 (light) 11.2:1 (dark)
+     text-2/hoch 4.9:1 (light) 9.0:1 (dark) · akzent-text/akzent 12.9:1 · oliv/akzent 4.8:1
+   Cards are always grey (hoch), never black on light. No outlines on cards, tags, markers. */
 .uhl-deck .thema-light {
-  --flaeche: var(--papier);
-  --hoch: var(--salbei);
+  --flaeche: var(--papier);   /* slide ground */
+  --hoch: var(--salbei);      /* cards, tags, picture frames, chart panels */
+  --hoch-2: var(--papier);    /* second level on a card (icon box, tick tile, nested frame): lighter than the card (feedback F1b) */
   --text: var(--wald);
   --text-2: var(--moos);
-  --linie: var(--halm);
-  --karte: var(--weiss);
-  --akzent: var(--lime);
+  --linie: var(--halm);       /* hairlines in tables only */
+  --akzent: var(--lime);      /* the one signal per slide */
   --akzent-text: var(--wald);
-  --balken: var(--text); /* chart bars next to the lime key bar */
+  --akzent-text-2: var(--oliv);
+  --balken: var(--moos);      /* chart bars next to the lime key bar: grey, never black on white (F1) */
+  --spur: var(--halm);        /* timeline track and its open markers */
+  --spur-fertig: var(--wald); /* done part of a track */
+  --logo: var(--wald);
+  --schleier: 97.9% 0 0;      /* veil over full-bleed pictures = slide ground (oklch L C H) */
 }
 .uhl-deck .thema-dark {
   --flaeche: var(--wald);
   --hoch: var(--tanne);
+  --hoch-2: var(--farn);
   --text: var(--papier);
   --text-2: var(--flechte);
   --linie: var(--farn);
-  --karte: var(--tanne);
   --akzent: var(--lime);
   --akzent-text: var(--wald);
-  --balken: var(--linie);
+  --akzent-text-2: var(--oliv);
+  --balken: var(--farn);
+  --spur: var(--farn);
+  --spur-fertig: var(--papier);
+  --logo: var(--papier);
+  --schleier: 17.8% 0 0;
 }
 
 /* ---------------------------------------------------------------- slide --- */
@@ -117,21 +132,15 @@
 .uhl-deck .chrome-marke { bottom: var(--chrome); left: var(--rand); }
 .uhl-deck .chrome-seite { bottom: var(--chrome); right: var(--rand); font-variant-numeric: tabular-nums; }
 .uhl-deck .chrome-logo {
+  /* the uhl block mark itself, no tile (feedback F1: "auf weiß das logo schwarz ohne box") */
   position: absolute;
   z-index: 5;
-  top: calc(var(--chrome) - 12px);
+  top: calc(var(--chrome) - 8px);
   right: var(--rand);
-  width: 56px;
-  height: 56px;
-  padding: 6px;
-  border-radius: var(--r);
-  background: var(--wald);
-  color: var(--papier);
+  width: 48px;
+  height: 48px;
+  color: var(--logo);
 }
-.uhl-deck .thema-dark .chrome-logo { background: var(--tanne); }
-.uhl-deck .auf-bild .chrome-label,
-.uhl-deck .auf-bild .chrome-marke,
-.uhl-deck .auf-bild .chrome-seite { color: var(--papier); }
 
 /* ----------------------------------------------------------------- type --- */
 /* Line lengths: display <= ~18 chars/line, aussage <= 30, titel <= 36,
@@ -220,21 +229,27 @@
 .uhl-deck .stapel-s > * + * { margin-top: var(--s1); }
 .uhl-deck .stapel-l > * + * { margin-top: var(--s3); }
 
-/* bullet list: short lime dash, hanging */
+/* bullet list: check mark on a small grey tile, like the ticks on uhl-website (feedback F1).
+   Liste in system.tsx renders the icon; the tile scales with the text style. */
 .uhl-deck .liste > li {
-  position: relative;
-  padding-left: 1.1em;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6em;
 }
-.uhl-deck .liste > li + li { margin-top: 0.5em; }
-.uhl-deck .liste > li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.72em;
-  width: 0.5em;
-  height: 2px;
-  background: var(--text);
+.uhl-deck .liste > li + li { margin-top: 0.6em; }
+.uhl-deck .liste-haken {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.25em;
+  height: 1.25em;
+  margin-top: calc((1lh - 1.25em) / 2);
+  border-radius: var(--r-sm);
+  background: var(--hoch);
+  color: var(--text);
 }
+.uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas) :is(.liste-haken, .ikon, .tag) { background: var(--hoch-2); }
+.uhl-deck .liste-haken > svg { width: 0.8em; height: 0.8em; }
 .uhl-deck .liste-nummer { counter-reset: n; }
 .uhl-deck .liste-nummer > li { counter-increment: n; display: flex; gap: 0.8em; }
 .uhl-deck .liste-nummer > li::before {
@@ -275,75 +290,65 @@
 .uhl-deck .bildunterschrift { margin-top: var(--s1); }
 .uhl-deck .portrait { border-radius: 9999px; } /* only people may be round (designsystem-v2) */
 
-/* gradient veil for text on full-bleed pictures */
+/* veil over full-bleed pictures, made of the slide ground: text keeps its role colour in both themes */
 .uhl-deck .schleier-unten::after,
-.uhl-deck .schleier-oben::after {
+.uhl-deck .schleier-oben::after,
+.uhl-deck .schleier-voll::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
-.uhl-deck .schleier-unten::after { background: linear-gradient(to top, oklch(17.8% 0 0 / 0.72), oklch(17.8% 0 0 / 0) 60%); }
-.uhl-deck .schleier-oben::after { background: linear-gradient(to bottom, oklch(17.8% 0 0 / 0.62), oklch(17.8% 0 0 / 0) 55%); }
-.uhl-deck .schleier-voll::after { content: ""; position: absolute; inset: 0; background: oklch(17.8% 0 0 / 0.45); }
+.uhl-deck .schleier-unten::after { background: linear-gradient(to top, oklch(var(--schleier) / 0.92), oklch(var(--schleier) / 0) 62%); }
+.uhl-deck .schleier-oben::after { background: linear-gradient(to bottom, oklch(var(--schleier) / 0.9), oklch(var(--schleier) / 0) 58%); }
+.uhl-deck .schleier-voll::after { background: oklch(var(--schleier) / 0.7); }
 
 /* ---------------------------------------------------------------- tiles --- */
-.uhl-deck .kachel {
+/* One card surface per theme. kachel-dunkel and kachel-glas are kept as aliases
+   for old markup; they look exactly like kachel (feedback F1: no black cards on
+   white, no glass, no outlines). */
+.uhl-deck .kachel,
+.uhl-deck .kachel-dunkel,
+.uhl-deck .kachel-glas {
   border-radius: var(--r);
   background: var(--hoch);
+  color: var(--text);
   padding: var(--s3);
 }
-.uhl-deck .kachel-dunkel {
-  border-radius: var(--r);
-  background: var(--wald);
-  color: var(--papier);
-  --text-2: var(--flechte);
-  padding: var(--s3);
-}
-.uhl-deck .thema-dark .kachel-dunkel { background: var(--tanne); }
 .uhl-deck .kachel-akzent {
   border-radius: var(--r);
   background: var(--akzent);
   color: var(--akzent-text);
   --text: var(--akzent-text);
-  --text-2: var(--oliv);
-  padding: var(--s3);
-}
-.uhl-deck .kachel-glas {
-  border-radius: var(--r);
-  background: oklch(100% 0 0 / 0.14);
-  border: 1px solid oklch(100% 0 0 / 0.28);
-  backdrop-filter: blur(18px);
-  color: var(--papier);
-  --text-2: oklch(92% 0 0);
+  --text-2: var(--akzent-text-2);
+  --hoch: oklch(100% 0 0 / 0.35);
   padding: var(--s3);
 }
 .uhl-deck .tag {
-  /* app/globals.css styles a .tag of the old app (opacity 0.2); reset it here */
+  /* fill only, no outline (feedback F1). app/globals.css styles an old .tag (opacity 0.2); reset here */
   opacity: 1;
   cursor: default;
-  font-size: 18px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 36px;
-  padding: 0 14px;
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
   border-radius: var(--r-sm);
-  border: 1px solid var(--linie);
+  background: var(--hoch);
   font: 500 18px/1 var(--f-text);
   color: var(--text);
 }
-.uhl-deck .tag-akzent { background: var(--akzent); border-color: var(--akzent); color: var(--akzent-text); }
+.uhl-deck .tag-akzent { background: var(--akzent); color: var(--akzent-text); }
 .uhl-deck .ikon {
   display: grid;
   place-items: center;
   width: 56px;
   height: 56px;
   border-radius: var(--r);
-  background: var(--wald);
-  color: var(--lime);
+  background: var(--hoch);
+  color: var(--text);
 }
-.uhl-deck .thema-dark .ikon { background: var(--farn); }
 
 /* over-limit marker (gallery + deck preview, never in print) */
 .uhl-deck .zu-lang { outline: 3px dashed oklch(57% 0.2 27); outline-offset: 6px; }

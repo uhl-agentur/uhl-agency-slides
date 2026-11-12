@@ -17,7 +17,7 @@ interface Cover {
 
 const TitelLinks: React.FC<Cover> = (p) => (
   <Folie chrome={false}>
-    <div className="voll" style={{ padding: '56px var(--rand)' }}>
+    <div className="voll" style={{ padding: 'var(--chrome) var(--rand)' }}>
       <div className="stapel" style={{ maxWidth: 1180 }}>
         <T stil="display" as="h1" max={48}>
           {p.titel}
@@ -26,7 +26,7 @@ const TitelLinks: React.FC<Cover> = (p) => (
           {p.unterzeile}
         </T>
       </div>
-      <div style={{ position: 'absolute', left: 'var(--rand)', bottom: 56 }} className="t-meta leise">
+      <div style={{ position: 'absolute', left: 'var(--rand)', bottom: 'var(--chrome)' }} className="t-meta leise">
         {[p.kunde, p.datum].filter(Boolean).join(' · ')}
       </div>
     </div>
@@ -34,9 +34,10 @@ const TitelLinks: React.FC<Cover> = (p) => (
 );
 
 /* ------------------------------------------------------------- titel-split --- */
+/* Exact 50/50: the picture half runs full bleed from x = 960 to the right edge. */
 const TitelSplit: React.FC<Cover> = (p) => (
   <Folie chrome={false} logo={false}>
-    <div className="voll" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+    <div className="voll" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)' }}>
       <div style={{ position: 'relative', padding: '0 var(--s4) 0 var(--rand)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <div className="stapel">
           <T stil="aussage" as="h1" max={48}>
@@ -46,7 +47,7 @@ const TitelSplit: React.FC<Cover> = (p) => (
             {p.unterzeile}
           </T>
         </div>
-        <div style={{ position: 'absolute', left: 'var(--rand)', bottom: 56 }} className="t-meta leise">
+        <div style={{ position: 'absolute', left: 'var(--rand)', bottom: 'var(--chrome)' }} className="t-meta leise">
           {[p.kunde, p.datum].filter(Boolean).join(' · ')}
         </div>
       </div>
@@ -57,10 +58,11 @@ const TitelSplit: React.FC<Cover> = (p) => (
 
 /* -------------------------------------------------------------- titel-bild --- */
 const TitelBild: React.FC<Cover> = (p) => (
-  <Folie chrome={false} aufBild thema="dark">
+  <Folie chrome={false}>
+    {/* veil of the slide ground: title in role colours reads in light and dark; kept low like a cover */}
     <Bild bild={p.bild} eckig schleier="unten" platzhalter="" unterschrift={false} className="voll" />
-    <div className="voll" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', textAlign: 'center', padding: '0 var(--rand) 120px' }}>
-      <div className="stapel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', textAlign: 'center' }}>
+      <div className="stapel-s" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <T stil="meta" leise max={90}>
           {p.unterzeile}
         </T>
@@ -88,11 +90,12 @@ interface Inhalt {
   bild?: BildDaten;
 }
 
+/* Exact 50/50: list in the left half, picture full bleed from x = 960. */
 const InhaltSplit: React.FC<Inhalt> = (p) => (
   <Folie label={p.label} logo={false}>
-    <div className="voll" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+    <div className="voll" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)' }}>
       <div style={{ padding: 'var(--oben) var(--s4) var(--unten) var(--rand)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <ol className="liste-nummer t-lead" style={{ display: 'grid', gap: 18 }}>
+        <ol className="liste-nummer t-lead" style={{ display: 'grid', gap: 'var(--s2)' }}>
           {p.kapitel.map((k, i) => (
             <li key={i}>{k}</li>
           ))}
@@ -108,7 +111,7 @@ const InhaltZentriert: React.FC<Inhalt> = (p) => (
     <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
       <ol style={{ display: 'grid', gap: 4 }}>
         {p.kapitel.map((k, i) => (
-          <li key={i} className="t-aussage" style={{ fontSize: 56, maxWidth: 'none' }}>
+          <li key={i} className="t-aussage" style={{ maxWidth: 'none' }}>
             <span className="leise" style={{ fontVariantNumeric: 'tabular-nums' }}>{String(i + 1).padStart(2, '0')}</span>&ensp;{k}
           </li>
         ))}
@@ -119,13 +122,13 @@ const InhaltZentriert: React.FC<Inhalt> = (p) => (
 
 const InhaltZeilen: React.FC<Inhalt> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: 'var(--s4)', alignItems: 'center' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
       <T stil="titel" as="h2" max={40}>
         {p.titel}
       </T>
       <ol>
         {p.kapitel.map((k, i) => (
-          <li key={i} className="linie-unten t-karte" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '22px 0' }}>
+          <li key={i} className="linie-unten t-karte" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: 'var(--s2) 0' }}>
             <span>{k}</span>
             <span className="leise t-meta" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {String(i + 1).padStart(2, '0')}

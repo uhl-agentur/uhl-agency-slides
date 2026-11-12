@@ -30,10 +30,15 @@ Next.js app for the agency's presentations. Two generations live here:
 - Type only via `<T stil=…>` / `t-*` classes; strong weight in running text via `t-stark`. Never a raw font size, colour or radius in a layout. Smallest text 18 px (`meta`).
 - Line length is capped by `max-width` in `em` on each style: display ~18 chars/line, aussage ~30, titel ~36, lead ~46, body ~62. Headlines `text-wrap: balance`, running text `pretty`. Line height: headings 0.98–1.15, lead 1.4, body 1.5.
 - **Character limits** live per field in each `LayoutDef.limits`; `<T max>` outlines overflow in red on screen. A deck must pass `check-deck` before PDF export.
-- Radius never above 8 px (`--r`), tags 4 px. No pills, no circles, except portraits of people (`Bild portrait`).
-- Colours only via roles (`--flaeche`, `--hoch`, `--text`, `--text-2`, `--linie`, `--akzent`). Lime `--akzent` is the one signal per slide: a highlight (`==wort==` in text), the key bar, the key number. Never lime text on light ground (use `akzent-text`, which turns oliv on light).
-- Logo: light uhl mark on a wald tile, top right (`Folie logo`). Never on lime.
-- Every layout renders in `light` and `dark`, and with only its required props (no picture = grey frame naming what belongs there).
+- Radius never above 8 px (`--r`), tags 4 px. No pills, no circles, except portraits of people (`Bild portrait`) and chart shapes.
+- **Colour only via theme roles** (`deck.css` top: `--flaeche`, `--hoch`, `--hoch-2`, `--text`, `--text-2`, `--linie`, `--akzent`, `--akzent-text`, `--akzent-text-2`, `--balken`, `--spur`, `--spur-fertig`, `--logo`). Every slide renders in light AND dark from the same markup; never force a theme in a layout. Contrast of every role pair is checked (webdesign-rules, AA). Why: user F1 "light version vordefinierte farbcodes … und selbe für schwarz".
+- **Cards are grey** (`--hoch`: salbei on light, tanne on dark), never black on white. Things on a card use the lighter `--hoch-2` (icon boxes, tick tiles). Lime `--akzent` is the one signal per slide (`==wort==`, the key number, the key bar). Why: user F1 "auf weiß nur graue cards keine schwarzen", F1b "helleres grau für die icon boxen".
+- **No outlines**: no borders on cards, tags, markers, pictures, chart shapes; no glass. Hairlines only as row separators in real tables/lists. Why: user F1 "keine outlines", "weniger trennlinien", "glaseffekt ganz weg".
+- Logo: the uhl block mark without a box, black on light, white on dark (`--logo`), top right. Why: user F1.
+- Bullets only via `<Liste>`: check mark on a small grey tile (website style). Why: user F1 "custom stichpunkt … mit icon, allgemein global".
+- Text | media / text | statement splits are always **50/50**. A single statement on a picture sits in the vertical middle. Why: user F1b "immer 50/50 das es clean aussieht".
+- **Less content**: one headline + one supporting block; no second paragraph without a reason. Why: user F1 "doppelabsätze ohne grund weg", "zu überladen".
+- Spacing tokens: headline to content `--s3` 48, inside a text block `--s2` 24, title to text / picture to caption `--s1` 12, text column to media column `--s4` 96, cards and pictures in a grid `--gap` 32. Content stays in `.inhalt` unless full-bleed.
 - Spacing doubles: 12 / 24 / 48 / 96 (`--s1`…`--s4`), grid gap 32.
 - Lots of air: one idea per slide, at most one headline + one supporting block.
 

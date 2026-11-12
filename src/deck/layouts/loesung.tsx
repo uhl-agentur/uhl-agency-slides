@@ -19,6 +19,7 @@ interface LoesungText {
   label?: string;
   titel: string;
   text: string;
+  /** optional second paragraph; leave it out unless it carries its own point (feedback F1: no double paragraphs) */
   zusatz?: string;
   punkteTitel?: string;
   punkte?: string[];
@@ -26,7 +27,7 @@ interface LoesungText {
 
 const LoesungTextL: React.FC<LoesungText> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '560px 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
       <div className="stapel-l">
         <T stil="body" max={160}>
           {p.text}
@@ -43,7 +44,7 @@ const LoesungTextL: React.FC<LoesungText> = (p) => (
           </div>
         ) : null}
       </div>
-      <div style={{ paddingLeft: 'var(--s4)' }}>
+      <div>
         <T stil="aussage" as="h2" max={48}>
           {p.titel}
         </T>
@@ -164,7 +165,7 @@ interface BilderText {
 
 const bilderTextPos: [number, number, number, number][] = [
   [96, 168, 400, 420],
-  [560, 500, 300, 300],
+  [592, 500, 320, 300], /* right edge 912 = end of the left half (50/50) */
 ];
 
 const BilderTextL: React.FC<BilderText> = (p) => (
@@ -209,15 +210,15 @@ interface Karten4 {
 
 const Karten4L: React.FC<Karten4> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s4)' }}>
-      <T stil="aussage" as="h2" max={56} style={{ textAlign: 'center' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+      <T stil="aussage" as="h2" max={56}>
         {p.titel}
       </T>
-      <div style={{ display: 'grid', gridTemplateColumns: `repeat(${p.karten.length}, 1fr)`, gap: 'var(--gap)', width: '100%' }}>
+      <div style={{ flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: `repeat(${p.karten.length}, 1fr)`, gap: 'var(--gap)' }}>
         {p.karten.map((k, i) => {
           const Ikon = ikonen[k.ikon] ?? Sparkles;
           return (
-            <div key={i} className="kachel" style={{ minHeight: 400, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+            <div key={i} className="kachel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
               <div className="ikon" style={{ marginBottom: 'var(--s3)' }}>
                 <Ikon size={28} strokeWidth={1.75} />
               </div>
@@ -248,12 +249,12 @@ interface Mosaik {
 
 const MosaikL: React.FC<Mosaik> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '624px 1fr', gap: 'var(--s4)' }}>
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
       <div className="stapel-l" style={{ alignSelf: 'center' }}>
         <T stil="titel" as="h2" max={48}>
           {p.titel}
         </T>
-        <T stil="body" max={180}>
+        <T stil="body" max={140}>
           {p.text}
         </T>
         <Liste punkte={p.punkte} max={40} />
@@ -332,7 +333,6 @@ const loesungText: LoesungText = {
   label: 'Lösung',
   titel: 'Eine Website, die Anfragen ==vorsortiert==',
   text: 'Der neue Auftritt führt Interessenten in drei Schritten zur passenden Leistung und liefert dem Vertrieb vollständige Anfragen statt loser Rückrufbitten.',
-  zusatz: 'Er ersetzt das allgemeine Kontaktformular durch einen geführten Anfragepfad.',
   punkteTitel: 'Leitprinzipien',
   punkte: ['Klar vor kreativ', 'Jede Seite hat ein Ziel', 'Messbar ab dem ersten Tag'],
 };
@@ -362,7 +362,6 @@ const mitte: Mitte = {
 const bilderText: BilderText = {
   label: 'Lösung',
   titel: 'Mehr qualifizierte Anfragen ohne mehr Aufwand im Büro',
-  text: 'Wir ersetzen Einzelmaßnahmen durch einen durchgängigen Weg vom ersten Klick bis zum Termin.',
   punkte: ['Ein Anfragepfad statt fünf', 'Klare Zuständigkeiten', 'Monatlicher Bericht'],
   bilder: [{ text: 'Startseite mit Leistungsauswahl' }, { text: 'Anfragepfad auf dem Smartphone' }],
 };
@@ -381,7 +380,7 @@ const karten4: Karten4 = {
 const mosaik: Mosaik = {
   label: 'Leistung',
   titel: 'Website-Relaunch für einen Handwerksbetrieb',
-  text: 'Ein Familienbetrieb aus der Region bekam einen Auftritt, der Leistungen verständlich erklärt, Bewerber anspricht und Anfragen direkt dem richtigen Ansprechpartner zuordnet.',
+  text: 'Ein Familienbetrieb aus der Region bekam einen Auftritt, der Leistungen verständlich erklärt und Anfragen direkt zuordnet.',
   punkte: ['Bildsprache aus eigenem Fotoshooting', 'Geführter Anfragepfad', 'Karriereseite mit Kurzbewerbung'],
   bilder: [{}, {}, {}, {}],
 };
@@ -476,7 +475,7 @@ export const loesungLayouts: LayoutDef[] = [
     zweck: 'Ein Projekt oder Produkt in Text links und vier Bildern rechts.',
     komponente: MosaikL,
     beispiel: mosaik,
-    limits: { label: 24, titel: 48, text: 180, 'punkte[]': 40, 'bilder[].text': 40 },
+    limits: { label: 24, titel: 48, text: 140, 'punkte[]': 40, 'bilder[].text': 40 },
     anzahl: { punkte: [0, 3], bilder: [0, 4] },
   },
   {

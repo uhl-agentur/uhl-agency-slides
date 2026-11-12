@@ -3,6 +3,7 @@
 import React, { createContext, useContext } from 'react';
 import { logoBlock } from './logo';
 import { cx, sichtbareLaenge } from './cx';
+import { Check } from 'lucide-react';
 
 /* ============================================================================
    Primitives of the deck system. Every layout is built only from these plus
@@ -143,7 +144,12 @@ export function Liste({
     <ul className={cx(nummer ? 'liste-nummer' : 'liste', `t-${stil}`, className)}>
       {punkte.map((p, i) => (
         <li key={i} className={cx(max !== undefined && sichtbareLaenge(p) > max && 'zu-lang')}>
-          {formatiere(p)}
+          {!nummer && (
+            <span className="liste-haken" aria-hidden>
+              <Check strokeWidth={2.5} />
+            </span>
+          )}
+          <span>{formatiere(p)}</span>
         </li>
       ))}
     </ul>
@@ -206,18 +212,19 @@ export interface KennzahlDaten {
 
 export function Kennzahl({
   k,
-  variante = 'dunkel',
+  variante = 'hoch',
   gross = true,
   className,
   style,
 }: {
   k: KennzahlDaten;
+  /** dunkel and glas are old names, they render like hoch (no black cards, no glass) */
   variante?: 'dunkel' | 'hoch' | 'akzent' | 'glas' | 'frei';
   gross?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }) {
-  const kl = variante === 'dunkel' ? 'kachel-dunkel' : variante === 'hoch' ? 'kachel' : variante === 'akzent' ? 'kachel-akzent' : variante === 'glas' ? 'kachel-glas' : '';
+  const kl = variante === 'akzent' ? 'kachel-akzent' : variante === 'frei' ? '' : 'kachel';
   return (
     <div className={cx(kl, className)} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 24, ...style }}>
       <T stil={gross ? 'zahl' : 'zahl-s'} max={8}>
