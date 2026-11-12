@@ -2,9 +2,7 @@ import React from 'react';
 import { Bild, BildDaten, Folie, T } from '../system';
 import type { LayoutDef } from '../typen';
 
-/* Reference group: covers and table of contents (akoya 01-06).
-   This file sets the bar for all other layout files: props typed, German
-   sample content that reads like a real deck, limits on every text field. */
+/* Covers and table of contents (akoya 01-06). */
 
 /* ------------------------------------------------------------ titel-links --- */
 interface Cover {

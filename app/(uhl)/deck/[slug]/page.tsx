@@ -8,7 +8,6 @@ export default async function DeckSeite({ params }: { params: Promise<{ slug: st
   const { slug } = await params;
   const deck = deckNach(slug);
   if (!deck) notFound();
-  const gesamt = String(deck.folien.length).padStart(2, '0');
   return (
     <main className="deck-ansicht">
       <title>{deck.titel}</title>
@@ -30,7 +29,7 @@ export default async function DeckSeite({ params }: { params: Promise<{ slug: st
         const K = l?.komponente;
         return (
           <div className="deck-folie" key={i}>
-            <FolienRahmen thema={f.thema ?? deck.thema} marke={deck.marke} seite={`${String(i + 1).padStart(2, '0')} / ${gesamt}`}>
+            <FolienRahmen thema={f.thema ?? deck.thema}>
               {K ? <K {...f.props} /> : <div className="deck-fehler">Unbekanntes Layout: {f.layout}</div>}
             </FolienRahmen>
           </div>

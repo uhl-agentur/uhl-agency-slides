@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { layoutNach, layouts } from '../../../../src/deck/registry';
+import { layoutNach } from '../../../../src/deck/registry';
 import { FolienRahmen } from '../../../../src/deck/system';
 import { probeProps } from '../../../../src/deck/probe';
 
@@ -11,11 +11,10 @@ export default async function EineVorlage({ params, searchParams }: { params: Pr
   const l = layoutNach(id);
   if (!l) notFound();
   const K = l.komponente;
-  const n = layouts.indexOf(l) + 1;
   return (
     <main>
       <style>{`html, body { margin: 0; background: #E3E3E3; } @page { size: 1920px 1080px; margin: 0; }`}</style>
-      <FolienRahmen {...{ thema: thema === 'dark' ? 'dark' : 'light', marke: 'Uhl Werbeagentur · Vorlagen', seite: String(n).padStart(2, '0') }}>
+      <FolienRahmen thema={thema === 'dark' ? 'dark' : 'light'}>
         <K {...(probe === 'max' || probe === 'min' ? probeProps(l, probe) : l.beispiel)} />
       </FolienRahmen>
     </main>

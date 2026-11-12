@@ -8,7 +8,6 @@
 .uhl-deck {
   /* --- palette (uhl-website v2) --- */
   --lime: oklch(86% 0.196 128.1); /* #ABE847, the one signal per slide */
-  --lime-blass: oklch(93.8% 0.09 128.1);
   --oliv: oklch(44% 0.074 128.1);
   --wald: oklch(17.8% 0 0); /* #111 */
   --tanne: oklch(23% 0 0);
@@ -18,7 +17,6 @@
   --halm: oklch(82% 0 0);
   --salbei: oklch(90.67% 0 0);
   --papier: oklch(97.9% 0 0); /* #F8F8F8 */
-  --weiss: oklch(100% 0 0);
   --lime-dunkel: oklch(74% 0.17 128.1); /* box on a lime card: one step darker green (F2e) */
 
   /* --- type: Funnel Display = voice, Funnel Sans = everything that runs --- */
@@ -30,10 +28,12 @@
   --s2: 24px;
   --s3: 48px;
   --s4: 96px;
-  --rand: 96px; /* left / right margin */
-  --chrome: 56px; /* distance of label, logo, footer from the edge */
-  --oben: 168px; /* content starts below the label row */
-  --unten: 168px; /* no footer (F2): bottom margin = top margin, every slide frames its content evenly (F3) */
+  /* one frame on all four sides (F3e "symetrisches rand padding oben und seiten und unten"):
+     logo and label sit 96 from the top like the sides, content ends 96 above the bottom edge */
+  --rand: 96px; /* margin left, right, top (chrome row) and bottom (content) */
+  --chrome: 96px; /* top of the label / logo row */
+  --oben: 192px; /* content starts below the chrome row: 96 + 48 logo + 48 */
+  --unten: 96px; /* no footer (F2): content runs to the frame like the sides */
   --gap: 32px; /* gap in image grids and tiles */
   --r: 8px; /* hard radius ceiling */
   --r-sm: 4px;
@@ -48,7 +48,7 @@
 .uhl-deck .thema-light {
   --flaeche: var(--papier);   /* slide ground */
   --hoch: var(--salbei);      /* cards, tags, picture frames, chart panels */
-  --hoch-2: var(--halm);      /* second level on a card (icon box, tick tile, badge): one step darker than the card (F2e) */
+  --hoch-2: var(--halm);      /* second level on a card (icon box, tick tile, tag): one step darker than the card (F2e) */
   --text: var(--wald);
   --text-2: var(--moos);
   --linie: var(--halm);       /* hairlines in tables only */
@@ -122,23 +122,19 @@
 }
 
 /* --------------------------------------------------------------- chrome --- */
-.uhl-deck .chrome-label,
-.uhl-deck .chrome-marke,
-.uhl-deck .chrome-seite {
+.uhl-deck .chrome-label {
   position: absolute;
   z-index: 5;
   font: 500 18px/1.35 var(--f-text);
   letter-spacing: 0.01em;
   color: var(--text-2);
 }
-.uhl-deck .chrome-label { top: var(--chrome); left: var(--rand); color: var(--text); }
-.uhl-deck .chrome-marke { bottom: var(--chrome); left: var(--rand); }
-.uhl-deck .chrome-seite { bottom: var(--chrome); right: var(--rand); font-variant-numeric: tabular-nums; }
+.uhl-deck .chrome-label { top: var(--chrome); left: var(--rand); line-height: 48px; color: var(--text); } /* centred on the 48 px logo */
 .uhl-deck .chrome-logo {
   /* the uhl block mark itself, no tile (feedback F1: "auf weiß das logo schwarz ohne box") */
   position: absolute;
   z-index: 5;
-  top: calc(var(--chrome) - 8px);
+  top: var(--chrome);
   right: var(--rand);
   width: 48px;
   height: 48px;
@@ -216,8 +212,6 @@
   max-width: 18em;
 }
 .uhl-deck .leise { color: var(--text-2); }
-.uhl-deck .akzent-text { color: var(--akzent); }
-.uhl-deck .thema-light .akzent-text { color: var(--oliv); }
 .uhl-deck mark {
   /* lime band trimmed at the top so it never covers the descenders of the line above;
      dark text on lime in both themes */
@@ -258,12 +252,11 @@
   background: var(--hoch);
   color: var(--text);
 }
-.uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas) :is(.liste-haken, .ikon, .tag) { background: var(--hoch-2); }
+.uhl-deck .kachel :is(.liste-haken, .ikon, .tag) { background: var(--hoch-2); }
 .uhl-deck .liste-haken > svg { width: 0.8em; height: 0.8em; }
 .uhl-deck .liste-nummer { counter-reset: n; }
 /* row hairlines: never above the first nor below the last row (F2 "beim allerobersten und alleruntersten weglassen") */
 .uhl-deck .linie-unten:last-child { border-bottom: 0; }
-.uhl-deck .linie-oben:first-child { border-top: 0; padding-top: 0; }
 .uhl-deck .liste-nummer > li { counter-increment: n; display: flex; gap: 0.8em; }
 .uhl-deck .liste-nummer > li::before {
   content: counter(n, decimal-leading-zero);
@@ -273,9 +266,7 @@
 }
 
 /* hairline rows (portfolio look) */
-.uhl-deck .linie-oben { border-top: 1px solid var(--linie); padding-top: var(--s2); }
 .uhl-deck .linie-unten { border-bottom: 1px solid var(--linie); }
-.uhl-deck .strich { width: 48px; height: 2px; background: var(--text); }
 
 /* --------------------------------------------------------------- images --- */
 .uhl-deck .bild {
@@ -317,12 +308,8 @@
 .uhl-deck .schleier-voll::after { background: oklch(var(--schleier) / 0.7); }
 
 /* ---------------------------------------------------------------- tiles --- */
-/* One card surface per theme. kachel-dunkel and kachel-glas are kept as aliases
-   for old markup; they look exactly like kachel (feedback F1: no black cards on
-   white, no glass, no outlines). */
-.uhl-deck .kachel,
-.uhl-deck .kachel-dunkel,
-.uhl-deck .kachel-glas {
+/* One card surface per theme: grey, never black on white, no glass, no outline (F1). */
+.uhl-deck .kachel {
   border-radius: var(--r);
   background: var(--hoch);
   color: var(--text);
@@ -375,7 +362,7 @@
    card is trimmed to its cap height, the last to its baseline, so the half-leading of big numbers
    no longer adds hidden space and the visible inset equals the padding on all four sides.
    .trim does the same for a single text element (price on a bar). */
-.uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas, .kachel-akzent) > :first-child { text-box: trim-start cap alphabetic; }
-.uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas, .kachel-akzent) > :last-child { text-box: trim-end cap alphabetic; }
-.uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas, .kachel-akzent) > :only-child,
+.uhl-deck :is(.kachel, .kachel-akzent) > :first-child { text-box: trim-start cap alphabetic; }
+.uhl-deck :is(.kachel, .kachel-akzent) > :last-child { text-box: trim-end cap alphabetic; }
+.uhl-deck :is(.kachel, .kachel-akzent) > :only-child,
 .uhl-deck .trim { text-box: trim-both cap alphabetic; }

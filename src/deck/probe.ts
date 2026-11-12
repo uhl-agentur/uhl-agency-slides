@@ -41,7 +41,7 @@ function wandle(v: unknown, pfad: string, def: Pick<LayoutDef, 'limits' | 'anzah
     const feld = pfad.replace(/\[\d+\]/g, '[]');
     const spanne = pfad.includes('.') || pfad.includes('[') ? undefined : def.anzahl?.[feld];
     let liste = v;
-    if (spanne) {
+    if (spanne && v.length) {
       const ziel = probe === 'max' ? spanne[1] : spanne[0];
       liste = Array.from({ length: ziel }, (_, i) => v[i % v.length]);
     }

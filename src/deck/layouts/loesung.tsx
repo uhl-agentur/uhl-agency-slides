@@ -6,13 +6,13 @@ import type { LayoutDef } from '../typen';
 /* Solution and work showcase (akoya 18-28): solution statements with text and
    pictures, feature cards with icons, and picture grids from bento to a
    full-bleed masonry. Scattered compositions use absolute slide coordinates
-   (1920 x 1080) and keep clear of the chrome band (168 top, 152 bottom). */
+   (1920 x 1080) and stay inside the slide frame (--oben / --unten / --rand, F3e). */
 
 /** Picture or grey frame named after its slot. */
 const slot = (bilder: BildDaten[] | undefined, i: number, name = 'Bild') => ({ bild: bilder?.[i], platzhalter: `${name} ${i + 1}` });
 
-/** Picture grids leave the chrome band free but use more height than text slides. */
-const galerie: React.CSSProperties = { position: 'absolute', top: 128, bottom: 128, left: 'var(--rand)', right: 'var(--rand)', display: 'grid', gap: 'var(--gap)' };
+/** Picture grids sit in the same frame as every other slide (F3 uniform padding). */
+const galerie: React.CSSProperties = { position: 'absolute', top: 'var(--oben)', bottom: 'var(--unten)', left: 'var(--rand)', right: 'var(--rand)', display: 'grid', gap: 'var(--gap)' };
 
 /* --------------------------------------------------------- loesung-text --- */
 interface LoesungText {
@@ -210,7 +210,7 @@ interface Karten4 {
 
 const Karten4L: React.FC<Karten4> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
       <T stil="aussage" as="h2" max={56}>
         {p.titel}
       </T>

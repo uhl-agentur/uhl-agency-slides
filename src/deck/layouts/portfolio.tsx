@@ -5,8 +5,7 @@ import type { LayoutDef } from '../typen';
 /* Portfolio group: the quiet compositions of the photographer template
    (referenz/portfolio) that Akoya does not cover. Small numbers, centred
    headings, lots of air; structure comes from spacing, not hairlines
-   (feedback F1: "weniger trennlinien"), hairlines only between real list rows. Same chrome as every other layout; the
-   template's centred "Logo here" is dropped. */
+   (feedback F1: "weniger trennlinien"), hairlines only between real list rows. Same chrome as every other layout. */
 
 const nr = (i: number) => String(i + 1).padStart(2, '0');
 const mitte: React.CSSProperties = { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' };
@@ -418,7 +417,9 @@ const TestimonialFolie: React.FC<Testimonial> = (p) => (
       <T stil="zitat" as="blockquote" max={130}>
         {p.zitat}
       </T>
-      <p className="t-meta leise">{[p.name, [p.rolle, p.firma].filter(Boolean).join(', ')].filter(Boolean).join(' · ')}</p>
+      <T stil="meta" leise max={100}>
+        {[p.name, [p.rolle, p.firma].filter(Boolean).join(', ')].filter(Boolean).join(' · ')}
+      </T>
     </div>
   </Folie>
 );

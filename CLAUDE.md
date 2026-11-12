@@ -27,7 +27,7 @@ Next.js app for the agency's presentations. Two generations live here:
 
 ## Design rules (why: same look as uhl-website, readable on a projector)
 
-- Canvas fixed 1920 x 1080 px. Margin `--rand` 96, chrome 56 from the edge, content between `--oben` 168 and `--unten` 168: same margin top and bottom (F3 "padding oben unten … einheitlich").
+- Canvas fixed 1920 x 1080 px. **One frame of 96 on all four sides**: label and logo 96 from the top (`--chrome`), sides `--rand` 96, content ends `--unten` 96 above the bottom; content starts at `--oben` 192 below the chrome row. Why: user F3/F3e "symetrisches rand padding oben und seiten und unten".
 - Fonts from uhl-website: **Funnel Display** for voice (display, aussage, titel, zahl, karte, zitat), **Funnel Sans** for running text (lead, body, meta).
 - Type only via `<T stil=…>` / `t-*` classes; strong weight in running text via `t-stark`. Never a raw font size, colour or radius in a layout. Smallest text 18 px (`meta`).
 - Line length is capped by `max-width` in `em` on each style: display ~18 chars/line, aussage ~30, titel ~36, lead ~46, body ~62. Headlines `text-wrap: balance`, running text `pretty`. Line height: headings 0.98–1.15, lead 1.4, body 1.5.
@@ -46,7 +46,7 @@ Next.js app for the agency's presentations. Two generations live here:
 - Spacing doubles: 12 / 24 / 48 / 96 (`--s1`…`--s4`), grid gap 32.
 - **Even card insets**: a card has one padding on all four sides (`--s3`, small cards `--s2`); its first text line is trimmed to cap height and its last to the baseline (`text-box` in deck.css), so the visible inset equals the padding. Chart panels too. Why: user F3 "padding in cards sollte auch einheitlich sein".
 - **Bars**: `--balken` is the box level on a chart panel: light halm #C4C4C4 with dark value, dark moos with light value. Why: user F3 "c4c4c4", "dunkler hintergrund wird hell auf heller".
-- **Vertical centring**: split columns and table rows centre their content vertically (`alignItems: center`), no baseline rows, no title-top/source-bottom columns. Stats in a row sit at one fixed gap (content-sized, not equal columns). Why: user F3b/F3c/F3d.
+- **Vertical centring**: split columns, table rows and title + block stacks centre their content vertically (`alignItems` / `justifyContent: center`), no baseline rows, no title-top/source-bottom columns. Stats in a row sit at one fixed gap (content-sized, not equal columns). Why: user F3b/F3c/F3d.
 - **No filler meta** like "Augsburg · 2026": every line on a slide says something. Why: user F3b "sowas weg, nix aussagen".
 - **Typesetting** (F3 "Hurenkind und Schusterjunge und weiteres"): slides have no page or column breaks inside a text, so the print widow/orphan cannot occur; the slide equivalents are handled: `satz()` binds number + unit, abbreviations, dashes and the last two words (no single-word last line); running text hyphenates only words of 10+ letters (`hyphenate-limit-chars`), headlines never; a too-long word breaks instead of overflowing. `npm run smoke` proves it on stress content.
 - Lots of air: one idea per slide, at most one headline + one supporting block.

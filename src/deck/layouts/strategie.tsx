@@ -13,9 +13,9 @@ import { ArrowRight, ArrowUp, MoveRight, TrendingDown, TrendingUp } from 'lucide
 
 /* ================================================================ helpers === */
 
-/** Traffic light mark. The label text always carries the meaning, the mark only repeats it:
-    Fill only, no outline: gut = accent, mittel = hatched (F2b "die gestrichelten Varianten weiterhin nutzen"),
-    schlecht = text colour. Distinct in both themes; the label carries the meaning in greyscale. */
+/** Traffic light mark: gut = accent, mittel = hatched with outline (F2b "die gestrichelten Varianten
+    weiterhin nutzen", F2d "die gestrichelten müssen auch outlines bekommen"), schlecht = text colour.
+    The label text carries the meaning, also in greyscale; the mark only repeats it. */
 type Stufe = 'gut' | 'mittel' | 'schlecht';
 
 function AmpelMarke({ stufe, text }: { stufe: Stufe; text: string }) {
@@ -84,7 +84,7 @@ interface Kernsatz {
 
 const KernsatzFolie: React.FC<Kernsatz> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
       <div className="stapel-l">
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s2)' }}>
           <Bild bild={p.logo} platzhalter="Logo" unterschrift={false} style={{ width: 120, height: 56 }} />
@@ -131,8 +131,6 @@ interface Marktbild {
   nachfrageText?: string;
   text: string;
   fazit: string;
-  /** not rendered any more (feedback F1 "zu viel inhalt"): the SWOT gets its own slide, strategie-swot */
-  swot?: Swot;
 }
 
 const MarktbildFolie: React.FC<Marktbild> = (p) => (
@@ -176,7 +174,7 @@ interface SwotVoll extends Swot {
 
 const SwotFolie: React.FC<SwotVoll> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
       <T stil="titel" as="h2" max={44}>
         {p.titel}
       </T>
@@ -210,7 +208,7 @@ const WettbewerbFolie: React.FC<Wettbewerb> = (p) => (
         </T>
         <ul>
           {p.wettbewerber.map((w, i) => (
-            <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '5fr 6fr', gap: 'var(--gap)', padding: '22px 0' }}>
+            <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '5fr 6fr', gap: 'var(--gap)', alignItems: 'center', padding: 'var(--s2) 0' }}>
               <div className="stapel-s">
                 <T stil="karte" max={28}>
                   {w.name}
@@ -361,12 +359,12 @@ const PersonasFolie: React.FC<Personas> = (p) => {
   const spalten = `200px repeat(${p.personas.length}, 1fr)`;
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <T stil="titel" as="h2" max={44}>
           {p.titel}
         </T>
         <div>
-          <div className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', paddingBottom: 'var(--s2)' }}>
+          <div className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', alignItems: 'center', paddingBottom: 'var(--s2)' }}>
             <span />
             {p.personas.map((x, i) => (
               <div key={i} className="stapel-s">
@@ -388,8 +386,8 @@ const PersonasFolie: React.FC<Personas> = (p) => {
             ))}
           </div>
           {personaZeilen.map((z) => (
-            <div key={z.key} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', padding: '16px 0' }}>
-              <span className="t-meta leise" style={{ paddingTop: 4 }}>
+            <div key={z.key} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', alignItems: 'center', padding: 'var(--s2) 0' }}>
+              <span className="t-meta leise">
                 {z.name}
               </span>
               {p.personas.map((x, i) => (
@@ -429,7 +427,7 @@ const JourneyFolie: React.FC<Journey> = (p) => {
   );
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <div className="stapel">
           <T stil="titel" as="h2" max={44}>
             {p.titel}
@@ -468,17 +466,11 @@ interface Unternehmen {
   usp: string;
   kernbotschaft: string;
   saeulen: { titel: string; text: string }[];
-  /** not rendered (feedback F1 "zu überladen"): trust numbers belong on beweis-kennzahlen3 */
-  trust?: KennzahlDaten[];
-  /** not rendered, see trust */
-  richtung?: string;
-  /** not rendered, see trust */
-  mood?: BildDaten[];
 }
 
 const UnternehmenFolie: React.FC<Unternehmen> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
       <div className="stapel" style={{ maxWidth: 1240 }}>
         <T stil="aussage" as="h2" max={56}>
           {p.kernbotschaft}
@@ -516,19 +508,19 @@ const KanalmixFolie: React.FC<Kanalmix> = (p) => {
   const spalten = '280px 200px 1fr 300px';
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <T stil="titel" as="h2" max={44}>
           {p.titel}
         </T>
         <div>
-          <div className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', paddingBottom: 'var(--s1)' }}>
+          <div className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', alignItems: 'center', paddingBottom: 'var(--s1)' }}>
             <span className="t-meta leise">Bereich</span>
             <span className="t-meta leise">Ampel</span>
             <span className="t-meta leise">Ist-Zustand</span>
             <span className="t-meta leise">Baseline</span>
           </div>
           {p.bereiche.map((b, i) => (
-            <div key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', alignItems: 'center', padding: '18px 0' }}>
+            <div key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--gap)', alignItems: 'center', padding: 'var(--s2) 0' }}>
               <T stil="karte" max={18}>
                 {b.name}
               </T>
@@ -561,13 +553,13 @@ const KpiFolie: React.FC<Kpi> = (p) => {
   const spalten = '280px 220px 1fr 200px 48px 200px';
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <div className="stapel-l">
           <T stil="titel" as="h2" max={44}>
             {p.titel}
           </T>
           <div>
-            <div className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--s2)', paddingBottom: 'var(--s1)' }}>
+            <div className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--s2)', alignItems: 'center', paddingBottom: 'var(--s1)' }}>
               <span className="t-meta leise">Bereich</span>
               <span className="t-meta leise">Ampel</span>
               <span className="t-meta leise">Kennzahl</span>
@@ -576,7 +568,7 @@ const KpiFolie: React.FC<Kpi> = (p) => {
               <span className="t-meta leise">Ziel</span>
             </div>
             {p.zeilen.map((z, i) => (
-              <div key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--s2)', alignItems: 'center', padding: '20px 0' }}>
+              <div key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: spalten, columnGap: 'var(--s2)', alignItems: 'center', padding: 'var(--s2) 0' }}>
                 <T stil="karte" max={18}>
                   {z.bereich}
                 </T>
@@ -633,7 +625,7 @@ const RoadmapFolie: React.FC<Roadmap> = (p) => {
   );
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <T stil="titel" as="h2" max={44}>
           {p.titel}
         </T>
@@ -893,7 +885,7 @@ interface Pakete {
 
 const PaketeFolie: React.FC<Pakete> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
       <T stil="titel" as="h2" max={44}>
         {p.titel}
       </T>
@@ -952,11 +944,11 @@ const OffeneFragenFolie: React.FC<OffeneFragen> = (p) => (
       </div>
       <ol style={{ alignSelf: 'center' }}>
         {p.fragen.map((f, i) => (
-          <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '56px 1fr 260px', gap: 'var(--s2)', alignItems: 'center', padding: '20px 0' }}>
+          <li key={i} className="linie-unten" style={{ display: 'grid', gridTemplateColumns: '56px 1fr 260px', gap: 'var(--s2)', alignItems: 'center', padding: 'var(--s2) 0' }}>
             <span className="t-meta leise" style={{ fontVariantNumeric: 'tabular-nums' }}>
               {nr(i)}
             </span>
-            <T stil="body" max={90}>
+            <T stil="body" max={70}>
               {f.frage}
             </T>
             <div className="stapel-s">
@@ -1284,7 +1276,7 @@ export const strategieLayouts: LayoutDef[] = [
     id: 'offene-fragen', name: 'Offene Fragen an den Kunden', gruppe: 'Ablauf', quelle: q,
     zweck: 'marketing-research-writer FEHLT-Marker und kundenfragen.md: offene Punkte mit Zuständigkeit.',
     komponente: OffeneFragenFolie, beispiel: offeneFragen,
-    limits: { label: 24, titel: 44, text: 140, 'fragen[].frage': 90, 'fragen[].wer': 28, 'fragen[].zu': 28 },
+    limits: { label: 24, titel: 44, text: 140, 'fragen[].frage': 70, 'fragen[].wer': 28, 'fragen[].zu': 28 },
     anzahl: { fragen: [2, 6] },
   },
 ];

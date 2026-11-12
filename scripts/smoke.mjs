@@ -37,7 +37,7 @@ function pruefe() {
     while (e.parentElement && getComputedStyle(e).display.startsWith('inline')) e = e.parentElement;
     return e;
   };
-  const kartenSel = '.kachel, .kachel-dunkel, .kachel-glas, .kachel-akzent';
+  const kartenSel = '.kachel, .kachel-akzent';
   // text blocks = elements that hold text directly
   const bloecke = [...folie.querySelectorAll('*')].filter(
     (e) => [...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && e.getClientRects().length && !e.closest('svg, .bild-leer, .chrome-label'),

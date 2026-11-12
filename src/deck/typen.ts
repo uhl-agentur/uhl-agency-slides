@@ -41,7 +41,7 @@ export interface LayoutDef<P = any> {
    * "karten[].text" (field of each item). Count excludes the ==highlight== marks.
    */
   limits: Record<string, number>;
-  /** maximum items per array field, e.g. { punkte: 4 } */
+  /** min and max items per top-level array field, e.g. { punkte: [0, 4] } */
   anzahl?: Record<string, [min: number, max: number]>;
 }
 
@@ -56,8 +56,6 @@ export interface FolieImDeck {
 export interface Deck {
   slug: string;
   titel: string;
-  /** bottom-left chrome, e.g. "Donauries · Marketingstrategie" */
-  marke: string;
   thema: 'light' | 'dark';
   folien: FolieImDeck[];
 }
@@ -72,8 +70,9 @@ export function pruefeLimits(props: Record<string, unknown>, def: Pick<LayoutDef
     }
   }
   for (const [feld, [min, max]] of Object.entries(def.anzahl ?? {})) {
-    const arr = props[feld];
-    if (Array.isArray(arr) && (arr.length < min || arr.length > max)) fehler.push(`${feld}: ${arr.length} Einträge, erlaubt ${min}–${max}`);
+    // a missing list counts as 0 items: with min > 0 the layout would crash on .map
+    const n = Array.isArray(props[feld]) ? (props[feld] as unknown[]).length : 0;
+    if (n < min || n > max) fehler.push(`${feld}: ${n} Einträge, erlaubt ${min}–${max}`);
   }
   return fehler;
 }

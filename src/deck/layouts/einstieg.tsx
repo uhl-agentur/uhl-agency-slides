@@ -154,7 +154,6 @@ interface ProblemText {
   titel: string;
   einleitung?: string;
   punkte?: string[];
-  folge?: string;
 }
 
 const ProblemSpalte: React.FC<ProblemText & { titelOben?: boolean }> = (p) => (
@@ -165,13 +164,10 @@ const ProblemSpalte: React.FC<ProblemText & { titelOben?: boolean }> = (p) => (
           {p.titel}
         </T>
       )}
-      <T stil="body" max={120}>
+      <T stil="body" max={60}>
         {p.einleitung}
       </T>
       <Liste punkte={p.punkte} stil="body" max={40} />
-      <T stil="body" leise max={110}>
-        {p.folge}
-      </T>
     </div>
   </div>
 );
@@ -253,7 +249,7 @@ const ProblemAussageFolie: React.FC<ProblemAussage> = (p) => (
     <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
       <div className="stapel-l">
         {p.saetze.map((s, i) => (
-          <T key={i} stil="titel" as={i === 0 ? 'h2' : 'p'} leise={i > 0} max={64}>
+          <T key={i} stil="titel" as={i === 0 ? 'h2' : 'p'} leise={i > 0} max={56}>
             {s}
           </T>
         ))}
@@ -326,8 +322,8 @@ const problemAussage: ProblemAussage = {
   saetze: ['Kunden suchen heute zuerst bei Google.', 'Wer dort fehlt, verliert Anfragen und Bewerber.'],
 };
 
-/* einleitung + list is the one supporting block; folge stays optional for old decks (feedback F1: no double paragraphs) */
-const problemLimits = { label: 24, titel: 60, einleitung: 60, 'punkte[]': 40, folge: 90 };
+/* einleitung + list is the one supporting block (feedback F1: no double paragraphs) */
+const problemLimits = { label: 24, titel: 60, einleitung: 60, 'punkte[]': 40 };
 
 export const einstiegLayouts: LayoutDef[] = [
   { id: 'einstieg-text', name: 'Einstieg, Text', gruppe: 'Einstieg', quelle: 'akoya-07', zweck: 'Positionierung in einem Satz plus kurzer Absatz, wer wir sind.', komponente: EinstiegTextFolie, beispiel: einstiegText, limits: { label: 24, titel: 64, text: 170 } },

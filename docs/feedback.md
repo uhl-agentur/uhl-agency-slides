@@ -62,22 +62,28 @@ Status: done (S3).
 > besser jetzt compact gleich und wir machen audit … und audit mit pstack bitte, ponytail und codereview. Dann smoketest das er alles handlen kann und sauberes zeilentrennen damit keine hurenkinder oder so enstehen also hier wirklich die typischen fehler die auftretten handlen können.Hurenkind und Schusterjunge und weiteres. ebenfalls noch schauen alle slides sollen padding oben unten links rechts einheitlich haben [Screenshot: preis-balken hell] und die grauen balken müssten nach unserem prinzip c4c4c4 haben?
 > [Screenshot: preis-balken dunkel] selbe auch für die hier müsste auch dunkler hintergrund wird hell auf heller nach unserem two tone prinzip [Screenshot: Kennzahl-Kacheln] padding in cards sollte auch einheitlich sein.
 
-Status: in progress (S4).
+Status: done (S4).
 
 ## F3b — 2026-11-12 (verbatim)
 
 > "Augsburg · 2026" sowas weg, nix aussagen. [Screenshot] inhalte vertical centeren
 
-Status: in progress (S4).
+Status: done (S4).
 
 ## F3c — 2026-11-12 (verbatim)
 
 > [Screenshot: offene-fragen hell + dunkel] auch die zwei vertical centeren
 
-Status: in progress (S4).
+Status: done (S4).
 
 ## F3d — 2026-11-12 (verbatim)
 
 > [Screenshot: drei Kennzahlen nebeneinander, +180 % / Nr. 1 / 38 €] gleiche gap zwischen den stats.
 
-Status: in progress (S4).
+Status: done (S4).
+
+## F3e — 2026-11-12 (verbatim)
+
+> [Screenshot: strategie-journey Zeilen] vertical centern bitte. [Screenshot: strategie-kanalmix] hier auch. und was ist aus den punkten geworden von davor: [F3 zitiert] also audits durch aber die anderen änderungen nicht bis jetzt? [Screenshot: Logo oben rechts] wir haben ja auch noch kein symetrisches rand padding? oben und seiten und unten.
+
+Status: done (S4).

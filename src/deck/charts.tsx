@@ -5,7 +5,7 @@ import { T } from './system';
 
 /* ============================================================================
    Charts of the deck system: plain HTML/SVG, no chart library. Colours only
-   via theme roles (--text, --hoch, --linie, --akzent), type only via t-*
+   via theme roles from deck.css, type only via t-*
    classes (smallest 18 px), radius never above --r. Lime marks the one key
    value per chart (a bar, the current milestone).
    ============================================================================ */
@@ -26,9 +26,8 @@ export interface BalkenDaten {
 }
 
 /**
- * Vertical bars with a value tag on each bar and label + sublabel below.
- * Fills its parent (give it a height). Bar colour is the --balken role of the
- * slide theme (deck.css), the highlighted bar is lime.
+ * Vertical bars, value as plain text in each bar's top corner, label + sublabel below.
+ * Fills its parent (give it a height). Bar colour is the --balken role, the key bar is lime.
  */
 export function Balken({
   balken,
@@ -43,7 +42,6 @@ export function Balken({
   style?: React.CSSProperties;
 }) {
   const groesster = Math.max(...balken.map((b) => b.wert), 1);
-  const farbe = 'var(--balken)'; // role from deck.css, follows a forced Folie theme too
   return (
     /* grid: bars in row 1, labels in row 2; the label row takes the height of the tallest label,
        so every bar keeps the same baseline whatever the label length */
@@ -59,8 +57,8 @@ export function Balken({
               height: `${Math.max(12, (b.wert / groesster) * 100)}%`,
               minHeight: 88,
               borderRadius: 'var(--r)',
-              background: b.hervorheben ? 'var(--akzent)' : farbe,
-              padding: 'var(--s2)', // same inset on every side as a small card
+              background: b.hervorheben ? 'var(--akzent)' : 'var(--balken)',
+              padding: 'var(--s2)',
             }}
           >
             <T

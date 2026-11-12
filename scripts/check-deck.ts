@@ -33,6 +33,10 @@ if (ziel === '--vorlagen') {
       const l = layoutNach(f.layout);
       if (!l) return funde.push(`${ort}: unbekanntes Layout`);
       for (const x of pruefeLimits(f.props, l)) funde.push(`${ort}: ${x}`);
+      // a typo in a field name renders an empty slide; fields the sample and the limits never
+      // name are probably typos (warning only: optional fields like bild may be missing from both)
+      const bekannt = new Set([...Object.keys(l.beispiel), ...Object.keys(l.limits).map((k) => k.split(/[.[]/)[0]), ...Object.keys(l.anzahl ?? {})]);
+      for (const k of Object.keys(f.props)) if (!bekannt.has(k)) console.log(`  ? ${ort}: Feld "${k}" kennt das Layout vermutlich nicht (Tippfehler?)`);
       if (JSON.stringify(f.props).includes('FEHLT:')) funde.push(`${ort}: enthält noch FEHLT-Marker`);
     });
     console.log(`${d.slug}: ${d.folien.length} Folien geprüft`);

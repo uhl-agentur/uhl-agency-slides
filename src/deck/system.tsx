@@ -15,15 +15,11 @@ export type Thema = 'light' | 'dark';
 
 export interface FolienKontextWert {
   thema: Thema;
-  /** bottom left: client or deck name */
-  marke?: string;
-  /** bottom right: "03 / 24" */
-  seite?: string;
 }
 
 export const FolienKontext = createContext<FolienKontextWert>({ thema: 'light' });
 
-/** Sets theme, marke and page number for the slide(s) inside (usable from server pages). */
+/** Sets the theme for the slide(s) inside (usable from server pages). */
 export function FolienRahmen({ children, ...wert }: FolienKontextWert & { children: React.ReactNode }) {
   return <FolienKontext.Provider value={wert}>{children}</FolienKontext.Provider>;
 }
@@ -34,7 +30,6 @@ export function FolienRahmen({ children, ...wert }: FolienKontextWert & { childr
 export function Folie({
   label,
   logo = true,
-  aufBild = false,
   chrome = true,
   thema: themaOverride,
   children,
@@ -42,9 +37,7 @@ export function Folie({
   /** top left: chapter of the deck ("Ausgangslage"). */
   label?: string;
   logo?: boolean;
-  /** chrome in light colours because the slide is a full-bleed picture */
-  aufBild?: boolean;
-  /** false: no label, marke, page number (cover, full-bleed) */
+  /** false: no chapter label (cover, full-bleed) */
   chrome?: boolean;
   /** force a theme (rare: a picture slide inside a light deck) */
   thema?: Thema;
@@ -53,11 +46,11 @@ export function Folie({
   const k = useContext(FolienKontext);
   const thema = themaOverride ?? k.thema;
   return (
-    <section className={cx('folie', `thema-${thema}`, aufBild && 'auf-bild')}>
+    <section className={cx('folie', `thema-${thema}`)}>
       {children}
       {chrome && label && <div className="chrome-label">{label}</div>}
       {logo && <UhlZeichen />}
-      {/* no footer: marke and page number are left out on purpose (F2 "Fußzeile … entfernen, Seitenanzahl irrelevant") */}
+      {/* no footer, no page number (F2 "Fußzeile … entfernen, Seitenanzahl irrelevant") */}
     </section>
   );
 }
@@ -97,9 +90,11 @@ export function T({
   leise?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  children?: string;
+  /** a number from deck data is shown as text instead of crashing the slide */
+  children?: string | number;
 }) {
-  if (!children) return null;
+  if (children === undefined || children === null || children === '') return null;
+  children = String(children);
   const zuLang = max !== undefined && sichtbareLaenge(children) > max;
   const fehlt = children.startsWith('FEHLT:');
   const El = Tag as React.ElementType;
@@ -213,23 +208,25 @@ export function Kennzahl({
   k,
   variante = 'hoch',
   gross = true,
+  max,
   className,
   style,
 }: {
   k: KennzahlDaten;
-  /** dunkel and glas are old names, they render like hoch (no black cards, no glass) */
-  variante?: 'dunkel' | 'hoch' | 'akzent' | 'glas' | 'frei';
+  variante?: 'hoch' | 'akzent' | 'frei';
   gross?: boolean;
+  /** character limits of the layout, so the outline matches check-deck */
+  max?: { wert?: number; text?: number };
   className?: string;
   style?: React.CSSProperties;
 }) {
   const kl = variante === 'akzent' ? 'kachel-akzent' : variante === 'frei' ? '' : 'kachel';
   return (
-    <div className={cx(kl, className)} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 24, ...style }}>
-      <T stil={gross ? 'zahl' : 'zahl-s'} max={8}>
+    <div className={cx(kl, className)} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 'var(--s2)', ...style }}>
+      <T stil={gross ? 'zahl' : 'zahl-s'} max={max?.wert ?? 8}>
         {k.wert}
       </T>
-      <T stil="meta" leise max={60}>
+      <T stil="meta" leise max={max?.text ?? 60}>
         {k.text}
       </T>
     </div>

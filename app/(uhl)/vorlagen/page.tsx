@@ -4,7 +4,6 @@ import { pruefeLimits } from '../../../src/deck/typen';
 
 // Gallery: every layout in light and dark, filled with its sample content.
 export default function Vorlagen() {
-  let n = 0;
   return (
     <main className="galerie">
       <style>{`
@@ -43,10 +42,9 @@ export default function Vorlagen() {
               {fehler.length > 0 && <span className="fehler">{fehler.join(' · ')}</span>}
             </div>
             {(['light', 'dark'] as const).map((thema) => {
-              n += 1;
               return (
                 <div className="mini" key={thema}>
-                  <FolienRahmen {...{ thema, marke: 'Uhl Werbeagentur · Vorlagen', seite: String(n).padStart(2, '0') }}>
+                  <FolienRahmen thema={thema}>
                     <K {...l.beispiel} />
                   </FolienRahmen>
                 </div>

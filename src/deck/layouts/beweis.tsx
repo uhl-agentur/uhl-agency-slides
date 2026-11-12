@@ -26,7 +26,7 @@ interface KennzahlenText extends Omit<Kennzahlen, 'aussage' | 'bild'> {
 const Kachelreihe: React.FC<{ k: KennzahlDaten[]; schluessel?: number }> = ({ k, schluessel }) => (
   <div style={{ display: 'grid', gridTemplateColumns: `repeat(${k.length}, 440px)`, gap: 'var(--gap)', justifyContent: 'center' }}>
     {k.map((z, i) => (
-      <Kennzahl key={i} k={z} variante={i === schluessel ? 'akzent' : 'hoch'} style={{ height: 320, textAlign: 'center', alignItems: 'center' }} />
+      <Kennzahl key={i} k={z} max={{ wert: 6, text: 44 }} variante={i === schluessel ? 'akzent' : 'hoch'} style={{ height: 320, textAlign: 'center', alignItems: 'center' }} />
     ))}
   </div>
 );
@@ -54,8 +54,6 @@ const Kennzahlen3: React.FC<Kennzahlen> = (p) => (
   </Folie>
 );
 
-/* Nine tiles need the full width (a 50/50 split leaves no room for the numbers):
-   headline | text as one 50/50 row at the top, the 3 x 3 grid fills the rest. */
 const KennzahlenText6: React.FC<KennzahlenText> = (p) => (
   <Folie label={p.label}>
     {/* F2: six figures are the realistic maximum next to a text; 50/50 like every text | media split */}
@@ -70,7 +68,7 @@ const KennzahlenText6: React.FC<KennzahlenText> = (p) => (
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 'var(--gap)' }}>
         {p.kennzahlen.map((z, i) => (
-          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ minHeight: 200 }} />
+          <Kennzahl key={i} k={z} gross={false} max={{ wert: 5, text: 32 }} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ minHeight: 200 }} />
         ))}
       </div>
     </div>
@@ -85,7 +83,7 @@ const Kennzahlen6: React.FC<Kennzahlen> = (p) => (
       </T>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 480px)', gap: 'var(--gap)' }}>
         {p.kennzahlen.map((z, i) => (
-          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ minHeight: 212, textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} />
+          <Kennzahl key={i} k={z} gross={false} max={{ wert: 5, text: 32 }} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ minHeight: 212, textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} />
         ))}
       </div>
     </div>
@@ -271,7 +269,7 @@ const AblaufZeitleiste: React.FC<Ablauf> = (p) => (
 
 const AblaufTitelZeitleiste: React.FC<Ablauf> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
       <T stil="titel" as="h2" max={60}>
         {p.titel}
       </T>
@@ -283,7 +281,7 @@ const AblaufTitelZeitleiste: React.FC<Ablauf> = (p) => (
 
 const AblaufZeitleisteAussage: React.FC<Ablauf> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
       <Zeitleiste punkte={p.punkte} erreicht={p.erreicht} max={{ ...zeitleisteMax, text: 100 }} style={{ marginTop: 'var(--s3)' }} />
       <T stil="aussage" as="h2" max={60} style={{ textAlign: 'center', marginInline: 'auto' }}>
         {p.titel}
@@ -328,9 +326,14 @@ const KontaktAbschluss: React.FC<Kontakt> = (p) => (
       <T stil="aussage" as="h2" max={60}>
         {p.aussage}
       </T>
-      <div className="t-body leise">
-        {[p.mail, ...(p.zeilen ?? [])].map((z, i) => (
-          <p key={i}>{z}</p>
+      <div>
+        <T stil="body" leise max={34}>
+          {p.mail}
+        </T>
+        {(p.zeilen ?? []).map((z, i) => (
+          <T key={i} stil="body" leise max={40}>
+            {z}
+          </T>
         ))}
       </div>
     </div>
@@ -345,12 +348,14 @@ const KontaktBild: React.FC<Kontakt> = (p) => (
           <T stil="titel" as="h2" max={60}>
             {p.aussage}
           </T>
-          <div className="t-body">
-            <p>{p.mail}</p>
+          <div>
+            <T stil="body" max={34}>
+              {p.mail}
+            </T>
             {(p.zeilen ?? []).map((z, i) => (
-              <p key={i} className="leise">
+              <T key={i} stil="body" leise max={40}>
                 {z}
-              </p>
+              </T>
             ))}
           </div>
         </div>

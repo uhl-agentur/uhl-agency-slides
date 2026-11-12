@@ -4,7 +4,6 @@ import type { Deck } from '../src/deck/typen';
 export const beispielDeck: Deck = {
   slug: 'beispiel',
   titel: 'Beispiel-Deck',
-  marke: 'Uhl Werbeagentur · Beispiel',
   thema: 'light',
   folien: [
     {
