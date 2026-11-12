@@ -54,6 +54,8 @@ export interface FolieImDeck {
 export interface Deck {
   slug: string;
   titel: string;
+  /** kind of deck; decks of the same kind are compared for variation (src/deck/abwechslung.ts) */
+  art?: 'pitch' | 'strategie' | 'sonstige';
   thema: 'light' | 'dark';
   folien: FolieImDeck[];
 }

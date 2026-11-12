@@ -1,9 +1,11 @@
 // Check a deck before export: every family and variant exists, every text within its character
 // limit, array counts within range, every picture slot filled with a real picture (F4: grey
-// placeholder frames never ship). Exit 1 on any finding.
+// placeholder frames never ship). Exit 1 on any finding. Variation warnings (! lines,
+// src/deck/abwechslung.ts) and unknown fields (? lines) never fail the check.
 // usage: npx tsx --tsconfig scripts/tsconfig.check.json scripts/check-deck.ts <slug|--alle|--vorlagen>
 import { decks, deckNach } from '../decks';
 import { familien, layoutNach, layouts, varianten } from '../src/deck/registry';
+import { pruefeAbwechslung } from '../src/deck/abwechslung';
 import { bilderNoetig, echteBilder, pfadVon, pruefeLimits } from '../src/deck/typen';
 
 const ziel = process.argv[2];
@@ -53,6 +55,8 @@ if (ziel === '--vorlagen') {
       for (const k of Object.keys(f.props)) if (!bekannt.has(k)) console.log(`  ? ${ort}: Feld "${k}" kennt das Layout vermutlich nicht (Tippfehler?)`);
       if (JSON.stringify(f.props).includes('FEHLT:')) funde.push(`${ort}: enthält noch FEHLT-Marker`);
     });
+    // variation rules (F4): warnings only, they never block the export
+    for (const w of pruefeAbwechslung(d, decks)) console.log(`  ! ${d.slug}: ${w}`);
     console.log(`${d.slug}: ${d.folien.length} Folien geprüft`);
   }
 }

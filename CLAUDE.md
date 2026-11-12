@@ -22,6 +22,7 @@ Next.js app for the agency's presentations. Two generations live here:
 | Deck check (limits, unknown family/variant, empty picture slots) | `npm run check:deck -- <slug>` |
 | Smoke test: every layout with stress content (max/min), overflow, overlap, widows, card insets | `npm run smoke` (dev server on 3417); stress data `src/deck/probe.ts`, `/vorlagen/<familie>/<variante>?probe=max` |
 | Typesetting selfcheck (`satz()` in `src/deck/cx.ts`) | `npm run check:satz` |
+| Variation rules (warnings in `check:deck`, `src/deck/abwechslung.ts`) + picture slot rule, selfcheck | `npm run check:abwechslung` |
 | PDF | `node scripts/export-pdf.mjs --route /deck/<slug> --output <file>.pdf` |
 
 ## Design rules (why: same look as uhl-website, readable on a projector)
@@ -32,6 +33,7 @@ Next.js app for the agency's presentations. Two generations live here:
 - Line length is capped by `max-width` in `em` on each style: display ~18 chars/line, aussage ~30, titel ~36, lead ~46, body ~62. Headlines `text-wrap: balance`, running text `pretty`. Line height: headings 0.98–1.15, lead 1.4, body 1.5.
 - **Families with variants** (F4): a family is one message, its variants are compositions of it. Deck slides name `{ layout: '<familie>', variante }`. Variants that differ by a parameter share one component (side, grid, count); really different compositions stay separate functions. Every variant declares `art` (text/bild/zahl/diagramm/liste) and `bilder` (picture slots). Why: user F4 "in einer Slide mit mehreren Varianten darstellen", "Code zusammenlegen".
 - **No empty picture slots in a deck**: `check-deck` fails when a slide has fewer real pictures (`src`) than its variant's `bilder`; without pictures pick a variant of the same family that needs none. Why: user F4 "nicht setzt für die Slots".
+- **Vary decks, warnings only** (`src/deck/abwechslung.ts`, printed by `check-deck` as `!`): no variant twice in a row, a family at most twice in a row, a variant at most twice per deck, at most three text slides in a row, and against the newest other deck of the same `art` (pitch/strategie) not more than half of the shared families on the same variant. Kapitel and single-variant families are exempt. Why: user F4 "bei mehreren Pitches immer unterschiedliche Layout-Darstellungen abwechseln", "Nur Warnungen".
 - **Character limits** live per field in each `LayoutDef.limits`; `<T max>` outlines overflow in red on screen. A deck must pass `check-deck` before PDF export.
 - Radius never above 8 px (`--r`), tags 4 px. No pills, no circles, except portraits of people (`Bild portrait`) and chart shapes.
 - **Colour only via theme roles** (`deck.css` top: `--flaeche`, `--hoch`, `--hoch-2`, `--text`, `--text-2`, `--linie`, `--akzent`, `--akzent-text`, `--akzent-text-2`, `--balken`, `--spur`, `--spur-fertig`, `--logo`). Every slide renders in light AND dark from the same markup; never force a theme in a layout. Contrast of every role pair is checked (webdesign-rules, AA). Why: user F1 "light version vordefinierte farbcodes … und selbe für schwarz".
