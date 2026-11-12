@@ -61,7 +61,14 @@ rule is "same message, different composition = variant".
 
 ## Steps
 
-1. Families + variant switch per group file, registry, typen (`variante`, `art`, `bilder`), gallery
-   per family, `/vorlagen/<familie>?variante=`. Migrate `decks/beispiel.ts`.
-2. Checks: `check-abwechslung` + slot rule in `check-deck`; selfcheck with a bad sample deck.
-3. Skill + CLAUDE.md. Smoke (all variants, light/dark, max/min) = 0, tsc, lint. Commit per step.
+1. done bed2230. Families + variants, registry `familien`, typen (`variante`, `art`, `bilder`), gallery
+   per family, `/vorlagen/<familie>/<variante>` (path, not query: smoke ids stay plain). 27 families,
+   76 variants (einstieg-bild + problem-bild became one). Migrated `decks/beispiel.ts`.
+2. done 665728f. Rules in `src/deck/abwechslung.ts`, printed by `check-deck`; slot rule in
+   `check-deck`; selfcheck `npm run check:abwechslung`.
+3. done. Skill tables on families, choice procedure; CLAUDE.md. Smoke 0, tsc, lint green.
+
+Deviations from the audit above: `loesung-mitte` and `zitat-bilder` stayed two variants (`umrahmt`,
+`zwischen`): different compositions. The horizontal data bars (`diagramm/balken`) and the vertical
+price bars (`preise/balken`, charts `Balken`) stay two charts: different jobs, merging would only
+add switches. `mitte` stays local in two files (different styles under the same name).
