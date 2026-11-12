@@ -62,7 +62,7 @@ export function Balken({
               <T
                 stil="karte"
                 max={max?.tag}
-                style={{ display: 'inline-block', padding: '6px 12px', borderRadius: 'var(--r-sm)', background: 'var(--flaeche)', color: 'var(--text)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}
+                style={{ display: 'inline-block', padding: '6px 12px', borderRadius: 'var(--r-sm)', background: b.hervorheben ? 'var(--lime-blass)' : 'var(--balken-schild)', color: b.hervorheben ? 'var(--wald)' : 'var(--balken-schild-text)', whiteSpace: 'nowrap', fontVariantNumeric: 'tabular-nums' }}
               >
                 {b.tag}
               </T>

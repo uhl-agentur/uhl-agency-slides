@@ -56,10 +56,11 @@ const Kennzahlen3: React.FC<Kennzahlen> = (p) => (
 
 /* Nine tiles need the full width (a 50/50 split leaves no room for the numbers):
    headline | text as one 50/50 row at the top, the 3 x 3 grid fills the rest. */
-const Kennzahlen9: React.FC<KennzahlenText> = (p) => (
+const KennzahlenText6: React.FC<KennzahlenText> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s3)' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'end' }}>
+    {/* F2: six figures are the realistic maximum next to a text; 50/50 like every text | media split */}
+    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 'var(--s4)', alignItems: 'center' }}>
+      <div className="stapel">
         <T stil="titel" as="h2" max={48}>
           {p.titel}
         </T>
@@ -67,15 +68,9 @@ const Kennzahlen9: React.FC<KennzahlenText> = (p) => (
           {p.text}
         </T>
       </div>
-      <div style={{ flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gridTemplateRows: 'repeat(3, minmax(0, 1fr))', gap: 'var(--gap)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 'var(--gap)' }}>
         {p.kennzahlen.map((z, i) => (
-          <Kennzahl
-            key={i}
-            k={z}
-            gross={false}
-            variante={i === p.schluessel ? 'akzent' : 'hoch'}
-            style={{ padding: 'var(--s2) var(--s3)', gap: 'var(--s1)', flexDirection: 'row', alignItems: 'center' }}
-          />
+          <Kennzahl key={i} k={z} gross={false} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ height: 200, padding: 'var(--s3)' }} />
         ))}
       </div>
     </div>
@@ -120,9 +115,6 @@ const kennzahlen9: KennzahlenText = {
     { wert: '4,8', text: 'Google-Bewertung im Schnitt' },
     { wert: '21\u00a0%', text: 'Abschlussquote der Leads' },
     { wert: '96\u00a0%', text: 'Kunden bleiben länger' },
-    { wert: '12 h', text: 'gesparte Zeit pro Woche' },
-    { wert: 'Top 3', text: 'bei Google für Kernbegriffe' },
-    { wert: '180', text: 'Bewerbungen in sechs Monaten' },
   ],
   schluessel: 1,
 };
@@ -400,15 +392,15 @@ export const beweisLayouts: LayoutDef[] = [
     anzahl: { kennzahlen: [3, 3] },
   },
   {
-    id: 'beweis-kennzahlen9',
-    name: 'Text + 9 Kennzahlen',
+    id: 'beweis-text-kennzahlen',
+    name: 'Text + 6 Kennzahlen',
     gruppe: 'Beweis',
     quelle: 'akoya-31',
     zweck: 'Viele Ergebnisse auf einen Blick, mit kurzer Einordnung links.',
-    komponente: Kennzahlen9,
+    komponente: KennzahlenText6,
     beispiel: kennzahlen9,
     limits: kennzahlen9Limits,
-    anzahl: { kennzahlen: [9, 9] },
+    anzahl: { kennzahlen: [2, 6] },
   },
   {
     id: 'beweis-kennzahlen6',

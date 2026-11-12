@@ -57,8 +57,7 @@ export function Folie({
       {children}
       {chrome && label && <div className="chrome-label">{label}</div>}
       {logo && <UhlZeichen />}
-      {chrome && k.marke && <div className="chrome-marke">{k.marke}</div>}
-      {chrome && k.seite && <div className="chrome-seite">{k.seite}</div>}
+      {/* no footer: marke and page number are left out on purpose (F2 "Fußzeile … entfernen, Seitenanzahl irrelevant") */}
     </section>
   );
 }

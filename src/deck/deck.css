@@ -47,7 +47,7 @@
 .uhl-deck .thema-light {
   --flaeche: var(--papier);   /* slide ground */
   --hoch: var(--salbei);      /* cards, tags, picture frames, chart panels */
-  --hoch-2: var(--papier);    /* second level on a card (icon box, tick tile, nested frame): lighter than the card (feedback F1b) */
+  --hoch-2: var(--halm);      /* second level on a card (icon box, tick tile): one step darker than the card, two-tone (F2) */
   --text: var(--wald);
   --text-2: var(--moos);
   --linie: var(--halm);       /* hairlines in tables only */
@@ -55,6 +55,8 @@
   --akzent-text: var(--wald);
   --akzent-text-2: var(--oliv);
   --balken: var(--moos);      /* chart bars next to the lime key bar: grey, never black on white (F1) */
+  --balken-schild: var(--wald); /* value badge on a bar: one step darker than the bar (F2) */
+  --balken-schild-text: var(--papier);
   --spur: var(--halm);        /* timeline track and its open markers */
   --spur-fertig: var(--wald); /* done part of a track */
   --logo: var(--wald);
@@ -71,6 +73,8 @@
   --akzent-text: var(--wald);
   --akzent-text-2: var(--oliv);
   --balken: var(--farn);
+  --balken-schild: var(--wald);
+  --balken-schild-text: var(--papier);
   --spur: var(--farn);
   --spur-fertig: var(--papier);
   --logo: var(--papier);
@@ -251,6 +255,9 @@
 .uhl-deck :is(.kachel, .kachel-dunkel, .kachel-glas) :is(.liste-haken, .ikon, .tag) { background: var(--hoch-2); }
 .uhl-deck .liste-haken > svg { width: 0.8em; height: 0.8em; }
 .uhl-deck .liste-nummer { counter-reset: n; }
+/* row hairlines: never above the first nor below the last row (F2 "beim allerobersten und alleruntersten weglassen") */
+.uhl-deck .linie-unten:last-child { border-bottom: 0; }
+.uhl-deck .linie-oben:first-child { border-top: 0; padding-top: 0; }
 .uhl-deck .liste-nummer > li { counter-increment: n; display: flex; gap: 0.8em; }
 .uhl-deck .liste-nummer > li::before {
   content: counter(n, decimal-leading-zero);
@@ -321,7 +328,8 @@
   color: var(--akzent-text);
   --text: var(--akzent-text);
   --text-2: var(--akzent-text-2);
-  --hoch: oklch(100% 0 0 / 0.35);
+  --hoch: var(--lime-blass);   /* boxes on a lime card: the desaturated light green (F2) */
+  --hoch-2: var(--lime-blass);
   padding: var(--s3);
 }
 .uhl-deck .tag {
@@ -354,3 +362,5 @@
 .uhl-deck .zu-lang { outline: 3px dashed oklch(57% 0.2 27); outline-offset: 6px; }
 @media print { .uhl-deck .zu-lang { outline: none; } }
 .uhl-deck .bild.voll { position: absolute; inset: 0; }
+/* an empty full-bleed picture shows the slide ground, so every slide keeps the same background (F2) */
+.uhl-deck .bild.voll:has(> .bild-leer) { background: transparent; }

@@ -3,6 +3,7 @@ import { Bild, BildDaten, Folie, Liste, T } from '../system';
 import type { KennzahlDaten } from '../system';
 import type { LayoutDef } from '../typen';
 import { cx } from '../cx';
+import { ArrowRight, ArrowUp, MoveRight, TrendingDown, TrendingUp } from 'lucide-react';
 
 /* Strategy group: renders the output of the agency skills marketing-strategy
    (slide-checklist.json, slides 1-8) and pitch-prep (pitch outline), plus the
@@ -13,12 +14,13 @@ import { cx } from '../cx';
 /* ================================================================ helpers === */
 
 /** Traffic light mark. The label text always carries the meaning, the mark only repeats it:
-    Fill only, no outline: gut = accent, mittel = linie grey (light grey on light, dark grey on dark),
+    Fill only, no outline: gut = accent, mittel = hatched (F2b "die gestrichelten Varianten weiterhin nutzen"),
     schlecht = text colour. Distinct in both themes; the label carries the meaning in greyscale. */
 type Stufe = 'gut' | 'mittel' | 'schlecht';
 
 function AmpelMarke({ stufe, text }: { stufe: Stufe; text: string }) {
-  const fill = stufe === 'gut' ? 'var(--akzent)' : stufe === 'mittel' ? 'var(--linie)' : 'var(--text)';
+  const fill =
+    stufe === 'gut' ? 'var(--akzent)' : stufe === 'mittel' ? 'repeating-linear-gradient(135deg, var(--text-2) 0 3px, transparent 3px 7px)' : 'var(--text)';
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
       <span style={{ width: 32, height: 18, flex: 'none', borderRadius: 'var(--r-sm)', background: fill }} />
@@ -38,7 +40,7 @@ function Skala({ wert, stufen, klein }: { wert: number; stufen?: string[]; klein
             style={{
               height: klein ? 8 : 20,
               borderRadius: 'var(--r-sm)',
-              background: n === w ? 'var(--akzent)' : n < w ? 'var(--text)' : 'var(--linie)',
+              background: n === w ? 'var(--akzent)' : n < w ? 'var(--balken)' : 'var(--linie)',
             }}
           />
           {!klein && (
@@ -54,12 +56,8 @@ function Skala({ wert, stufen, klein }: { wert: number; stufen?: string[]; klein
 }
 
 function Pfeil({ richtung }: { richtung: 'wächst' | 'stabil' | 'schrumpft' }) {
-  const dreh = richtung === 'wächst' ? -45 : richtung === 'schrumpft' ? 45 : 0;
-  return (
-    <svg viewBox="0 0 20 20" width={28} height={28} style={{ transform: `rotate(${dreh}deg)` }} aria-hidden>
-      <path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth={2} />
-    </svg>
-  );
+  const Ikon = richtung === 'wächst' ? TrendingUp : richtung === 'schrumpft' ? TrendingDown : MoveRight;
+  return <Ikon size={32} strokeWidth={2} aria-hidden />;
 }
 
 const nr = (i: number) => String(i + 1).padStart(2, '0');
@@ -299,8 +297,9 @@ const MatrixFolie: React.FC<Matrix> = (p) => (
           <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 2, background: 'var(--text)' }} />
           <div style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: 1, background: 'var(--linie)' }} />
           <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: 1, background: 'var(--linie)' }} />
-          <span className="t-meta leise" style={{ position: 'absolute', left: 'var(--s2)', top: 0 }}>
-            {`↑ ${p.achseY.plus}`}
+          <span className="t-meta leise" style={{ position: 'absolute', left: 'var(--s2)', top: 0, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <ArrowUp size={18} aria-hidden />
+            {p.achseY.plus}
           </span>
           <span className="t-meta leise" style={{ position: 'absolute', left: 'var(--s2)', bottom: 'var(--s1)' }}>
             {p.achseY.minus}
@@ -314,7 +313,10 @@ const MatrixFolie: React.FC<Matrix> = (p) => (
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <span className="t-meta leise">{p.achseX.minus}</span>
-          <span className="t-meta leise">{`${p.achseX.plus} →`}</span>
+          <span className="t-meta leise" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            {p.achseX.plus}
+            <ArrowRight size={18} aria-hidden />
+          </span>
         </div>
       </div>
     </div>
@@ -575,7 +577,7 @@ const KpiFolie: React.FC<Kpi> = (p) => {
                 <T stil="karte" className={z.stufe === 'schlecht' ? 'leise' : undefined} max={10}>
                   {z.von}
                 </T>
-                <span className="t-body leise">→</span>
+                <ArrowRight size={24} className="leise" aria-hidden />
                 <T stil="karte" className={z.stufe === 'schlecht' ? 'leise' : undefined} max={10}>
                   {z.bis}
                 </T>

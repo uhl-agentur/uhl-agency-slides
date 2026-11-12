@@ -32,7 +32,6 @@ const KapitelTrennerFolie: React.FC<KapitelTrenner> = (p) => {
           <T stil="aussage" as="h2" max={40}>
             {p.titel}
           </T>
-          <div className="strich" style={{ marginTop: 'var(--s3)' }} />
           <T stil="lead" leise max={110} style={{ marginTop: 'var(--s3)' }}>
             {p.text}
           </T>
@@ -106,7 +105,6 @@ const AnsatzFolie: React.FC<Ansatz> = (p) => (
       <T stil="karte" as="h2" max={32}>
         {p.titel}
       </T>
-      <div className="strich" style={{ margin: 'var(--s3) 0' }} />
       <T stil="lead" max={150}>
         {p.text}
       </T>
@@ -692,7 +690,6 @@ const ProjektTitelFolie: React.FC<ProjektTitel> = (p) => (
       <T stil="aussage" as="h2" max={40}>
         {p.projekt}
       </T>
-      <div className="strich" style={{ margin: 'var(--s3) 0' }} />
       <T stil="lead" max={40}>
         {p.kunde}
       </T>
