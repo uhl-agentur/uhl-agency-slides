@@ -37,3 +37,9 @@ Status: done (S3).
 > [Screenshot: Ampel "Baseline" schraffiert] die gestrichelten müssen auch outlines bekommen
 
 Status: done (S3).
+
+## F2e — 2026-11-12 (verbatim, dictated)
+
+> Ja, du hast mich nicht ganz richtig verstanden bei dem Tutone. Wir wollen hellgraue Karten mit dunkelgrauer Iconbox - Das stimmt soweit. Wir wollen hellgrüne Karten mit dunkelgrüner Iconbox und wir wollen dunkel- oder dunkelgraue Karten mit noch dunkelgrauerer Iconbox. immer gleiches prinzip prozentual also hintergrund 0%, card 20% oder so, icon box 40%
+
+Status: done (S3).
