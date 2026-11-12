@@ -23,7 +23,6 @@ Next.js app for the agency's presentations. Two generations live here:
 | Smoke test: every layout with stress content (max/min), overflow, overlap, widows, card insets | `npm run smoke` (dev server on 3417); stress data `src/deck/probe.ts`, `/vorlagen/<id>?probe=max` |
 | Typesetting selfcheck (`satz()` in `src/deck/cx.ts`) | `npm run check:satz` |
 | PDF | `node scripts/export-pdf.mjs --route /deck/<slug> --output <file>.pdf` |
-| Template references (gitignored, third-party) | `referenz/akoya/`, `referenz/portfolio/` |
 
 ## Design rules (why: same look as uhl-website, readable on a projector)
 

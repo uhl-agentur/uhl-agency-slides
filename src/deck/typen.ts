@@ -30,8 +30,6 @@ export interface LayoutDef<P = any> {
   id: string;
   name: string;
   gruppe: Gruppe;
-  /** where the composition comes from: "akoya-07", "portfolio-12", "agentur" */
-  quelle: string;
   /** one line: when to use this layout */
   zweck: string;
   komponente: React.FC<P>;

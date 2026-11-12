@@ -2,7 +2,7 @@ import React from 'react';
 import { Bild, BildDaten, Folie, T } from '../system';
 import type { LayoutDef } from '../typen';
 
-/* Covers and table of contents (akoya 01-06). */
+/* Covers and table of contents. */
 
 /* ------------------------------------------------------------ titel-links --- */
 interface Cover {
@@ -146,10 +146,10 @@ const inhalt: Inhalt = {
 const inhaltLimits = { label: 24, titel: 40, 'kapitel[]': 28 };
 
 export const titelLayouts: LayoutDef[] = [
-  { id: 'titel-links', name: 'Titel, links oben', gruppe: 'Titel', quelle: 'akoya-01', zweck: 'Ruhiges Deckblatt ohne Bild, Titel groß links oben.', komponente: TitelLinks, beispiel: cover, limits: coverLimits },
-  { id: 'titel-split', name: 'Titel mit Bildhälfte', gruppe: 'Titel', quelle: 'akoya-02', zweck: 'Deckblatt mit Kundenbild oder Mockup rechts.', komponente: TitelSplit, beispiel: cover, limits: coverLimits },
-  { id: 'titel-bild', name: 'Titel auf Vollbild', gruppe: 'Titel', quelle: 'akoya-03', zweck: 'Deckblatt auf großem Stimmungsbild, Titel unten zentriert.', komponente: TitelBild, beispiel: cover, limits: coverLimits },
-  { id: 'inhalt-split', name: 'Inhalt mit Bild', gruppe: 'Inhalt', quelle: 'akoya-04', zweck: 'Agenda als nummerierte Liste neben einem Bild.', komponente: InhaltSplit, beispiel: inhalt, limits: inhaltLimits, anzahl: { kapitel: [3, 9] } },
-  { id: 'inhalt-zentriert', name: 'Inhalt groß zentriert', gruppe: 'Inhalt', quelle: 'akoya-05', zweck: 'Agenda als großer, zentrierter Block.', komponente: InhaltZentriert, beispiel: inhalt, limits: { ...inhaltLimits, 'kapitel[]': 24 }, anzahl: { kapitel: [3, 8] } },
-  { id: 'inhalt-zeilen', name: 'Inhalt in Zeilen', gruppe: 'Inhalt', quelle: 'akoya-06 + portfolio-chapters', zweck: 'Agenda mit Titel links, Kapitel als Linienzeilen rechts.', komponente: InhaltZeilen, beispiel: inhalt, limits: inhaltLimits, anzahl: { kapitel: [3, 8] } },
+  { id: 'titel-links', name: 'Titel, links oben', gruppe: 'Titel', zweck: 'Ruhiges Deckblatt ohne Bild, Titel groß links oben.', komponente: TitelLinks, beispiel: cover, limits: coverLimits },
+  { id: 'titel-split', name: 'Titel mit Bildhälfte', gruppe: 'Titel', zweck: 'Deckblatt mit Kundenbild oder Mockup rechts.', komponente: TitelSplit, beispiel: cover, limits: coverLimits },
+  { id: 'titel-bild', name: 'Titel auf Vollbild', gruppe: 'Titel', zweck: 'Deckblatt auf großem Stimmungsbild, Titel unten zentriert.', komponente: TitelBild, beispiel: cover, limits: coverLimits },
+  { id: 'inhalt-split', name: 'Inhalt mit Bild', gruppe: 'Inhalt', zweck: 'Agenda als nummerierte Liste neben einem Bild.', komponente: InhaltSplit, beispiel: inhalt, limits: inhaltLimits, anzahl: { kapitel: [3, 9] } },
+  { id: 'inhalt-zentriert', name: 'Inhalt groß zentriert', gruppe: 'Inhalt', zweck: 'Agenda als großer, zentrierter Block.', komponente: InhaltZentriert, beispiel: inhalt, limits: { ...inhaltLimits, 'kapitel[]': 24 }, anzahl: { kapitel: [3, 8] } },
+  { id: 'inhalt-zeilen', name: 'Inhalt in Zeilen', gruppe: 'Inhalt', zweck: 'Agenda mit Titel links, Kapitel als Linienzeilen rechts.', komponente: InhaltZeilen, beispiel: inhalt, limits: inhaltLimits, anzahl: { kapitel: [3, 8] } },
 ];

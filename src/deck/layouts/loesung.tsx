@@ -3,7 +3,7 @@ import { BarChart3, Camera, Compass, Gauge, Globe, Handshake, Layers, Lightbulb,
 import { Bild, BildDaten, Folie, Liste, T } from '../system';
 import type { LayoutDef } from '../typen';
 
-/* Solution and work showcase (akoya 18-28): solution statements with text and
+/* Solution and work showcase: solution statements with text and
    pictures, feature cards with icons, and picture grids from bento to a
    full-bleed masonry. Scattered compositions use absolute slide coordinates
    (1920 x 1080) and stay inside the slide frame (--oben / --unten / --rand, F3e). */
@@ -406,7 +406,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'loesung-text',
     name: 'Lösung, Text und Headline',
     gruppe: 'Lösung',
-    quelle: 'akoya-18',
     zweck: 'Lösung in einem Satz rechts, Erklärung und Leitprinzipien links.',
     komponente: LoesungTextL,
     beispiel: loesungText,
@@ -417,7 +416,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'loesung-zickzack',
     name: 'Lösung im Zickzack',
     gruppe: 'Lösung',
-    quelle: 'akoya-19',
     zweck: 'Zwei Kernsätze im Wechsel mit zwei Bildern.',
     komponente: ZickzackL,
     beispiel: zickzack,
@@ -428,7 +426,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'loesung-verstreut',
     name: 'Lösung in drei Bildern',
     gruppe: 'Lösung',
-    quelle: 'akoya-20',
     zweck: 'Drei Funktionen oder Schritte als lose verteilte Bilder mit Beschreibung.',
     komponente: VerstreutL,
     beispiel: verstreut,
@@ -439,7 +436,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'loesung-mitte',
     name: 'Lösung, Satz zwischen Bildern',
     gruppe: 'Lösung',
-    quelle: 'akoya-21',
     zweck: 'Ein zentraler Satz, umgeben von vier kleinen Bildern mit Stichwort.',
     komponente: MitteL,
     beispiel: mitte,
@@ -450,7 +446,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'loesung-bilder-text',
     name: 'Lösung, Bilder und großer Text',
     gruppe: 'Lösung',
-    quelle: 'akoya-22',
     zweck: 'Zwei Bilder links, Nutzenversprechen mit Punkten rechts.',
     komponente: BilderTextL,
     beispiel: bilderText,
@@ -461,7 +456,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'leistung-karten4',
     name: 'Leistung in vier Karten',
     gruppe: 'Leistung',
-    quelle: 'akoya-23',
     zweck: 'Leistungsversprechen als Headline, darunter vier Bausteine mit Icon.',
     komponente: Karten4L,
     beispiel: karten4,
@@ -472,7 +466,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'leistung-mosaik',
     name: 'Leistung mit Bildmosaik',
     gruppe: 'Leistung',
-    quelle: 'akoya-24',
     zweck: 'Ein Projekt oder Produkt in Text links und vier Bildern rechts.',
     komponente: MosaikL,
     beispiel: mosaik,
@@ -483,7 +476,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'leistung-bento8',
     name: 'Arbeiten, Bento mit acht Bildern',
     gruppe: 'Leistung',
-    quelle: 'akoya-25',
     zweck: 'Acht Arbeiten in zwei Reihen mit wechselnder Breite.',
     komponente: Bento8L,
     beispiel: { label: 'Arbeiten', bilder: leer(8) },
@@ -494,7 +486,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'leistung-bento53',
     name: 'Arbeiten, Bento fünf und drei',
     gruppe: 'Leistung',
-    quelle: 'akoya-26',
     zweck: 'Fünf schmale Bilder oben, drei breite unten.',
     komponente: Bento53L,
     beispiel: { label: 'Arbeiten', bilder: leer(8) },
@@ -505,7 +496,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'leistung-raster6',
     name: 'Arbeiten, Raster drei mal zwei',
     gruppe: 'Leistung',
-    quelle: 'akoya-27',
     zweck: 'Sechs gleich große Arbeiten, optional mit Bildunterschrift.',
     komponente: Raster6L,
     beispiel: raster6,
@@ -516,7 +506,6 @@ export const loesungLayouts: LayoutDef[] = [
     id: 'leistung-masonry',
     name: 'Arbeiten, Vollbild-Mauerwerk',
     gruppe: 'Leistung',
-    quelle: 'akoya-28',
     zweck: 'Bildwand über die ganze Folie, als Pause zwischen Kapiteln.',
     komponente: MasonryL,
     beispiel: { bilder: leer(13) },

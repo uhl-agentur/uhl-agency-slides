@@ -2,7 +2,7 @@ import React from 'react';
 import { Bild, BildDaten, Folie, Liste, T } from '../system';
 import type { LayoutDef } from '../typen';
 
-/* Group: introduction, team and problem (akoya 07-17).
+/* Group: introduction, team and problem.
    Agency take on the reference: same compositions, more air, our type scale. */
 
 const mitte: React.CSSProperties = { display: 'flex', flexDirection: 'column', justifyContent: 'center' };
@@ -326,15 +326,15 @@ const problemAussage: ProblemAussage = {
 const problemLimits = { label: 24, titel: 60, einleitung: 60, 'punkte[]': 40 };
 
 export const einstiegLayouts: LayoutDef[] = [
-  { id: 'einstieg-text', name: 'Einstieg, Text', gruppe: 'Einstieg', quelle: 'akoya-07', zweck: 'Positionierung in einem Satz plus kurzer Absatz, wer wir sind.', komponente: EinstiegTextFolie, beispiel: einstiegText, limits: { label: 24, titel: 64, text: 170 } },
-  { id: 'einstieg-bild', name: 'Aussage auf Vollbild', gruppe: 'Einstieg', quelle: 'akoya-08', zweck: 'Eine Kernaussage über einem großen Stimmungsbild.', komponente: EinstiegBild, beispiel: einstiegBild, limits: { label: 24, aussage: 84 } },
-  { id: 'einstieg-bild-hoch', name: 'Text mit Hochkantbild', gruppe: 'Einstieg', quelle: 'akoya-09', zweck: 'Ziel oder Mission links, dazu bis zu drei Eckdaten und ein hohes Bild.', komponente: EinstiegBildHoch, beispiel: einstiegBildHoch, limits: { label: 24, text: 130, 'fakten[]': 40 }, anzahl: { fakten: [0, 3] } },
-  { id: 'einstieg-bild-satz', name: 'Bild, Satz rechts', gruppe: 'Einstieg', quelle: 'akoya-10', zweck: 'Ein quadratisches Bild und ein kurzer Satz in zwei Tönen.', komponente: EinstiegBildSatz, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
-  { id: 'einstieg-satz-bild', name: 'Satz links, Bild', gruppe: 'Einstieg', quelle: 'akoya-11', zweck: 'Kurzer Satz rechtsbündig neben einem Querformatbild.', komponente: EinstiegSatzBild, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
-  { id: 'team-reihe', name: 'Team in einer Reihe', gruppe: 'Team', quelle: 'akoya-12', zweck: 'Projektteam mit Überschrift und bis zu sechs Porträts mit Rolle.', komponente: TeamReiheFolie, beispiel: teamReihe, limits: { label: 24, titel: 72, 'mitglieder[].name': 28, 'mitglieder[].rolle': 32 }, anzahl: { mitglieder: [2, 6] } },
-  { id: 'problem-text', name: 'Problem, Text und Headline', gruppe: 'Problem', quelle: 'akoya-13', zweck: 'Ausgangslage als Textspalte, das Problem als Headline daneben.', komponente: ProblemTextFolie, beispiel: problemText, limits: problemLimits, anzahl: { punkte: [0, 4] } },
-  { id: 'problem-bild', name: 'Problem auf Vollbild', gruppe: 'Problem', quelle: 'akoya-14', zweck: 'Das Problem als ein Satz mittig auf einem großen Bild.', komponente: ProblemBild, beispiel: problemBild, limits: { label: 24, aussage: 84 } },
-  { id: 'problem-mosaik', name: 'Problem mit Bildmosaik', gruppe: 'Problem', quelle: 'akoya-15', zweck: 'Ausgangslage als Text, belegt mit vier Bildern (z. B. Screenshots, Situation vor Ort).', komponente: ProblemMosaik, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 4] } },
-  { id: 'problem-raster', name: 'Problem mit Bildraster', gruppe: 'Problem', quelle: 'akoya-16', zweck: 'Ausgangslage als Text neben sechs gleich großen Belegbildern.', komponente: ProblemRaster, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 6] } },
-  { id: 'problem-aussage', name: 'Problem als große Aussage', gruppe: 'Problem', quelle: 'akoya-17', zweck: 'Situation, Folge und Wirkung in zwei bis drei großen Sätzen, dazu zwei Bilder.', komponente: ProblemAussageFolie, beispiel: problemAussage, limits: { label: 24, 'saetze[]': 56 }, anzahl: { saetze: [2, 3], bilder: [0, 2] } },
+  { id: 'einstieg-text', name: 'Einstieg, Text', gruppe: 'Einstieg', zweck: 'Positionierung in einem Satz plus kurzer Absatz, wer wir sind.', komponente: EinstiegTextFolie, beispiel: einstiegText, limits: { label: 24, titel: 64, text: 170 } },
+  { id: 'einstieg-bild', name: 'Aussage auf Vollbild', gruppe: 'Einstieg', zweck: 'Eine Kernaussage über einem großen Stimmungsbild.', komponente: EinstiegBild, beispiel: einstiegBild, limits: { label: 24, aussage: 84 } },
+  { id: 'einstieg-bild-hoch', name: 'Text mit Hochkantbild', gruppe: 'Einstieg', zweck: 'Ziel oder Mission links, dazu bis zu drei Eckdaten und ein hohes Bild.', komponente: EinstiegBildHoch, beispiel: einstiegBildHoch, limits: { label: 24, text: 130, 'fakten[]': 40 }, anzahl: { fakten: [0, 3] } },
+  { id: 'einstieg-bild-satz', name: 'Bild, Satz rechts', gruppe: 'Einstieg', zweck: 'Ein quadratisches Bild und ein kurzer Satz in zwei Tönen.', komponente: EinstiegBildSatz, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
+  { id: 'einstieg-satz-bild', name: 'Satz links, Bild', gruppe: 'Einstieg', zweck: 'Kurzer Satz rechtsbündig neben einem Querformatbild.', komponente: EinstiegSatzBild, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
+  { id: 'team-reihe', name: 'Team in einer Reihe', gruppe: 'Team', zweck: 'Projektteam mit Überschrift und bis zu sechs Porträts mit Rolle.', komponente: TeamReiheFolie, beispiel: teamReihe, limits: { label: 24, titel: 72, 'mitglieder[].name': 28, 'mitglieder[].rolle': 32 }, anzahl: { mitglieder: [2, 6] } },
+  { id: 'problem-text', name: 'Problem, Text und Headline', gruppe: 'Problem', zweck: 'Ausgangslage als Textspalte, das Problem als Headline daneben.', komponente: ProblemTextFolie, beispiel: problemText, limits: problemLimits, anzahl: { punkte: [0, 4] } },
+  { id: 'problem-bild', name: 'Problem auf Vollbild', gruppe: 'Problem', zweck: 'Das Problem als ein Satz mittig auf einem großen Bild.', komponente: ProblemBild, beispiel: problemBild, limits: { label: 24, aussage: 84 } },
+  { id: 'problem-mosaik', name: 'Problem mit Bildmosaik', gruppe: 'Problem', zweck: 'Ausgangslage als Text, belegt mit vier Bildern (z. B. Screenshots, Situation vor Ort).', komponente: ProblemMosaik, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 4] } },
+  { id: 'problem-raster', name: 'Problem mit Bildraster', gruppe: 'Problem', zweck: 'Ausgangslage als Text neben sechs gleich großen Belegbildern.', komponente: ProblemRaster, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 6] } },
+  { id: 'problem-aussage', name: 'Problem als große Aussage', gruppe: 'Problem', zweck: 'Situation, Folge und Wirkung in zwei bis drei großen Sätzen, dazu zwei Bilder.', komponente: ProblemAussageFolie, beispiel: problemAussage, limits: { label: 24, 'saetze[]': 56 }, anzahl: { saetze: [2, 3], bilder: [0, 2] } },
 ];

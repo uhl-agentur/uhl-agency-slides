@@ -3,7 +3,7 @@ import { Bild, BildDaten, Folie, Kennzahl, KennzahlDaten, Liste, T } from '../sy
 import { Balken, BalkenDaten, Meilenstein, Venn3, VennKreis, Zeitleiste } from '../charts';
 import type { LayoutDef } from '../typen';
 
-/* Proof, value, pricing, process and contact (akoya 29-44).
+/* Proof, value, pricing, process and contact.
    Key figures use Kennzahl tiles (one `akzent` tile = the key figure),
    charts come from ../charts. */
 
@@ -378,7 +378,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'beweis-kennzahlen-bild',
     name: 'Aussage + 3 Kennzahlen auf Bild',
     gruppe: 'Beweis',
-    quelle: 'akoya-29',
     zweck: 'Drei Belegzahlen als Kacheln auf einem Stimmungsbild hinter Schleier.',
     komponente: KennzahlenBild,
     beispiel: kennzahlen3,
@@ -389,7 +388,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'beweis-kennzahlen3',
     name: 'Aussage + 3 Kennzahlen',
     gruppe: 'Beweis',
-    quelle: 'akoya-30',
     zweck: 'Eine Aussage, belegt mit drei Zahlen; eine davon als Schlüsselzahl.',
     komponente: Kennzahlen3,
     beispiel: kennzahlen3,
@@ -400,7 +398,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'beweis-text-kennzahlen',
     name: 'Text + 6 Kennzahlen',
     gruppe: 'Beweis',
-    quelle: 'akoya-31',
     zweck: 'Viele Ergebnisse auf einen Blick, mit kurzer Einordnung links.',
     komponente: KennzahlenText6,
     beispiel: kennzahlen9,
@@ -411,7 +408,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'beweis-kennzahlen6',
     name: 'Aussage + 6 Kennzahlen',
     gruppe: 'Beweis',
-    quelle: 'akoya-32',
     zweck: 'Aussage oben, darunter sechs Ergebnisse in zwei Reihen.',
     komponente: Kennzahlen6,
     beispiel: kennzahlen6,
@@ -422,7 +418,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'wert-mosaik',
     name: 'Text + Bildmosaik',
     gruppe: 'Wert',
-    quelle: 'akoya-33',
     zweck: 'Nutzen in einem Satz, belegt mit drei Bildern aus Projekt oder Alltag.',
     komponente: WertMosaikFolie,
     beispiel: {
@@ -436,7 +431,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'wert-venn',
     name: 'Text + Venn-Diagramm',
     gruppe: 'Wert',
-    quelle: 'akoya-34',
     zweck: 'Positionierung als Schnittmenge aus Können, Kundenwunsch und Markt.',
     komponente: WertVennFolie,
     beispiel: {
@@ -457,7 +451,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'wert-zwei-spalten',
     name: 'Zwei Textspalten',
     gruppe: 'Wert',
-    quelle: 'akoya-35',
     zweck: 'Vorher und nachher in zwei ruhigen Absätzen, ohne Bild.',
     komponente: ZweiSpaltenFolie,
     beispiel: {
@@ -471,7 +464,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'preis-balken',
     name: 'Preise als Balken',
     gruppe: 'Preis',
-    quelle: 'akoya-36 bis 38',
     zweck: 'Zwei bis drei Pakete als Balken, das empfohlene in Lime (ab vier Balken passt der Preis nicht mehr in den Balken).',
     komponente: PreisBalkenFolie,
     beispiel: preis,
@@ -482,7 +474,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'ablauf-zeitleiste',
     name: 'Zeitleiste',
     gruppe: 'Ablauf',
-    quelle: 'akoya-39',
     zweck: 'Projektablauf mit drei bis sechs Meilensteinen über die volle Breite.',
     komponente: AblaufZeitleiste,
     beispiel: { label: 'Ablauf', punkte: meilensteine, erreicht: 2 } satisfies Ablauf,
@@ -493,7 +484,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'ablauf-titel-zeitleiste',
     name: 'Überschrift + Zeitleiste',
     gruppe: 'Ablauf',
-    quelle: 'akoya-40',
     zweck: 'Überschrift oben, darunter vier Meilensteine bis zum Ziel.',
     komponente: AblaufTitelZeitleiste,
     beispiel: {
@@ -514,7 +504,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'ablauf-zeitleiste-aussage',
     name: 'Zeitleiste + Aussage',
     gruppe: 'Ablauf',
-    quelle: 'akoya-41',
     zweck: 'Drei große Etappen oben, die Kernaussage groß darunter.',
     komponente: AblaufZeitleisteAussage,
     beispiel: {
@@ -534,7 +523,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'kontakt-mail',
     name: 'Kontakt: E-Mail groß',
     gruppe: 'Kontakt',
-    quelle: 'akoya-42',
     zweck: 'Letzte Folie mit einer großen Kontaktadresse in der Mitte.',
     komponente: KontaktMail,
     beispiel: { label: 'Kontakt', aussage: 'Fragen? Schreiben Sie uns.', mail: 'info@uhl-werbeagentur.de' } satisfies Kontakt,
@@ -544,7 +532,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'kontakt-abschluss',
     name: 'Kontakt: Schlusssatz',
     gruppe: 'Kontakt',
-    quelle: 'akoya-43',
     zweck: 'Schlusssatz groß in der Mitte, darunter die Kontaktwege.',
     komponente: KontaktAbschluss,
     beispiel: kontakt,
@@ -555,7 +542,6 @@ export const beweisLayouts: LayoutDef[] = [
     id: 'kontakt-bild',
     name: 'Kontakt mit Bild',
     gruppe: 'Kontakt',
-    quelle: 'akoya-44',
     zweck: 'Schlusssatz und Kontakt links, Team- oder Bürofoto rechts.',
     komponente: KontaktBild,
     beispiel: kontakt,

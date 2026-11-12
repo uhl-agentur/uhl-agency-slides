@@ -37,7 +37,6 @@ export default function Vorlagen() {
               <b>{l.name}</b>
               <a href={`/vorlagen/${l.id}`}>{l.id}</a>
               <span>{l.gruppe}</span>
-              <span>{l.quelle}</span>
               <span>{l.zweck}</span>
               {fehler.length > 0 && <span className="fehler">{fehler.join(' · ')}</span>}
             </div>
