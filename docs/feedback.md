@@ -101,3 +101,15 @@ Status: done (S4).
 Status: done (S4). Ein Display-Gewicht 550, Skala 136 · 72 · 56 · 32 · 24 · 18.
 
 > bei headlines und immer als & handeln.
+
+## F3h — 2026-11-12 (verbatim)
+
+> [Screenshot: team-reihe] vertikal zentrieren und dann git commit push.
+
+Status: done (S4).
+
+## F3i — 2026-11-12 (verbatim, dictated)
+
+> Kollege, mach mal die Eyebrow-Nummerierungen weg, wo sie keinen Sinn ergeben. Wie zum Beispiel, was wir für sie tun. Website, SEO, Google Ads, Social Media, da ist nicht nötig, oben drüber eine Nummerierung zu haben, weil das ist ja keine Reihenfolge. Auch bei unseren Schwerpunkten ist es nicht relevant. Wir können es als optionales Feld dalassen und ausblenden. Aber an sich ist es ja nicht relevant thematisch, dass wir hier eine Nummerierung haben. Deswegen sowas würde ich auf jeden Fall noch entfernen. Okay, Digga.
+
+Status: in progress (S4).

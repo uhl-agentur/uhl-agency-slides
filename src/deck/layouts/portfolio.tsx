@@ -272,7 +272,7 @@ const ArbeitenReiheFolie: React.FC<ArbeitenReihe> = (p) => {
   ];
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ ...mitte, gap: 'var(--s3)' }}>
+      <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s3)' }}>
         <T stil="titel" as="h2" max={36}>
           {p.titel}
         </T>
@@ -302,7 +302,7 @@ const ArbeitenProjektFolie: React.FC<ArbeitenProjekt> = (p) => {
   const b = p.bilder ?? [];
   return (
     <Folie label={p.label}>
-      <div className="inhalt" style={{ ...mitte, gap: 'var(--s3)' }}>
+      <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s3)' }}>
         <T stil="titel" as="h2" max={36}>
           {p.titel}
         </T>
@@ -583,7 +583,7 @@ interface KontaktSpalten {
 
 const KontaktSpaltenFolie: React.FC<KontaktSpalten> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ ...mitte, gap: 'var(--s3)' }}>
+    <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s3)' }}>
       <T stil="titel" as="h2" max={36}>
         {p.titel}
       </T>

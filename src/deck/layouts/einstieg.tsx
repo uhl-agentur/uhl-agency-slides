@@ -125,7 +125,7 @@ interface TeamReihe {
 
 const TeamReiheFolie: React.FC<TeamReihe> = (p) => (
   <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--s3)' }}>
+    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s3)' }}>
       <T stil="titel" as="h2" max={72} style={{ textAlign: 'center' }}>
         {p.titel}
       </T>
