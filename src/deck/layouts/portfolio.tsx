@@ -414,7 +414,7 @@ interface Testimonial {
 const TestimonialFolie: React.FC<Testimonial> = (p) => (
   <Folie label={p.label}>
     <div className="inhalt" style={{ ...mitte, justifyContent: 'center', gap: 'var(--s3)' }}>
-      <T stil="zitat" as="blockquote" max={130}>
+      <T stil="aussage" as="blockquote" max={130}>
         {p.zitat}
       </T>
       <T stil="meta" leise max={100}>
@@ -628,8 +628,8 @@ const HeroStreuFolie: React.FC<HeroStreu> = (p) => {
   const orte: React.CSSProperties[] = [
     { left: 260, top: 120, width: 220, height: 220 },
     { right: 220, top: 170, width: 240, height: 260 },
-    { left: 96, bottom: 200, width: 300, height: 260 },
-    { right: 96, bottom: 230, width: 240, height: 240 },
+    { left: 'var(--rand)', bottom: 200, width: 300, height: 260 },
+    { right: 'var(--rand)', bottom: 230, width: 240, height: 240 },
   ];
   return (
     <Folie label={p.label}>

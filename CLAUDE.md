@@ -27,8 +27,8 @@ Next.js app for the agency's presentations. Two generations live here:
 
 ## Design rules (why: same look as uhl-website, readable on a projector)
 
-- Canvas fixed 1920 x 1080 px. **One frame of 96 on all four sides**: label and logo 96 from the top (`--chrome`), sides `--rand` 96, content ends `--unten` 96 above the bottom; content starts at `--oben` 192 below the chrome row. Why: user F3/F3e "symetrisches rand padding oben und seiten und unten".
-- Fonts from uhl-website: **Funnel Display** for voice (display, aussage, titel, zahl, karte, zitat), **Funnel Sans** for running text (lead, body, meta).
+- Canvas fixed 1920 x 1080 px. **One frame of 72 on all four sides**: label and logo (56 px) 72 from the top (`--chrome`), sides `--rand` 72, content ends `--unten` 72 above the bottom; content starts at `--oben` 176 below the chrome row. Why: user F3e "symetrisches rand padding", F3f "weniger layout padding", "logo etwas größer".
+- Fonts from uhl-website: **Funnel Display** for voice (display, aussage, titel, zahl, karte), **Funnel Sans** for running text (lead, body, meta). **One scale, one weight** (F3g "fonts mergen und reduzieren"): Display always 550 at 136 · 72 · 56 · 32 (zahl = 136, zahl-s = 72, quote = aussage), Sans 32 · 24 · 18. Inventory of what slides really use: `/typo`. Headlines (display, aussage, titel, karte) write "und" as "&" automatically in `<T>` (F3g).
 - Type only via `<T stil=…>` / `t-*` classes; strong weight in running text via `t-stark`. Never a raw font size, colour or radius in a layout. Smallest text 18 px (`meta`).
 - Line length is capped by `max-width` in `em` on each style: display ~18 chars/line, aussage ~30, titel ~36, lead ~46, body ~62. Headlines `text-wrap: balance`, running text `pretty`. Line height: headings 0.98–1.15, lead 1.4, body 1.5.
 - **Character limits** live per field in each `LayoutDef.limits`; `<T max>` outlines overflow in red on screen. A deck must pass `check-deck` before PDF export.

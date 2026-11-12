@@ -69,7 +69,8 @@ export function UhlZeichen({ className = 'chrome-logo' }: { className?: string }
 
 /* ------------------------------------------------------------------ T --- */
 
-type Stil = 'display' | 'aussage' | 'titel' | 'zahl' | 'zahl-s' | 'karte' | 'lead' | 'body' | 'meta' | 'zitat';
+type Stil = 'display' | 'aussage' | 'titel' | 'zahl' | 'zahl-s' | 'karte' | 'lead' | 'body' | 'meta';
+const UEBERSCHRIFT = new Set<Stil>(['display', 'aussage', 'titel', 'karte']);
 
 /**
  * Text with a character limit. `==wort==` marks a lime highlight, `\n` breaks a line.
@@ -95,6 +96,8 @@ export function T({
 }) {
   if (children === undefined || children === null || children === '') return null;
   children = String(children);
+  // headlines write "und" as "&" (F3g "bei headlines und immer als & handeln")
+  if (UEBERSCHRIFT.has(stil)) children = children.replace(/ und /g, ' & ');
   const zuLang = max !== undefined && sichtbareLaenge(children) > max;
   const fehlt = children.startsWith('FEHLT:');
   const El = Tag as React.ElementType;

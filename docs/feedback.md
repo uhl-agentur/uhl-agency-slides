@@ -87,3 +87,17 @@ Status: done (S4).
 > [Screenshot: strategie-journey Zeilen] vertical centern bitte. [Screenshot: strategie-kanalmix] hier auch. und was ist aus den punkten geworden von davor: [F3 zitiert] also audits durch aber die anderen änderungen nicht bis jetzt? [Screenshot: Logo oben rechts] wir haben ja auch noch kein symetrisches rand padding? oben und seiten und unten.
 
 Status: done (S4).
+
+## F3f — 2026-11-12 (verbatim)
+
+> [Screenshot: strategie-kernsatz, drei Textspalten] hier auch die horizontalen gaps. und wir können weniger layout padding machen [Screenshot: Folie mit Rahmen] und logo erne etwas größer
+
+Status: done (S4).
+
+## F3g — 2026-11-12 (verbatim)
+
+> ja lass uns fonts mergen und reduzieren
+
+Status: done (S4). Ein Display-Gewicht 550, Skala 136 · 72 · 56 · 32 · 24 · 18.
+
+> bei headlines und immer als & handeln.

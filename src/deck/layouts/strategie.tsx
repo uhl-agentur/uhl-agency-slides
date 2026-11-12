@@ -95,9 +95,10 @@ const KernsatzFolie: React.FC<Kernsatz> = (p) => (
         </T>
       </div>
       {!!p.stuetzen?.length && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--gap)' }}>
+        /* content-sized columns, equal visible gaps between them (F3f) */
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--s4)' }}>
           {p.stuetzen.map((s, i) => (
-            <T key={i} stil="body" leise max={96}>
+            <T key={i} stil="body" leise max={96} style={{ flex: '0 1 auto', maxWidth: '15em' }}>
               {s}
             </T>
           ))}

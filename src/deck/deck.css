@@ -30,10 +30,12 @@
   --s4: 96px;
   /* one frame on all four sides (F3e "symetrisches rand padding oben und seiten und unten"):
      logo and label sit 96 from the top like the sides, content ends 96 above the bottom edge */
-  --rand: 96px; /* margin left, right, top (chrome row) and bottom (content) */
-  --chrome: 96px; /* top of the label / logo row */
-  --oben: 192px; /* content starts below the chrome row: 96 + 48 logo + 48 */
-  --unten: 96px; /* no footer (F2): content runs to the frame like the sides */
+  /* frame 72 (F3f "weniger layout padding") */
+  --rand: 72px; /* margin left, right, top (chrome row) and bottom (content) */
+  --chrome: 72px; /* top of the label / logo row */
+  --logo-gr: 56px; /* logo size (F3f "logo etwas größer") */
+  --oben: 176px; /* content starts below the chrome row: 72 + 56 logo + 48 */
+  --unten: 72px; /* no footer (F2): content runs to the frame like the sides */
   --gap: 32px; /* gap in image grids and tiles */
   --r: 8px; /* hard radius ceiling */
   --r-sm: 4px;
@@ -129,15 +131,15 @@
   letter-spacing: 0.01em;
   color: var(--text-2);
 }
-.uhl-deck .chrome-label { top: var(--chrome); left: var(--rand); line-height: 48px; color: var(--text); } /* centred on the 48 px logo */
+.uhl-deck .chrome-label { top: var(--chrome); left: var(--rand); line-height: var(--logo-gr); color: var(--text); } /* centred on the logo */
 .uhl-deck .chrome-logo {
   /* the uhl block mark itself, no tile (feedback F1: "auf weiß das logo schwarz ohne box") */
   position: absolute;
   z-index: 5;
   top: var(--chrome);
   right: var(--rand);
-  width: 48px;
-  height: 48px;
+  width: var(--logo-gr);
+  height: var(--logo-gr);
   color: var(--logo);
 }
 
@@ -147,22 +149,24 @@
    ("Suchmaschinenoptimierung") no longer overflow narrow columns. Headlines never hyphenate
    (soft hyphens \u00AD in the content only). Units, abbreviations and the last two words are
    bound by satz() in cx.ts. A word longer than its box still breaks instead of overflowing. */
-.uhl-deck .folie :is(.t-display, .t-aussage, .t-titel, .t-zahl, .t-zahl-s, .t-karte, .t-lead, .t-body, .t-meta, .t-zitat) {
+.uhl-deck .folie :is(.t-display, .t-aussage, .t-titel, .t-zahl, .t-zahl-s, .t-karte, .t-lead, .t-body, .t-meta) {
   overflow-wrap: break-word;
   hyphens: manual;
   hyphenate-limit-chars: 10 4 4;
 }
 .uhl-deck .folie :is(.t-body, .t-lead, .t-meta, .t-karte) { hyphens: auto; }
-/* Line lengths: display <= ~18 chars/line, aussage <= 30, titel <= 36,
+/* One type scale (F3g "fonts mergen und reduzieren"): Display always weight 550 in
+   136 · 72 · 56 · 32, Sans 32 (lead) · 24 · 18. Numbers use the display / aussage sizes.
+   Line lengths: display <= ~18 chars/line, aussage <= 30, titel <= 36,
    lead <= 46, body <= 62, meta <= 48. Headlines balance, running text wraps pretty. */
 .uhl-deck .t-display {
-  font: 600 136px/0.98 var(--f-display);
+  font: 550 136px/0.98 var(--f-display);
   letter-spacing: -0.04em;
   text-wrap: balance;
   max-width: 11em;
 }
 .uhl-deck .t-aussage {
-  font: 350 72px/1.1 var(--f-display);
+  font: 550 72px/1.08 var(--f-display);
   letter-spacing: -0.025em;
   text-wrap: balance;
   max-width: 16em;
@@ -174,13 +178,13 @@
   max-width: 18em;
 }
 .uhl-deck .t-zahl {
-  font: 500 128px/0.95 var(--f-display);
+  font: 550 136px/0.95 var(--f-display); /* same size as display (F3g) */
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
 }
 .uhl-deck .t-zahl-s {
-  font: 500 88px/0.95 var(--f-display);
-  letter-spacing: -0.035em;
+  font: 550 72px/0.95 var(--f-display); /* same size as aussage (F3g) */
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
 .uhl-deck .t-karte {
@@ -204,12 +208,6 @@
   letter-spacing: 0.005em;
   text-wrap: pretty;
   max-width: 28em;
-}
-.uhl-deck .t-zitat {
-  font: 350 64px/1.15 var(--f-display);
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-  max-width: 18em;
 }
 .uhl-deck .leise { color: var(--text-2); }
 .uhl-deck mark {
