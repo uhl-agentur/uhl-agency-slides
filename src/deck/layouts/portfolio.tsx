@@ -86,7 +86,6 @@ const KapitelBildFolie: React.FC<KapitelBild> = (p) => {
 
 const kapitelBild: KapitelBild = {
   label: 'Leistungen',
-  nummer: '02',
   titel: 'Suchmaschinenoptimierung',
   text: 'Wir bringen Ihre Seiten dorthin, wo Ihre Kunden suchen: technisch sauber und messbar.',
 };
@@ -152,6 +151,8 @@ interface Spalten {
   label?: string;
   titel: string;
   spalten: { titel: string; text?: string }[];
+  /** 01, 02 … above each column: only for a real order (process steps), never for a set of services (F3i) */
+  nummeriert?: boolean;
 }
 
 const SpaltenFolie: React.FC<Spalten> = (p) => (
@@ -163,9 +164,11 @@ const SpaltenFolie: React.FC<Spalten> = (p) => (
       <ol style={{ alignSelf: 'stretch', display: 'grid', gridTemplateColumns: `repeat(${p.spalten.length}, 1fr)`, gap: 'var(--gap)', textAlign: 'left' }}>
         {p.spalten.map((s, i) => (
           <li key={i} className="stapel-s">
-            <div className="t-meta leise" style={{ fontVariantNumeric: 'tabular-nums' }}>
-              {nr(i)}
-            </div>
+            {p.nummeriert && (
+              <div className="t-meta leise" style={{ fontVariantNumeric: 'tabular-nums' }}>
+                {nr(i)}
+              </div>
+            )}
             <T stil="karte" as="h3" max={24}>
               {s.titel}
             </T>
@@ -192,6 +195,7 @@ const leistungen: Spalten = {
 const prozess: Spalten = {
   label: 'Ablauf',
   titel: 'Vom Briefing bis zum Launch',
+  nummeriert: true,
   spalten: [
     { titel: 'Briefing', text: 'Ziele, Zielgruppen und Budget in einem Workshop klären.' },
     { titel: 'Konzept', text: 'Struktur, Inhalte und Design als klickbarer Entwurf.' },
@@ -207,6 +211,8 @@ interface Treppe {
   titel: string;
   text?: string;
   stufen: { titel: string; text?: string; bild?: BildDaten }[];
+  /** big 01–04 above each step: only when the steps build on each other (F3i) */
+  nummeriert?: boolean;
 }
 
 const TreppeFolie: React.FC<Treppe> = (p) => {
@@ -225,10 +231,12 @@ const TreppeFolie: React.FC<Treppe> = (p) => {
         <ol style={{ display: 'grid', gridTemplateColumns: `repeat(${p.stufen.length}, 1fr)`, gap: 'var(--s2)', alignItems: 'end' }}>
           {p.stufen.map((s, i) => (
             <li key={i} style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className="t-titel leise" style={{ fontVariantNumeric: 'tabular-nums' }}>
-                {nr(i)}
-              </div>
-              <T stil="karte" as="h3" max={11} style={{ marginTop: 'var(--s2)' }}>
+              {p.nummeriert && (
+                <div className="t-titel leise" style={{ fontVariantNumeric: 'tabular-nums', marginBottom: 'var(--s2)' }}>
+                  {nr(i)}
+                </div>
+              )}
+              <T stil="karte" as="h3" max={11}>
                 {s.titel}
               </T>
               <T stil="meta" leise max={40} style={{ marginTop: 'var(--s1)' }}>
@@ -709,8 +717,8 @@ export const portfolioLayouts: LayoutDef[] = [
   { id: 'kapitel-bild', name: 'Kapitel mit Bildcollage', gruppe: 'Kapitel', quelle: 'portfolio-017', zweck: 'Kapitelanfang mit kurzer Beschreibung und drei Bildern rechts.', komponente: KapitelBildFolie, beispiel: kapitelBild, limits: { label: 24, nummer: 4, titel: 36, text: 110 }, anzahl: { bilder: [0, 3] } },
   { id: 'ansatz', name: 'Ansatz zentriert', gruppe: 'Wert', quelle: 'portfolio-002', zweck: 'Haltung oder Arbeitsweise in einem ruhigen, zentrierten Absatz.', komponente: AnsatzFolie, beispiel: ansatz, limits: { label: 24, titel: 32, text: 150 } },
   { id: 'rahmen-bild', name: 'Bild mit Aussage', gruppe: 'Wert', quelle: 'portfolio-003', zweck: 'Ein oder zwei Bilder (z. B. vorher/nachher) und eine Aussage darunter.', komponente: RahmenBildFolie, beispiel: rahmenBild, limits: { label: 24, aussage: 70 }, anzahl: { bilder: [0, 2] } },
-  { id: 'leistungen-spalten', name: 'Leistungen in Spalten', gruppe: 'Leistung', quelle: 'portfolio-004', zweck: 'Drei bis vier Leistungen mit Nummer, Titel und kurzem Text.', komponente: SpaltenFolie, beispiel: leistungen, limits: spaltenLimits, anzahl: { spalten: [3, 4] } },
-  { id: 'leistungen-treppe', name: 'Schwerpunkte als Treppe', gruppe: 'Leistung', quelle: 'portfolio-006', zweck: 'Einleitung links, vier nummerierte Stufen mit steigenden Bildbalken.', komponente: TreppeFolie, beispiel: treppe, limits: { label: 24, titel: 24, text: 90, 'stufen[].titel': 11, 'stufen[].text': 40 }, anzahl: { stufen: [4, 4] } },
+  { id: 'leistungen-spalten', name: 'Leistungen in Spalten', gruppe: 'Leistung', quelle: 'portfolio-004', zweck: 'Drei bis vier Leistungen mit Titel und kurzem Text, ohne Nummern (keine Reihenfolge, F3i).', komponente: SpaltenFolie, beispiel: leistungen, limits: spaltenLimits, anzahl: { spalten: [3, 4] } },
+  { id: 'leistungen-treppe', name: 'Schwerpunkte als Treppe', gruppe: 'Leistung', quelle: 'portfolio-006', zweck: 'Einleitung links, vier Stufen mit steigenden Bildbalken; Nummern nur mit nummeriert: true (F3i).', komponente: TreppeFolie, beispiel: treppe, limits: { label: 24, titel: 24, text: 90, 'stufen[].titel': 11, 'stufen[].text': 40 }, anzahl: { stufen: [4, 4] } },
   { id: 'arbeiten-reihe', name: 'Arbeiten in einer Reihe', gruppe: 'Arbeiten', quelle: 'portfolio-007', zweck: 'Fünf Projektbilder unterschiedlicher Größe, zur Mitte hin wachsend.', komponente: ArbeitenReiheFolie, beispiel: arbeitenReihe, limits: { label: 24, titel: 36, ...bildTextLimits }, anzahl: { bilder: [0, 5] } },
   { id: 'arbeiten-projekt', name: 'Projekt mit drei Bildern', gruppe: 'Arbeiten', quelle: 'portfolio-008', zweck: 'Ein Projekt: großes Hauptbild und zwei Details mit Bildunterschrift.', komponente: ArbeitenProjektFolie, beispiel: arbeitenProjekt, limits: { label: 24, titel: 36, ...bildTextLimits }, anzahl: { bilder: [0, 3] } },
   { id: 'zitat-bilder', name: 'Satz zwischen Bildern', gruppe: 'Arbeiten', quelle: 'portfolio-031', zweck: 'Ein kurzer Satz zwischen drei frei gesetzten Projektbildern.', komponente: ZitatBilderFolie, beispiel: zitatBilder, limits: { label: 24, zitat: 84, 'bilder[].text': 32 }, anzahl: { bilder: [0, 3] } },
