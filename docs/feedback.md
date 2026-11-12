@@ -119,3 +119,9 @@ Status: done (S4).
 > Entfernen überall diese Akoja-Sleit-Namen, weil ja unsere Slice nicht die von Akoja.
 
 Status: done (S4). Feld quelle aus LayoutDef und Galerie entfernt.
+
+## F3k — 2026-11-12 (verbatim)
+
+> lass uns bitte [Screenshot: inhalt-zentriert] bitte die so bauen mit tabulatoren und dann proofen [Screenshot Referenz: Titel links, Nummern rechtsbündig in einer Spalte]
+
+Status: done (S4).
