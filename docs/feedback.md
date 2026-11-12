@@ -125,3 +125,11 @@ Status: done (S4). Feld quelle aus LayoutDef und Galerie entfernt.
 > lass uns bitte [Screenshot: inhalt-zentriert] bitte die so bauen mit tabulatoren und dann proofen [Screenshot Referenz: Titel links, Nummern rechtsbündig in einer Spalte]
 
 Status: done (S4).
+
+## F4 — 2026-11-12 (verbatim, dictated)
+
+> Schauen wir kurz, ob wir bei manchen Slides die Varianten zusammen mergen können, weil die ziemlich gleich sind. Vielleicht können wir ja mit einer Slide arbeiten mit mehreren Varianten und dafür hier ähnliche Slides zusammenführen, zum Beispiel Text mit Hochkant oder Bildsatz rechts, Bildsatz links, sowas wäre ja möglich als Varianten zu kombinieren. Oder Aussage auf Vollbild und Problem auf Vollbild ist eigentlich dieselbe Slide. Auch Probleme mit Bildmosaik, Problem mit Bildraster, Problem als großer Aussage sind ja eigentlich alles dieselben Varianten, deswegen vielleicht kann man die mergen und in einer Slide mit mehreren Varianten darstellen. Und lass uns noch für den Slide Skill integrieren, dass wir Wenn wir zum Beispiel die Marketing Strategy Skill nutzen oder den Pitch Prep Slide Skill, ein sauberes Handling haben, wann er welche Slides nutzen soll und wie er variieren soll und dass wir in Zukunft nicht immer die gleichen Komponenten nutzen, sondern. Wichtig wäre nur, dass er nicht setzt für die Slots. Das ist nicht komisch, wenn vom Layout irgendwann schickst du.
+> Also dass wir nicht immer dieselben Slides nutzen, sondern variieren und bei mehreren Pitches immer unterschiedliche Layout-Darstellungen abwechseln und nicht immer auf die eine langweilige Slide zurückgreifen. Ja, ich weiß noch nicht genau, wie wir das handeln können am besten. Also definiere einfach ein paar Regeln für. Wiederholung. Wiederholung? Duplizieren. Ja, Wiederholung, Duplizieren und dann machst du einfach ein Subagent im Skill, welcher das alles validiert. Aber du kannst aber das Skript machen, eigentlich. Oder ein Skript wäre noch besser, glaube ich.
+> (Rückfrage beantwortet:) Du darfst selber auch schauen, was Familien sinnvoll wären. Mach gerne auch Code zusammenlegen. … Ponytail-Audit … bevor macht glaube ich mehr Sinn. Abwechslung: nur Warnungen.
+
+Status: planned (S5), plan docs/plan/familien.md. Verstanden als: Bild-Varianten nur wählen, wenn echte Bilder da sind (keine leeren Slots).
