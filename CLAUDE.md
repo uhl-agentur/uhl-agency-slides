@@ -13,14 +13,14 @@ Next.js app for the agency's presentations. Two generations live here:
 | Primitives `Folie`, `T`, `Liste`, `Bild`, `Kennzahl`, `UhlZeichen`, `FolienRahmen` | `src/deck/system.tsx` |
 | Charts (bars, lines, venn, timeline, scale, matrix) | `src/deck/charts.tsx` |
 | Layout contract `LayoutDef`, deck format `Deck`, `pruefeLimits` | `src/deck/typen.ts` |
-| Layouts, one file per group | `src/deck/layouts/*.tsx` |
+| Layout families (S5): `registry.familien` = order + names; variants live in `src/deck/layouts/*.tsx` | `src/deck/registry.ts` |
 | Registry (gallery order) | `src/deck/registry.ts` |
 | Decks (content only) | `decks/<slug>.ts` |
-| Gallery: every layout light + dark | `/vorlagen`, single: `/vorlagen/<id>?thema=dark` |
+| Gallery: every family with its variants, light + dark | `/vorlagen`, single: `/vorlagen/<familie>/<variante>?thema=dark` |
 | One deck | `/deck/<slug>` |
 | Screenshots + overflow/limit check | `node scripts/shot.mjs --ids a,b --out output/shots` |
-| Deck check (limits, unknown layouts) | `npm run check:deck -- <slug>` |
-| Smoke test: every layout with stress content (max/min), overflow, overlap, widows, card insets | `npm run smoke` (dev server on 3417); stress data `src/deck/probe.ts`, `/vorlagen/<id>?probe=max` |
+| Deck check (limits, unknown family/variant, empty picture slots) | `npm run check:deck -- <slug>` |
+| Smoke test: every layout with stress content (max/min), overflow, overlap, widows, card insets | `npm run smoke` (dev server on 3417); stress data `src/deck/probe.ts`, `/vorlagen/<familie>/<variante>?probe=max` |
 | Typesetting selfcheck (`satz()` in `src/deck/cx.ts`) | `npm run check:satz` |
 | PDF | `node scripts/export-pdf.mjs --route /deck/<slug> --output <file>.pdf` |
 
@@ -30,6 +30,8 @@ Next.js app for the agency's presentations. Two generations live here:
 - Fonts from uhl-website: **Funnel Display** for voice (display, aussage, titel, zahl, karte), **Funnel Sans** for running text (lead, body, meta). **One scale, one weight** (F3g "fonts mergen und reduzieren"): Display always 550 at 136 · 72 · 56 · 32 (zahl = 136, zahl-s = 72, quote = aussage), Sans 32 · 24 · 18. Inventory of what slides really use: `/typo`. Headlines (display, aussage, titel, karte) write "und" as "&" automatically in `<T>` (F3g).
 - Type only via `<T stil=…>` / `t-*` classes; strong weight in running text via `t-stark`. Never a raw font size, colour or radius in a layout. Smallest text 18 px (`meta`).
 - Line length is capped by `max-width` in `em` on each style: display ~18 chars/line, aussage ~30, titel ~36, lead ~46, body ~62. Headlines `text-wrap: balance`, running text `pretty`. Line height: headings 0.98–1.15, lead 1.4, body 1.5.
+- **Families with variants** (F4): a family is one message, its variants are compositions of it. Deck slides name `{ layout: '<familie>', variante }`. Variants that differ by a parameter share one component (side, grid, count); really different compositions stay separate functions. Every variant declares `art` (text/bild/zahl/diagramm/liste) and `bilder` (picture slots). Why: user F4 "in einer Slide mit mehreren Varianten darstellen", "Code zusammenlegen".
+- **No empty picture slots in a deck**: `check-deck` fails when a slide has fewer real pictures (`src`) than its variant's `bilder`; without pictures pick a variant of the same family that needs none. Why: user F4 "nicht setzt für die Slots".
 - **Character limits** live per field in each `LayoutDef.limits`; `<T max>` outlines overflow in red on screen. A deck must pass `check-deck` before PDF export.
 - Radius never above 8 px (`--r`), tags 4 px. No pills, no circles, except portraits of people (`Bild portrait`) and chart shapes.
 - **Colour only via theme roles** (`deck.css` top: `--flaeche`, `--hoch`, `--hoch-2`, `--text`, `--text-2`, `--linie`, `--akzent`, `--akzent-text`, `--akzent-text-2`, `--balken`, `--spur`, `--spur-fertig`, `--logo`). Every slide renders in light AND dark from the same markup; never force a theme in a layout. Contrast of every role pair is checked (webdesign-rules, AA). Why: user F1 "light version vordefinierte farbcodes … und selbe für schwarz".

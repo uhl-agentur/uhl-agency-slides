@@ -1,37 +1,34 @@
 import type React from 'react';
 
 /* ============================================================================
-   Layout contract. Every layout file exports one or more LayoutDef. The
-   registry (registry.ts) collects them; the gallery (/vorlagen) renders every
-   layout in light and dark with its `beispiel`; a deck (decks/<slug>.ts) is a
-   list of { layout, props } that the check script validates against `limits`.
+   Layout contract (S5 families). A family is one message ("Titel", "Aussage mit
+   Bild"); its variants are different compositions of it. Every layout file
+   exports LayoutDef entries, one per variant; the registry (registry.ts) orders
+   them by family. The gallery (/vorlagen) renders every variant in light and
+   dark with its `beispiel`; a deck (decks/<slug>.ts) is a list of
+   { layout: <familie>, variante?, props } that check-deck validates.
    ============================================================================ */
 
-export type Gruppe =
-  | 'Titel'
-  | 'Inhalt'
-  | 'Einstieg'
-  | 'Team'
-  | 'Problem'
-  | 'Lösung'
-  | 'Leistung'
-  | 'Beweis'
-  | 'Wert'
-  | 'Preis'
-  | 'Ablauf'
-  | 'Kontakt'
-  | 'Kapitel'
-  | 'Arbeiten'
-  | 'Strategie';
+/** what a variant shows mainly; drives the rhythm rule of check-abwechslung */
+export type Art = 'text' | 'bild' | 'zahl' | 'diagramm' | 'liste';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- registry holds layouts with different prop shapes
 export interface LayoutDef<P = any> {
-  /** stable id, kebab-case, used in deck files */
-  id: string;
+  /** family id, kebab-case, used in deck files as `layout` */
+  familie: string;
+  /** variant key inside the family; singletons have none */
+  variante?: string;
+  /** variant name in the gallery */
   name: string;
-  gruppe: Gruppe;
-  /** one line: when to use this layout */
+  /** one line: when to use this variant */
   zweck: string;
+  art: Art;
+  /**
+   * Picture slots this variant renders. A deck slide needs at least this many real pictures
+   * (src) in its props, or check-deck fails: grey placeholder frames never ship (F4).
+   * A function when the count follows the props (one picture per team member).
+   */
+  bilder?: number | ((props: P) => number);
   komponente: React.FC<P>;
   beispiel: P;
   /**
@@ -44,7 +41,10 @@ export interface LayoutDef<P = any> {
 }
 
 export interface FolieImDeck {
+  /** family id */
   layout: string;
+  /** variant key; missing = the family's first variant */
+  variante?: string;
   props: Record<string, unknown>;
   thema?: 'light' | 'dark';
   /** note for the speaker / leitfaden, never on the slide */
@@ -88,4 +88,20 @@ function werte(obj: unknown, teile: string[], ort: string): [string, unknown][] 
     return v.flatMap((x, i) => werte(x, rest, `${ort}${key}[${i}]${rest.length ? '.' : ''}`));
   }
   return werte(v, rest, `${ort}${key}${rest.length ? '.' : ''}`);
+}
+
+/** "familie/variante" (or "familie" for a singleton): gallery anchor, /vorlagen/<pfad>, smoke ids */
+export const pfadVon = (l: Pick<LayoutDef, 'familie' | 'variante'>) => (l.variante ? `${l.familie}/${l.variante}` : l.familie);
+
+/** picture slots a slide with these props needs (LayoutDef.bilder) */
+export function bilderNoetig(def: Pick<LayoutDef, 'bilder'>, props: Record<string, unknown>): number {
+  return typeof def.bilder === 'function' ? def.bilder(props) : (def.bilder ?? 0);
+}
+
+/** real pictures in props: every object with a non-empty src, at any depth */
+export function echteBilder(v: unknown): number {
+  if (Array.isArray(v)) return v.reduce((n: number, x) => n + echteBilder(x), 0);
+  if (!v || typeof v !== 'object') return 0;
+  const o = v as Record<string, unknown>;
+  return (typeof o.src === 'string' && o.src.trim() ? 1 : 0) + Object.entries(o).reduce((n, [k, x]) => n + (k === 'src' ? 0 : echteBilder(x)), 0);
 }

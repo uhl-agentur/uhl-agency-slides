@@ -1,23 +1,27 @@
 import type { Deck } from '../src/deck/typen';
 
-/* Minimal demo deck: shows the deck format. Real decks: copy this file, register in decks/index.ts. */
+/* Minimal demo deck: shows the deck format { layout: <familie>, variante?, props }.
+   Real decks: copy this file, register in decks/index.ts. */
 export const beispielDeck: Deck = {
   slug: 'beispiel',
   titel: 'Beispiel-Deck',
   thema: 'light',
   folien: [
     {
-      layout: 'titel-links',
+      layout: 'titel',
+      variante: 'links',
       props: { titel: 'So sieht ein Uhl-Deck aus', unterzeile: 'Inhalt in decks/<slug>.ts, Gestaltung im Deck-System.', kunde: 'Uhl Werbeagentur', datum: 'November 2026' },
     },
     {
-      layout: 'inhalt-zeilen',
+      layout: 'inhalt',
+      variante: 'zeilen',
       props: { label: 'Inhalt', titel: 'Was wir heute besprechen', kapitel: ['Ausgangslage', 'Strategie', 'Nächste Schritte'] },
     },
     {
-      layout: 'titel-bild',
+      layout: 'kontakt',
+      variante: 'abschluss',
       thema: 'dark',
-      props: { titel: 'Danke für Ihre Zeit', unterzeile: 'Uhl Werbeagentur · Augsburg' },
+      props: { aussage: 'Danke für Ihre Zeit', mail: 'info@uhl-werbeagentur.de', zeilen: ['Uhl Werbeagentur, Augsburg'] },
     },
   ],
 };

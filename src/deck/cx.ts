@@ -1,6 +1,9 @@
 // Plain helpers, no 'use client': layouts rendered on the server may call them.
 export const cx = (...k: (string | false | null | undefined)[]) => k.filter(Boolean).join(' ');
 
+/** 01, 02 … for a real order (steps, phases) */
+export const nr = (i: number) => String(i + 1).padStart(2, '0');
+
 /** Length a reader sees: the ==highlight== marks do not count. */
 export const sichtbareLaenge = (s: string) => s.replace(/==/g, '').length;
 

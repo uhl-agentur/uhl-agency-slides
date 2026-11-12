@@ -29,16 +29,17 @@ const EinstiegTextFolie: React.FC<EinstiegText> = (p) => (
   </Folie>
 );
 
-/* --------------------------------------------------------- einstieg-bild --- */
+/* ------------------------------------------------ aussage-bild / vollbild --- */
 interface AussageBild {
   label?: string;
   aussage: string;
   bild?: BildDaten;
 }
 
-const EinstiegBild: React.FC<AussageBild> = (p) => (
+/* one statement on a full picture: intro and problem alike (F4 merged einstieg-bild + problem-bild) */
+const AussageVollbild: React.FC<AussageBild> = (p) => (
   <Folie label={p.label}>
-    {/* full veil of the slide ground: statement in role colours, centred, light and dark */}
+    {/* full veil of the slide ground: statement in role colours, centred (feedback F1b "die aussage gerne mittig") */}
     <Bild bild={p.bild} eckig schleier="voll" platzhalter="" unterschrift={false} className="voll" />
     <div className="inhalt" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
       <T stil="aussage" as="h2" max={84}>
@@ -91,25 +92,21 @@ const Satz: React.FC<SatzBild & { rechts?: boolean }> = (p) => (
   </div>
 );
 
-const EinstiegBildSatz: React.FC<SatzBild> = (p) => (
-  <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'stretch' }}>
-      <Bild bild={p.bild} platzhalter="Bild" unterschrift={false} style={{ height: '100%' }} />
-      <div style={mitte}>
-        <Satz {...p} />
+/* picture left at full height and sentence right, or sentence right-aligned left of a landscape picture */
+const SatzBildFolie: React.FC<SatzBild & { bildRechts?: boolean }> = (p) => {
+  const bild = <Bild bild={p.bild} platzhalter="Bild" unterschrift={false} style={{ height: p.bildRechts ? 544 : '100%' }} />;
+  return (
+    <Folie label={p.label}>
+      <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: p.bildRechts ? 'center' : 'stretch' }}>
+        {!p.bildRechts && bild}
+        <div style={mitte}>
+          <Satz {...p} rechts={p.bildRechts} />
+        </div>
+        {p.bildRechts && bild}
       </div>
-    </div>
-  </Folie>
-);
-
-const EinstiegSatzBild: React.FC<SatzBild> = (p) => (
-  <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)', alignItems: 'center' }}>
-      <Satz {...p} rechts />
-      <Bild bild={p.bild} platzhalter="Bild quer" unterschrift={false} style={{ height: 544 }} />
-    </div>
-  </Folie>
-);
+    </Folie>
+  );
+};
 
 /* ------------------------------------------------------------ team-reihe --- */
 interface Mitglied {
@@ -185,57 +182,27 @@ const ProblemTextFolie: React.FC<ProblemText> = (p) => (
   </Folie>
 );
 
-/* ---------------------------------------------------------- problem-bild --- */
-const ProblemBild: React.FC<AussageBild> = (p) => (
-  <Folie label={p.label}>
-    {/* full veil of the slide ground: statement in role colours, centred (feedback F1b "die aussage gerne mittig") */}
-    <Bild bild={p.bild} eckig schleier="voll" platzhalter="" unterschrift={false} className="voll" />
-    <div className="inhalt" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-      <T stil="aussage" as="h2" max={84}>
-        {p.aussage}
-      </T>
-    </div>
-  </Folie>
-);
-
 /* ------------------------------------------------ problem-mosaik / -raster --- */
 interface ProblemBilder extends ProblemText {
   bilder?: BildDaten[];
 }
 
-const ProblemMosaik: React.FC<ProblemBilder> = (p) => {
-  const b = (i: number) => <Bild bild={p.bilder?.[i]} platzhalter={`Bild ${i + 1}`} unterschrift={false} style={{ height: '100%' }} />;
+/* text column left, pictures right: mosaik = 4 in two rows of 1:2 and 2:1 (6-column grid), raster = 6 equal */
+const ProblemBilderFolie: React.FC<ProblemBilder & { raster?: boolean }> = (p) => {
+  const spans = p.raster ? [2, 2, 2, 2, 2, 2] : [2, 4, 4, 2];
   return (
     <Folie label={p.label}>
       <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
         <ProblemSpalte {...p} titelOben />
-        <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: 'var(--gap)' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 'var(--gap)' }}>
-            {b(0)}
-            {b(1)}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 'var(--gap)' }}>
-            {b(2)}
-            {b(3)}
-          </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gridTemplateRows: '1fr 1fr', gap: 'var(--gap)' }}>
+          {spans.map((span, i) => (
+            <Bild key={i} bild={p.bilder?.[i]} platzhalter={`Bild ${i + 1}`} unterschrift={false} style={{ height: '100%', gridColumn: `span ${span}` }} />
+          ))}
         </div>
       </div>
     </Folie>
   );
 };
-
-const ProblemRaster: React.FC<ProblemBilder> = (p) => (
-  <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--s4)' }}>
-      <ProblemSpalte {...p} titelOben />
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridTemplateRows: '1fr 1fr', gap: 'var(--gap)' }}>
-        {[0, 1, 2, 3, 4, 5].map((i) => (
-          <Bild key={i} bild={p.bilder?.[i]} platzhalter={`Bild ${i + 1}`} unterschrift={false} style={{ height: '100%' }} />
-        ))}
-      </div>
-    </div>
-  </Folie>
-);
 
 /* ------------------------------------------------------- problem-aussage --- */
 interface ProblemAussage {
@@ -312,11 +279,6 @@ const problemTextKurz: ProblemText = {
   punkte: ['Website seit Jahren nicht gepflegt', 'Kaum Bewertungen bei Google', 'Kein klarer Weg zur Anfrage'],
 };
 
-const problemBild: AussageBild = {
-  label: 'Ausgangslage',
-  aussage: 'Wer online nicht auffällt, wird von Kunden und Bewerbern ==übersehen==.',
-};
-
 const problemAussage: ProblemAussage = {
   label: 'Ausgangslage',
   saetze: ['Kunden suchen heute zuerst bei Google.', 'Wer dort fehlt, verliert Anfragen und Bewerber.'],
@@ -326,15 +288,14 @@ const problemAussage: ProblemAussage = {
 const problemLimits = { label: 24, titel: 60, einleitung: 60, 'punkte[]': 40 };
 
 export const einstiegLayouts: LayoutDef[] = [
-  { id: 'einstieg-text', name: 'Einstieg, Text', gruppe: 'Einstieg', zweck: 'Positionierung in einem Satz plus kurzer Absatz, wer wir sind.', komponente: EinstiegTextFolie, beispiel: einstiegText, limits: { label: 24, titel: 64, text: 170 } },
-  { id: 'einstieg-bild', name: 'Aussage auf Vollbild', gruppe: 'Einstieg', zweck: 'Eine Kernaussage über einem großen Stimmungsbild.', komponente: EinstiegBild, beispiel: einstiegBild, limits: { label: 24, aussage: 84 } },
-  { id: 'einstieg-bild-hoch', name: 'Text mit Hochkantbild', gruppe: 'Einstieg', zweck: 'Ziel oder Mission links, dazu bis zu drei Eckdaten und ein hohes Bild.', komponente: EinstiegBildHoch, beispiel: einstiegBildHoch, limits: { label: 24, text: 130, 'fakten[]': 40 }, anzahl: { fakten: [0, 3] } },
-  { id: 'einstieg-bild-satz', name: 'Bild, Satz rechts', gruppe: 'Einstieg', zweck: 'Ein quadratisches Bild und ein kurzer Satz in zwei Tönen.', komponente: EinstiegBildSatz, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
-  { id: 'einstieg-satz-bild', name: 'Satz links, Bild', gruppe: 'Einstieg', zweck: 'Kurzer Satz rechtsbündig neben einem Querformatbild.', komponente: EinstiegSatzBild, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
-  { id: 'team-reihe', name: 'Team in einer Reihe', gruppe: 'Team', zweck: 'Projektteam mit Überschrift und bis zu sechs Porträts mit Rolle.', komponente: TeamReiheFolie, beispiel: teamReihe, limits: { label: 24, titel: 72, 'mitglieder[].name': 28, 'mitglieder[].rolle': 32 }, anzahl: { mitglieder: [2, 6] } },
-  { id: 'problem-text', name: 'Problem, Text und Headline', gruppe: 'Problem', zweck: 'Ausgangslage als Textspalte, das Problem als Headline daneben.', komponente: ProblemTextFolie, beispiel: problemText, limits: problemLimits, anzahl: { punkte: [0, 4] } },
-  { id: 'problem-bild', name: 'Problem auf Vollbild', gruppe: 'Problem', zweck: 'Das Problem als ein Satz mittig auf einem großen Bild.', komponente: ProblemBild, beispiel: problemBild, limits: { label: 24, aussage: 84 } },
-  { id: 'problem-mosaik', name: 'Problem mit Bildmosaik', gruppe: 'Problem', zweck: 'Ausgangslage als Text, belegt mit vier Bildern (z. B. Screenshots, Situation vor Ort).', komponente: ProblemMosaik, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 4] } },
-  { id: 'problem-raster', name: 'Problem mit Bildraster', gruppe: 'Problem', zweck: 'Ausgangslage als Text neben sechs gleich großen Belegbildern.', komponente: ProblemRaster, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 6] } },
-  { id: 'problem-aussage', name: 'Problem als große Aussage', gruppe: 'Problem', zweck: 'Situation, Folge und Wirkung in zwei bis drei großen Sätzen, dazu zwei Bilder.', komponente: ProblemAussageFolie, beispiel: problemAussage, limits: { label: 24, 'saetze[]': 56 }, anzahl: { saetze: [2, 3], bilder: [0, 2] } },
+  { familie: 'text', variante: 'einleitung', name: 'Einleitung', art: 'text', zweck: 'Positionierung in einem Satz plus kurzer Absatz, wer wir sind.', komponente: EinstiegTextFolie, beispiel: einstiegText, limits: { label: 24, titel: 64, text: 170 } },
+  { familie: 'text', variante: 'liste', name: 'Liste und Headline', art: 'text', zweck: 'Ausgangslage als Textspalte mit Punkten, das Problem als Headline daneben.', komponente: ProblemTextFolie, beispiel: problemText, limits: problemLimits, anzahl: { punkte: [0, 4] } },
+  { familie: 'aussage-bild', variante: 'vollbild', name: 'Auf Vollbild', art: 'bild', bilder: 1, zweck: 'Eine Kernaussage (Haltung oder Problem) mittig über einem großen Bild.', komponente: AussageVollbild, beispiel: einstiegBild, limits: { label: 24, aussage: 84 } },
+  { familie: 'aussage-bild', variante: 'hochkant', name: 'Mit Hochkantbild', art: 'bild', bilder: 1, zweck: 'Ziel oder Mission links, dazu bis zu drei Eckdaten und ein hohes Bild.', komponente: EinstiegBildHoch, beispiel: einstiegBildHoch, limits: { label: 24, text: 130, 'fakten[]': 40 }, anzahl: { fakten: [0, 3] } },
+  { familie: 'aussage-bild', variante: 'bild-links', name: 'Bild links, Satz rechts', art: 'bild', bilder: 1, zweck: 'Ein hohes Bild und ein kurzer Satz in zwei Tönen.', komponente: SatzBildFolie, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
+  { familie: 'aussage-bild', variante: 'bild-rechts', name: 'Satz links, Bild rechts', art: 'bild', bilder: 1, zweck: 'Kurzer Satz rechtsbündig neben einem Querformatbild.', komponente: (p: SatzBild) => <SatzBildFolie {...p} bildRechts />, beispiel: satzBild, limits: { label: 24, satz: 40, nachsatz: 40 } },
+  { familie: 'aussage-bilder', variante: 'mosaik', name: 'Text mit Bildmosaik', art: 'bild', bilder: 4, zweck: 'Ausgangslage als Text, belegt mit vier Bildern (z. B. Screenshots, Situation vor Ort).', komponente: ProblemBilderFolie, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 4] } },
+  { familie: 'aussage-bilder', variante: 'raster', name: 'Text mit Bildraster', art: 'bild', bilder: 6, zweck: 'Ausgangslage als Text neben sechs gleich großen Belegbildern.', komponente: (p: ProblemBilder) => <ProblemBilderFolie {...p} raster />, beispiel: problemTextKurz, limits: { ...problemLimits, titel: 36 }, anzahl: { punkte: [0, 3], bilder: [0, 6] } },
+  { familie: 'aussage-bilder', variante: 'saetze', name: 'Große Sätze', art: 'bild', bilder: 2, zweck: 'Situation, Folge und Wirkung in zwei bis drei großen Sätzen, dazu zwei Bilder.', komponente: ProblemAussageFolie, beispiel: problemAussage, limits: { label: 24, 'saetze[]': 56 }, anzahl: { saetze: [2, 3], bilder: [0, 2] } },
+  { familie: 'team', name: 'Team in einer Reihe', art: 'bild', bilder: (p: TeamReihe) => p.mitglieder.length, zweck: 'Projektteam mit Überschrift und bis zu sechs Porträts mit Rolle.', komponente: TeamReiheFolie, beispiel: teamReihe, limits: { label: 24, titel: 72, 'mitglieder[].name': 28, 'mitglieder[].rolle': 32 }, anzahl: { mitglieder: [2, 6] } },
 ];

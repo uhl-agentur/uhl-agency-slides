@@ -275,31 +275,12 @@ interface Galerie {
   bilder: BildDaten[];
 }
 
-const Bento8L: React.FC<Galerie> = (p) => (
+/** two rows of pictures; spalten = grid columns, spans = column span of each tile (its count = slots) */
+const RasterL: React.FC<Galerie & { spalten: string; spans: number[] }> = (p) => (
   <Folie label={p.label}>
-    <div style={{ ...galerie, gridTemplateColumns: '2fr 3.4fr 2fr 3.4fr', gridTemplateRows: '1fr 1fr' }}>
-      {Array.from({ length: 8 }, (_, i) => (
-        <Bild key={i} {...slot(p.bilder, i, 'Projekt')} style={{ minHeight: 0 }} />
-      ))}
-    </div>
-  </Folie>
-);
-
-const Bento53L: React.FC<Galerie> = (p) => (
-  <Folie label={p.label}>
-    <div style={{ ...galerie, gridTemplateColumns: 'repeat(15, 1fr)', gridTemplateRows: '1fr 1fr' }}>
-      {[3, 3, 3, 3, 3, 6, 5, 4].map((span, i) => (
+    <div style={{ ...galerie, gridTemplateColumns: p.spalten, gridTemplateRows: '1fr 1fr' }}>
+      {p.spans.map((span, i) => (
         <Bild key={i} {...slot(p.bilder, i, 'Projekt')} style={{ gridColumn: `span ${span}`, minHeight: 0 }} />
-      ))}
-    </div>
-  </Folie>
-);
-
-const Raster6L: React.FC<Galerie> = (p) => (
-  <Folie label={p.label}>
-    <div style={{ ...galerie, gridTemplateColumns: 'repeat(3, 1fr)', gridTemplateRows: '1fr 1fr' }}>
-      {Array.from({ length: 6 }, (_, i) => (
-        <Bild key={i} {...slot(p.bilder, i, 'Projekt')} style={{ minHeight: 0 }} />
       ))}
     </div>
   </Folie>
@@ -402,114 +383,15 @@ const raster6: Galerie = {
 const galerieLimits = { label: 24, 'bilder[].text': 40 };
 
 export const loesungLayouts: LayoutDef[] = [
-  {
-    id: 'loesung-text',
-    name: 'Lösung, Text und Headline',
-    gruppe: 'Lösung',
-    zweck: 'Lösung in einem Satz rechts, Erklärung und Leitprinzipien links.',
-    komponente: LoesungTextL,
-    beispiel: loesungText,
-    limits: { label: 24, titel: 48, text: 160, zusatz: 100, punkteTitel: 30, 'punkte[]': 40 },
-    anzahl: { punkte: [2, 4] },
-  },
-  {
-    id: 'loesung-zickzack',
-    name: 'Lösung im Zickzack',
-    gruppe: 'Lösung',
-    zweck: 'Zwei Kernsätze im Wechsel mit zwei Bildern.',
-    komponente: ZickzackL,
-    beispiel: zickzack,
-    limits: { label: 24, oben: 64, unten: 64 },
-    anzahl: { bilder: [0, 2] },
-  },
-  {
-    id: 'loesung-verstreut',
-    name: 'Lösung in drei Bildern',
-    gruppe: 'Lösung',
-    zweck: 'Drei Funktionen oder Schritte als lose verteilte Bilder mit Beschreibung.',
-    komponente: VerstreutL,
-    beispiel: verstreut,
-    limits: { label: 24, 'schritte[].titel': 28, 'schritte[].text': 80 },
-    anzahl: { schritte: [3, 3] },
-  },
-  {
-    id: 'loesung-mitte',
-    name: 'Lösung, Satz zwischen Bildern',
-    gruppe: 'Lösung',
-    zweck: 'Ein zentraler Satz, umgeben von vier kleinen Bildern mit Stichwort.',
-    komponente: MitteL,
-    beispiel: mitte,
-    limits: { label: 24, satz: 64, 'bilder[].text': 24 },
-    anzahl: { bilder: [0, 4] },
-  },
-  {
-    id: 'loesung-bilder-text',
-    name: 'Lösung, Bilder und großer Text',
-    gruppe: 'Lösung',
-    zweck: 'Zwei Bilder links, Nutzenversprechen mit Punkten rechts.',
-    komponente: BilderTextL,
-    beispiel: bilderText,
-    limits: { label: 24, titel: 60, text: 110, 'punkte[]': 34, 'bilder[].text': 60 },
-    anzahl: { punkte: [0, 3], bilder: [0, 2] },
-  },
-  {
-    id: 'leistung-karten4',
-    name: 'Leistung in vier Karten',
-    gruppe: 'Leistung',
-    zweck: 'Leistungsversprechen als Headline, darunter vier Bausteine mit Icon.',
-    komponente: Karten4L,
-    beispiel: karten4,
-    limits: { label: 24, titel: 56, 'karten[].titel': 28, 'karten[].text': 90 },
-    anzahl: { karten: [3, 4] },
-  },
-  {
-    id: 'leistung-mosaik',
-    name: 'Leistung mit Bildmosaik',
-    gruppe: 'Leistung',
-    zweck: 'Ein Projekt oder Produkt in Text links und vier Bildern rechts.',
-    komponente: MosaikL,
-    beispiel: mosaik,
-    limits: { label: 24, titel: 48, text: 140, 'punkte[]': 40, 'bilder[].text': 40 },
-    anzahl: { punkte: [0, 3], bilder: [0, 4] },
-  },
-  {
-    id: 'leistung-bento8',
-    name: 'Arbeiten, Bento mit acht Bildern',
-    gruppe: 'Leistung',
-    zweck: 'Acht Arbeiten in zwei Reihen mit wechselnder Breite.',
-    komponente: Bento8L,
-    beispiel: { label: 'Arbeiten', bilder: leer(8) },
-    limits: galerieLimits,
-    anzahl: { bilder: [0, 8] },
-  },
-  {
-    id: 'leistung-bento53',
-    name: 'Arbeiten, Bento fünf und drei',
-    gruppe: 'Leistung',
-    zweck: 'Fünf schmale Bilder oben, drei breite unten.',
-    komponente: Bento53L,
-    beispiel: { label: 'Arbeiten', bilder: leer(8) },
-    limits: galerieLimits,
-    anzahl: { bilder: [0, 8] },
-  },
-  {
-    id: 'leistung-raster6',
-    name: 'Arbeiten, Raster drei mal zwei',
-    gruppe: 'Leistung',
-    zweck: 'Sechs gleich große Arbeiten, optional mit Bildunterschrift.',
-    komponente: Raster6L,
-    beispiel: raster6,
-    limits: galerieLimits,
-    anzahl: { bilder: [0, 6] },
-  },
-  {
-    id: 'leistung-masonry',
-    name: 'Arbeiten, Vollbild-Mauerwerk',
-    gruppe: 'Leistung',
-    zweck: 'Bildwand über die ganze Folie, als Pause zwischen Kapiteln.',
-    komponente: MasonryL,
-    beispiel: { bilder: leer(13) },
-    limits: galerieLimits,
-    anzahl: { bilder: [0, 13] },
-  },
+  { familie: 'text', variante: 'loesung', name: 'Lösung mit Leitprinzipien', art: 'text', zweck: 'Lösung in einem Satz rechts, Erklärung und Leitprinzipien links.', komponente: LoesungTextL, beispiel: loesungText, limits: { label: 24, titel: 48, text: 160, zusatz: 100, punkteTitel: 30, 'punkte[]': 40 }, anzahl: { punkte: [2, 4] } },
+  { familie: 'aussage-bilder', variante: 'zickzack', name: 'Zickzack', art: 'bild', bilder: 2, zweck: 'Zwei Kernsätze im Wechsel mit zwei Bildern.', komponente: ZickzackL, beispiel: zickzack, limits: { label: 24, oben: 64, unten: 64 }, anzahl: { bilder: [0, 2] } },
+  { familie: 'aussage-bilder', variante: 'verstreut', name: 'Drei verstreute Bilder', art: 'bild', bilder: 3, zweck: 'Drei Funktionen oder Schritte als lose verteilte Bilder mit Beschreibung.', komponente: VerstreutL, beispiel: verstreut, limits: { label: 24, 'schritte[].titel': 28, 'schritte[].text': 80 }, anzahl: { schritte: [3, 3] } },
+  { familie: 'aussage-bilder', variante: 'umrahmt', name: 'Satz von vier Bildern umrahmt', art: 'bild', bilder: 4, zweck: 'Ein zentraler Satz, umgeben von vier kleinen Bildern mit Stichwort.', komponente: MitteL, beispiel: mitte, limits: { label: 24, satz: 64, 'bilder[].text': 24 }, anzahl: { bilder: [0, 4] } },
+  { familie: 'text-bilder', variante: 'bilder-text', name: 'Bilder links, großer Text', art: 'bild', bilder: 2, zweck: 'Zwei Bilder links, Nutzenversprechen mit Punkten rechts.', komponente: BilderTextL, beispiel: bilderText, limits: { label: 24, titel: 60, text: 110, 'punkte[]': 34, 'bilder[].text': 60 }, anzahl: { punkte: [0, 3], bilder: [0, 2] } },
+  { familie: 'text-bilder', variante: 'leistung', name: 'Leistung mit Bildmosaik', art: 'bild', bilder: 4, zweck: 'Ein Projekt oder Produkt in Text links und vier Bildern rechts.', komponente: MosaikL, beispiel: mosaik, limits: { label: 24, titel: 48, text: 140, 'punkte[]': 40, 'bilder[].text': 40 }, anzahl: { punkte: [0, 3], bilder: [0, 4] } },
+  { familie: 'leistungen', variante: 'karten', name: 'Vier Karten mit Icon', art: 'liste', zweck: 'Leistungsversprechen als Headline, darunter drei bis vier Bausteine mit Icon.', komponente: Karten4L, beispiel: karten4, limits: { label: 24, titel: 56, 'karten[].titel': 28, 'karten[].text': 90 }, anzahl: { karten: [3, 4] } },
+  { familie: 'galerie', variante: 'bento8', name: 'Bento mit acht Bildern', art: 'bild', bilder: 8, zweck: 'Acht Arbeiten in zwei Reihen mit wechselnder Breite.', komponente: (p: Galerie) => <RasterL {...p} spalten="2fr 3.4fr 2fr 3.4fr" spans={[1, 1, 1, 1, 1, 1, 1, 1]} />, beispiel: { label: 'Arbeiten', bilder: leer(8) }, limits: galerieLimits, anzahl: { bilder: [0, 8] } },
+  { familie: 'galerie', variante: 'bento53', name: 'Bento fünf und drei', art: 'bild', bilder: 8, zweck: 'Fünf schmale Bilder oben, drei breite unten.', komponente: (p: Galerie) => <RasterL {...p} spalten="repeat(15, 1fr)" spans={[3, 3, 3, 3, 3, 6, 5, 4]} />, beispiel: { label: 'Arbeiten', bilder: leer(8) }, limits: galerieLimits, anzahl: { bilder: [0, 8] } },
+  { familie: 'galerie', variante: 'raster6', name: 'Raster drei mal zwei', art: 'bild', bilder: 6, zweck: 'Sechs gleich große Arbeiten, optional mit Bildunterschrift.', komponente: (p: Galerie) => <RasterL {...p} spalten="repeat(3, 1fr)" spans={[1, 1, 1, 1, 1, 1]} />, beispiel: raster6, limits: galerieLimits, anzahl: { bilder: [0, 6] } },
+  { familie: 'galerie', variante: 'mauerwerk', name: 'Vollbild-Mauerwerk', art: 'bild', bilder: 13, zweck: 'Bildwand über die ganze Folie, als Pause zwischen Kapiteln.', komponente: MasonryL, beispiel: { bilder: leer(13) }, limits: galerieLimits, anzahl: { bilder: [0, 13] } },
 ];

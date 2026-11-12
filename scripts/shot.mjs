@@ -15,7 +15,7 @@ const page = await browser.newPage();
 await page.setViewport({ width: 1920, height: 1080 });
 if (!ids) {
   await page.goto(`http://localhost:${port}/vorlagen`, { waitUntil: 'networkidle0' });
-  ids = (await page.$$eval('.reihe', (r) => r.map((x) => x.id))).join(',');
+  ids = (await page.$$eval('.reihe', (r) => r.map((x) => x.dataset.pfad))).join(',');
 }
 const themen = thema === 'beide' ? ['light', 'dark'] : [thema];
 for (const id of ids.split(',').filter(Boolean)) {
@@ -32,7 +32,7 @@ for (const id of ids.split(',').filter(Boolean)) {
         return r.width > 0 && (r.right > s.right + 1 || r.bottom > s.bottom + 1 || r.left < s.left - 1) && getComputedStyle(e).position !== 'absolute' && e.textContent.trim();
       }).length;
     });
-    await el.screenshot({ path: `${out}/${id}-${t}.png` });
+    await el.screenshot({ path: `${out}/${id.replace("/", "-")}-${t}.png` });
     console.log(`${id}-${t}${zuLang ? ` ZU-LANG:${zuLang}` : ''}${ueber ? ` UEBERLAUF:${ueber}` : ''}`);
   }
 }

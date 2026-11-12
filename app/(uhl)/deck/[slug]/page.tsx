@@ -25,12 +25,12 @@ export default async function DeckSeite({ params }: { params: Promise<{ slug: st
         }
       `}</style>
       {deck.folien.map((f, i) => {
-        const l = layoutNach(f.layout);
+        const l = layoutNach(f.layout, f.variante);
         const K = l?.komponente;
         return (
           <div className="deck-folie" key={i}>
             <FolienRahmen thema={f.thema ?? deck.thema}>
-              {K ? <K {...f.props} /> : <div className="deck-fehler">Unbekanntes Layout: {f.layout}</div>}
+              {K ? <K {...f.props} /> : <div className="deck-fehler">Unbekanntes Layout: {f.layout}{f.variante ? ` / ${f.variante}` : ''}</div>}
             </FolienRahmen>
           </div>
         );

@@ -7,7 +7,7 @@
 //   ZEILENANFANG  a line starts with a unit, sign or dash that belongs to the line before ("38 / %")
 //   TRENNUNG      a hyphenated break leaves fewer than 3 letters on one side
 //   KARTE         a card's visible inset differs between top, left and bottom by more than 6 px
-// usage: node scripts/smoke.mjs [--port 3417] [--ids a,b] [--probe max|min|beide|keine] [--out dir]
+// usage: node scripts/smoke.mjs [--port 3417] [--ids titel/links,team] [--probe max|min|beide|keine] [--out dir]
 import puppeteer from 'puppeteer';
 import { mkdirSync } from 'node:fs';
 
@@ -23,7 +23,7 @@ const page = await browser.newPage();
 await page.setViewport({ width: 1920, height: 1080 });
 if (!ids) {
   await page.goto(`http://localhost:${port}/vorlagen`, { waitUntil: 'networkidle0' });
-  ids = (await page.$$eval('.reihe', (r) => r.map((x) => x.id))).join(',');
+  ids = (await page.$$eval('.reihe', (r) => r.map((x) => x.dataset.pfad))).join(',');
 }
 const probes = { beide: ['max', 'min'], keine: [''] }[probeArg] ?? [probeArg];
 
@@ -156,7 +156,7 @@ for (const id of ids.split(',').filter(Boolean)) {
       }
       await page.evaluate(() => document.fonts.ready);
       const funde = await page.evaluate(pruefe);
-      if (out) await (await page.$('section.folie')).screenshot({ path: `${out}/${id}-${probe || 'beispiel'}-${t}.png` });
+      if (out) await (await page.$('section.folie')).screenshot({ path: `${out}/${id.replace("/", "-")}-${probe || 'beispiel'}-${t}.png` });
       for (const f of funde) {
         console.log(`✗ ${ort}: ${f}`);
         proTyp[f.split(' ')[0]] = (proTyp[f.split(' ')[0]] ?? 0) + 1;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Bild, BildDaten, Folie, Liste, T } from '../system';
 import type { KennzahlDaten } from '../system';
 import type { LayoutDef } from '../typen';
-import { cx } from '../cx';
+import { cx, nr } from '../cx';
 import { ArrowRight, ArrowUp, MoveRight, TrendingDown, TrendingUp } from 'lucide-react';
 
 /* Strategy group: renders the output of the agency skills marketing-strategy
@@ -70,7 +70,6 @@ function Pfeil({ richtung }: { richtung: 'wächst' | 'stabil' | 'schrumpft' }) {
   return <Ikon size={32} strokeWidth={2} aria-hidden />;
 }
 
-const nr = (i: number) => String(i + 1).padStart(2, '0');
 const zahl = (n: number) => n.toLocaleString('de-DE');
 
 /* ================================================== 1 strategie-kernsatz === */
@@ -835,7 +834,8 @@ const PitchCaseFolie: React.FC<PitchCase> = (p) => (
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
         <div className="stapel-l">
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s2)' }}>
-            <Bild bild={p.logo} platzhalter="Logo" unterschrift={false} style={{ width: 120, height: 56 }} />
+            {/* logo only when there is one: an empty grey slot never ships (F4) */}
+            {p.logo?.src && <Bild bild={p.logo} unterschrift={false} style={{ width: 120, height: 56 }} />}
             <T stil="meta" leise max={60}>
               {[p.kunde, p.branche].filter(Boolean).join(' · ')}
             </T>
@@ -1169,111 +1169,111 @@ const offeneFragen: OffeneFragen = {
 
 export const strategieLayouts: LayoutDef[] = [
   {
-    id: 'strategie-kernsatz', name: 'Strategie-Kernsatz', gruppe: 'Strategie',
+    familie: 'strategie-kernsatz', name: 'Strategie-Kernsatz', art: 'text',
     zweck: 'marketing-strategy Slide 1 Kick-off: Präsens-Kernsatz, Stützsätze, Marketingstrategie für Kunde.',
     komponente: KernsatzFolie, beispiel: kernsatz,
     limits: { label: 24, kunde: 40, satz: 48, 'stuetzen[]': 96 }, anzahl: { stuetzen: [0, 3] },
   },
   {
-    id: 'strategie-marktbild', name: 'Marktbild mit Skala', gruppe: 'Strategie',
+    familie: 'strategie-marktbild', name: 'Marktbild mit Skala', art: 'diagramm',
     zweck: 'marketing-strategy Slide 2 Marktbild: Sophistication 1-5, Nachfrage-Richtung, ein kurzer Absatz, Fazit. SWOT auf eigener Folie (strategie-swot).',
     komponente: MarktbildFolie, beispiel: marktbild,
     limits: { label: 24, titel: 44, 'stufen[]': 18, nachfrageText: 14, text: 150, fazit: 80 },
     anzahl: { stufen: [5, 5] },
   },
   {
-    id: 'strategie-swot', name: 'SWOT ganzseitig', gruppe: 'Strategie',
+    familie: 'strategie-swot', name: 'SWOT ganzseitig', art: 'liste',
     zweck: 'marketing-strategy Slide 2 Element swot, wenn es eine eigene Folie braucht.',
     komponente: SwotFolie, beispiel: swotVoll,
     limits: { label: 24, titel: 44, 'staerken[]': 40, 'schwaechen[]': 40, 'chancen[]': 40, 'risiken[]': 40 },
     anzahl: { staerken: [2, 4], schwaechen: [2, 4], chancen: [2, 4], risiken: [2, 4] },
   },
   {
-    id: 'strategie-wettbewerb', name: 'Wettbewerb und Lücke', gruppe: 'Strategie',
+    familie: 'strategie-wettbewerb', name: 'Wettbewerb und Lücke', art: 'liste',
     zweck: 'marketing-strategy Slide 3 Konkurrenz: Wettbewerber-Zeilen, Lücke als Payoff, Differenzierung.',
     komponente: WettbewerbFolie, beispiel: wettbewerb,
     limits: { label: 24, titel: 44, 'wettbewerber[].name': 28, 'wettbewerber[].typ': 36, 'wettbewerber[].merkmal': 70, luecke: 80, 'punkte[]': 60 },
     anzahl: { wettbewerber: [2, 4], punkte: [0, 3] },
   },
   {
-    id: 'strategie-matrix', name: 'Positionierungs-Matrix', gruppe: 'Strategie',
+    familie: 'diagramm', variante: 'matrix', name: 'Positionierungs-Matrix', art: 'diagramm',
     zweck: 'marketing-strategy Slide 3 Konkurrenz: Positionierungs-Matrix mit zwei ehrlichen Achsen.',
     komponente: MatrixFolie, beispiel: matrix,
     limits: { label: 24, titel: 44, text: 150, 'achseX.minus': 26, 'achseX.plus': 26, 'achseY.minus': 26, 'achseY.plus': 26, 'anbieter[].name': 24, 'wir.name': 18 },
     anzahl: { anbieter: [3, 7] },
   },
   {
-    id: 'strategie-personas', name: 'Persona-Vergleich', gruppe: 'Strategie',
+    familie: 'strategie-personas', name: 'Persona-Vergleich', art: 'liste',
     zweck: 'marketing-strategy Slide 4 Persona: Segment, Sophistication, Trigger, Desire, Pain, Objection, Tonalität.',
     komponente: PersonasFolie, beispiel: personas,
     limits: { label: 24, titel: 44, 'personas[].name': 22, 'personas[].segment': 30, 'personas[].ausloeser': 30, 'personas[].wunsch': 30, 'personas[].schmerz': 30, 'personas[].einwand': 30, 'personas[].ton': 30 },
     anzahl: { personas: [2, 4] },
   },
   {
-    id: 'strategie-journey', name: 'User Journey', gruppe: 'Strategie',
+    familie: 'strategie-journey', name: 'User Journey', art: 'liste',
     zweck: 'marketing-strategy Slide 4 Element user_journey: Phasen mit Kontaktpunkt und Bedürfnis.',
     komponente: JourneyFolie, beispiel: journey,
     limits: { label: 24, titel: 44, persona: 60, 'phasen[].name': 16, 'phasen[].kontakt': 36, 'phasen[].beduerfnis': 56 },
     anzahl: { phasen: [3, 6] },
   },
   {
-    id: 'strategie-unternehmen', name: 'Unternehmen: USP und Botschaft', gruppe: 'Strategie',
-    zweck: 'marketing-strategy Slide 5 Unternehmen: Kernbotschaft, USP, drei Messaging-Säulen. Trust-Zahlen auf beweis-kennzahlen3.',
+    familie: 'strategie-unternehmen', name: 'Unternehmen: USP und Botschaft', art: 'text',
+    zweck: 'marketing-strategy Slide 5 Unternehmen: Kernbotschaft, USP, drei Messaging-Säulen. Trust-Zahlen auf kennzahlen/drei.',
     komponente: UnternehmenFolie, beispiel: unternehmen,
     limits: { label: 24, kernbotschaft: 56, usp: 80, 'saeulen[].titel': 24, 'saeulen[].text': 64 },
     anzahl: { saeulen: [2, 3] },
   },
   {
-    id: 'strategie-kanalmix', name: 'Ist-Analyse Kanalmix', gruppe: 'Strategie',
+    familie: 'strategie-kanalmix', name: 'Ist-Analyse Kanalmix', art: 'liste',
     zweck: 'marketing-strategy Slide 6 Ist-Analyse Kanal-Mix: je Domain Ampel, Ist-Zustand, Baseline.',
     komponente: KanalmixFolie, beispiel: kanalmix,
     limits: { label: 24, titel: 44, 'bereiche[].name': 18, 'bereiche[].befund': 68, 'bereiche[].baseline': 24 },
     anzahl: { bereiche: [3, 6] },
   },
   {
-    id: 'strategie-kpi', name: 'Kanalmix-Recap mit KPI', gruppe: 'Strategie',
+    familie: 'strategie-kpi', name: 'Kanalmix-Recap mit KPI', art: 'zahl',
     zweck: 'marketing-strategy Slide 7 Kanal-Mix-Recap: Domain, Ampel, Baseline-KPI zu Ziel-KPI, Annahme-Fußnote.',
     komponente: KpiFolie, beispiel: kpi,
     limits: { label: 24, titel: 44, 'zeilen[].bereich': 18, 'zeilen[].kennzahl': 40, 'zeilen[].von': 10, 'zeilen[].bis': 10, fussnote: 120 },
     anzahl: { zeilen: [3, 7] },
   },
   {
-    id: 'strategie-roadmap', name: 'Roadmap in zwei Stufen', gruppe: 'Strategie',
+    familie: 'strategie-roadmap', name: 'Roadmap in zwei Stufen', art: 'liste',
     zweck: 'marketing-strategy Slide 8 Roadmap: Fundament, dann Betreuung mit KPI-Meilensteinen und Zeiten.',
     komponente: RoadmapFolie, beispiel: roadmap,
     limits: { label: 24, titel: 44, 'fundament.zeitraum': 24, 'fundament.titel': 28, 'fundament.punkte[]': 34, 'betreuung.zeitraum': 24, 'betreuung.titel': 28, 'betreuung.punkte[]': 34, 'meilensteine[].zeit': 20, 'meilensteine[].kpi': 44 },
     anzahl: { meilensteine: [2, 4] },
   },
   {
-    id: 'strategie-balken', name: 'Balkendiagramm', gruppe: 'Strategie',
+    familie: 'diagramm', variante: 'balken', name: 'Balkendiagramm', art: 'diagramm',
     zweck: 'research-markt / research-seo: Markt- und Suchzahlen als Balken, ein Wert hervorgehoben.',
     komponente: BalkenFolie, beispiel: balken,
     limits: { label: 24, titel: 44, text: 150, quelle: 80, 'balken[].label': 26, 'balken[].anzeige': 10 },
     anzahl: { balken: [2, 8] },
   },
   {
-    id: 'strategie-linie', name: 'Liniendiagramm', gruppe: 'Strategie',
+    familie: 'diagramm', variante: 'linie', name: 'Liniendiagramm', art: 'diagramm',
     zweck: 'research-markt / research-seo: Trend über 12 Monate, eine Reihe hervorgehoben (Nachfrage-Richtung).',
     komponente: LinieFolie, beispiel: linie,
     limits: { label: 24, titel: 44, text: 150, quelle: 80, 'achse[]': 6, 'reihen[].name': 40 },
     anzahl: { achse: [2, 12], reihen: [1, 3] },
   },
   {
-    id: 'pitch-case', name: 'Referenz-Case', gruppe: 'Beweis',
+    familie: 'beweis', variante: 'case', name: 'Referenz-Case', art: 'zahl', bilder: 1,
     zweck: 'pitch-prep Abschnitt Relevante Referenzen: Kunde, Problem, Lösung, Ergebnisse, Bild.',
     komponente: PitchCaseFolie, beispiel: pitchCase,
     limits: { label: 24, kunde: 32, branche: 26, titel: 60, herausforderung: 100, loesung: 100, 'ergebnisse[].wert': 6, 'ergebnisse[].text': 44 },
     anzahl: { ergebnisse: [2, 3] },
   },
   {
-    id: 'pitch-pakete', name: 'Angebotspakete', gruppe: 'Preis',
+    familie: 'preise', variante: 'pakete', name: 'Angebotspakete', art: 'zahl',
     zweck: 'pitch-prep Lösungsansatz / angebot: zwei bis drei Pakete nebeneinander, eins empfohlen.',
     komponente: PaketeFolie, beispiel: pakete,
     limits: { label: 24, titel: 44, 'pakete[].name': 24, 'pakete[].fuer': 48, 'pakete[].preis': 14, 'pakete[].einheit': 36, 'pakete[].punkte[]': 36 },
     anzahl: { pakete: [2, 3] },
   },
   {
-    id: 'offene-fragen', name: 'Offene Fragen an den Kunden', gruppe: 'Ablauf',
+    familie: 'offene-fragen', name: 'Offene Fragen an den Kunden', art: 'liste',
     zweck: 'marketing-research-writer FEHLT-Marker und kundenfragen.md: offene Punkte mit Zuständigkeit.',
     komponente: OffeneFragenFolie, beispiel: offeneFragen,
     limits: { label: 24, titel: 44, text: 140, 'fragen[].frage': 70, 'fragen[].wer': 28, 'fragen[].zu': 28 },

@@ -22,37 +22,34 @@ interface KennzahlenText extends Omit<Kennzahlen, 'aussage' | 'bild'> {
   text?: string;
 }
 
-/** grey tiles (role --hoch) in both themes, the one key figure in lime */
-const Kachelreihe: React.FC<{ k: KennzahlDaten[]; schluessel?: number }> = ({ k, schluessel }) => (
-  <div style={{ display: 'grid', gridTemplateColumns: `repeat(${k.length}, 440px)`, gap: 'var(--gap)', justifyContent: 'center' }}>
-    {k.map((z, i) => (
-      <Kennzahl key={i} k={z} max={{ wert: 6, text: 44 }} variante={i === schluessel ? 'akzent' : 'hoch'} style={{ height: 320, textAlign: 'center', alignItems: 'center' }} />
-    ))}
-  </div>
-);
-
-const KennzahlenBild: React.FC<Kennzahlen> = (p) => (
-  <Folie label={p.label}>
-    <Bild bild={p.bild} eckig schleier="voll" platzhalter="" unterschrift={false} className="voll" />
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s4)', textAlign: 'center' }}>
-      <T stil="aussage" as="h2" max={80}>
-        {p.aussage}
-      </T>
-      <Kachelreihe k={p.kennzahlen} schluessel={p.schluessel} />
-    </div>
-  </Folie>
-);
-
-const Kennzahlen3: React.FC<Kennzahlen> = (p) => (
-  <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s4)', textAlign: 'center' }}>
-      <T stil="aussage" as="h2" max={80}>
-        {p.aussage}
-      </T>
-      <Kachelreihe k={p.kennzahlen} schluessel={p.schluessel} />
-    </div>
-  </Folie>
-);
+/* Statement over a row of key figures, grey tiles (role --hoch) in both themes, the one key figure
+   in lime. Three figures = big tiles; more = three columns of small tiles. bildgrund = on a picture
+   behind a full veil. */
+const KennzahlenAussage: React.FC<Kennzahlen & { bildgrund?: boolean }> = (p) => {
+  const klein = p.kennzahlen.length > 3;
+  return (
+    <Folie label={p.label}>
+      {p.bildgrund && <Bild bild={p.bild} eckig schleier="voll" platzhalter="" unterschrift={false} className="voll" />}
+      <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s4)', textAlign: 'center' }}>
+        <T stil="aussage" as="h2" max={80}>
+          {p.aussage}
+        </T>
+        <div style={{ display: 'grid', gridTemplateColumns: klein ? 'repeat(3, 480px)' : `repeat(${p.kennzahlen.length}, 440px)`, gap: 'var(--gap)', justifyContent: 'center' }}>
+          {p.kennzahlen.map((z, i) => (
+            <Kennzahl
+              key={i}
+              k={z}
+              gross={!klein}
+              max={klein ? { wert: 5, text: 32 } : { wert: 6, text: 44 }}
+              variante={i === p.schluessel ? 'akzent' : 'hoch'}
+              style={klein ? { minHeight: 212, textAlign: 'center', alignItems: 'center', justifyContent: 'center' } : { height: 320, textAlign: 'center', alignItems: 'center' }}
+            />
+          ))}
+        </div>
+      </div>
+    </Folie>
+  );
+};
 
 const KennzahlenText6: React.FC<KennzahlenText> = (p) => (
   <Folie label={p.label}>
@@ -69,21 +66,6 @@ const KennzahlenText6: React.FC<KennzahlenText> = (p) => (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 'var(--gap)' }}>
         {p.kennzahlen.map((z, i) => (
           <Kennzahl key={i} k={z} gross={false} max={{ wert: 5, text: 32 }} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ minHeight: 200 }} />
-        ))}
-      </div>
-    </div>
-  </Folie>
-);
-
-const Kennzahlen6: React.FC<Kennzahlen> = (p) => (
-  <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'var(--s4)', textAlign: 'center' }}>
-      <T stil="aussage" as="h2" max={80}>
-        {p.aussage}
-      </T>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 480px)', gap: 'var(--gap)' }}>
-        {p.kennzahlen.map((z, i) => (
-          <Kennzahl key={i} k={z} gross={false} max={{ wert: 5, text: 32 }} variante={i === p.schluessel ? 'akzent' : 'hoch'} style={{ minHeight: 212, textAlign: 'center', alignItems: 'center', justifyContent: 'center' }} />
         ))}
       </div>
     </div>
@@ -259,33 +241,22 @@ interface Ablauf {
 
 const zeitleisteMax = { titel: 22, datum: 20, text: 70 };
 
-const AblaufZeitleiste: React.FC<Ablauf> = (p) => (
-  <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      <Zeitleiste punkte={p.punkte} erreicht={p.erreicht} max={zeitleisteMax} />
-    </div>
-  </Folie>
-);
-
-const AblaufTitelZeitleiste: React.FC<Ablauf> = (p) => (
+/* Timeline across the full width; the title sits above it, or with `unten` as the big statement below. */
+const AblaufFolie: React.FC<Ablauf & { unten?: boolean; textMax: number }> = (p) => (
   <Folie label={p.label}>
     <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
-      <T stil="titel" as="h2" max={60}>
-        {p.titel}
-      </T>
-      {/* centred in the space below the headline */}
-      <Zeitleiste punkte={p.punkte} erreicht={p.erreicht} max={{ ...zeitleisteMax, text: 90 }} style={{ marginBlock: 'auto' }} />
-    </div>
-  </Folie>
-);
-
-const AblaufZeitleisteAussage: React.FC<Ablauf> = (p) => (
-  <Folie label={p.label}>
-    <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 'var(--s3)' }}>
-      <Zeitleiste punkte={p.punkte} erreicht={p.erreicht} max={{ ...zeitleisteMax, text: 100 }} style={{ marginTop: 'var(--s3)' }} />
-      <T stil="aussage" as="h2" max={60} style={{ textAlign: 'center', marginInline: 'auto' }}>
-        {p.titel}
-      </T>
+      {!p.unten && p.titel && (
+        <T stil="titel" as="h2" max={60}>
+          {p.titel}
+        </T>
+      )}
+      {/* with a headline above: centred in the space below it */}
+      <Zeitleiste punkte={p.punkte} erreicht={p.erreicht} max={{ ...zeitleisteMax, text: p.textMax }} style={p.unten ? { marginTop: 'var(--s3)' } : p.titel ? { marginBlock: 'auto' } : undefined} />
+      {p.unten && (
+        <T stil="aussage" as="h2" max={60} style={{ textAlign: 'center', marginInline: 'auto' }}>
+          {p.titel}
+        </T>
+      )}
     </div>
   </Folie>
 );
@@ -320,22 +291,27 @@ const KontaktMail: React.FC<Kontakt> = (p) => (
   </Folie>
 );
 
+/** mail and further contact lines under the closing sentence */
+const KontaktWege: React.FC<Kontakt & { leiseMail?: boolean }> = (p) => (
+  <div>
+    <T stil="body" leise={p.leiseMail} max={34}>
+      {p.mail}
+    </T>
+    {(p.zeilen ?? []).map((z, i) => (
+      <T key={i} stil="body" leise max={40}>
+        {z}
+      </T>
+    ))}
+  </div>
+);
+
 const KontaktAbschluss: React.FC<Kontakt> = (p) => (
   <Folie label={p.label}>
     <div className="inhalt" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: 'var(--s3)' }}>
       <T stil="aussage" as="h2" max={60}>
         {p.aussage}
       </T>
-      <div>
-        <T stil="body" leise max={34}>
-          {p.mail}
-        </T>
-        {(p.zeilen ?? []).map((z, i) => (
-          <T key={i} stil="body" leise max={40}>
-            {z}
-          </T>
-        ))}
-      </div>
+      <KontaktWege {...p} leiseMail />
     </div>
   </Folie>
 );
@@ -348,16 +324,7 @@ const KontaktBild: React.FC<Kontakt> = (p) => (
           <T stil="titel" as="h2" max={60}>
             {p.aussage}
           </T>
-          <div>
-            <T stil="body" max={34}>
-              {p.mail}
-            </T>
-            {(p.zeilen ?? []).map((z, i) => (
-              <T key={i} stil="body" leise max={40}>
-                {z}
-              </T>
-            ))}
-          </div>
+          <KontaktWege {...p} />
         </div>
       </div>
       <Bild bild={p.bild} eckig platzhalter="Teamfoto" unterschrift={false} style={{ height: '100%' }} />
@@ -374,50 +341,12 @@ const kontakt: Kontakt = {
 const kontaktLimits = { label: 24, aussage: 60, mail: 34, 'zeilen[]': 40 };
 
 export const beweisLayouts: LayoutDef[] = [
+  { familie: 'kennzahlen', variante: 'drei', name: 'Aussage und drei Kennzahlen', art: 'zahl', zweck: 'Eine Aussage, belegt mit drei Zahlen; eine davon als Schlüsselzahl.', komponente: KennzahlenAussage, beispiel: kennzahlen3, limits: kennzahlenLimits, anzahl: { kennzahlen: [3, 3] } },
+  { familie: 'kennzahlen', variante: 'sechs', name: 'Aussage und sechs Kennzahlen', art: 'zahl', zweck: 'Aussage oben, darunter sechs Ergebnisse in zwei Reihen.', komponente: KennzahlenAussage, beispiel: kennzahlen6, limits: { ...kennzahlenLimits, 'kennzahlen[].wert': 5, 'kennzahlen[].text': 32 }, anzahl: { kennzahlen: [6, 6] } },
+  { familie: 'kennzahlen', variante: 'text-sechs', name: 'Text und sechs Kennzahlen', art: 'zahl', zweck: 'Viele Ergebnisse auf einen Blick, mit kurzer Einordnung links.', komponente: KennzahlenText6, beispiel: kennzahlen9, limits: kennzahlen9Limits, anzahl: { kennzahlen: [2, 6] } },
+  { familie: 'kennzahlen', variante: 'bild', name: 'Drei Kennzahlen auf Bild', art: 'zahl', bilder: 1, zweck: 'Drei Belegzahlen als Kacheln auf einem Stimmungsbild hinter Schleier.', komponente: (p: Kennzahlen) => <KennzahlenAussage {...p} bildgrund />, beispiel: kennzahlen3, limits: kennzahlenLimits, anzahl: { kennzahlen: [3, 3] } },
   {
-    id: 'beweis-kennzahlen-bild',
-    name: 'Aussage + 3 Kennzahlen auf Bild',
-    gruppe: 'Beweis',
-    zweck: 'Drei Belegzahlen als Kacheln auf einem Stimmungsbild hinter Schleier.',
-    komponente: KennzahlenBild,
-    beispiel: kennzahlen3,
-    limits: kennzahlenLimits,
-    anzahl: { kennzahlen: [3, 3] },
-  },
-  {
-    id: 'beweis-kennzahlen3',
-    name: 'Aussage + 3 Kennzahlen',
-    gruppe: 'Beweis',
-    zweck: 'Eine Aussage, belegt mit drei Zahlen; eine davon als Schlüsselzahl.',
-    komponente: Kennzahlen3,
-    beispiel: kennzahlen3,
-    limits: kennzahlenLimits,
-    anzahl: { kennzahlen: [3, 3] },
-  },
-  {
-    id: 'beweis-text-kennzahlen',
-    name: 'Text + 6 Kennzahlen',
-    gruppe: 'Beweis',
-    zweck: 'Viele Ergebnisse auf einen Blick, mit kurzer Einordnung links.',
-    komponente: KennzahlenText6,
-    beispiel: kennzahlen9,
-    limits: kennzahlen9Limits,
-    anzahl: { kennzahlen: [2, 6] },
-  },
-  {
-    id: 'beweis-kennzahlen6',
-    name: 'Aussage + 6 Kennzahlen',
-    gruppe: 'Beweis',
-    zweck: 'Aussage oben, darunter sechs Ergebnisse in zwei Reihen.',
-    komponente: Kennzahlen6,
-    beispiel: kennzahlen6,
-    limits: { ...kennzahlenLimits, 'kennzahlen[].wert': 5, 'kennzahlen[].text': 32 },
-    anzahl: { kennzahlen: [6, 6] },
-  },
-  {
-    id: 'wert-mosaik',
-    name: 'Text + Bildmosaik',
-    gruppe: 'Wert',
+    familie: 'text-bilder', variante: 'mosaik', name: 'Text und drei Bilder', art: 'bild', bilder: 3,
     zweck: 'Nutzen in einem Satz, belegt mit drei Bildern aus Projekt oder Alltag.',
     komponente: WertMosaikFolie,
     beispiel: {
@@ -428,9 +357,7 @@ export const beweisLayouts: LayoutDef[] = [
     limits: { label: 24, titel: 48, text: 140 },
   },
   {
-    id: 'wert-venn',
-    name: 'Text + Venn-Diagramm',
-    gruppe: 'Wert',
+    familie: 'diagramm', variante: 'venn', name: 'Venn-Diagramm', art: 'diagramm',
     zweck: 'Positionierung als Schnittmenge aus Können, Kundenwunsch und Markt.',
     komponente: WertVennFolie,
     beispiel: {
@@ -448,9 +375,7 @@ export const beweisLayouts: LayoutDef[] = [
     anzahl: { punkte: [2, 5], kreise: [3, 3] },
   },
   {
-    id: 'wert-zwei-spalten',
-    name: 'Zwei Textspalten',
-    gruppe: 'Wert',
+    familie: 'text', variante: 'zwei-spalten', name: 'Zwei Textspalten', art: 'text',
     zweck: 'Vorher und nachher in zwei ruhigen Absätzen, ohne Bild.',
     komponente: ZweiSpaltenFolie,
     beispiel: {
@@ -460,32 +385,12 @@ export const beweisLayouts: LayoutDef[] = [
     } satisfies ZweiSpalten,
     limits: { label: 24, links: 160, rechts: 160 },
   },
+  { familie: 'preise', variante: 'balken', name: 'Preise als Balken', art: 'zahl', zweck: 'Zwei bis drei Pakete als Balken, das empfohlene in Lime (ab vier Balken passt der Preis nicht mehr in den Balken).', komponente: PreisBalkenFolie, beispiel: preis, limits: { label: 24, titel: 40, text: 120, hinweis: 80, 'stufen[].tag': 9, 'stufen[].label': 12, 'stufen[].sub': 26 }, anzahl: { stufen: [2, 3] } },
+  { familie: 'ablauf', variante: 'zeitleiste', name: 'Zeitleiste', art: 'liste', zweck: 'Projektablauf mit drei bis sechs Meilensteinen über die volle Breite.', komponente: (p: Ablauf) => <AblaufFolie {...p} titel={undefined} textMax={70} />, beispiel: { label: 'Ablauf', punkte: meilensteine, erreicht: 2 } satisfies Ablauf, limits: { label: 24, 'punkte[].titel': 22, 'punkte[].datum': 20, 'punkte[].text': 70 }, anzahl: { punkte: [3, 6] } },
   {
-    id: 'preis-balken',
-    name: 'Preise als Balken',
-    gruppe: 'Preis',
-    zweck: 'Zwei bis drei Pakete als Balken, das empfohlene in Lime (ab vier Balken passt der Preis nicht mehr in den Balken).',
-    komponente: PreisBalkenFolie,
-    beispiel: preis,
-    limits: { label: 24, titel: 40, text: 120, hinweis: 80, 'stufen[].tag': 9, 'stufen[].label': 12, 'stufen[].sub': 26 },
-    anzahl: { stufen: [2, 3] },
-  },
-  {
-    id: 'ablauf-zeitleiste',
-    name: 'Zeitleiste',
-    gruppe: 'Ablauf',
-    zweck: 'Projektablauf mit drei bis sechs Meilensteinen über die volle Breite.',
-    komponente: AblaufZeitleiste,
-    beispiel: { label: 'Ablauf', punkte: meilensteine, erreicht: 2 } satisfies Ablauf,
-    limits: { label: 24, 'punkte[].titel': 22, 'punkte[].datum': 20, 'punkte[].text': 70 },
-    anzahl: { punkte: [3, 6] },
-  },
-  {
-    id: 'ablauf-titel-zeitleiste',
-    name: 'Überschrift + Zeitleiste',
-    gruppe: 'Ablauf',
+    familie: 'ablauf', variante: 'titel-zeitleiste', name: 'Überschrift und Zeitleiste', art: 'liste',
     zweck: 'Überschrift oben, darunter vier Meilensteine bis zum Ziel.',
-    komponente: AblaufTitelZeitleiste,
+    komponente: (p: Ablauf) => <AblaufFolie {...p} textMax={90} />,
     beispiel: {
       label: 'Ablauf',
       titel: 'In vier Schritten zu planbaren Anfragen',
@@ -501,11 +406,9 @@ export const beweisLayouts: LayoutDef[] = [
     anzahl: { punkte: [3, 5] },
   },
   {
-    id: 'ablauf-zeitleiste-aussage',
-    name: 'Zeitleiste + Aussage',
-    gruppe: 'Ablauf',
+    familie: 'ablauf', variante: 'zeitleiste-aussage', name: 'Zeitleiste und Aussage', art: 'liste',
     zweck: 'Drei große Etappen oben, die Kernaussage groß darunter.',
-    komponente: AblaufZeitleisteAussage,
+    komponente: (p: Ablauf) => <AblaufFolie {...p} unten textMax={100} />,
     beispiel: {
       label: 'Nächste Schritte',
       titel: 'Jeder Schritt bringt Sie näher an planbare Anfragen.',
@@ -519,33 +422,7 @@ export const beweisLayouts: LayoutDef[] = [
     limits: { label: 24, titel: 60, 'punkte[].titel': 22, 'punkte[].datum': 20, 'punkte[].text': 100 },
     anzahl: { punkte: [3, 4] },
   },
-  {
-    id: 'kontakt-mail',
-    name: 'Kontakt: E-Mail groß',
-    gruppe: 'Kontakt',
-    zweck: 'Letzte Folie mit einer großen Kontaktadresse in der Mitte.',
-    komponente: KontaktMail,
-    beispiel: { label: 'Kontakt', aussage: 'Fragen? Schreiben Sie uns.', mail: 'info@uhl-werbeagentur.de' } satisfies Kontakt,
-    limits: { label: 24, aussage: 60, mail: 34 },
-  },
-  {
-    id: 'kontakt-abschluss',
-    name: 'Kontakt: Schlusssatz',
-    gruppe: 'Kontakt',
-    zweck: 'Schlusssatz groß in der Mitte, darunter die Kontaktwege.',
-    komponente: KontaktAbschluss,
-    beispiel: kontakt,
-    limits: kontaktLimits,
-    anzahl: { zeilen: [0, 3] },
-  },
-  {
-    id: 'kontakt-bild',
-    name: 'Kontakt mit Bild',
-    gruppe: 'Kontakt',
-    zweck: 'Schlusssatz und Kontakt links, Team- oder Bürofoto rechts.',
-    komponente: KontaktBild,
-    beispiel: kontakt,
-    limits: kontaktLimits,
-    anzahl: { zeilen: [0, 3] },
-  },
+  { familie: 'kontakt', variante: 'mail', name: 'E-Mail groß', art: 'text', zweck: 'Letzte Folie mit einer großen Kontaktadresse in der Mitte.', komponente: KontaktMail, beispiel: { label: 'Kontakt', aussage: 'Fragen? Schreiben Sie uns.', mail: 'info@uhl-werbeagentur.de' } satisfies Kontakt, limits: { label: 24, aussage: 60, mail: 34 } },
+  { familie: 'kontakt', variante: 'abschluss', name: 'Schlusssatz', art: 'text', zweck: 'Schlusssatz groß in der Mitte, darunter die Kontaktwege.', komponente: KontaktAbschluss, beispiel: kontakt, limits: kontaktLimits, anzahl: { zeilen: [0, 3] } },
+  { familie: 'kontakt', variante: 'bild', name: 'Mit Bild', art: 'bild', bilder: 1, zweck: 'Schlusssatz und Kontakt links, Team- oder Bürofoto rechts.', komponente: KontaktBild, beispiel: kontakt, limits: kontaktLimits, anzahl: { zeilen: [0, 3] } },
 ];
