@@ -7,14 +7,22 @@ import type { Deck } from './typen';
      1  same family + variant never twice in a row
      2  same family at most twice in a row
      3  same variant at most twice per deck
-     4  at most three text slides in a row
+     4  at most three slides of the same art in a row (pattern interrupt, S6)
      5  vs. the newest other deck of the same kind: more than half of the shared
         families on the same variant -> name the unused variants
+     6  show, do not list (S6): from 6 content slides on, at least a third are
+        bild / zahl / diagramm
+     7  strong end (S6, peak-end rule): a deck of 6+ slides ends on kontakt,
+        ablauf or offene-fragen, a next step instead of a summary
    Exempt from 2 and 3: families with one variant (strategy slides, team, open
    questions: nothing to vary) and kapitel (one divider per chapter by design).
    ============================================================================ */
 
-const MAX_TEXT_FOLGE = 3;
+const MAX_FOLGE = 3;
+/** frame slides: not counted as content for rule 6 */
+const RAHMEN = new Set(['titel', 'inhalt', 'kapitel', 'kontakt', 'offene-fragen']);
+const SCHLUSS = new Set(['kontakt', 'ablauf', 'offene-fragen']);
+const SICHTBAR = new Set(['bild', 'zahl', 'diagramm']);
 const frei = (familie: string) => familie === 'kapitel' || varianten(familie).length < 2;
 
 interface Stelle {
@@ -51,9 +59,17 @@ export function pruefeAbwechslung(deck: Deck, alle: Deck[] = []): string[] {
 
   let folge: Stelle[] = [];
   for (const x of s) {
-    folge = x.art === 'text' ? [...folge, x] : [];
-    if (folge.length === MAX_TEXT_FOLGE + 1) w.push(`Folien ${folge[0].nr}–${x.nr}: ${folge.length} Textfolien in Folge, höchstens ${MAX_TEXT_FOLGE}; Bild, Zahl oder Diagramm dazwischen (Regel 4)`);
+    folge = folge.length && folge[0].art === x.art ? [...folge, x] : [x];
+    if (folge.length === MAX_FOLGE + 1) w.push(`Folien ${folge[0].nr}–${x.nr}: ${folge.length}× art ${x.art} in Folge, höchstens ${MAX_FOLGE}; eine andere Darstellung dazwischen (Regel 4)`);
   }
+
+  const inhalt = s.filter((x) => !RAHMEN.has(x.familie));
+  const sichtbar = inhalt.filter((x) => SICHTBAR.has(x.art ?? ''));
+  if (inhalt.length >= 6 && sichtbar.length * 3 < inhalt.length)
+    w.push(`nur ${sichtbar.length} von ${inhalt.length} Inhaltsfolien zeigen Bild, Zahl oder Diagramm, mindestens ein Drittel; Struktur visualisieren: mindmap, trichter, kreislauf, vergleich, pyramide, anteile (Regel 6)`);
+
+  const ende = s[s.length - 1];
+  if (s.length >= 6 && !SCHLUSS.has(ende.familie)) w.push(`Folie ${ende.nr}: Deck endet auf ${name(ende)}; letzte Folie = nächster Schritt (kontakt, ablauf oder offene-fragen) (Regel 7)`);
 
   // rule 5: the newest other deck of the same kind
   const andere = deck.art ? alle.filter((d) => d.slug !== deck.slug && d.art === deck.art) : [];

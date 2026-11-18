@@ -28,12 +28,12 @@ Layouts are **families** (one message) with **variants** (compositions of it). S
 |---|---|
 | frame | `titel: vollbild \| bild-haelfte \| links` · `inhalt: zeilen \| gross \| bild` · `kapitel: trenner \| bilder` between chapters |
 | 1 kick-off | `strategie-kernsatz` |
-| 2 marktbild | `strategie-marktbild` + `strategie-swot` as its own slide; numbers: `diagramm: balken \| linie` |
+| 2 marktbild | `strategie-marktbild` + `strategie-swot` as its own slide; numbers: `diagramm: balken \| linie`; demand path `trichter: breit \| geteilt` |
 | 3 konkurrenz | `strategie-wettbewerb`, `diagramm: matrix` |
-| 4 persona | `strategie-personas` + `strategie-journey` |
-| 5 unternehmen | `strategie-unternehmen`; trust numbers `kennzahlen: drei \| text-sechs \| sechs \| bild`; design direction `text-bilder: mosaik \| projekt` or `aussage-bild: vollbild \| rahmen` |
-| 6 ist-analyse-kanalmix | `strategie-kanalmix` |
-| 7 kanalmix-recap | `strategie-kpi` |
+| 4 persona | `strategie-personas` + `strategie-journey`; needs and topics of one persona `mindmap: radial` |
+| 5 unternehmen | `strategie-unternehmen`; brand / message layers `pyramide`; us vs. the usual way `vergleich: tabelle`; trust numbers `kennzahlen: drei \| text-sechs \| sechs \| bild`; design direction `text-bilder: mosaik \| projekt` or `aussage-bild: vollbild \| rahmen` |
+| 6 ist-analyse-kanalmix | `strategie-kanalmix`; channels at a glance `mindmap: radial`; website structure `mindmap: baum` |
+| 7 kanalmix-recap | `strategie-kpi`; budget split `anteile`; monthly optimisation loop `kreislauf` |
 | 8 roadmap | `strategie-roadmap`, then `offene-fragen`, `kontakt: abschluss \| mail \| bild \| spalten` |
 
 **Table B — pitch outline section → family**
@@ -41,10 +41,10 @@ Layouts are **families** (one message) with **variants** (compositions of it). S
 | Section | Family: allowed variants |
 |---|---|
 | Deckblatt | `titel: bild-haelfte \| streu \| vollbild \| links` |
-| Ausgangslage | `text: liste \| einleitung` · `aussage-bild: vollbild \| bild-links \| bild-rechts \| hochkant` · `aussage-bilder: saetze \| mosaik \| raster` |
+| Ausgangslage | `trichter: geteilt \| breit` (where leads get lost) · `vergleich: vorher-nachher` · `text: liste \| einleitung` · `aussage-bild: vollbild \| bild-links \| bild-rechts \| hochkant` · `aussage-bilder: saetze \| mosaik \| raster` |
 | Relevante Referenzen (one per case) | `beweis: case \| stimme`; several: `beweis: logos \| jahre`, `text-bilder: projekt`, `galerie: reihe \| raster6 \| bento8` |
-| Lösungsansatz | `text: loesung \| zentriert \| zwei-spalten` · `leistungen: karten \| spalten \| treppe` · `aussage-bilder: zickzack \| verstreut \| umrahmt \| zwischen` · `ablauf: schritte \| zeitleiste \| titel-zeitleiste` |
-| Investition | `preise: pakete \| spalten \| balken` |
+| Lösungsansatz | `mindmap: radial \| baum` (channels, sitemap) · `vergleich: vorher-nachher \| tabelle` · `pyramide` · `kreislauf` (ongoing care) · `text: loesung \| zentriert \| zwei-spalten` · `leistungen: karten \| spalten \| treppe` · `aussage-bilder: zickzack \| verstreut \| umrahmt \| zwischen` · `ablauf: schritte \| zeitleiste \| titel-zeitleiste` |
+| Investition | `preise: pakete \| spalten \| balken`; media budget `anteile` |
 | Team | `team` (real photos from `public/team/`, one per member) |
 | Nächste Schritte | `ablauf: zeitleiste-aussage \| titel-zeitleiste`, `kontakt: abschluss \| mail \| bild` |
 
@@ -55,12 +55,37 @@ Layouts are **families** (one message) with **variants** (compositions of it). S
 4. Inside the deck: no variant twice in a row, a family at most twice in a row, a variant at most twice per deck, never more than three text slides in a row (alternate with bild / zahl / diagramm). One idea per slide, one headline + one supporting block (no second paragraph without a reason).
 5. Theme set once in `thema` (every variant exists in light and dark); single slides may switch for chapter breaks.
 
+**Show, do not list** (F5 "zu langweilig, sehr viel gleiche Slides"): before writing a text or list slide, check the content's shape. A shape on the left = the family on the right, a text slide only when nothing fits.
+
+| Content shape | Family |
+|---|---|
+| one topic with 3-6 parts (channels, topics, ideas) | `mindmap: radial` |
+| hierarchy, sitemap, offer structure | `mindmap: baum` |
+| numbers that shrink stage by stage (visitors, leads, customers) | `trichter` |
+| something that repeats (measure, learn, improve) | `kreislauf` |
+| before / after, today / tomorrow | `vergleich: vorher-nachher` |
+| us against alternatives on criteria | `vergleich: tabelle` |
+| layers that build on each other (brand house, messages) | `pyramide` |
+| parts of one whole (budget, traffic sources) | `anteile` (never a pie) |
+| 3-6 results | `kennzahlen` · steps with dates `ablauf` · overlap of three `diagramm: venn` · position against rivals `diagramm: matrix` |
+
+**Keep the audience** (best practice; rules 4, 6, 7 of `check:deck` warn):
+- Storyline SCQA (Minto): situation, complication, question, answer. The first content slide states the client's problem in their own numbers or words, not the agency.
+- Headline = assertion: a full sentence with a verb that states the slide's point ("Neun von zehn Besuchern gehen ohne Anfrage"), never a label ("Ausgangslage"). The label goes in `label`.
+- Pattern interrupt: never more than three slides of the same `art` in a row (rule 4); attention drops after ~10 minutes, so every chapter starts with a change (dark `kapitel`, a picture, one big number).
+- At least a third of the content slides are bild / zahl / diagramm (rule 6).
+- One surprise per chapter: a concrete number, a real customer quote, a before/after. One lime highlight per slide (von Restorff), at most four items per group (Cowan).
+- Peak and end (peak-end rule): put the strongest proof in the middle third, end on the next step (`kontakt`, `ablauf`, `offene-fragen`, rule 7), never on a summary.
+- Pitch length: 10-15 slides; cut a slide before shrinking its text.
+
 ## 3. Write the deck
 
 `decks/<slug>.ts` (copy `decks/beispiel.ts`), register it in `decks/index.ts`. Content only: `{ layout: '<familie>', variante: '<key>', props, thema?, notiz? }` per slide (no `variante` = the family's first). Props must match the variant's `beispiel` shape (read it in the layout file; variants of one family mostly share it). Text rules:
 - stay under every limit (shown in the gallery header; the slide outlines overflow in red),
 - `==wort==` = the one lime highlight of the slide, `\n` = deliberate line break,
 - German with real umlauts, numbers German ("38 %", "1.250 €"), headlines as statements, not labels,
+- no dash as a pause (em dash, spaced en dash or hyphen): comma, colon or full stop instead (F5; `check:deck` fails). Ranges without spaces ("2–4") are fine,
+- headlines write "&" for "und" (`<T>` does it; write it so in the deck too),
 - long compounds that must break: soft hyphen `­`.
 Pictures: `{ src: '/<kunde>/datei.jpg', alt, text? }`, files under `public/<kunde>/`. Missing picture = pick a variant that needs none (step 2), never a grey frame, never random stock; tell the user which pictures would unlock a picture variant.
 

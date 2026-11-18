@@ -5,6 +5,7 @@ import { loesungLayouts } from './layouts/loesung';
 import { beweisLayouts } from './layouts/beweis';
 import { portfolioLayouts } from './layouts/portfolio';
 import { strategieLayouts } from './layouts/strategie';
+import { visualLayouts } from './layouts/visual';
 
 /* Families in gallery order (S5). A family = one message; its variants = compositions of it.
    Each layout file exports one array; add it below once, and a new family here. */
@@ -23,6 +24,12 @@ export const familien: { id: string; name: string }[] = [
   { id: 'beweis', name: 'Beweis' },
   { id: 'preise', name: 'Preise' },
   { id: 'diagramm', name: 'Diagramm' },
+  { id: 'mindmap', name: 'Mindmap' },
+  { id: 'trichter', name: 'Trichter' },
+  { id: 'kreislauf', name: 'Kreislauf' },
+  { id: 'vergleich', name: 'Vergleich' },
+  { id: 'pyramide', name: 'Pyramide' },
+  { id: 'anteile', name: 'Anteile' },
   { id: 'team', name: 'Team' },
   { id: 'strategie-kernsatz', name: 'Strategie-Kernsatz' },
   { id: 'strategie-marktbild', name: 'Marktbild' },
@@ -48,6 +55,7 @@ export const layouts: LayoutDef[] = [
   ...beweisLayouts,
   ...portfolioLayouts,
   ...strategieLayouts,
+  ...visualLayouts,
 ].sort((a, b) => rang(a) - rang(b));
 
 /** a family's variant; no variante = the family's first variant */

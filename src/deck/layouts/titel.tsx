@@ -252,7 +252,7 @@ const InhaltZeilen: React.FC<Inhalt> = (p) => (
               padding: "var(--s2) 0",
             }}
           >
-            <span>{k}</span>
+            <T stil="karte" as="span">{k}</T>
             <span
               className="leise t-meta"
               style={{ fontVariantNumeric: "tabular-nums" }}

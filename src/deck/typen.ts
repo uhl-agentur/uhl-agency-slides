@@ -107,3 +107,18 @@ export function echteBilder(v: unknown): number {
   const o = v as Record<string, unknown>;
   return (typeof o.src === 'string' && o.src.trim() ? 1 : 0) + Object.entries(o).reduce((n, [k, x]) => n + (k === 'src' ? 0 : echteBilder(x)), 0);
 }
+
+/** every string in props, at any depth (content rules of check-deck) */
+export function texteVon(v: unknown): string[] {
+  if (typeof v === 'string') return [v];
+  if (Array.isArray(v)) return v.flatMap(texteVon);
+  if (v && typeof v === 'object') return Object.values(v).flatMap(texteVon);
+  return [];
+}
+
+/**
+ * A dash used as a pause: em dash anywhere, en dash or hyphen with spaces around it. Content uses
+ * comma, colon or full stop instead (F5 "em dashes die sollen alle raus"). Ranges without spaces
+ * ("2–4", "März–Mai") and a lone "–" for "none" stay allowed.
+ */
+export const gedankenstrich = (s: string) => /—|\s[–-]\s/.test(s);

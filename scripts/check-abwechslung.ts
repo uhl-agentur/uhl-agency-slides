@@ -4,7 +4,7 @@
 import assert from 'node:assert';
 import { pruefeAbwechslung } from '../src/deck/abwechslung';
 import { layoutNach } from '../src/deck/registry';
-import { bilderNoetig, echteBilder, type Deck, type FolieImDeck } from '../src/deck/typen';
+import { bilderNoetig, echteBilder, gedankenstrich, type Deck, type FolieImDeck } from '../src/deck/typen';
 
 const folie = (layout: string, variante?: string): FolieImDeck => ({ layout, variante, props: {} });
 const deck = (slug: string, folien: FolieImDeck[], art: Deck['art'] = 'pitch'): Deck => ({ slug, titel: slug, thema: 'light', art, folien });
@@ -19,10 +19,24 @@ assert.equal(regeln(pruefeAbwechslung(deck('r1', [folie('kennzahlen', 'drei'), f
 // rule 2: one family three times in a row, different variants
 assert.equal(regeln(pruefeAbwechslung(deck('r2', [folie('kennzahlen', 'drei'), folie('kennzahlen', 'sechs'), folie('kennzahlen', 'bild')]))), '2');
 // kapitel and single-variant families are exempt from 2 and 3
-assert.deepEqual(pruefeAbwechslung(deck('frei', [folie('kapitel', 'trenner'), folie('text', 'liste'), folie('kapitel', 'trenner'), folie('kennzahlen', 'drei'), folie('kapitel', 'trenner'), folie('strategie-swot'), folie('strategie-swot'), folie('strategie-swot')])), []);
+assert.deepEqual(pruefeAbwechslung(deck('frei', [folie('kapitel', 'trenner'), folie('text', 'liste'), folie('kapitel', 'trenner'), folie('kennzahlen', 'drei'), folie('kapitel', 'trenner'), folie('strategie-swot'), folie('pyramide'), folie('strategie-swot'), folie('kontakt', 'abschluss')])), []);
+// rule 4 counts any art, not only text: four diagrams in a row
+assert.equal(regeln(pruefeAbwechslung(deck('r4d', [folie('mindmap', 'radial'), folie('trichter', 'breit'), folie('kreislauf'), folie('pyramide')]))), '4');
+// rule 6: six content slides, only one visual
+const listen = ['einleitung', 'liste', 'loesung', 'zentriert', 'zwei-spalten'].map((x) => folie('text', x));
+const r6 = deck('r6', [listen[0], listen[1], folie('kennzahlen', 'drei'), listen[2], listen[3], folie('vergleich', 'vorher-nachher'), folie('kontakt', 'mail')]);
+assert.equal(regeln(pruefeAbwechslung(r6)), '6');
+// rule 7: six slides that end on a content slide
+assert.equal(regeln(pruefeAbwechslung(deck('r7', [folie('titel', 'links'), folie('mindmap', 'radial'), folie('text', 'liste'), folie('anteile'), folie('text', 'loesung'), folie('kennzahlen', 'drei')]))), '7');
+// content rule: dash as a pause
+assert.ok(gedankenstrich('Mehr Anfragen — weniger Aufwand'));
+assert.ok(gedankenstrich('Mehr Anfragen – weniger Aufwand'));
+assert.ok(!gedankenstrich('2–4 Wochen'));
+assert.ok(!gedankenstrich('–'));
+assert.ok(!gedankenstrich('Social-Media-Kanäle'));
 // rule 3: a variant three times in one deck
 assert.equal(regeln(pruefeAbwechslung(deck('r3', [folie('kennzahlen', 'drei'), folie('titel', 'links'), folie('kennzahlen', 'drei'), folie('galerie', 'reihe'), folie('kennzahlen', 'drei')]))), '3');
-// rule 4: four text slides in a row (titel/links, text/*, kontakt/mail are text)
+// rule 4: four slides of one art in a row (titel/links, text/*, kontakt/mail are text)
 assert.equal(regeln(pruefeAbwechslung(deck('r4', [folie('titel', 'links'), folie('text', 'einleitung'), folie('text', 'zentriert'), folie('kontakt', 'mail')]))), '4');
 // rule 5: newest other deck of the same kind uses the same variants; another kind is ignored
 const alt = deck('alt', [folie('titel', 'links'), folie('kennzahlen', 'drei'), folie('kontakt', 'abschluss')]);

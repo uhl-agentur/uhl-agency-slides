@@ -156,9 +156,9 @@ const MarktbildFolie: React.FC<Marktbild> = (p) => (
         </div>
         <div className="stapel">
           <span className="t-meta leise">Nachfrage</span>
-          <span className="t-karte" style={{ display: 'flex', alignItems: 'center', gap: 'var(--s1)' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--s1)' }}>
             <Pfeil richtung={p.nachfrage} />
-            {p.nachfrageText ?? p.nachfrage}
+            <T stil="karte" as="span">{p.nachfrageText ?? p.nachfrage}</T>
           </span>
         </div>
       </div>

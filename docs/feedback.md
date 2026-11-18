@@ -133,3 +133,9 @@ Status: done (S4).
 > (Rückfrage beantwortet:) Du darfst selber auch schauen, was Familien sinnvoll wären. Mach gerne auch Code zusammenlegen. … Ponytail-Audit … bevor macht glaube ich mehr Sinn. Abwechslung: nur Warnungen.
 
 Status: done (S5: bed2230, 665728f, S5.3). 77 Layouts zu 27 Familien mit 76 Varianten, Code zusammengelegt; Abwechslungsregeln als Warnungen in check-deck; leere Bild-Slots blockieren; /slides wählt pro Abschnitt Familie + am längsten ungenutzte Variante. Verstanden als: Bild-Varianten nur wählen, wenn echte Bilder da sind (keine leeren Slots).
+
+## F5 — 2026-11-18 (verbatim, dictated)
+
+> baue mal bitte noch mindmaps und überlege was noch andere visualisierte darstellungen sind die aktuell fehlen die sinvoll sein könnten dannach die audits drüber laufen lassen bzw smoke checks machen, und das generieren ist aktuell noch inhaltlich zu langweilig wir nutzen sehr viel gleiche slides. Inhaltlich em dashes die sollen alle raus, wir nutzen bitte in healdines immer anstatt und &. und überlege best practice wie wir die slides möglichst interessant halten und am besten um es interessant zu halten bzw wenig interest-lost-rate zu haben.
+
+Status: done (S6). 6 neue Familien (mindmap, trichter, kreislauf, vergleich, pyramide, anteile), Gedankenstrich-Verbot in check-deck, & auch an Zeilenumbrüchen + Smoke-Befund UND, Regeln 4/6/7 gegen Monotonie, Skill-Tabelle "Show, do not list" + Best Practice.

@@ -6,6 +6,7 @@
 //   WAISE         last line of a multi-line text is one short word (widow word)
 //   ZEILENANFANG  a line starts with a unit, sign or dash that belongs to the line before ("38 / %")
 //   TRENNUNG      a hyphenated break leaves fewer than 3 letters on one side
+//   UND           a headline still shows "und" instead of "&" (F3g/F5)
 //   KARTE         a card's visible inset differs between top, left and bottom by more than 6 px
 // usage: node scripts/smoke.mjs [--port 3417] [--ids titel/links,team] [--probe max|min|beide|keine] [--out dir]
 import puppeteer from 'puppeteer';
@@ -89,6 +90,8 @@ function pruefe() {
       if (erstes && erstes.teil <= 0 && /^[%€×‰–—]/.test(erstes.t)) funde.push(`ZEILENANFANG "${erstes.t}" in "${name(e)}"`);
     }
   }
+  // headlines write "&" (F3g/F5)
+  for (const e of folie.querySelectorAll('.t-display, .t-aussage, .t-titel, .t-karte')) if (/(^|\s)und(\s|$)/.test(e.textContent)) funde.push(`UND in Überschrift "${name(e)}"`);
   // hyphenation fragments
   for (const e of bloecke) {
     for (const w of zeilenVon(e).woerter) {

@@ -1,12 +1,12 @@
 // Check a deck before export: every family and variant exists, every text within its character
 // limit, array counts within range, every picture slot filled with a real picture (F4: grey
-// placeholder frames never ship). Exit 1 on any finding. Variation warnings (! lines,
+// placeholder frames never ship), no dash used as a pause (F5). Exit 1 on any finding. Variation warnings (! lines,
 // src/deck/abwechslung.ts) and unknown fields (? lines) never fail the check.
 // usage: npx tsx --tsconfig scripts/tsconfig.check.json scripts/check-deck.ts <slug|--alle|--vorlagen>
 import { decks, deckNach } from '../decks';
 import { familien, layoutNach, layouts, varianten } from '../src/deck/registry';
 import { pruefeAbwechslung } from '../src/deck/abwechslung';
-import { bilderNoetig, echteBilder, pfadVon, pruefeLimits } from '../src/deck/typen';
+import { bilderNoetig, echteBilder, gedankenstrich, pfadVon, pruefeLimits, texteVon } from '../src/deck/typen';
 
 const ziel = process.argv[2];
 if (!ziel) {
@@ -24,6 +24,7 @@ if (ziel === '--vorlagen') {
     if (!familien.some((f) => f.id === l.familie)) funde.push(`${id}: Familie fehlt in registry.familien`);
     if (!l.variante && layouts.filter((x) => x.familie === l.familie).length > 1) funde.push(`${id}: Familie mit mehreren Varianten braucht variante`);
     for (const f of pruefeLimits(l.beispiel, l)) funde.push(`${id} (beispiel): ${f}`);
+    for (const t of texteVon(l.beispiel).filter(gedankenstrich)) funde.push(`${id} (beispiel): Gedankenstrich in "${t.slice(0, 50)}"`);
     if (!Object.keys(l.limits).length) funde.push(`${id}: keine limits`);
   }
   console.log(`${familien.length} Familien, ${layouts.length} Varianten geprüft`);
@@ -53,6 +54,8 @@ if (ziel === '--vorlagen') {
       // name are probably typos (warning only: optional fields like bild may be missing from both)
       const bekannt = new Set([...Object.keys(l.beispiel), ...Object.keys(l.limits).map((k) => k.split(/[.[]/)[0]), ...Object.keys(l.anzahl ?? {})]);
       for (const k of Object.keys(f.props)) if (!bekannt.has(k)) console.log(`  ? ${ort}: Feld "${k}" kennt das Layout vermutlich nicht (Tippfehler?)`);
+      // F5: no dash as a pause; comma, colon or full stop instead
+      for (const t of texteVon(f.props).filter(gedankenstrich)) funde.push(`${ort}: Gedankenstrich in "${t.slice(0, 50)}" (Komma, Doppelpunkt oder Punkt)`);
       if (JSON.stringify(f.props).includes('FEHLT:')) funde.push(`${ort}: enthält noch FEHLT-Marker`);
     });
     // variation rules (F4): warnings only, they never block the export

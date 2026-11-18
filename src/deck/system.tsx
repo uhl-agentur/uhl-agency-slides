@@ -97,7 +97,8 @@ export function T({
   if (children === undefined || children === null || children === '') return null;
   children = String(children);
   // headlines write "und" as "&" (F3g "bei headlines und immer als & handeln")
-  if (UEBERSCHRIFT.has(stil)) children = children.replace(/ und /g, ' & ');
+  // also next to a line break ("Strategie\nund Umsetzung")
+  if (UEBERSCHRIFT.has(stil)) children = children.replace(/(\s)und(?=\s)/g, '$1&');
   const zuLang = max !== undefined && sichtbareLaenge(children) > max;
   const fehlt = children.startsWith('FEHLT:');
   const El = Tag as React.ElementType;
